@@ -6,7 +6,7 @@ Interactive two-sided portfolio for Richie Linardi, showcasing software, AI/data
 
 `v0.1 - Foundation`
 
-This phase establishes the repository, local development environment, documentation, and project structure. No production design system or portfolio content has been implemented yet.
+This phase establishes the repository, local development environment, documentation, validation workflow, and project structure. No production design system or portfolio content has been implemented yet.
 
 ## Tech Stack
 
@@ -16,7 +16,17 @@ This phase establishes the repository, local development environment, documentat
 - Tailwind CSS
 - ESLint
 - Prettier
+- GitHub Actions
 - Vercel deployment target
+
+## Runtime
+
+Use Node.js 20 for local development. The repository includes `.nvmrc` so compatible version managers can select the expected major version automatically.
+
+```bash
+nvm use
+npm ci
+```
 
 ## Local Development
 
@@ -28,20 +38,29 @@ Open `http://localhost:3000`.
 
 ## Validation
 
-Phase 0 exit criteria:
+Run the complete automated validation suite with:
 
 ```bash
-npm run dev
-npm run lint
-npm run build
+npm run validate
 ```
 
-Additional foundation checks:
+Phase 0 automated exit criteria:
 
-```bash
-npm run typecheck
-npm run format:check
+```text
+npm run lint          PASS
+npm run typecheck     PASS
+npm run format:check  PASS
+npm run build         PASS
 ```
+
+Owner smoke test:
+
+```text
+npm run dev           PASS
+HTTP page load        PASS
+```
+
+The same automated validation runs in GitHub Actions for pull requests and pushes to `main`.
 
 ## Project Rules
 
