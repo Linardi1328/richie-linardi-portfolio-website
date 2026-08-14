@@ -5,8 +5,18 @@
 1. Branch from `main` using the phase naming convention.
 2. Keep each branch focused on its phase objective.
 3. Run validation before opening a pull request.
-4. Open a PR using the project template below.
-5. Merge only after review, owner testing, and approval.
+4. Open a PR using the repository pull request template.
+5. Confirm GitHub Actions is passing.
+6. Merge only after review, owner testing, and approval.
+
+## Runtime
+
+Use Node.js 20. If `nvm` is installed:
+
+```bash
+nvm use
+npm ci
+```
 
 ## Branch Names
 
@@ -32,7 +42,10 @@ npm run lint
 npm run typecheck
 npm run format:check
 npm run build
+npm run validate
 ```
+
+`npm run validate` is the required consolidated automated check before requesting merge approval.
 
 ## Content Rules
 
@@ -50,22 +63,17 @@ npm run build
 - Respect `prefers-reduced-motion` for motion-heavy interactions.
 - Preserve real URLs for the professional and basketball sides.
 
-## Pull Request Template
+## Pull Request Requirements
 
-```markdown
-## Objective
+Every meaningful PR should document:
 
-## What Changed
+- Objective
+- What changed
+- Screenshots when visual changes exist
+- Tests run
+- Accessibility impact
+- Responsive testing
+- Known limitations
+- Owner testing required
 
-## Screenshots
-
-## Tests Run
-
-## Accessibility
-
-## Responsive Testing
-
-## Known Limitations
-
-## Owner Testing Required
-```
+The repository-level pull request template provides these sections automatically.
