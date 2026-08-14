@@ -1,4 +1,5 @@
-import type { ButtonHTMLAttributes } from "react";
+import Link from "next/link";
+import type { ButtonHTMLAttributes, ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 
 const buttonVariants = {
@@ -19,10 +20,26 @@ const buttonSizes = {
 type ButtonVariant = keyof typeof buttonVariants;
 type ButtonSize = keyof typeof buttonSizes;
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonStyleProps = {
+  className?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
 };
+
+function buttonClassName({
+  className,
+  variant = "primary",
+  size = "md",
+}: ButtonStyleProps) {
+  return cn(
+    "inline-flex items-center justify-center rounded-button border font-semibold transition-[background-color,border-color,color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] active:translate-y-px",
+    buttonVariants[variant],
+    buttonSizes[size],
+    className,
+  );
+}
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & ButtonStyleProps;
 
 export function Button({
   className,
@@ -34,12 +51,27 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center rounded-button border font-semibold transition-[background-color,border-color,color,transform] duration-[var(--motion-fast)] ease-[var(--ease-standard)] active:translate-y-px disabled:pointer-events-none disabled:opacity-45",
-        buttonVariants[variant],
-        buttonSizes[size],
-        className,
+        buttonClassName({ className, variant, size }),
+        "disabled:pointer-events-none disabled:opacity-45",
       )}
       type={type}
+      {...props}
+    />
+  );
+}
+
+type ButtonLinkProps = Omit<ComponentProps<typeof Link>, "className"> &
+  ButtonStyleProps;
+
+export function ButtonLink({
+  className,
+  variant = "primary",
+  size = "md",
+  ...props
+}: ButtonLinkProps) {
+  return (
+    <Link
+      className={buttonClassName({ className, variant, size })}
       {...props}
     />
   );
