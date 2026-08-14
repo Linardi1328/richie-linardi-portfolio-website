@@ -15,6 +15,8 @@ One journey. Two sides. The same discipline.
 
 ## Phases
 
+Current active development phase: `v0.2 - Design System`.
+
 | Version | Phase                  | Objective                                                          |
 | ------- | ---------------------- | ------------------------------------------------------------------ |
 | v0.1    | Foundation             | Repository, toolchain, docs, CI, structure, local checks           |

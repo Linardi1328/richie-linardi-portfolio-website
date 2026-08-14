@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Richie Linardi | Portfolio Foundation",
+  title: "Richie Linardi | Portfolio Design System",
   description:
-    "Foundation for Richie Linardi's two-sided professional and basketball portfolio.",
+    "Shared visual foundation for Richie Linardi's professional and basketball portfolio.",
 };
 
 type RootLayoutProps = Readonly<{
@@ -15,7 +15,7 @@ type RootLayoutProps = Readonly<{
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }
