@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ButtonLink } from "@/components/ui";
 
 const designSystemItems = [
   "Semantic color tokens",
@@ -24,12 +24,7 @@ export default function Home() {
             v0.3.
           </p>
           <div className="mt-8">
-            <Link
-              className="inline-flex rounded-button border border-accent bg-accent px-5 py-3 text-sm font-semibold text-primary-dark transition-colors duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:border-accent-hover hover:bg-accent-hover"
-              href="/design-system"
-            >
-              Review Design System
-            </Link>
+            <ButtonLink href="/design-system">Review Design System</ButtonLink>
           </div>
         </div>
       </section>
