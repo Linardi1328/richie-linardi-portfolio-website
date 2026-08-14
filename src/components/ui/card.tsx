@@ -25,7 +25,7 @@ export function Card({
       className={cn(
         "flex h-full flex-col gap-5 rounded-card",
         interactive &&
-          "transition-[border-color,transform] duration-[var(--motion-standard)] ease-[var(--ease-standard)] hover:-translate-y-0.5 hover:border-context-accent",
+          "transition-[border-color,transform] duration-[var(--motion-standard)] ease-[var(--ease-standard)] hover:-translate-y-0.5 hover:border-context-accent focus-within:-translate-y-0.5 focus-within:border-context-accent",
         className,
       )}
       {...props}
