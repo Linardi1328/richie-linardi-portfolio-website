@@ -1,17 +1,394 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  color-scheme: light;
+
+  --primary-dark: #07111f;
+  --deep-blue: #123b68;
+  --royal-blue: #1f5f9f;
+  --primary-light: #fbf8f1;
+
+  --neutral-50: #fbfaf7;
+  --neutral-100: #f4f0e8;
+  --neutral-200: #e5ded1;
+  --neutral-300: #c9bfad;
+  --neutral-500: #756c5f;
+  --neutral-700: #37322c;
+  --neutral-900: #13100d;
+
+  --accent: #b8944d;
+  --accent-hover: #97743a;
+  --accent-soft: #efe5cf;
+
+  --success: #2f6f4f;
+  --success-soft: #e3f0e8;
+  --warning: #a66a1f;
+  --warning-soft: #f7ead8;
+  --danger: #a64035;
+  --danger-soft: #f4dfdc;
+  --information: #315f8f;
+  --information-soft: #dfeaf6;
+
+  --background: var(--primary-light);
+  --foreground: var(--primary-dark);
+  --surface: #fffdf8;
+  --surface-elevated: #ffffff;
+  --surface-muted: var(--neutral-100);
+  --border: var(--neutral-200);
+  --border-strong: var(--neutral-300);
+  --text-primary: var(--primary-dark);
+  --text-secondary: #344054;
+  --text-muted: #6b6256;
+  --focus-ring: #7b5e2a;
+
+  --context-accent: var(--accent);
+  --context-accent-hover: var(--accent-hover);
+  --context-accent-soft: var(--accent-soft);
+  --context-surface: var(--surface);
+
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  --container-wide: 1180px;
+  --container-default: 1040px;
+  --container-narrow: 760px;
+  --gutter: 1rem;
+  --section-spacing: 4rem;
+  --component-spacing: 1.25rem;
+  --grid-gap: 1rem;
+
+  --radius-panel: 8px;
+  --radius-card: 8px;
+  --radius-button: 6px;
+  --radius-badge: 4px;
+  --border-thin: 1px;
+  --border-thick: 2px;
+  --shadow-soft: 0 18px 40px
+    color-mix(in srgb, var(--primary-dark) 8%, transparent);
+
+  --motion-fast: 150ms;
+  --motion-standard: 220ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-deep-blue: var(--deep-blue);
+  --color-royal-blue: var(--royal-blue);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-focus-ring: var(--focus-ring);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-information: var(--information);
+  --color-information-soft: var(--information-soft);
+  --color-context-accent: var(--context-accent);
+  --color-context-accent-hover: var(--context-accent-hover);
+  --color-context-accent-soft: var(--context-accent-soft);
+  --color-context-surface: var(--context-surface);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --spacing-gutter: var(--gutter);
+  --spacing-section: var(--section-spacing);
+  --spacing-component: var(--component-spacing);
+  --spacing-grid: var(--grid-gap);
+  --radius-panel: var(--radius-panel);
+  --radius-card: var(--radius-card);
+  --radius-button: var(--radius-button);
+  --radius-badge: var(--radius-badge);
+  --shadow-soft: var(--shadow-soft);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2rem;
+    --section-spacing: 5.5rem;
+    --component-spacing: 1.5rem;
+    --grid-gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 3rem;
+    --section-spacing: 7rem;
+    --grid-gap: 1.5rem;
+  }
+}
+
+.theme-professional,
+[data-context="professional"] {
+  --context-accent: var(--deep-blue);
+  --context-accent-hover: var(--royal-blue);
+  --context-accent-soft: var(--information-soft);
+  --context-surface: #f7f9fb;
+}
+
+.theme-basketball,
+[data-context="basketball"] {
+  --context-accent: var(--accent);
+  --context-accent-hover: var(--accent-hover);
+  --context-accent-soft: var(--accent-soft);
+  --context-surface: #fff8ec;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-padding-top: 5rem;
+  text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  min-width: 0;
+}
+
+body::selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: var(--border-thick) solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+@layer components {
+  .page-shell {
+    min-height: 100vh;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--background) 86%, white) 0%,
+        var(--background) 42%
+      ),
+      var(--background);
+  }
+
+  .container-wide,
+  .container-default,
+  .container-narrow {
+    width: 100%;
+    max-width: calc(var(--container-default) + (var(--gutter) * 2));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .container-wide {
+    max-width: calc(var(--container-wide) + (var(--gutter) * 2));
+  }
+
+  .container-narrow {
+    max-width: calc(var(--container-narrow) + (var(--gutter) * 2));
+  }
+
+  .section-block {
+    padding-block: var(--section-spacing);
+  }
+
+  .type-display {
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: 0;
+  }
+
+  .type-h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .type-h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.16;
+    letter-spacing: 0;
+  }
+
+  .type-h3 {
+    font-size: 1.375rem;
+    font-weight: 650;
+    line-height: 1.24;
+    letter-spacing: 0;
+  }
+
+  .type-h4 {
+    font-size: 1.0625rem;
+    font-weight: 650;
+    line-height: 1.32;
+    letter-spacing: 0;
+  }
+
+  .type-body-large {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    letter-spacing: 0;
+  }
+
+  .type-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    letter-spacing: 0;
+  }
+
+  .type-body-small {
+    font-size: 0.875rem;
+    line-height: 1.62;
+    letter-spacing: 0;
+  }
+
+  .type-caption {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+
+  .type-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .type-mono {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    letter-spacing: 0;
+  }
+
+  .type-display,
+  .type-h1,
+  .type-h2,
+  .type-h3,
+  .type-h4,
+  .type-body-large,
+  .type-body,
+  .type-body-small,
+  .type-caption,
+  .type-eyebrow,
+  .type-mono {
+    overflow-wrap: break-word;
+  }
+
+  .motion-track {
+    position: relative;
+    overflow: hidden;
+    min-height: 0.5rem;
+    border-radius: 999px;
+    background: var(--surface-muted);
+  }
+
+  .motion-track::after {
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 38%;
+    border-radius: inherit;
+    background: var(--context-accent);
+    content: "";
+    animation: motion-scan 2.4s var(--ease-standard) infinite;
+  }
+
+  .navigation-prototype summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  @layer components {
+    .type-display {
+      font-size: 4rem;
+    }
+
+    .type-h1 {
+      font-size: 3rem;
+    }
+
+    .type-h2 {
+      font-size: 2.375rem;
+    }
+
+    .type-h3 {
+      font-size: 1.625rem;
+    }
+
+    .type-body-large {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  @layer components {
+    .type-display {
+      font-size: 4.75rem;
+    }
+  }
+}
+
+@keyframes motion-scan {
+  0% {
+    transform: translateX(-105%);
+  }
+
+  50% {
+    transform: translateX(82%);
+  }
+
+  100% {
+    transform: translateX(270%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .motion-track::after {
+    animation: none;
+    transform: translateX(0);
+  }
 }
