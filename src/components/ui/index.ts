@@ -1,5 +1,5 @@
 export { Badge } from "./badge";
-export { Button } from "./button";
+export { Button, ButtonLink } from "./button";
 export { Card } from "./card";
 export { Container, ResponsiveGrid, Section } from "./container";
 export { Divider } from "./divider";
