@@ -21,7 +21,7 @@ This phase establishes the repository, local development environment, documentat
 
 ## Runtime
 
-Use Node.js 20 for local development. The repository includes `.nvmrc` so compatible version managers can select the expected major version automatically.
+Use Node.js 24 LTS for local development. The repository includes `.nvmrc` so compatible version managers can select the expected major version automatically.
 
 ```bash
 nvm use
