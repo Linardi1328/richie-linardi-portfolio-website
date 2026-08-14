@@ -11,7 +11,7 @@
 
 ## Runtime
 
-Use Node.js 20. If `nvm` is installed:
+Use Node.js 24 LTS. If `nvm` is installed:
 
 ```bash
 nvm use
