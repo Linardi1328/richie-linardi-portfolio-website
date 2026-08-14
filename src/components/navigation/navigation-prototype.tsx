@@ -9,6 +9,12 @@ const navItems = [
   { href: "#contexts", label: "Contexts" },
 ];
 
+const desktopNavLinkClass =
+  "rounded-button px-3 py-2 text-sm font-semibold text-text-secondary transition-colors duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:bg-surface-muted hover:text-text-primary";
+const mobileNavLinkClass =
+  "block rounded-button px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-surface-muted hover:text-text-primary";
+const currentNavLinkClass = "bg-context-accent-soft text-text-primary";
+
 type NavigationPrototypeProps = {
   className?: string;
 };
@@ -42,9 +48,8 @@ export function NavigationPrototype({ className }: NavigationPrototypeProps) {
                 <Link
                   aria-current={item.current ? "page" : undefined}
                   className={cn(
-                    "rounded-button px-3 py-2 text-sm font-semibold text-text-secondary transition-colors duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:bg-surface-muted hover:text-text-primary",
-                    item.current &&
-                      "bg-context-accent-soft text-text-primary",
+                    desktopNavLinkClass,
+                    item.current && currentNavLinkClass,
                   )}
                   href={item.href}
                 >
@@ -69,9 +74,8 @@ export function NavigationPrototype({ className }: NavigationPrototypeProps) {
                   <Link
                     aria-current={item.current ? "page" : undefined}
                     className={cn(
-                      "block rounded-button px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-surface-muted hover:text-text-primary",
-                      item.current &&
-                        "bg-context-accent-soft text-text-primary",
+                      mobileNavLinkClass,
+                      item.current && currentNavLinkClass,
                     )}
                     href={item.href}
                   >
