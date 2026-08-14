@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 const navItems = [
+  { href: "/design-system", label: "Overview", current: true },
   { href: "#principles", label: "Principles" },
   { href: "#typography", label: "Typography" },
   { href: "#components", label: "Components" },
@@ -36,13 +37,13 @@ export function NavigationPrototype({ className }: NavigationPrototypeProps) {
           className="hidden md:block"
         >
           <ul className="flex items-center gap-1">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <li key={item.href}>
                 <Link
-                  aria-current={index === 0 ? "page" : undefined}
+                  aria-current={item.current ? "page" : undefined}
                   className={cn(
                     "rounded-button px-3 py-2 text-sm font-semibold text-text-secondary transition-colors duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:bg-surface-muted hover:text-text-primary",
-                    index === 0 && "bg-context-accent-soft text-text-primary",
+                    item.current && "bg-context-accent-soft text-text-primary",
                   )}
                   href={item.href}
                 >
@@ -65,7 +66,11 @@ export function NavigationPrototype({ className }: NavigationPrototypeProps) {
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
-                    className="block rounded-button px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-surface-muted hover:text-text-primary"
+                    aria-current={item.current ? "page" : undefined}
+                    className={cn(
+                      "block rounded-button px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-surface-muted hover:text-text-primary",
+                      item.current && "bg-context-accent-soft text-text-primary",
+                    )}
                     href={item.href}
                   >
                     {item.label}
