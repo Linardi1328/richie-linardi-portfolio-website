@@ -17,7 +17,7 @@ One journey. Two sides. The same discipline.
 
 | Version | Phase                  | Objective                                                          |
 | ------- | ---------------------- | ------------------------------------------------------------------ |
-| v0.1    | Foundation             | Repository, toolchain, docs, structure, local checks               |
+| v0.1    | Foundation             | Repository, toolchain, docs, CI, structure, local checks           |
 | v0.2    | Design System          | Colors, typography, UI primitives, temporary `/design-system` page |
 | v0.3    | Professional Interface | Publishable professional homepage                                  |
 | v0.4    | Project Engine         | Reusable `/projects/[slug]` case-study framework                   |
@@ -30,11 +30,23 @@ One journey. Two sides. The same discipline.
 
 ## Phase 0 Exit Criteria
 
+Automated checks:
+
 ```text
-npm run dev       PASS
-npm run lint      PASS
-npm run build     PASS
+npm run lint          PASS
+npm run typecheck     PASS
+npm run format:check  PASS
+npm run build         PASS
 ```
+
+Owner smoke test:
+
+```text
+npm run dev           PASS
+HTTP page load        PASS
+```
+
+Pull requests must also receive a passing GitHub Actions validation run before merge unless the workflow infrastructure itself is the change being reviewed and the checks have been independently verified.
 
 ## Development Branches
 
