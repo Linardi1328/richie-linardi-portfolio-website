@@ -43,7 +43,8 @@ export function NavigationPrototype({ className }: NavigationPrototypeProps) {
                   aria-current={item.current ? "page" : undefined}
                   className={cn(
                     "rounded-button px-3 py-2 text-sm font-semibold text-text-secondary transition-colors duration-[var(--motion-fast)] ease-[var(--ease-standard)] hover:bg-surface-muted hover:text-text-primary",
-                    item.current && "bg-context-accent-soft text-text-primary",
+                    item.current &&
+                      "bg-context-accent-soft text-text-primary",
                   )}
                   href={item.href}
                 >
@@ -69,7 +70,8 @@ export function NavigationPrototype({ className }: NavigationPrototypeProps) {
                     aria-current={item.current ? "page" : undefined}
                     className={cn(
                       "block rounded-button px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-surface-muted hover:text-text-primary",
-                      item.current && "bg-context-accent-soft text-text-primary",
+                      item.current &&
+                        "bg-context-accent-soft text-text-primary",
                     )}
                     href={item.href}
                   >
