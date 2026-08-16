@@ -40,13 +40,15 @@ export function ProfessionalHero({
           </div>
 
           <Surface className="rounded-card bg-context-surface">
-            <p className="type-eyebrow text-text-muted">Current technical focus</p>
+            <p className="type-eyebrow text-text-muted">
+              Current technical focus
+            </p>
             <p className="type-h3 mt-3 text-text-primary">
               Reliable software, data systems, and AI-assisted workflows.
             </p>
             <p className="type-body-small mt-4 text-text-secondary">
-              Projects are presented with their actual implementation state and safety
-              boundaries intact.
+              Projects are presented with their actual implementation state and
+              safety boundaries intact.
             </p>
             <TagGroup className="mt-6" tags={[...tags]} />
           </Surface>
