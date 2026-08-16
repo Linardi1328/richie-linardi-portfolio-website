@@ -75,7 +75,8 @@ export default function Home() {
                 <TagGroup tags={[...professionalHomeData.technicalFocus]} />
                 <p className="type-body-small mt-6 text-text-secondary">
                   I’m most interested in systems where data, automation, and AI
-                  need strong validation, traceability, and explicit human control.
+                  need strong validation, traceability, and explicit human
+                  control.
                 </p>
               </Surface>
             </div>
