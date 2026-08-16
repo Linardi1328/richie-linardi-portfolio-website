@@ -26,10 +26,15 @@ export function SiteNavigation({ className, items }: SiteNavigationProps) {
       <div className="flex items-center justify-between gap-4">
         <Link className="grid rounded-[2px] text-text-primary" href="/">
           <span className="text-base font-bold leading-none">RL</span>
-          <span className="type-caption mt-1 text-text-muted">Richie Linardi</span>
+          <span className="type-caption mt-1 text-text-muted">
+            Richie Linardi
+          </span>
         </Link>
 
-        <nav aria-label="Professional portfolio navigation" className="hidden md:block">
+        <nav
+          aria-label="Professional portfolio navigation"
+          className="hidden md:block"
+        >
           <ul className="flex items-center gap-1">
             {items.map((item) => (
               <li key={item.href}>
@@ -63,7 +68,10 @@ export function SiteNavigation({ className, items }: SiteNavigationProps) {
             <ul className="grid gap-1">
               {items.map((item) => (
                 <li key={item.href}>
-                  <Link className={cn(navigationLinkClass, "block")} href={item.href}>
+                  <Link
+                    className={cn(navigationLinkClass, "block")}
+                    href={item.href}
+                  >
                     {item.label}
                   </Link>
                 </li>
