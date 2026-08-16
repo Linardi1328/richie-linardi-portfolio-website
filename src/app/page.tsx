@@ -1,59 +1,108 @@
-import { ButtonLink } from "@/components/ui";
-
-const designSystemItems = [
-  "Semantic color tokens",
-  "Responsive typography scale",
-  "Layout and spacing conventions",
-  "Reusable UI primitives",
-  "Portfolio pattern prototypes",
-  "Professional and basketball contexts",
-];
+import { ProfessionalHero } from "@/components/hero/professional-hero";
+import { SiteNavigation } from "@/components/navigation/site-navigation";
+import { ProjectCard } from "@/components/projects/project-card";
+import { TimelineItem } from "@/components/timeline/timeline-item";
+import {
+  Container,
+  ResponsiveGrid,
+  Section,
+  SectionHeading,
+  Surface,
+  TagGroup,
+  TextLink,
+} from "@/components/ui";
+import { professionalHomeData } from "@/data/professional-home";
 
 export default function Home() {
   return (
-    <main className="page-shell flex min-h-screen flex-col justify-center py-section">
-      <section className="flex flex-col gap-6">
-        <div className="container-narrow">
-          <p className="type-eyebrow text-text-muted">v0.2 Design System</p>
-          <h1 className="type-h1 mt-4 text-text-primary">
-            Richie Linardi Portfolio
-          </h1>
-          <p className="type-body-large mt-5 text-text-secondary">
-            Phase v0.2 establishes the shared visual language for the future
-            professional and basketball sides. The production homepage begins in
-            v0.3.
-          </p>
-          <div className="mt-8">
-            <ButtonLink href="/design-system">Review Design System</ButtonLink>
-          </div>
-        </div>
-      </section>
+    <main className="page-shell theme-professional">
+      <Container className="pt-4 md:pt-6" size="wide">
+        <SiteNavigation items={professionalHomeData.navigation} />
+      </Container>
 
-      <section
-        aria-labelledby="current-scope"
-        className="container-narrow mt-14 grid gap-5"
+      <ProfessionalHero {...professionalHomeData.hero} />
+
+      <Section aria-labelledby="projects-heading" id="projects">
+        <Container size="wide">
+          <SectionHeading
+            description="A small set of technical projects with scope and status stated as they exist today."
+            eyebrow="Selected technical projects"
+            id="projects-heading"
+            title="Work built around evidence, controls, and maintainable boundaries."
+          />
+          <ResponsiveGrid className="mt-10" columns="two">
+            {professionalHomeData.projects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </ResponsiveGrid>
+        </Container>
+      </Section>
+
+      <Section
+        aria-labelledby="experience-heading"
+        className="border-y border-border bg-context-surface"
+        id="experience"
       >
-        <div>
-          <h2 id="current-scope" className="type-h3 text-text-primary">
-            Current Scope
-          </h2>
-          <p className="type-body mt-2 text-text-secondary">
-            This route remains a simple phase marker. The full interface will be
-            assembled from approved primitives after design review.
-          </p>
-        </div>
+        <Container size="wide">
+          <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
+            <div>
+              <SectionHeading
+                description="A compact snapshot of the academic and project context behind the work."
+                eyebrow="Experience & education"
+                id="experience-heading"
+                title="Computer science in practice and in the classroom."
+              />
+              <div className="mt-9">
+                {professionalHomeData.milestones.map((milestone) => (
+                  <TimelineItem
+                    key={milestone.title}
+                    label={milestone.label}
+                    title={milestone.title}
+                  >
+                    {milestone.description}
+                  </TimelineItem>
+                ))}
+              </div>
+            </div>
 
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {designSystemItems.map((item) => (
-            <li
-              key={item}
-              className="rounded-card border border-border bg-surface px-4 py-3 text-sm font-medium text-text-secondary"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </section>
+            <div id="skills">
+              <SectionHeading
+                description="Tools and areas that recur across my current software projects."
+                eyebrow="Technical focus"
+                title="A practical stack, not a keyword wall."
+              />
+              <Surface className="mt-9 rounded-card">
+                <TagGroup tags={[...professionalHomeData.technicalFocus]} />
+                <p className="type-body-small mt-6 text-text-secondary">
+                  I’m most interested in systems where data, automation, and AI
+                  need strong validation, traceability, and explicit human
+                  control.
+                </p>
+              </Surface>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section aria-labelledby="contact-heading">
+        <Container size="narrow">
+          <div className="text-center">
+            <p className="type-eyebrow text-context-accent">Explore the work</p>
+            <h2 className="type-h2 mt-3 text-text-primary" id="contact-heading">
+              The repositories carry the implementation details.
+            </h2>
+            <p className="type-body mt-4 text-text-secondary">
+              Browse the code, docs, tests, and project boundaries directly on
+              GitHub.
+            </p>
+            <div className="mt-6 flex justify-center">
+              <TextLink external href="https://github.com/Linardi1328">
+                github.com/Linardi1328
+              </TextLink>
+            </div>
+          </div>
+        </Container>
+      </Section>
     </main>
   );
 }
