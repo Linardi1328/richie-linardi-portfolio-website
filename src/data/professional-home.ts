@@ -61,9 +61,10 @@ export const professionalHomeData = {
   ] satisfies ProfessionalProject[],
   milestones: [
     {
-      label: "Teaching",
-      title: "Teaching Associate · FIT1045",
-      description: "Teaching Associate for FIT1045 at Monash University.",
+      label: "Project experience",
+      title: "Independent software systems",
+      description:
+        "Building and documenting software across market research, accounting workflows, multilingual support, and project operations.",
     },
     {
       label: "Education",
