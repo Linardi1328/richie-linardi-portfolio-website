@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Richie Linardi | Portfolio Design System",
+  title: "Richie Linardi | Software & Data Portfolio",
   description:
-    "Shared visual foundation for Richie Linardi's professional and basketball portfolio.",
+    "Professional portfolio for Richie Linardi, featuring selected software, data, AI, and automation projects.",
 };
 
 type RootLayoutProps = Readonly<{
