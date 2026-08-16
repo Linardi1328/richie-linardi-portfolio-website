@@ -91,7 +91,8 @@ export default function Home() {
               The repositories carry the implementation details.
             </h2>
             <p className="type-body mt-4 text-text-secondary">
-              Browse the code, docs, tests, and project boundaries directly on GitHub.
+              Browse the code, docs, tests, and project boundaries directly on
+              GitHub.
             </p>
             <div className="mt-6 flex justify-center">
               <TextLink external href="https://github.com/Linardi1328">
