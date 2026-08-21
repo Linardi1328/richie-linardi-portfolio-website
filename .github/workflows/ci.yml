@@ -7,7 +7,7 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   validate:
@@ -20,8 +20,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
@@ -31,28 +29,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Format design reference docs
-        if: github.event_name == 'pull_request' && github.head_ref == 'docs/design-reference-library'
-        shell: bash
-        run: |
-          npx prettier --write \
-            docs/design-references/BRAINSTORM.md \
-            docs/design-references/PROJECTS_OVERVIEW_FINAL.md
-
-          if git diff --quiet -- \
-            docs/design-references/BRAINSTORM.md \
-            docs/design-references/PROJECTS_OVERVIEW_FINAL.md; then
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            docs/design-references/BRAINSTORM.md \
-            docs/design-references/PROJECTS_OVERVIEW_FINAL.md
-          git commit -m "style: format design reference docs"
-          git push origin HEAD:${{ github.head_ref }}
 
       - name: Run validation
         run: npm run validate
