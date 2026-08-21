@@ -25,6 +25,7 @@ The visual hierarchy should reward maturity and evidence rather than exaggeratin
 ### Featured project
 
 #### SPY Market Agent
+
 **Role on page:** Primary featured technical project / strongest Data Science + ML research proof.
 
 **Public summary**  
@@ -50,6 +51,7 @@ Release/tag, repository, research/evaluation documentation, test/quality gates, 
 ### Core systems
 
 #### Personal Project Operator
+
 **Role on page:** Most actively evolving developer-tool / automation system.
 
 **Public summary**  
@@ -71,6 +73,7 @@ Node.js · GitHub · OpenClaw · Telegram · Codex workflow · Linux sandboxing
 Repository, phase documentation, tests, deterministic command examples, security boundaries, development run-state architecture.
 
 #### LedgerPilot AI
+
 **Role on page:** Strongest audit/accounting + controlled AI workflow project.
 
 **Public summary**  
@@ -92,6 +95,7 @@ Python · FastAPI · PostgreSQL · SQLAlchemy · Pydantic · Alembic
 Repository, domain/control docs, API boundaries, test suite, migrations, human-review flow, audit/event model.
 
 #### KHLIM Assist
+
 **Role on page:** Multilingual AI + deterministic support-routing project.
 
 **Public summary**  
@@ -117,6 +121,7 @@ Repository, evaluation fixtures, decision-policy documentation, tests, provider/
 ### Emerging / product-foundation builds
 
 #### RBL Content Engine
+
 **Role on page:** New evidence-verification + content-systems experiment.
 
 **Public summary**  
@@ -138,6 +143,7 @@ Python standard library first · deterministic offline pipeline · structured ev
 Repository, claim-verification model, platform-research lineage, deterministic treatments/storyboards, test fixtures.
 
 #### KHLIM Super App
+
 **Role on page:** Product/architecture foundation demonstrating larger-system thinking.
 
 **Public summary**  
@@ -159,6 +165,7 @@ Mobile app + admin web + modular backend + PostgreSQL/object storage, with expli
 Product brief, MVP scope, architecture, module boundaries, security/privacy planning, user workflows, ADRs, development roadmap.
 
 #### Richie Linardi Portfolio Website
+
 **Role on page:** Meta project / UI engineering / personal product system.
 
 **Public summary**  
@@ -234,11 +241,13 @@ Filters should change the project set without changing the underlying status/pro
 SPY Market Agent receives the largest editorial card.
 
 Desktop composition:
+
 - left: real/generated-for-project visual area (chart/research UI only when it represents the actual system);
 - center: title, summary, boundaries;
 - right/bottom: current status, technical tags, proof actions.
 
 Actions:
+
 - `View case study` when the case study exists;
 - `View repository` always when public;
 - optional `Release / docs` proof link.
@@ -246,11 +255,13 @@ Actions:
 ### D. Core systems grid
 
 Three high-information cards:
+
 - Personal Project Operator
 - LedgerPilot AI
 - KHLIM Assist
 
 Each gets enough height for:
+
 - system icon/visual;
 - name;
 - one-sentence problem/system summary;
@@ -259,6 +270,7 @@ Each gets enough height for:
 - proof actions.
 
 The cards should not use identical decorative screenshots. Visuals should reflect each system:
+
 - PPO: terminal/orchestration/workspace graph;
 - LedgerPilot: document → controls → journal → human review workflow;
 - KHLIM Assist: multilingual conversation → knowledge → policy → draft flow.
@@ -266,11 +278,13 @@ The cards should not use identical decorative screenshots. Visuals should reflec
 ### E. Emerging builds row
 
 Smaller but still serious cards:
+
 - RBL Content Engine
 - KHLIM Super App
 - Portfolio Website
 
 These cards must visibly communicate maturity:
+
 - `Early stage`
 - `Planning / foundation`
 - `Active development`
@@ -292,10 +306,12 @@ This section replaces generic skill-marketing language.
 ### G. Bottom CTA
 
 Two actions:
+
 - `Explore case studies`
 - `Browse GitHub repositories`
 
 Optional third text link:
+
 - `How I build` → future experience/about methodology section.
 
 ---
@@ -328,6 +344,7 @@ interface PortfolioProject {
 ```
 
 Internal/optional fields may track:
+
 - current commit/tag;
 - source README/PR/commit;
 - status provenance;
@@ -416,13 +433,16 @@ public/projects/
 ## 9. Visual direction
 
 ### Palette
+
 - Black / near-black foundation
 - Deep navy / blue for professional technical surfaces
 - White / ivory for readable content
 - Gold for hierarchy, prestige, selection, and proof emphasis
 
 ### Background motifs
+
 Use subtle layers only:
+
 - statistical lines / distribution geometry;
 - market/candlestick silhouettes around SPY;
 - document/audit geometry around LedgerPilot;
@@ -432,6 +452,7 @@ Use subtle layers only:
 No decorative motif should compete with project names or status.
 
 ### Typography
+
 - Editorial/serif display can be used for page/featured-project titles.
 - Clean sans for system descriptions, status, evidence, and technical tags.
 - Monospace only for code/status fragments where meaningful.
@@ -441,16 +462,19 @@ No decorative motif should compete with project names or status.
 ## 10. Responsive behavior
 
 ### Desktop
+
 - Featured SPY card spans the main content width or a 2/3 + 1/3 composition.
 - Core systems: 3-column grid when space permits.
 - Emerging builds: 3 smaller cards or a horizontal evidence row.
 
 ### Tablet
+
 - Featured card stacks internally.
 - Core cards: 2 columns, final card full/centered as needed.
 - Emerging cards: 2 columns → 1.
 
 ### Mobile
+
 - No sidebar.
 - Filters horizontally scroll or wrap accessibly.
 - Featured project becomes a single vertical evidence card.
@@ -490,6 +514,7 @@ When the page exceeds roughly 9–12 projects, add pagination or a compact archi
 Project status changes frequently. Each record should carry `verifiedAt` and ideally source provenance.
 
 Before a public release/deployment:
+
 - check the current repo default branch;
 - check current release/milestone wording;
 - update stale status strings;
@@ -520,6 +545,7 @@ The image must be tall enough to represent the actual page; do **not** force it 
 ## 14. Acceptance criteria for the design image
 
 The design is accepted only if:
+
 - all seven public projects are visible or clearly discoverable;
 - SPY Market Agent has clear featured hierarchy;
 - PPO reflects its newer Phase 6E maturity, not old Phase 1.5 copy;
