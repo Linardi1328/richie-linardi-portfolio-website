@@ -18,7 +18,7 @@ The signature mechanic is the page/book flip between those identities. It should
 | Global       | Main flipbook homepage                | Introduce both identities and create the signature first impression                     | Portraits, RBL logo, featured project proof, basketball proof entry points | Current visual reference exists                   |
 | Global       | Navigation / page edge / flip control | Make the two-sided architecture obvious and usable                                      | Route state, current side, reduced-motion fallback                         | Needs focused interaction draft                   |
 | Identity     | About / same-skill-two-worlds         | Explain character, motivations, discipline, leadership, and how both identities connect | Personal narrative + selected proof                                        | Needs draft                                       |
-| Professional | Projects overview                     | Show all active/credible builds with status and technical surface                       | Repositories, screenshots, docs, tests, releases                           | **Specification finalized; v2 visual draft next** |
+| Professional | Projects overview                     | Show all active/credible builds with status and technical surface                       | Repositories, screenshots, docs, tests, releases                           | **v2 visual approved; implementation target set** |
 | Professional | Project case-study template           | Prove engineering ability in depth                                                      | Architecture, screenshots, GitHub, tests, decisions, limitations           | Needs draft                                       |
 | Professional | Experience / audit / leadership       | Show real responsibilities and outcomes                                                 | Documents/screenshots where appropriate, verified role data                | Needs draft                                       |
 | Professional | Education / Monash                    | Explain Data Science specialization and academic development                            | Coursework/projects/certificates where useful                              | Needs draft                                       |
@@ -208,7 +208,7 @@ The gallery, timeline, cards, filters, and homepage highlights should update aut
 
 1. Main homepage — final interaction states and mobile behavior
 2. Basketball Proof Gallery — highest evidence value
-3. Projects overview — **specification finalized; create v2 reference image next**
+3. Projects overview — **v2 reference approved; implementation can target it**
 4. Project case-study template — begin with SPY Market Agent
 5. Basketball achievements + statistics combined system
 6. Basketball journey timeline
