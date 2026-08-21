@@ -1,7 +1,8 @@
 # Richie Linardi Portfolio — Projects Overview Final Specification
 
-Status: **Design/content specification locked for the next visual-design pass**  
-Status snapshot verified from GitHub: **2026-08-21**
+Status: **Approved Projects Overview v2 design direction**  
+Status snapshot verified from GitHub: **2026-08-21**  
+Visual reference approved: **2026-08-22**
 
 ## 1. Purpose
 
@@ -164,28 +165,6 @@ Mobile app + admin web + modular backend + PostgreSQL/object storage, with expli
 **Primary proof**  
 Product brief, MVP scope, architecture, module boundaries, security/privacy planning, user workflows, ADRs, development roadmap.
 
-#### Richie Linardi Portfolio Website
-
-**Role on page:** Meta project / UI engineering / personal product system.
-
-**Public summary**  
-Interactive two-sided portfolio product designed to connect professional and basketball identities through a shared design system and eventual signature page-flip experience.
-
-**Current status**  
-`v0.3 professional homepage merged · project/case-study system is the next implementation stage`
-
-**Truthful boundary**  
-The basketball interface and signature page-flip are design/planned work, not yet implemented production features.
-
-**Primary lenses**  
-Next.js · TypeScript · UI/UX · Design Systems · Content Architecture
-
-**Core stack**  
-Next.js · React · TypeScript · Tailwind CSS
-
-**Primary proof**  
-Repository, design system, CI validation, professional homepage, future versioned design references, implementation-vs-reference reviews.
-
 ---
 
 ## 3. Projects deliberately not shown as primary public cards
@@ -281,13 +260,11 @@ Smaller but still serious cards:
 
 - RBL Content Engine
 - KHLIM Super App
-- Portfolio Website
 
 These cards must visibly communicate maturity:
 
 - `Early stage`
 - `Planning / foundation`
-- `Active development`
 
 Do not visually imply that planning documentation is equivalent to a production application.
 
@@ -465,7 +442,7 @@ No decorative motif should compete with project names or status.
 
 - Featured SPY card spans the main content width or a 2/3 + 1/3 composition.
 - Core systems: 3-column grid when space permits.
-- Emerging builds: 3 smaller cards or a horizontal evidence row.
+- Emerging builds: 2 asymmetric cards or a balanced two-column evidence row.
 
 ### Tablet
 
@@ -533,7 +510,7 @@ The next generated reference image should show, in this order:
 3. filter row;
 4. large SPY Market Agent feature;
 5. three core-system cards: PPO, LedgerPilot, KHLIM Assist;
-6. emerging-build strip: RBL Content Engine, KHLIM Super App, Portfolio Website;
+6. emerging-build strip: RBL Content Engine and KHLIM Super App;
 7. proof/build-principles strip;
 8. case-study / GitHub CTA;
 9. restrained footer.
@@ -546,14 +523,13 @@ The image must be tall enough to represent the actual page; do **not** force it 
 
 The design is accepted only if:
 
-- all seven public projects are visible or clearly discoverable;
+- all six public projects are visible or clearly discoverable;
 - SPY Market Agent has clear featured hierarchy;
 - PPO reflects its newer Phase 6E maturity, not old Phase 1.5 copy;
 - LedgerPilot reflects Phase 5 human review;
 - KHLIM Assist keeps auto-reply boundaries truthful;
 - RBL Content Engine is clearly early-stage/pilot;
 - KHLIM Super App is clearly planning/pre-development;
-- the Portfolio Website does not pretend the flip interaction is already implemented;
 - cards emphasize proof and current boundaries, not marketing hype;
 - future project additions do not require a redesign;
 - the visual system remains blue + gold + black + white;
@@ -565,4 +541,4 @@ The design is accepted only if:
 
 **Locked direction:** Evidence-first editorial project catalogue with one featured mature project, a core-systems grid, an honest emerging-build layer, and reusable proof/status architecture.
 
-This specification should be used as the source for the next `Projects Overview v2` reference image and later implementation.
+The approved reference is `current/02-projects-overview-v2-current.svg`. This specification and that visual should be used together for later implementation. The portfolio website itself is intentionally excluded from the project catalogue because the website is already the medium the visitor is experiencing.
