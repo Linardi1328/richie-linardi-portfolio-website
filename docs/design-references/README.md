@@ -6,7 +6,7 @@ This directory preserves the approved visual direction and design specifications
 
 ## Source-of-truth rule
 
-These images are **design references, not factual source-of-truth**. Generated text, statistics, dates, logos, uniforms, tournament names, and UI copy must be verified against structured portfolio data and primary/credible sources before implementation.
+These images are **design references, not factual source-of-truth**. Generated text, statistics, dates, logos, uniforms, tournament names, market values, live-status labels, and UI copy must be verified against structured portfolio data and primary/credible sources before implementation.
 
 ## Current direction
 
@@ -29,6 +29,28 @@ Approved Projects Overview v2 reference, approved 2026-08-22.
 - Status, evidence, current limitations, and proof actions are part of the card language.
 - The Portfolio Website is intentionally not shown as its own project card because the website itself is already the visitor's experience.
 - The SVG is a lightweight review reference that embeds the approved image direction; it is not a production asset.
+
+### `current/03-basketball-proof-gallery-v1-current.jpg`
+
+Approved Basketball Proof Gallery reference.
+
+- Photography is the dominant proof surface rather than an achievement-card grid.
+- Black/gold arena-archive styling with restrained Indonesia red/white treatment.
+- Jersey `#13` is the persistent athlete identity motif.
+- Achievement, tournament, statistic, and source metadata should attach to the relevant photographs.
+- Empty proof slots in the draft are intentional placeholders for owner-provided original media.
+- Final tournament facts and statistics must be re-verified during implementation.
+
+### `current/04-spy-market-agent-case-study-v2-current.jpg`
+
+Approved SPY Market Agent case-study direction with live-system evidence treatment.
+
+- High-impact case-study hero and technical-research visual language.
+- The honest research result remains prominent rather than being hidden by performance marketing.
+- A `Live Operating Proof` region demonstrates that the system can ingest current data and execute its bounded pipeline in real time.
+- Live evidence can include heartbeat/health state, recent runs, paper-only signals, audit events, and current-data timestamps when backed by the actual deployed system.
+- The design must **not** imply live-money trading or an approved predictive edge. Paper/research execution boundaries remain explicit.
+- Generated market prices, timestamps, run counts, metrics, or system states in this mockup are illustrative until connected to real telemetry.
 
 ## Locked specifications
 
@@ -60,17 +82,18 @@ Rejected direction. Kept only to document what **not** to recreate: generic dark
 
 ## Reference-image policy
 
-Repository copies are intentionally lightweight review images so the design history remains easy to browse without bloating the application bundle. Production photos, logos, and optimized website assets belong under `public/` only when they are actually integrated into the site.
+Repository copies are intentionally lightweight review images so the design history remains easy to browse without bloating the application bundle. Production photos, logos, project screenshots, and optimized website assets belong under `public/` only when they are actually integrated into the site.
 
 ## Naming convention going forward
 
-`NN-interface-name-vMAJOR.MINOR-status.<ext>`
+`NN-interface-name-vMAJOR-status.<ext>`
 
 Examples:
 
 - `02-projects-overview-v2-current.svg`
-- `03-basketball-proof-gallery-v2-current.jpg`
-- `04-project-case-study-spy-v1-draft.jpg`
+- `03-basketball-proof-gallery-v1-current.jpg`
+- `04-spy-market-agent-case-study-v2-current.jpg`
+- `05-basketball-achievements-statistics-v1-draft.jpg`
 
 When a draft is superseded, move it to `archive/`; keep only the latest approved direction in `current/`.
 
