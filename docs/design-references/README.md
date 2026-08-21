@@ -73,9 +73,15 @@ KHLIM Assist case study: multilingual support flow, typed retrieval, GREEN/YELLO
 See [`INTERFACE_COMPONENT_MAP.md`](./INTERFACE_COMPONENT_MAP.md). Every implemented interface should use stable comments/identifiers such as:
 
 ```tsx
-{/* [SECTION 01] Experience Dossiers */}
-{/* [CARD 01] Auditor */}
-{/* [CARD 02] Statistics Team Leader */}
+{
+  /* [SECTION 01] Experience Dossiers */
+}
+{
+  /* [CARD 01] Auditor */
+}
+{
+  /* [CARD 02] Statistics Team Leader */
+}
 ```
 
 This is intentional: the owner should be able to search for a visual card/section name and manually adjust that exact area without hunting through the component tree.
