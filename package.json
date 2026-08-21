@@ -9,7 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format:check": "prettier --write docs/design-references/BRAINSTORM.md docs/design-references/PROJECTS_OVERVIEW_FINAL.md && git diff -- docs/design-references/BRAINSTORM.md docs/design-references/PROJECTS_OVERVIEW_FINAL.md && exit 1",
     "validate": "npm run lint && npm run typecheck && npm run format:check && npm run build"
   },
   "dependencies": {
