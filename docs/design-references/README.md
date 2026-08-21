@@ -19,11 +19,22 @@ Current main-home visual direction.
 - Basketball face: black/gold/red-white Indonesia cues; #13 identity; gallery/proof entry points.
 - RBL initials mark is the primary personal brand device.
 
+### `current/02-projects-overview-v2-current.svg`
+
+Approved Projects Overview v2 reference, approved 2026-08-22.
+
+- Six-project catalogue: SPY Market Agent, Personal Project Operator, LedgerPilot AI, KHLIM Assist, RBL Content Engine, and KHLIM Super App.
+- SPY Market Agent receives the dominant featured-research treatment.
+- Core systems and emerging/foundation builds have visibly different maturity hierarchy.
+- Status, evidence, current limitations, and proof actions are part of the card language.
+- The Portfolio Website is intentionally not shown as its own project card because the website itself is already the visitor's experience.
+- The SVG is a lightweight review reference that embeds the approved image direction; it is not a production asset.
+
 ## Locked specifications
 
 ### `PROJECTS_OVERVIEW_FINAL.md`
 
-Final content, evidence, status, layout, responsiveness, and future-growth specification for the Projects interface. Verified against current public GitHub state on 2026-08-21. This file is the source for the next `Projects Overview v2` visual reference.
+Approved content, evidence, status, layout, responsiveness, and future-growth specification for the Projects interface. Verified against public GitHub state on 2026-08-21 and updated after owner approval on 2026-08-22. Use it together with `current/02-projects-overview-v2-current.svg` during implementation.
 
 ### `BRAINSTORM.md`
 
@@ -53,13 +64,13 @@ Repository copies are intentionally lightweight review images so the design hist
 
 ## Naming convention going forward
 
-`NN-interface-name-vMAJOR.MINOR-status.jpg`
+`NN-interface-name-vMAJOR.MINOR-status.<ext>`
 
 Examples:
 
-- `05-projects-overview-v2.0-current.jpg`
-- `06-basketball-proof-gallery-v2.0-current.jpg`
-- `07-project-case-study-spy-v1.0-draft.jpg`
+- `02-projects-overview-v2-current.svg`
+- `03-basketball-proof-gallery-v2-current.jpg`
+- `04-project-case-study-spy-v1-draft.jpg`
 
 When a draft is superseded, move it to `archive/`; keep only the latest approved direction in `current/`.
 
