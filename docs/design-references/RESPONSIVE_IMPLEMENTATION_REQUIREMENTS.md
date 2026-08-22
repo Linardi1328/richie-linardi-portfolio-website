@@ -85,15 +85,33 @@ Every interface must support:
 Responsive-specific logic should be easy to find manually. Use searchable comments near meaningful layout changes, for example:
 
 ```tsx
-{/* [RESPONSIVE: phone] */}
-{/* [RESPONSIVE: small-tablet] */}
-{/* [RESPONSIVE: tablet-portrait] */}
-{/* [RESPONSIVE: tablet-landscape] */}
-{/* [RESPONSIVE: large-tablet-2in1] */}
-{/* [RESPONSIVE: desktop] */}
-{/* [TOUCH: edge-swipe-zone] */}
-{/* [POINTER: edge-hover-peek] */}
-{/* [REDUCED MOTION] */}
+{
+  /* [RESPONSIVE: phone] */
+}
+{
+  /* [RESPONSIVE: small-tablet] */
+}
+{
+  /* [RESPONSIVE: tablet-portrait] */
+}
+{
+  /* [RESPONSIVE: tablet-landscape] */
+}
+{
+  /* [RESPONSIVE: large-tablet-2in1] */
+}
+{
+  /* [RESPONSIVE: desktop] */
+}
+{
+  /* [TOUCH: edge-swipe-zone] */
+}
+{
+  /* [POINTER: edge-hover-peek] */
+}
+{
+  /* [REDUCED MOTION] */
+}
 ```
 
 Component labels from `INTERFACE_COMPONENT_MAP.md` should remain stable alongside these responsive labels so the owner can locate both the content region and its device-specific behavior quickly.
