@@ -8,15 +8,20 @@ This directory preserves approved visual directions used to compare the real imp
 
 These images are **design references, not factual source-of-truth**. Generated text, statistics, dates, logos, uniforms, tournament names, article headlines, contact details, market values, live-status labels, project metrics, and UI copy must be verified against structured portfolio data and primary/credible sources before production use.
 
-Repository copies are intentionally lightweight review images. Original photographs, project screenshots, logos, and production-ready optimized assets belong under `public/` only when integrated into the website.
+Repository copies are optimized, readable development-reference images. Original photographs, project screenshots, logos, and production-ready optimized assets belong under `public/` only when integrated into the website.
+
+## Reference status
+
+The numbering is intentionally stable. Rejected references are removed rather than renumbering every later interface.
+
+- `01` — **replacement required**. The previous main dual-sided homepage mockup was rejected and removed from `current/`.
+- `05` — **replacement required**. The previous Basketball Achievements + Statistics mockup was rejected and removed from `current/`.
+
+Do not recreate either rejected mockup from Git history as a production target. New versions may reuse the vacant numbers only after explicit owner approval.
 
 ## Current approved references
 
-### `current/01-main-homepage-dual-sided-v2.jpg`
-
-Main flipbook/two-sided homepage direction: professional navy/blue/black/white/gold face, basketball black/gold/Indonesia face, RBL branding, and the page-turn identity mechanic.
-
-### `current/02-projects-overview-v2-current.svg`
+### `current/02-projects-overview-v2-current.jpg`
 
 Approved six-project overview. SPY Market Agent is the flagship; Personal Project Operator, LedgerPilot AI, KHLIM Assist, RBL Content Engine, and KHLIM Super App form the remaining catalogue. The portfolio website itself is intentionally excluded as a project card.
 
@@ -27,10 +32,6 @@ Photography-first basketball evidence archive. #13, Indonesia red/white, irregul
 ### `current/04-spy-market-agent-case-study-v2-current.jpg`
 
 SPY Market Agent technical case study with prominent honest research result and a `Live Operating Proof` region. Production must remain explicitly research/paper-only and must connect all live values to real telemetry.
-
-### `current/05-basketball-achievements-statistics-v1-current.jpg`
-
-Basketball achievements + statistics dashboard: career snapshot, tournament lens, achievement ledger, verified stat panels, development-by-season, proof sources, and the `Richie analyzes Richie` Data Science crossover.
 
 ### `current/06-basketball-journey-timeline-v1-current.jpg`
 
@@ -68,6 +69,10 @@ LedgerPilot AI case-study template emphasizing human-supervised accounting workf
 
 KHLIM Assist case study: multilingual support flow, typed retrieval, GREEN/YELLOW/RED policy decisions, draft response preview, evidence/knowledge, organizer oversight, and explicit participant auto-reply disablement. Generated interaction counts, language counts, response times, and similar figures are placeholders unless verified.
 
+### `current/15-signature-flipbook-interaction-v1-current.jpg`
+
+Signature interaction reference for the physical two-sided portfolio object. It defines the professional-to-basketball page-turn concept, desktop edge hover/click/drag behavior, tablet/touch adaptation, mobile edge-swipe/tap behavior, page thickness/spine treatment, and the responsive interaction direction. Production must also follow the reduced-motion, keyboard, and device-capability requirements in `RESPONSIVE_IMPLEMENTATION_REQUIREMENTS.md`.
+
 ## Implementation labels
 
 See [`INTERFACE_COMPONENT_MAP.md`](./INTERFACE_COMPONENT_MAP.md). Every implemented interface should use stable comments/identifiers such as:
@@ -91,16 +96,17 @@ This is intentional: the owner should be able to search for a visual card/sectio
 - `PROJECTS_OVERVIEW_FINAL.md` — approved Projects overview content/layout specification.
 - `BRAINSTORM.md` — living product/interface map and proof-first architecture.
 - `INTERFACE_COMPONENT_MAP.md` — stable implementation labels and comments for manual design refinement.
+- `RESPONSIVE_IMPLEMENTATION_REQUIREMENTS.md` — site-wide phone, tablet, foldable, 2-in-1, desktop, interaction, orientation, accessibility, and reduced-motion contract.
 
 ## Archived references
 
-Older/superseded directions stay under `archive/` rather than disappearing. `archive/99-discarded-generic-portfolio-concept.jpg` remains an explicit example of the generic developer-dashboard direction not to recreate.
+Older/superseded directions stay under `archive/` rather than disappearing when they are still useful history. Explicitly rejected references such as the former `01` and `05` mockups do **not** need to remain as active visual targets. `archive/99-discarded-generic-portfolio-concept.jpg` remains an explicit example of the generic developer-dashboard direction not to recreate.
 
 ## Naming convention
 
 `NN-interface-name-vMAJOR-status.<ext>`
 
-When an approved design is replaced, move the previous version to `archive/` and keep the newest approved direction in `current/`.
+When an approved design is replaced, move the previous version to `archive/` only if preserving it has development value. Rejected mockups may be removed completely. Keep numbering stable so documentation and implementation comments do not shift unnecessarily.
 
 ## Implementation comparison checklist
 
