@@ -54,6 +54,20 @@ It showcases:
 - professional and basketball context samples
 - navigation and interaction state prototypes
 
+## Design Reference Library
+
+Approved implementation mockups and interaction references live under [`docs/design-references/`](./docs/design-references/README.md).
+
+The images in `docs/design-references/current/` are readable development references, not factual source-of-truth and not production assets. Generated copy, statistics, dates, project metrics, market values, tournament details, contact information, and similar claims must be verified before implementation.
+
+Reference numbering stays stable even when a mockup is rejected. Slots `01` (main dual-sided homepage) and `05` (Basketball Achievements + Statistics) are currently intentionally vacant and require new owner-approved replacements. Do not renumber the remaining references.
+
+Implementation must also follow:
+
+- [`INTERFACE_COMPONENT_MAP.md`](./docs/design-references/INTERFACE_COMPONENT_MAP.md) for searchable section/card labels;
+- [`RESPONSIVE_IMPLEMENTATION_REQUIREMENTS.md`](./docs/design-references/RESPONSIVE_IMPLEMENTATION_REQUIREMENTS.md) for phone, tablet, foldable, 2-in-1, desktop, accessibility, orientation, and reduced-motion behavior;
+- the current approved mockup for visual hierarchy and composition, while allowing responsive recomposition where necessary.
+
 ## Token Architecture
 
 Global tokens live in `src/app/globals.css` and are exposed through CSS custom properties plus Tailwind CSS 4 theme variables.
@@ -129,6 +143,7 @@ The same automated validation runs in GitHub Actions for pull requests and pushe
 - Reusable UI primitives should be created before real page styling begins.
 - The professional and basketball sides must share the same design system.
 - Meaningful implementation should happen on phase branches and be reviewed through pull requests.
+- Design-reference PRs require owner visual approval when image fidelity/readability is part of the change.
 
 ## Planned Structure
 
