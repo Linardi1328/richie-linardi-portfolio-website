@@ -1,8 +1,8 @@
 # High-Resolution Design Reference Repair
 
-> Review status: **BLOCKED ON BINARY REPLACEMENT — DO NOT MERGE YET**
+> Review status: **READY FOR OWNER VISUAL REVIEW — DO NOT MERGE UNTIL APPROVED**
 
-This branch exists to replace the thumbnail-grade design-reference exports currently stored under `docs/design-references/current/` with readable development references.
+This branch replaces the thumbnail-grade design-reference exports under `docs/design-references/current/` with readable development references.
 
 ## Owner approval gate
 
@@ -10,27 +10,38 @@ This PR must **not** be merged until Richie has opened the changed image files d
 
 CI success is necessary but is **not** sufficient approval for this PR.
 
-## Reference set to repair
+## Current repaired set
 
-1. `01-main-homepage-dual-sided-v2.jpg`
-2. `02-projects-overview-v2-current.jpg` (replace the current low-fidelity SVG reference with a readable raster review copy)
-3. `03-basketball-proof-gallery-v1-current.jpg`
-4. `04-spy-market-agent-case-study-v2-current.jpg`
-5. `05-basketball-achievements-statistics-v1-current.jpg`
-6. `06-basketball-journey-timeline-v1-current.jpg`
-7. `07-about-identity-same-skill-two-worlds-v1-current.jpg`
-8. `08-professional-experience-leadership-v1-current.jpg`
-9. `09-education-monash-v1-current.jpg`
-10. `10-press-media-archive-v1-current.jpg`
-11. `11-contact-opportunities-v1-current.jpg`
-12. `12-web-resume-v1-current.jpg`
-13. `13-ledgerpilot-case-study-v1-current.jpg`
-14. `14-khlim-assist-case-study-v1-current.jpg`
-15. `15-signature-flipbook-interaction-v1-current.jpg`
+Readable high-quality review copies are present for:
+
+1. `02-projects-overview-v2-current.jpg`
+2. `03-basketball-proof-gallery-v1-current.jpg`
+3. `04-spy-market-agent-case-study-v2-current.jpg`
+4. `06-basketball-journey-timeline-v1-current.jpg`
+5. `07-about-identity-same-skill-two-worlds-v1-current.jpg`
+6. `08-professional-experience-leadership-v1-current.jpg`
+7. `09-education-monash-v1-current.jpg`
+8. `10-press-media-archive-v1-current.jpg`
+9. `11-contact-opportunities-v1-current.jpg`
+10. `12-web-resume-v1-current.jpg`
+11. `13-ledgerpilot-case-study-v1-current.jpg`
+12. `14-khlim-assist-case-study-v1-current.jpg`
+13. `15-signature-flipbook-interaction-v1-current.jpg`
+
+The obsolete low-fidelity `02-projects-overview-v2-current.svg` has been removed.
+
+## Rejected / replacement-required slots
+
+The previous references below were explicitly rejected and removed rather than preserved as development targets:
+
+- `01-main-homepage-dual-sided-v2.jpg` — **replacement required**
+- `05-basketball-achievements-statistics-v1-current.jpg` — **replacement required**
+
+Keep these numbers vacant until new owner-approved replacement mockups are created. Do not renumber later references.
 
 ## Acceptance criteria
 
-For every image:
+For every current image:
 
 - GitHub's file preview must render successfully.
 - Opening the image directly must show a readable full mockup, not a tiny thumbnail.
@@ -42,6 +53,6 @@ For every image:
 
 Workflow for this repair:
 
-`repair branch -> binary replacement -> PR visual review -> owner approval -> CI green -> squash merge to main`
+`repair branch -> binary replacement -> documentation alignment -> owner visual review -> owner approval -> CI green -> squash merge to main`
 
-Do not bypass the owner visual-review step.
+Do not bypass the owner visual-review step and do not use a merge commit for this PR.
