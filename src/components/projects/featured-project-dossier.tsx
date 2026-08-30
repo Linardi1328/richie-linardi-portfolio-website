@@ -40,7 +40,10 @@ export function FeaturedProjectDossier({
         </a>
       </header>
 
-      <div className="featured-project-dossier__tags" aria-label="Technical surface">
+      <div
+        className="featured-project-dossier__tags"
+        aria-label="Technical surface"
+      >
         {project.tags.map((tag) => (
           <span key={tag}>{tag}</span>
         ))}
@@ -58,7 +61,9 @@ export function FeaturedProjectDossier({
         </section>
 
         <section className="featured-project-dossier__module">
-          <p className="featured-project-dossier__label">Operating boundaries</p>
+          <p className="featured-project-dossier__label">
+            Operating boundaries
+          </p>
           <ul className="featured-project-dossier__list">
             {project.boundaries.map((boundary) => (
               <li key={boundary}>{boundary}</li>

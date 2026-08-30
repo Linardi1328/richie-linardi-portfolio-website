@@ -110,7 +110,8 @@
   display: inline-flex;
   min-height: 32px;
   align-items: center;
-  border: 1px solid color-mix(in srgb, var(--stage-accent) 22%, var(--stage-line));
+  border: 1px solid
+    color-mix(in srgb, var(--stage-accent) 22%, var(--stage-line));
   border-radius: 999px;
   padding-inline: 0.75rem;
   color: var(--stage-muted);
