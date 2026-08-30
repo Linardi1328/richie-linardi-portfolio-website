@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import "../styles/production-shell.css";
 
 export const metadata: Metadata = {
-  title: "Richie Linardi | Software & Data Portfolio",
+  title: "Richie Linardi | Software, Data & Basketball",
   description:
-    "Professional portfolio for Richie Linardi, featuring selected software, data, AI, and automation projects.",
+    "Two-sided portfolio for Richie Linardi, connecting software, data, AI, and basketball through one evidence-driven personal archive.",
 };
 
 type RootLayoutProps = Readonly<{
