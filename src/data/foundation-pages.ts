@@ -24,14 +24,24 @@ export const foundationPages = {
         title: "Build systems that can explain themselves.",
         description:
           "The professional side will focus on evidence, architecture, deterministic boundaries, testing, and the decisions behind each system.",
-        items: ["Projects with proof", "Human control", "Current limitations", "Reviewable engineering decisions"],
+        items: [
+          "Projects with proof",
+          "Human control",
+          "Current limitations",
+          "Reviewable engineering decisions",
+        ],
       },
       {
         eyebrow: "Basketball world",
         title: "Treat the athlete journey like an archive.",
         description:
           "The basketball side will connect milestones, photography, statistics, sources, and context instead of behaving like a social-media feed.",
-        items: ["Chronology", "Verified results", "Event context", "Source-backed media"],
+        items: [
+          "Chronology",
+          "Verified results",
+          "Event context",
+          "Source-backed media",
+        ],
       },
       {
         eyebrow: "Shared principle",
@@ -162,7 +172,8 @@ export const foundationPages = {
   journey: {
     world: "basketball",
     eyebrow: "Basketball journey",
-    title: "From development to higher-level competition, shown as one sequence.",
+    title:
+      "From development to higher-level competition, shown as one sequence.",
     description:
       "The journey page is the chronological backbone of the athlete side. This preview establishes the story architecture before the verified milestones and owner media are fully wired in.",
     sections: [

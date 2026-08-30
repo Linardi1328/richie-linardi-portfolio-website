@@ -46,7 +46,10 @@ export function FoundationRoutePage({
             <h1>{title}</h1>
             <p className="foundation-route__lede">{description}</p>
             {primaryHref && primaryLabel ? (
-              <Link className="foundation-route__primary-link" href={primaryHref}>
+              <Link
+                className="foundation-route__primary-link"
+                href={primaryHref}
+              >
                 {primaryLabel}
                 <span aria-hidden="true">→</span>
               </Link>
@@ -54,10 +57,16 @@ export function FoundationRoutePage({
           </div>
         </section>
 
-        <section className="foundation-route__sections" aria-label={`${title} foundation`}>
+        <section
+          className="foundation-route__sections"
+          aria-label={`${title} foundation`}
+        >
           {sections.map((section, index) => (
             <article className="foundation-route__section" key={section.title}>
-              <div className="foundation-route__section-index" aria-hidden="true">
+              <div
+                className="foundation-route__section-index"
+                aria-hidden="true"
+              >
                 {String(index + 1).padStart(2, "0")}
               </div>
               <div>
@@ -79,7 +88,9 @@ export function FoundationRoutePage({
         <aside className="foundation-route__status" aria-label="Preview status">
           <span>Preview foundation</span>
           <p>
-            Structure, hierarchy, routing, and responsive composition are ready for review. Deep content and final interaction polish intentionally follow owner feedback.
+            Structure, hierarchy, routing, and responsive composition are ready
+            for review. Deep content and final interaction polish intentionally
+            follow owner feedback.
           </p>
         </aside>
       </main>
