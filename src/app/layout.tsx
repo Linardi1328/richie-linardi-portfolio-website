@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 import "../styles/production-shell.css";
+import "../styles/featured-project-dossier.css";
 
 export const metadata: Metadata = {
   title: "Richie Linardi | Software, Data & Basketball",
