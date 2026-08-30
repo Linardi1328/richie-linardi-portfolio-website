@@ -13,7 +13,7 @@
 ## Automated Pass Gates
 
 - [ ] `CI / Validate` passes.
-- [ ] `PPO PR validation` passes.
+- [ ] `PPO PR validation / PPO required validation` passes.
 - [ ] `Production Pass Gates / Required production gate` passes.
 - [ ] `npm run validate` passes locally when local validation is practical.
 
