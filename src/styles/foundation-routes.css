@@ -1,0 +1,203 @@
+.foundation-route {
+  min-height: 70vh;
+  color: var(--stage-ink);
+}
+
+.foundation-route__hero {
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.foundation-route__hero-inner,
+.foundation-route__sections,
+.foundation-route__status {
+  width: min(100%, 86rem);
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 4vw, 4rem);
+}
+
+.foundation-route__hero-inner {
+  padding-top: clamp(4rem, 10vw, 8rem);
+  padding-bottom: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+.foundation-route__eyebrow {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.foundation-route__hero h1 {
+  max-width: 13ch;
+  margin: 0.85rem 0 0;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.foundation-route__lede {
+  max-width: 48rem;
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  line-height: 1.65;
+  color: var(--stage-muted);
+}
+
+.foundation-route__primary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 3rem;
+  margin-top: 2rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--stage-line);
+  font-weight: 750;
+  color: var(--stage-ink);
+  text-decoration: none;
+}
+
+.foundation-route__primary-link:hover,
+.foundation-route__primary-link:focus-visible {
+  border-color: var(--stage-accent);
+  color: var(--stage-accent);
+}
+
+.foundation-route__sections {
+  display: grid;
+  gap: 0;
+  padding-top: clamp(1rem, 3vw, 2rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.foundation-route__section {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: clamp(2rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.foundation-route__section-index {
+  padding-top: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  color: var(--stage-accent);
+}
+
+.foundation-route__section h2 {
+  max-width: 18ch;
+  margin: 0.55rem 0 0;
+  font-size: clamp(1.9rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.foundation-route__section p:not(.foundation-route__eyebrow) {
+  max-width: 45rem;
+  margin: 1rem 0 0;
+  line-height: 1.7;
+  color: var(--stage-muted);
+}
+
+.foundation-route__section ul {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.foundation-route__section li {
+  position: relative;
+  padding-left: 1.25rem;
+  line-height: 1.55;
+}
+
+.foundation-route__section li::before {
+  position: absolute;
+  top: 0.68em;
+  left: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--stage-accent);
+  content: "";
+}
+
+.foundation-route__status {
+  display: grid;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+.foundation-route__status span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.foundation-route__status p {
+  max-width: 44rem;
+  margin: 0;
+  line-height: 1.6;
+  color: var(--stage-muted);
+}
+
+@media (min-width: 600px) {
+  .foundation-route__section {
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .foundation-route__section {
+    grid-template-columns: 5rem minmax(15rem, 0.72fr) minmax(20rem, 1.28fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .foundation-route__section > div:last-child {
+    display: grid;
+    grid-template-columns: minmax(13rem, 0.8fr) minmax(18rem, 1.2fr);
+    column-gap: clamp(2rem, 4vw, 4.5rem);
+    align-items: start;
+  }
+
+  .foundation-route__section .foundation-route__eyebrow,
+  .foundation-route__section h2 {
+    grid-column: 1;
+  }
+
+  .foundation-route__section p:not(.foundation-route__eyebrow),
+  .foundation-route__section ul {
+    grid-column: 2;
+  }
+
+  .foundation-route__section p:not(.foundation-route__eyebrow) {
+    grid-row: 1 / span 2;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .foundation-route__hero-inner {
+    padding-top: 8.5rem;
+    padding-bottom: 7.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foundation-route__primary-link {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}
