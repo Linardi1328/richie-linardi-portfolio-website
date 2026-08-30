@@ -38,7 +38,9 @@ export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
   }, [pathname, world]);
 
   function handleWorldSwitch(event: MouseEvent<HTMLAnchorElement>) {
-    const rememberedTarget = window.sessionStorage.getItem(routeKeys[targetWorld]);
+    const rememberedTarget = window.sessionStorage.getItem(
+      routeKeys[targetWorld],
+    );
 
     if (rememberedTarget && rememberedTarget !== defaultRoutes[targetWorld]) {
       event.preventDefault();

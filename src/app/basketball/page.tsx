@@ -42,7 +42,9 @@ export default function BasketballPage() {
         {/* [SECTION 01] Basketball Journey Architecture */}
         <section className="basketball-shell-section" id="journey">
           <div className="basketball-shell-section__inner">
-            <p className="basketball-shell-hero__kicker">Journey architecture</p>
+            <p className="basketball-shell-hero__kicker">
+              Journey architecture
+            </p>
             <h2 className="mt-3 max-w-[16ch] text-[clamp(2.3rem,7vw,5rem)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[var(--stage-ink)]">
               A career should read like a sequence, not a collage.
             </h2>
@@ -99,16 +101,18 @@ export default function BasketballPage() {
           <div className="basketball-shell-section__inner">
             <div className="grid gap-8 min-[900px]:grid-cols-2 min-[900px]:items-end">
               <div>
-                <p className="basketball-shell-hero__kicker">Archive direction</p>
+                <p className="basketball-shell-hero__kicker">
+                  Archive direction
+                </p>
                 <h2 className="mt-3 text-[clamp(2.2rem,6vw,4.5rem)] font-extrabold leading-[0.98] tracking-[-0.04em] text-[var(--stage-ink)]">
                   Photography first. Context always.
                 </h2>
               </div>
               <p className="max-w-xl text-base leading-7 text-[var(--stage-muted)] min-[900px]:justify-self-end">
                 The next basketball production phases will replace this shell
-                scaffold with the verified journey, achievement ledger, statistics,
-                gallery, and media archive without changing the shared page
-                architecture established here.
+                scaffold with the verified journey, achievement ledger,
+                statistics, gallery, and media archive without changing the
+                shared page architecture established here.
               </p>
             </div>
           </div>

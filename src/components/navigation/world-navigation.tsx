@@ -35,7 +35,9 @@ export function WorldNavigation({
           </span>
           <span className="world-navigation__identity">
             <span className="world-navigation__name">Richie Linardi</span>
-            <span className="world-navigation__world">{worldLabels[world]}</span>
+            <span className="world-navigation__world">
+              {worldLabels[world]}
+            </span>
           </span>
         </Link>
 

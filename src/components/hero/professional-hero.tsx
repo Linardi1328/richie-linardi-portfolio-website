@@ -9,17 +9,20 @@ type ProfessionalHeroProps = {
 
 const proofPrinciples = [
   {
-    description: "Show the current implementation state, not the imagined end state.",
+    description:
+      "Show the current implementation state, not the imagined end state.",
     index: "01",
     title: "Evidence before theatre",
   },
   {
-    description: "Keep consequential actions behind explicit deterministic controls.",
+    description:
+      "Keep consequential actions behind explicit deterministic controls.",
     index: "02",
     title: "Human control stays visible",
   },
   {
-    description: "Treat testing, review, and limitations as part of the product story.",
+    description:
+      "Treat testing, review, and limitations as part of the product story.",
     index: "03",
     title: "Proof is part of the interface",
   },
@@ -55,9 +58,15 @@ export function ProfessionalHero({
           </div>
         </div>
 
-        <aside aria-label="Technical focus" className="professional-shell-hero__rail">
+        <aside
+          aria-label="Technical focus"
+          className="professional-shell-hero__rail"
+        >
           {proofPrinciples.map((principle) => (
-            <div className="professional-shell-hero__rail-item" key={principle.index}>
+            <div
+              className="professional-shell-hero__rail-item"
+              key={principle.index}
+            >
               <span className="professional-shell-hero__rail-index">
                 {principle.index}
               </span>

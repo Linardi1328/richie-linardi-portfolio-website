@@ -78,8 +78,8 @@ export default function Home() {
                 <Surface className="mt-9 rounded-card">
                   <TagGroup tags={[...professionalHomeData.technicalFocus]} />
                   <p className="type-body-small mt-6 text-text-secondary">
-                    I’m most interested in systems where data, automation, and AI
-                    need strong validation, traceability, and explicit human
+                    I’m most interested in systems where data, automation, and
+                    AI need strong validation, traceability, and explicit human
                     control.
                   </p>
                 </Surface>
@@ -92,8 +92,13 @@ export default function Home() {
         <Section aria-labelledby="contact-heading">
           <Container size="narrow">
             <div className="text-center">
-              <p className="type-eyebrow text-context-accent">Explore the work</p>
-              <h2 className="type-h2 mt-3 text-text-primary" id="contact-heading">
+              <p className="type-eyebrow text-context-accent">
+                Explore the work
+              </p>
+              <h2
+                className="type-h2 mt-3 text-text-primary"
+                id="contact-heading"
+              >
                 The repositories carry the implementation details.
               </h2>
               <p className="type-body mt-4 text-text-secondary">
