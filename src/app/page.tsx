@@ -1,5 +1,6 @@
 import { ProfessionalHero } from "@/components/hero/professional-hero";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
+import { FeaturedProjectDossier } from "@/components/projects/featured-project-dossier";
 import { ProjectCard } from "@/components/projects/project-card";
 import { TimelineItem } from "@/components/timeline/timeline-item";
 import {
@@ -12,7 +13,18 @@ import {
   TextLink,
 } from "@/components/ui";
 import { professionalHomeData } from "@/data/professional-home";
+import { publicProjectCatalogue } from "@/data/project-registry";
 import { professionalWorldNavigation } from "@/data/world-navigation";
+
+const featuredProject = publicProjectCatalogue.find(
+  (project) => project.catalogueState === "featured",
+);
+
+const supportingProjectCards = featuredProject
+  ? professionalHomeData.projects.filter(
+      (project) => project.title !== featuredProject.title,
+    )
+  : professionalHomeData.projects;
 
 export default function Home() {
   return (
@@ -32,11 +44,36 @@ export default function Home() {
               id="projects-heading"
               title="Work built around evidence, controls, and maintainable boundaries."
             />
-            <ResponsiveGrid className="mt-10" columns="two">
-              {professionalHomeData.projects.map((project) => (
-                <ProjectCard key={project.title} project={project} />
-              ))}
-            </ResponsiveGrid>
+
+            {featuredProject ? (
+              <div className="mt-10">
+                <FeaturedProjectDossier project={featuredProject} />
+              </div>
+            ) : null}
+
+            {/* [SECTION 01A] Supporting Systems Catalogue */}
+            <div className="mt-12">
+              <div className="mb-5 flex items-end justify-between gap-6 border-b border-border pb-4">
+                <div>
+                  <p className="type-eyebrow text-context-accent">
+                    Supporting systems
+                  </p>
+                  <h3 className="mt-2 text-xl font-bold tracking-[-0.02em] text-text-primary">
+                    Current catalogue
+                  </h3>
+                </div>
+                <p className="hidden max-w-md text-right text-sm leading-6 text-text-muted min-[768px]:block">
+                  Each system stays attached to its real implementation state,
+                  constraints, and repository evidence.
+                </p>
+              </div>
+
+              <ResponsiveGrid columns="two">
+                {supportingProjectCards.map((project) => (
+                  <ProjectCard key={project.title} project={project} />
+                ))}
+              </ResponsiveGrid>
+            </div>
           </Container>
         </Section>
 
