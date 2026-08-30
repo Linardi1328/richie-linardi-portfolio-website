@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import type { MouseEvent } from "react";
 import type { PortfolioWorld } from "@/data/world-navigation";
 import { cn } from "@/lib/cn";
 
@@ -23,28 +24,35 @@ const defaultRoutes: Record<PortfolioWorld, string> = {
 
 export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const targetWorld: PortfolioWorld =
     world === "professional" ? "basketball" : "professional";
-  const [targetRoute, setTargetRoute] = useState(defaultRoutes[targetWorld]);
-
-  useEffect(() => {
-    window.sessionStorage.setItem(routeKeys[world], pathname || defaultRoutes[world]);
-
-    const rememberedTarget = window.sessionStorage.getItem(routeKeys[targetWorld]);
-    if (rememberedTarget) {
-      setTargetRoute(rememberedTarget);
-    }
-  }, [pathname, targetWorld, world]);
-
   const targetLabel =
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
+
+  useEffect(() => {
+    window.sessionStorage.setItem(
+      routeKeys[world],
+      pathname || defaultRoutes[world],
+    );
+  }, [pathname, world]);
+
+  function handleWorldSwitch(event: MouseEvent<HTMLAnchorElement>) {
+    const rememberedTarget = window.sessionStorage.getItem(routeKeys[targetWorld]);
+
+    if (rememberedTarget && rememberedTarget !== defaultRoutes[targetWorld]) {
+      event.preventDefault();
+      router.push(rememberedTarget);
+    }
+  }
 
   return (
     <Link
       aria-label={`Turn to ${targetLabel.toLowerCase()}`}
       className={cn("world-switcher", className)}
       data-target-world={targetWorld}
-      href={targetRoute}
+      href={defaultRoutes[targetWorld]}
+      onClick={handleWorldSwitch}
     >
       <span aria-hidden="true" className="world-switcher__edge" />
       <span className="world-switcher__copy">
