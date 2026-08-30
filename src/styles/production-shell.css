@@ -1,0 +1,698 @@
+.portfolio-stage {
+  --stage-ink: #07111f;
+  --stage-muted: #6a7280;
+  --stage-line: color-mix(in srgb, var(--stage-ink) 14%, transparent);
+  --stage-paper: #f8f6f0;
+  --stage-paper-elevated: #fffdf8;
+  --stage-accent: #b8944d;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  padding: 0;
+  isolation: isolate;
+}
+
+.portfolio-stage--professional {
+  --stage-ink: #07111f;
+  --stage-muted: #596475;
+  --stage-line: #d8dee7;
+  --stage-paper: #f7f8fa;
+  --stage-paper-elevated: #ffffff;
+  --stage-accent: #174c7e;
+  background: #06101d;
+}
+
+.portfolio-stage--basketball {
+  --stage-ink: #f7f1e4;
+  --stage-muted: #c5b99f;
+  --stage-line: #2e2a23;
+  --stage-paper: #0c0b09;
+  --stage-paper-elevated: #13110e;
+  --stage-accent: #c8a45c;
+  background: #050504;
+}
+
+.portfolio-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.portfolio-stage--professional .portfolio-atmosphere {
+  background:
+    radial-gradient(circle at 16% 0%, rgb(31 95 159 / 24%), transparent 34rem),
+    radial-gradient(circle at 88% 12%, rgb(184 148 77 / 13%), transparent 26rem),
+    linear-gradient(150deg, #06101d 0%, #0b1d31 48%, #07111f 100%);
+}
+
+.portfolio-stage--basketball .portfolio-atmosphere {
+  background:
+    radial-gradient(circle at 12% 16%, rgb(177 22 32 / 22%), transparent 24rem),
+    radial-gradient(circle at 86% 8%, rgb(200 164 92 / 17%), transparent 30rem),
+    linear-gradient(145deg, #040403 0%, #11100d 58%, #070604 100%);
+}
+
+.portfolio-book {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  margin-inline: auto;
+}
+
+.portfolio-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: clip;
+  background: var(--stage-paper);
+  color: var(--stage-ink);
+}
+
+.portfolio-book__spine {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 40;
+  width: 4px;
+  pointer-events: none;
+  background: linear-gradient(180deg, #735827, #d4b56e 38%, #8d6f35 74%, #4e3b1c);
+  box-shadow: 0 0 22px rgb(184 148 77 / 20%);
+}
+
+.portfolio-stage--professional .portfolio-book__spine {
+  right: 0;
+}
+
+.portfolio-stage--basketball .portfolio-book__spine {
+  left: 0;
+}
+
+.portfolio-page__chrome {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: 0.75rem;
+  background: color-mix(in srgb, var(--stage-paper) 84%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--stage-line) 76%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.portfolio-page__content {
+  min-width: 0;
+}
+
+.portfolio-page__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  padding: 1.25rem var(--gutter) 1.5rem;
+  border-top: 1px solid var(--stage-line);
+  color: var(--stage-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.world-navigation {
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.world-navigation__bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.world-navigation__brand {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.world-navigation__monogram {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 56%, var(--stage-line));
+  color: var(--stage-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.world-navigation__identity {
+  display: grid;
+  min-width: 0;
+  gap: 0.08rem;
+}
+
+.world-navigation__name {
+  overflow: hidden;
+  color: var(--stage-ink);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.world-navigation__world {
+  overflow: hidden;
+  color: var(--stage-muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.world-navigation__desktop {
+  display: none;
+}
+
+.world-navigation__links {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.world-navigation__link,
+.world-navigation__menu-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  border-radius: 999px;
+  color: var(--stage-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
+}
+
+.world-navigation__link {
+  padding-inline: 0.9rem;
+}
+
+.world-navigation__link:hover,
+.world-navigation__menu-link:hover {
+  background: color-mix(in srgb, var(--stage-accent) 10%, transparent);
+  color: var(--stage-ink);
+}
+
+.world-navigation__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.world-navigation__menu {
+  position: relative;
+}
+
+.world-navigation__menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.world-navigation__menu-trigger {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--stage-line);
+  border-radius: 999px;
+  padding-inline: 0.85rem;
+  color: var(--stage-ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.world-navigation__menu-panel {
+  position: absolute;
+  top: calc(100% + 0.65rem);
+  right: 0;
+  width: min(16rem, calc(100vw - 2rem));
+  padding: 0.65rem;
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 20%);
+}
+
+.world-navigation__menu-panel ul {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.world-navigation__menu-link {
+  width: 100%;
+  padding-inline: 0.85rem;
+}
+
+.world-switcher {
+  display: inline-grid;
+  min-height: 44px;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+  border-radius: 999px;
+  padding: 0.38rem 0.65rem 0.38rem 0.4rem;
+  color: var(--stage-ink);
+  text-decoration: none;
+  transition:
+    transform var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard);
+}
+
+.world-switcher:hover {
+  transform: translateY(-1px);
+  border-color: var(--stage-accent);
+  background: color-mix(in srgb, var(--stage-accent) 8%, transparent);
+}
+
+.world-switcher__edge {
+  width: 0.35rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #765a2a, #e3c77e, #84672f);
+  box-shadow: 0 0 14px rgb(184 148 77 / 25%);
+}
+
+.world-switcher__copy {
+  display: none;
+}
+
+.world-switcher__eyebrow {
+  color: var(--stage-muted);
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.world-switcher__label {
+  color: var(--stage-ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.world-switcher__arrow {
+  color: var(--stage-accent);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.professional-shell-hero,
+.basketball-shell-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.professional-shell-hero {
+  padding: clamp(4rem, 9vw, 8rem) var(--gutter) clamp(4.5rem, 10vw, 9rem);
+}
+
+.professional-shell-hero__grid {
+  display: grid;
+  max-width: 1180px;
+  margin-inline: auto;
+  gap: 3rem;
+}
+
+.professional-shell-hero__kicker,
+.basketball-shell-hero__kicker {
+  color: var(--stage-accent);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.professional-shell-hero__title {
+  max-width: 11ch;
+  margin-top: 1rem;
+  color: var(--stage-ink);
+  font-size: clamp(3.4rem, 12vw, 7.6rem);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+
+.professional-shell-hero__description {
+  max-width: 43rem;
+  margin-top: 1.7rem;
+  color: var(--stage-muted);
+  font-size: clamp(1rem, 2vw, 1.22rem);
+  line-height: 1.72;
+}
+
+.professional-shell-hero__actions,
+.basketball-shell-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.professional-shell-hero__rail {
+  display: grid;
+  align-content: end;
+  gap: 0;
+  border-top: 1px solid var(--stage-line);
+}
+
+.professional-shell-hero__rail-item {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.professional-shell-hero__rail-index {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.professional-shell-hero__rail-copy strong {
+  display: block;
+  color: var(--stage-ink);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.professional-shell-hero__rail-copy span {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--stage-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.basketball-shell-hero {
+  min-height: min(52rem, calc(100vh - 5rem));
+  padding: clamp(4rem, 9vw, 8rem) var(--gutter);
+  background:
+    linear-gradient(90deg, rgb(4 4 3 / 92%), rgb(4 4 3 / 48%)),
+    radial-gradient(circle at 78% 42%, rgb(200 164 92 / 15%), transparent 28rem);
+}
+
+.basketball-shell-hero__grid {
+  display: grid;
+  max-width: 1180px;
+  min-height: inherit;
+  margin-inline: auto;
+  align-items: center;
+  gap: 3rem;
+}
+
+.basketball-shell-hero__title {
+  max-width: 9ch;
+  margin-top: 1rem;
+  color: var(--stage-ink);
+  font-size: clamp(3.4rem, 12vw, 8rem);
+  font-weight: 820;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.basketball-shell-hero__description {
+  max-width: 40rem;
+  margin-top: 1.5rem;
+  color: var(--stage-muted);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.72;
+}
+
+.basketball-shell-hero__number {
+  position: relative;
+  display: grid;
+  min-height: 20rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 28%, var(--stage-line));
+  background:
+    linear-gradient(145deg, rgb(200 164 92 / 8%), transparent 52%),
+    #0b0a08;
+  color: transparent;
+  font-size: clamp(11rem, 36vw, 25rem);
+  font-weight: 900;
+  letter-spacing: -0.09em;
+  line-height: 0.72;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--stage-accent) 60%, transparent);
+}
+
+.basketball-shell-hero__number::after {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  color: var(--stage-accent);
+  content: "ATHLETE SIDE / RBL";
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.basketball-shell-section {
+  padding: var(--section-spacing) var(--gutter);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.basketball-shell-section__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.basketball-shell-section__grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.basketball-shell-card {
+  min-height: 13rem;
+  padding: 1.35rem;
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+}
+
+.basketball-shell-card__index {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.basketball-shell-card h3 {
+  margin-top: 2rem;
+  color: var(--stage-ink);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.basketball-shell-card p {
+  margin-top: 0.65rem;
+  color: var(--stage-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 600px) {
+  .portfolio-page__chrome {
+    padding: 0.85rem 1.25rem;
+  }
+
+  .world-switcher__copy {
+    display: grid;
+    gap: 0.08rem;
+  }
+
+  .basketball-shell-section__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .portfolio-stage {
+    padding: 1rem;
+  }
+
+  .portfolio-book {
+    min-height: calc(100vh - 2rem);
+  }
+
+  .portfolio-page {
+    min-height: calc(100vh - 2rem);
+    border: 1px solid rgb(255 255 255 / 8%);
+    box-shadow: 0 34px 100px rgb(0 0 0 / 30%);
+  }
+
+  .portfolio-book__spine {
+    position: absolute;
+    top: 1.15rem;
+    bottom: 1.15rem;
+    width: 5px;
+  }
+
+  .portfolio-stage--professional .portfolio-book__spine {
+    right: 1rem;
+  }
+
+  .portfolio-stage--basketball .portfolio-book__spine {
+    left: 1rem;
+  }
+
+  .portfolio-page__footer {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .professional-shell-hero__rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-bottom: 1px solid var(--stage-line);
+  }
+
+  .professional-shell-hero__rail-item {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    padding: 1.25rem;
+    border-right: 1px solid var(--stage-line);
+    border-bottom: 0;
+  }
+
+  .professional-shell-hero__rail-item:last-child {
+    border-right: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .portfolio-stage {
+    padding: 1.5rem;
+  }
+
+  .portfolio-book {
+    min-height: calc(100vh - 3rem);
+  }
+
+  .portfolio-page {
+    min-height: calc(100vh - 3rem);
+  }
+
+  .portfolio-stage--professional .portfolio-book__spine {
+    right: 1.5rem;
+  }
+
+  .portfolio-stage--basketball .portfolio-book__spine {
+    left: 1.5rem;
+  }
+
+  .world-navigation__bar {
+    grid-template-columns: minmax(15rem, 1fr) auto minmax(15rem, 1fr);
+  }
+
+  .world-navigation__desktop {
+    display: block;
+  }
+
+  .world-navigation__actions {
+    justify-self: end;
+  }
+
+  .world-navigation__menu {
+    display: none;
+  }
+
+  .basketball-shell-section__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .professional-shell-hero__grid,
+  .basketball-shell-hero__grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+  }
+
+  .professional-shell-hero__rail {
+    grid-column: 1 / -1;
+  }
+
+  .basketball-shell-hero__number {
+    min-height: 30rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .portfolio-stage {
+    padding: 2rem;
+  }
+
+  .portfolio-book {
+    max-width: 1680px;
+    min-height: calc(100vh - 4rem);
+  }
+
+  .portfolio-page {
+    min-height: calc(100vh - 4rem);
+  }
+
+  .portfolio-stage--professional .portfolio-book__spine {
+    right: 2rem;
+  }
+
+  .portfolio-stage--basketball .portfolio-book__spine {
+    left: 2rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .portfolio-stage {
+    padding-block: 2.5rem;
+  }
+
+  .portfolio-book {
+    max-width: 1760px;
+  }
+}
+
+@media (pointer: coarse) {
+  .world-navigation__link,
+  .world-navigation__menu-link,
+  .world-navigation__menu-trigger,
+  .world-switcher {
+    min-height: 48px;
+  }
+
+  .world-switcher:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world-switcher,
+  .world-navigation__link,
+  .world-navigation__menu-link {
+    transition: none;
+  }
+
+  .world-switcher:hover {
+    transform: none;
+  }
+}
