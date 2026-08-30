@@ -5,7 +5,7 @@ Every pull request targeting `main` must satisfy the production gates below befo
 ## Automated gates
 
 1. **CI / Validate** — lint, TypeScript, formatting, production build, and production-server smoke test.
-2. **PPO PR validation** — type checks, shell syntax checks, full regression validation, and diff whitespace checks.
+2. **PPO PR validation / PPO required validation** — type checks, shell syntax checks, full regression validation, and diff whitespace checks.
 3. **Production Pass Gates / Required production gate** — repeats the application validation at the merge boundary and verifies critical production contracts remain present.
 
 The production gate also fails if forbidden legacy project content (`Healthy Bite`) or hidden project content (`ProofLab`) appears under `src/`.
@@ -47,7 +47,7 @@ A green CI run is necessary, but it does not replace required owner visual revie
 Repository rules should require pull requests for `main` and require these status checks once GitHub has observed their names:
 
 - `Validate` from the `CI` workflow;
-- the validation job from `PPO PR validation`;
+- `PPO required validation` from `PPO PR validation`;
 - `Required production gate` from `Production Pass Gates`.
 
 Do not enable a mandatory independent reviewer count for a single-owner workflow unless another eligible reviewer is available, because GitHub does not allow authors to approve their own pull requests.
