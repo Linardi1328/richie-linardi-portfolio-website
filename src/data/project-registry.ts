@@ -9,8 +9,7 @@ export const projectRegistry = [
     repositoryUrl: "https://github.com/Linardi1328/spy-market-agent",
     phase: "Phase 5",
     release: "v2.0.0-beta.1",
-    currentStatus:
-      "v2.0.0-beta.1 · Phase 5 safety/recovery scaffold active",
+    currentStatus: "v2.0.0-beta.1 · Phase 5 safety/recovery scaffold active",
     statusVerifiedAt: "2026-08-31",
     catalogueState: "featured",
     sortOrder: 10,
@@ -96,7 +95,8 @@ export const projectRegistry = [
       },
       {
         kind: "tests",
-        label: "Backend, authorization, review, and reconciliation test coverage",
+        label:
+          "Backend, authorization, review, and reconciliation test coverage",
       },
     ],
   },
@@ -125,7 +125,8 @@ export const projectRegistry = [
       },
       {
         kind: "documentation",
-        label: "Phase 2 architecture, privacy, taxonomy, and acceptance documentation",
+        label:
+          "Phase 2 architecture, privacy, taxonomy, and acceptance documentation",
       },
     ],
   },
@@ -140,7 +141,13 @@ export const projectRegistry = [
     statusVerifiedAt: "2026-08-31",
     catalogueState: "catalogue",
     sortOrder: 50,
-    tags: ["Python", "Content systems", "Verification", "Storyboards", "Offline pipeline"],
+    tags: [
+      "Python",
+      "Content systems",
+      "Verification",
+      "Storyboards",
+      "Offline pipeline",
+    ],
     boundaries: [
       "Project claims must trace to project evidence.",
       "Phase 0 does not publish content or message customers.",
@@ -184,7 +191,8 @@ export const projectRegistry = [
       },
       {
         kind: "tests",
-        label: "Browser, authorization, persistence, payment, and build workflows",
+        label:
+          "Browser, authorization, persistence, payment, and build workflows",
       },
       {
         kind: "documentation",

@@ -66,11 +66,21 @@ If a design calls for a metric, timestamp, live status, achievement, project mil
 Production components should preserve stable searchable annotations when they materially help manual refinement, for example:
 
 ```tsx
-{/* [SHELL: flipbook-root] */}
-{/* [SECTION: professional-projects] */}
-{/* [CARD: spy-market-agent] */}
-{/* [MODULE: live-operating-proof] */}
-{/* [RESPONSIVE: tablet-landscape] */}
+{
+  /* [SHELL: flipbook-root] */
+}
+{
+  /* [SECTION: professional-projects] */
+}
+{
+  /* [CARD: spy-market-agent] */
+}
+{
+  /* [MODULE: live-operating-proof] */
+}
+{
+  /* [RESPONSIVE: tablet-landscape] */
+}
 ```
 
 Do not add noisy labels to every primitive. Label meaningful composition boundaries, cards, interactive modules, and responsive behavior that the owner may reasonably want to tune later.

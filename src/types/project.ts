@@ -1,11 +1,7 @@
 export type ProjectCatalogueState = "featured" | "catalogue" | "candidate";
 
 export type ProjectEvidenceKind =
-  | "deployment"
-  | "documentation"
-  | "release"
-  | "repository"
-  | "tests";
+  "deployment" | "documentation" | "release" | "repository" | "tests";
 
 export type ProjectEvidence = {
   href?: string;
