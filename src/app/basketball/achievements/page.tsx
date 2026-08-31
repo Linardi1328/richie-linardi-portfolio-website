@@ -114,7 +114,8 @@ export default function BasketballAchievementsPage() {
             <div className="basketball-record__note" data-reveal>
               Statistics are separated into their own competition-aware view so
               results and numbers can be read with the correct sample size and
-              season context. <Link href="/basketball/stats">Open statistics →</Link>
+              season context.{" "}
+              <Link href="/basketball/stats">Open statistics →</Link>
             </div>
           </div>
         </section>

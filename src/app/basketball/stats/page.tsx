@@ -99,7 +99,10 @@ export default function BasketballStatsPage() {
 
             <div className="basketball-record__seasons" data-reveal>
               {dblSeasonStats.map((season) => (
-                <article className="basketball-record__season" key={season.season}>
+                <article
+                  className="basketball-record__season"
+                  key={season.season}
+                >
                   <div className="basketball-record__season-title">
                     <strong>{season.season}</strong>
                     <span>{season.context}</span>
@@ -143,8 +146,8 @@ export default function BasketballStatsPage() {
             </a>
             <p className="basketball-record__note">
               The interface intentionally avoids invented advanced metrics. More
-              detailed game logs and shooting splits can be added when the source
-              data is complete enough to compare like with like.
+              detailed game logs and shooting splits can be added when the
+              source data is complete enough to compare like with like.
             </p>
           </div>
         </section>

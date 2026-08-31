@@ -128,11 +128,15 @@
 @keyframes archive-marker-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgb(200 164 92 / 0%), 0 0 18px rgb(200 164 92 / 26%);
+    box-shadow:
+      0 0 0 0 rgb(200 164 92 / 0%),
+      0 0 18px rgb(200 164 92 / 26%);
   }
 
   50% {
-    box-shadow: 0 0 0 0.45rem rgb(200 164 92 / 7%), 0 0 26px rgb(200 164 92 / 40%);
+    box-shadow:
+      0 0 0 0.45rem rgb(200 164 92 / 7%),
+      0 0 26px rgb(200 164 92 / 40%);
   }
 }
 
@@ -158,7 +162,11 @@
 
   .basketball-record-card:hover {
     transform: translateY(-0.25rem);
-    border-color: color-mix(in srgb, var(--stage-accent) 62%, var(--stage-line));
+    border-color: color-mix(
+      in srgb,
+      var(--stage-accent) 62%,
+      var(--stage-line)
+    );
     box-shadow: 0 24px 60px rgb(0 0 0 / 18%);
   }
 }

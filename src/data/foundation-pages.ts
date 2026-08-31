@@ -151,10 +151,7 @@ export const foundationPages = {
         title: "Athlete-side public profiles.",
         description:
           "Basketball updates and public-facing athlete content can be followed through the established Instagram and TikTok profiles.",
-        items: [
-          "Instagram · @richiebertrand3",
-          "TikTok · @richiebertrand",
-        ],
+        items: ["Instagram · @richiebertrand3", "TikTok · @richiebertrand"],
       },
       {
         eyebrow: "Privacy boundary",

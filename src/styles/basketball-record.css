@@ -61,11 +61,15 @@
   min-height: 15rem;
   align-content: space-between;
   padding: 1.4rem;
-  border: 1px solid color-mix(in srgb, var(--stage-accent) 42%, var(--stage-line));
+  border: 1px solid
+    color-mix(in srgb, var(--stage-accent) 42%, var(--stage-line));
   background:
-    radial-gradient(circle at 80% 20%, rgb(200 164 92 / 18%), transparent 12rem),
-    linear-gradient(145deg, rgb(139 21 30 / 16%), transparent 65%),
-    #0d0c09;
+    radial-gradient(
+      circle at 80% 20%,
+      rgb(200 164 92 / 18%),
+      transparent 12rem
+    ),
+    linear-gradient(145deg, rgb(139 21 30 / 16%), transparent 65%), #0d0c09;
 }
 
 .basketball-record__hero-index span {
@@ -82,7 +86,8 @@
   font-weight: 900;
   letter-spacing: -0.09em;
   line-height: 0.7;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--stage-accent) 70%, transparent);
+  -webkit-text-stroke: 1px
+    color-mix(in srgb, var(--stage-accent) 70%, transparent);
 }
 
 .basketball-record__section-inner {
@@ -105,7 +110,8 @@
   display: grid;
   gap: 2rem;
   padding: clamp(1.5rem, 4vw, 3rem);
-  border: 1px solid color-mix(in srgb, var(--stage-accent) 60%, var(--stage-line));
+  border: 1px solid
+    color-mix(in srgb, var(--stage-accent) 60%, var(--stage-line));
   background:
     radial-gradient(circle at 92% 0%, rgb(200 164 92 / 18%), transparent 20rem),
     linear-gradient(145deg, rgb(139 21 30 / 12%), transparent 62%),
