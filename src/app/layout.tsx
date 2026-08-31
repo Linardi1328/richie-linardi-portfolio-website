@@ -4,6 +4,7 @@ import "./globals.css";
 import "../styles/production-shell.css";
 import "../styles/featured-project-dossier.css";
 import "../styles/foundation-routes.css";
+import "../styles/portfolio-depth.css";
 
 export const metadata: Metadata = {
   title: "Richie Linardi | Software, Data & Basketball",
