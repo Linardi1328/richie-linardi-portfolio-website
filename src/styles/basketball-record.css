@@ -1,0 +1,341 @@
+.basketball-record {
+  min-height: 70vh;
+  color: var(--stage-ink);
+}
+
+.basketball-record__hero,
+.basketball-record__section {
+  padding-inline: var(--gutter);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.basketball-record__hero-inner,
+.basketball-record__section-inner {
+  width: min(100%, 74rem);
+  margin-inline: auto;
+}
+
+.basketball-record__hero-inner {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: clamp(4.5rem, 10vw, 8.5rem);
+}
+
+.basketball-record__kicker {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.basketball-record__hero h1,
+.basketball-record__section h2 {
+  max-width: 11ch;
+  margin-top: 0.8rem;
+  font-weight: 860;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.basketball-record__hero h1 {
+  font-size: clamp(3.4rem, 11vw, 8rem);
+}
+
+.basketball-record__section h2 {
+  font-size: clamp(2.5rem, 7vw, 5.4rem);
+}
+
+.basketball-record__lede {
+  max-width: 42rem;
+  margin-top: 1.4rem;
+  color: var(--stage-muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.basketball-record__hero-index {
+  display: grid;
+  min-height: 15rem;
+  align-content: space-between;
+  padding: 1.4rem;
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 42%, var(--stage-line));
+  background:
+    radial-gradient(circle at 80% 20%, rgb(200 164 92 / 18%), transparent 12rem),
+    linear-gradient(145deg, rgb(139 21 30 / 16%), transparent 65%),
+    #0d0c09;
+}
+
+.basketball-record__hero-index span {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.basketball-record__hero-index strong {
+  color: transparent;
+  font-size: clamp(7rem, 25vw, 13rem);
+  font-weight: 900;
+  letter-spacing: -0.09em;
+  line-height: 0.7;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--stage-accent) 70%, transparent);
+}
+
+.basketball-record__section-inner {
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.basketball-record__section-heading {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.basketball-record__section-heading > p:last-child {
+  max-width: 38rem;
+  color: var(--stage-muted);
+  line-height: 1.7;
+}
+
+.basketball-record__feature {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 60%, var(--stage-line));
+  background:
+    radial-gradient(circle at 92% 0%, rgb(200 164 92 / 18%), transparent 20rem),
+    linear-gradient(145deg, rgb(139 21 30 / 12%), transparent 62%),
+    var(--stage-paper-elevated);
+}
+
+.basketball-record__feature-year {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.basketball-record__feature h2 {
+  max-width: 11ch;
+  margin-top: 1rem;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+}
+
+.basketball-record__feature p {
+  max-width: 42rem;
+  color: var(--stage-muted);
+  line-height: 1.75;
+}
+
+.basketball-record__source {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  color: var(--stage-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.basketball-record__source::after {
+  content: "↗";
+}
+
+.basketball-record__source:hover,
+.basketball-record__source:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.basketball-record__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.basketball-record-card {
+  display: flex;
+  min-height: 19rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.35rem;
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+}
+
+.basketball-record-card__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.basketball-record-card h3 {
+  max-width: 15ch;
+  margin-top: 2.4rem;
+  font-size: 1.55rem;
+  font-weight: 820;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.basketball-record-card p {
+  margin-top: 0.9rem;
+  color: var(--stage-muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.basketball-record__stat-grid {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--stage-line);
+  border-left: 1px solid var(--stage-line);
+}
+
+.basketball-record__stat {
+  min-height: 9rem;
+  padding: 1.25rem;
+  border-right: 1px solid var(--stage-line);
+  border-bottom: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+}
+
+.basketball-record__stat span {
+  color: var(--stage-muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.basketball-record__stat strong {
+  display: block;
+  margin-top: 1.2rem;
+  color: var(--stage-ink);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+
+.basketball-record__seasons {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--stage-line);
+}
+
+.basketball-record__season {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.basketball-record__season:last-child {
+  border-bottom: 0;
+}
+
+.basketball-record__season-title strong {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 850;
+}
+
+.basketball-record__season-title span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--stage-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.basketball-record__season-numbers {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.basketball-record__season-numbers div {
+  min-width: 0;
+}
+
+.basketball-record__season-numbers span {
+  display: block;
+  color: var(--stage-muted);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.basketball-record__season-numbers strong {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 1.35rem;
+  font-weight: 830;
+}
+
+.basketball-record__shooting {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 750;
+}
+
+.basketball-record__note {
+  margin-top: 1.4rem;
+  color: var(--stage-muted);
+  font-size: 0.75rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 600px) {
+  .basketball-record__grid,
+  .basketball-record__stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .basketball-record__hero-inner {
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    align-items: end;
+  }
+
+  .basketball-record__section-heading {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.7fr);
+    align-items: end;
+  }
+
+  .basketball-record__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .basketball-record__stat-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .basketball-record__season {
+    grid-template-columns: minmax(14rem, 0.8fr) minmax(22rem, 1.2fr) auto;
+    align-items: center;
+  }
+}
+
+@media (pointer: coarse) {
+  .basketball-record__source {
+    min-height: 3rem;
+  }
+}
