@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { PortfolioEffects } from "@/components/effects/portfolio-effects";
 import { WorldNavigation } from "@/components/navigation/world-navigation";
 import type {
   PortfolioWorld,
@@ -25,6 +26,7 @@ export function PortfolioWorldShell({
       data-context={world}
       data-world={world}
     >
+      <PortfolioEffects />
       <div aria-hidden="true" className="portfolio-atmosphere" />
       <div className="portfolio-book">
         {/* [FLIP CONTROL] Page Edge / Corner */}

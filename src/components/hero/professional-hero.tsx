@@ -3,6 +3,7 @@ import { ButtonLink } from "@/components/ui";
 type ProfessionalHeroProps = {
   description: string;
   eyebrow: string;
+  systemCount: number;
   tags: readonly string[];
   title: string;
 };
@@ -31,6 +32,7 @@ const proofPrinciples = [
 export function ProfessionalHero({
   description,
   eyebrow,
+  systemCount,
   tags,
   title,
 }: ProfessionalHeroProps) {
@@ -38,7 +40,7 @@ export function ProfessionalHero({
     <section className="professional-shell-hero">
       {/* [HERO FRONT] Professional Face */}
       <div className="professional-shell-hero__grid">
-        <div>
+        <div className="professional-shell-hero__copy" data-reveal>
           <p className="professional-shell-hero__kicker">{eyebrow}</p>
           <h1 className="professional-shell-hero__title">{title}</h1>
           <p className="professional-shell-hero__description">{description}</p>
@@ -58,9 +60,50 @@ export function ProfessionalHero({
           </div>
         </div>
 
+        {/* [MODULE: professional-identity-specimen] */}
+        <aside
+          aria-label="Professional portfolio index"
+          className="professional-shell-hero__specimen"
+          data-reveal
+          data-reveal-delay="1"
+        >
+          <div className="professional-shell-hero__specimen-topline">
+            <span>RBL / SYSTEMS INDEX</span>
+            <span>2026</span>
+          </div>
+
+          <div className="professional-shell-hero__specimen-mark">
+            <span aria-hidden="true">RBL</span>
+          </div>
+
+          <div className="professional-shell-hero__specimen-count">
+            <strong>{String(systemCount).padStart(2, "0")}</strong>
+            <span>public systems in the current catalogue</span>
+          </div>
+
+          <div className="professional-shell-hero__specimen-stack">
+            <p>Current technical field</p>
+            <div>
+              {tags.slice(0, 6).map((tag, index) => (
+                <span key={tag}>
+                  <i>{String(index + 1).padStart(2, "0")}</i>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <p className="professional-shell-hero__specimen-note">
+            Engineering decisions, operating boundaries, and evidence stay
+            visible alongside the interface.
+          </p>
+        </aside>
+
         <aside
           aria-label="Technical focus"
           className="professional-shell-hero__rail"
+          data-reveal
+          data-reveal-delay="2"
         >
           {proofPrinciples.map((principle) => (
             <div
@@ -77,10 +120,6 @@ export function ProfessionalHero({
             </div>
           ))}
         </aside>
-
-        <div className="sr-only">
-          Current technical focus: {tags.join(", ")}.
-        </div>
       </div>
     </section>
   );

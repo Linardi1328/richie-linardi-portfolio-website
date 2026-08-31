@@ -1,0 +1,570 @@
+.professional-shell-hero__copy {
+  align-self: center;
+}
+
+.professional-shell-hero__specimen {
+  position: relative;
+  display: grid;
+  min-height: 25rem;
+  align-content: space-between;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--stage-line);
+  background:
+    linear-gradient(90deg, rgb(23 76 126 / 6%) 1px, transparent 1px),
+    linear-gradient(rgb(23 76 126 / 6%) 1px, transparent 1px),
+    linear-gradient(145deg, #fff 0%, #f1f5f9 100%);
+  background-size:
+    2rem 2rem,
+    2rem 2rem,
+    auto;
+  box-shadow: 0 28px 70px rgb(7 17 31 / 10%);
+}
+
+.professional-shell-hero__specimen::before {
+  position: absolute;
+  top: -6rem;
+  right: -5rem;
+  width: 18rem;
+  height: 18rem;
+  border: 1px solid rgb(184 148 77 / 32%);
+  border-radius: 50%;
+  content: "";
+}
+
+.professional-shell-hero__specimen::after {
+  position: absolute;
+  top: -3rem;
+  right: -2rem;
+  width: 12rem;
+  height: 12rem;
+  border: 1px solid rgb(23 76 126 / 18%);
+  border-radius: 50%;
+  content: "";
+}
+
+.professional-shell-hero__specimen-topline {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.professional-shell-hero__specimen-mark {
+  position: absolute;
+  top: 22%;
+  right: 8%;
+  z-index: 0;
+  color: transparent;
+  font-size: clamp(5.5rem, 14vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 0.8;
+  transform: rotate(-90deg) translateY(30%);
+  transform-origin: center;
+  -webkit-text-stroke: 1px rgb(23 76 126 / 12%);
+}
+
+.professional-shell-hero__specimen-count {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: end;
+  gap: 1rem;
+  margin-top: 4rem;
+}
+
+.professional-shell-hero__specimen-count strong {
+  color: #07111f;
+  font-size: clamp(5rem, 15vw, 8.5rem);
+  font-weight: 760;
+  letter-spacing: -0.08em;
+  line-height: 0.72;
+}
+
+.professional-shell-hero__specimen-count span {
+  max-width: 9rem;
+  padding-bottom: 0.4rem;
+  color: var(--stage-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.professional-shell-hero__specimen-stack {
+  position: relative;
+  z-index: 1;
+  margin-top: 3rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+.professional-shell-hero__specimen-stack > p {
+  padding-block: 0.8rem;
+  color: var(--stage-accent);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.professional-shell-hero__specimen-stack > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--stage-line);
+}
+
+.professional-shell-hero__specimen-stack span {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 0.3rem;
+  border-bottom: 1px solid var(--stage-line);
+  color: #07111f;
+  font-size: 0.74rem;
+  font-weight: 750;
+}
+
+.professional-shell-hero__specimen-stack span:nth-child(odd) {
+  border-right: 1px solid var(--stage-line);
+}
+
+.professional-shell-hero__specimen-stack i {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-style: normal;
+}
+
+.professional-shell-hero__specimen-note {
+  position: relative;
+  z-index: 1;
+  max-width: 24rem;
+  margin-top: 1.4rem;
+  color: var(--stage-muted);
+  font-size: 0.74rem;
+  line-height: 1.6;
+}
+
+.professional-identity-bridge {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4.5rem, 9vw, 8rem) var(--gutter);
+  background:
+    radial-gradient(circle at 12% 0%, rgb(23 76 126 / 32%), transparent 26rem),
+    radial-gradient(
+      circle at 92% 100%,
+      rgb(184 148 77 / 18%),
+      transparent 28rem
+    ),
+    #07111f;
+  color: #f8fafc;
+}
+
+.professional-identity-bridge__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.professional-identity-bridge__intro {
+  display: grid;
+  gap: 1rem;
+  max-width: 54rem;
+}
+
+.professional-identity-bridge__intro > p {
+  color: #b8944d;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.professional-identity-bridge__intro h2 {
+  max-width: 10ch;
+  font-size: clamp(3rem, 9vw, 6.8rem);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+
+.professional-identity-bridge__intro > span {
+  max-width: 40rem;
+  color: #aebbc9;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.professional-identity-bridge__faces {
+  display: grid;
+  gap: 0;
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  border: 1px solid rgb(255 255 255 / 14%);
+}
+
+.professional-identity-bridge__face {
+  display: flex;
+  min-height: 26rem;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+.professional-identity-bridge__face--systems {
+  background: linear-gradient(145deg, rgb(23 76 126 / 18%), transparent 70%);
+}
+
+.professional-identity-bridge__face--athlete {
+  background:
+    radial-gradient(
+      circle at 88% 15%,
+      rgb(184 148 77 / 20%),
+      transparent 16rem
+    ),
+    linear-gradient(145deg, rgb(128 20 27 / 15%), transparent 68%);
+}
+
+.professional-identity-bridge__face-index {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #8595a8;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.professional-identity-bridge__face h3 {
+  max-width: 11ch;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 740;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.professional-identity-bridge__face p {
+  max-width: 31rem;
+  margin-top: 1rem;
+  color: #aebbc9;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.professional-identity-bridge__face a {
+  width: fit-content;
+  color: #d5b76f;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.professional-identity-bridge__spine {
+  display: grid;
+  min-height: 4rem;
+  place-items: center;
+  border-block: 1px solid rgb(184 148 77 / 32%);
+  background: linear-gradient(90deg, #6e5429, #c3a45f, #72572c);
+  color: #08111e;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.professional-identity-bridge__disciplines {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 14%);
+  border-left: 1px solid rgb(255 255 255 / 14%);
+}
+
+.professional-identity-bridge__disciplines span {
+  display: flex;
+  min-height: 4.5rem;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-right: 1px solid rgb(255 255 255 / 14%);
+  border-bottom: 1px solid rgb(255 255 255 / 14%);
+  color: #dce4eb;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.professional-identity-bridge__disciplines i {
+  color: #b8944d;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-style: normal;
+}
+
+.basketball-career-index {
+  padding: clamp(4.5rem, 9vw, 8rem) var(--gutter);
+  border-bottom: 1px solid var(--stage-line);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 48%,
+      rgb(200 164 92 / 4%) 48% 52%,
+      transparent 52%
+    ),
+    #080705;
+}
+
+.basketball-career-index__heading {
+  display: grid;
+  gap: 2rem;
+}
+
+.basketball-career-index__heading h2,
+.basketball-archive-direction h2 {
+  max-width: 12ch;
+  margin-top: 0.75rem;
+  color: var(--stage-ink);
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 860;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.basketball-career-index__heading > p {
+  max-width: 38rem;
+  color: var(--stage-muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.basketball-career-index__track {
+  display: grid;
+  grid-auto-columns: minmax(15.5rem, 1fr);
+  grid-auto-flow: column;
+  gap: 0;
+  margin-top: 3.5rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: #6e5930 transparent;
+  scrollbar-width: thin;
+  scroll-snap-type: inline proximity;
+}
+
+.basketball-career-index__moment {
+  min-height: 25rem;
+  padding: 1.4rem 1.25rem 1.8rem;
+  border-top: 1px solid var(--stage-line);
+  border-right: 1px solid var(--stage-line);
+  scroll-snap-align: start;
+}
+
+.basketball-career-index__moment:first-child {
+  border-left: 1px solid var(--stage-line);
+}
+
+.basketball-career-index__year {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.basketball-career-index__year span {
+  color: var(--stage-ink);
+  font-size: 2.4rem;
+  font-weight: 850;
+  letter-spacing: -0.05em;
+}
+
+.basketball-career-index__year i {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-style: normal;
+}
+
+.basketball-career-index__marker {
+  width: 0.65rem;
+  height: 0.65rem;
+  margin-top: 1.2rem;
+  border: 2px solid #080705;
+  border-radius: 50%;
+  outline: 1px solid var(--stage-accent);
+  background: var(--stage-accent);
+  box-shadow: 0 0 18px rgb(200 164 92 / 28%);
+}
+
+.basketball-career-index__context {
+  margin-top: 3.2rem;
+  color: var(--stage-accent);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.basketball-career-index__moment h3 {
+  max-width: 12ch;
+  margin-top: 0.65rem;
+  color: var(--stage-ink);
+  font-size: 1.55rem;
+  font-weight: 820;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+
+.basketball-career-index__detail {
+  margin-top: 1rem;
+  color: var(--stage-muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.basketball-career-index__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  justify-content: space-between;
+  padding-top: 1.3rem;
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.basketball-career-index__cta a,
+.basketball-archive-direction__links a {
+  color: var(--stage-accent);
+  font-family: inherit;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.basketball-shell-card {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard),
+    background var(--motion-fast) var(--ease-standard);
+}
+
+.basketball-shell-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--stage-accent) 60%, var(--stage-line));
+  background: color-mix(
+    in srgb,
+    var(--stage-accent) 5%,
+    var(--stage-paper-elevated)
+  );
+}
+
+.basketball-shell-card__action {
+  margin-top: auto;
+  padding-top: 2rem;
+  color: var(--stage-accent);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.basketball-archive-direction {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.basketball-archive-direction > div:last-child > p {
+  max-width: 38rem;
+  color: var(--stage-muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.basketball-archive-direction__links {
+  display: grid;
+  gap: 0;
+  margin-top: 2rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+.basketball-archive-direction__links a {
+  display: flex;
+  min-height: 3.7rem;
+  align-items: center;
+  border-bottom: 1px solid var(--stage-line);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 600px) {
+  .professional-identity-bridge__disciplines {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .basketball-career-index__cta {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .professional-identity-bridge__faces {
+    grid-template-columns: minmax(0, 1fr) 3rem minmax(0, 1fr);
+  }
+
+  .professional-identity-bridge__spine {
+    min-height: 100%;
+    border-block: 0;
+    border-inline: 1px solid rgb(184 148 77 / 32%);
+    writing-mode: vertical-rl;
+  }
+
+  .basketball-career-index__heading,
+  .basketball-archive-direction {
+    grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
+    align-items: end;
+    gap: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .professional-shell-hero__specimen {
+    min-height: 31rem;
+  }
+
+  .professional-shell-hero__specimen-mark {
+    top: 18%;
+    right: 10%;
+  }
+}
+
+@media (pointer: coarse) {
+  .basketball-shell-card:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .basketball-shell-card {
+    transition: none;
+  }
+
+  .basketball-shell-card:hover {
+    transform: none;
+  }
+}
