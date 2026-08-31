@@ -14,7 +14,10 @@
     linear-gradient(90deg, rgb(23 76 126 / 6%) 1px, transparent 1px),
     linear-gradient(rgb(23 76 126 / 6%) 1px, transparent 1px),
     linear-gradient(145deg, #fff 0%, #f1f5f9 100%);
-  background-size: 2rem 2rem, 2rem 2rem, auto;
+  background-size:
+    2rem 2rem,
+    2rem 2rem,
+    auto;
   box-shadow: 0 28px 70px rgb(7 17 31 / 10%);
 }
 
@@ -157,7 +160,11 @@
   padding: clamp(4.5rem, 9vw, 8rem) var(--gutter);
   background:
     radial-gradient(circle at 12% 0%, rgb(23 76 126 / 32%), transparent 26rem),
-    radial-gradient(circle at 92% 100%, rgb(184 148 77 / 18%), transparent 28rem),
+    radial-gradient(
+      circle at 92% 100%,
+      rgb(184 148 77 / 18%),
+      transparent 28rem
+    ),
     #07111f;
   color: #f8fafc;
 }
@@ -219,7 +226,11 @@
 
 .professional-identity-bridge__face--athlete {
   background:
-    radial-gradient(circle at 88% 15%, rgb(184 148 77 / 20%), transparent 16rem),
+    radial-gradient(
+      circle at 88% 15%,
+      rgb(184 148 77 / 20%),
+      transparent 16rem
+    ),
     linear-gradient(145deg, rgb(128 20 27 / 15%), transparent 68%);
 }
 
@@ -304,7 +315,12 @@
   padding: clamp(4.5rem, 9vw, 8rem) var(--gutter);
   border-bottom: 1px solid var(--stage-line);
   background:
-    linear-gradient(90deg, transparent 0 48%, rgb(200 164 92 / 4%) 48% 52%, transparent 52%),
+    linear-gradient(
+      90deg,
+      transparent 0 48%,
+      rgb(200 164 92 / 4%) 48% 52%,
+      transparent 52%
+    ),
     #080705;
 }
 
@@ -450,7 +466,11 @@
 .basketball-shell-card:hover {
   transform: translateY(-3px);
   border-color: color-mix(in srgb, var(--stage-accent) 60%, var(--stage-line));
-  background: color-mix(in srgb, var(--stage-accent) 5%, var(--stage-paper-elevated));
+  background: color-mix(
+    in srgb,
+    var(--stage-accent) 5%,
+    var(--stage-paper-elevated)
+  );
 }
 
 .basketball-shell-card__action {

@@ -20,7 +20,8 @@ export const basketballCareerMoments = [
   },
   {
     context: "East Java",
-    detail: "52 points · 21 rebounds · 13 assists across the season · Second Team.",
+    detail:
+      "52 points · 21 rebounds · 13 assists across the season · Second Team.",
     label: "DBL season",
     year: "2022",
   },
@@ -38,7 +39,8 @@ export const basketballCareerMoments = [
   },
   {
     context: "National team",
-    detail: "ASEAN School Games Gold · Indonesia defeated the Philippines 56–54 in the final.",
+    detail:
+      "ASEAN School Games Gold · Indonesia defeated the Philippines 56–54 in the final.",
     label: "ASEAN School Games",
     year: "2024",
   },

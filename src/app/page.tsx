@@ -136,8 +136,8 @@ export default function Home() {
                   <h3>Perform where preparation becomes visible.</h3>
                   <p>
                     The basketball side follows the same evidence-first idea:
-                    progression, results, context, photography, and source-backed
-                    moments stay connected.
+                    progression, results, context, photography, and
+                    source-backed moments stay connected.
                   </p>
                 </div>
                 <Link href="/basketball">Turn to basketball →</Link>
