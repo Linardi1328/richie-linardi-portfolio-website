@@ -40,7 +40,7 @@ export function ProfessionalHero({
     <section className="professional-shell-hero">
       {/* [HERO FRONT] Professional Face */}
       <div className="professional-shell-hero__grid">
-        <div className="professional-shell-hero__copy">
+        <div className="professional-shell-hero__copy" data-reveal>
           <p className="professional-shell-hero__kicker">{eyebrow}</p>
           <h1 className="professional-shell-hero__title">{title}</h1>
           <p className="professional-shell-hero__description">{description}</p>
@@ -64,6 +64,8 @@ export function ProfessionalHero({
         <aside
           aria-label="Professional portfolio index"
           className="professional-shell-hero__specimen"
+          data-reveal
+          data-reveal-delay="1"
         >
           <div className="professional-shell-hero__specimen-topline">
             <span>RBL / SYSTEMS INDEX</span>
@@ -100,6 +102,8 @@ export function ProfessionalHero({
         <aside
           aria-label="Technical focus"
           className="professional-shell-hero__rail"
+          data-reveal
+          data-reveal-delay="2"
         >
           {proofPrinciples.map((principle) => (
             <div
