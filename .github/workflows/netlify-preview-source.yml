@@ -22,7 +22,8 @@ jobs:
             --exclude=node_modules \
             --exclude=.next \
             --exclude=out \
-            -czf netlify-preview-source.tgz .
+            -czf /tmp/netlify-preview-source.tgz .
+          mv /tmp/netlify-preview-source.tgz ./netlify-preview-source.tgz
 
       - name: Upload source artifact
         uses: actions/upload-artifact@v4
