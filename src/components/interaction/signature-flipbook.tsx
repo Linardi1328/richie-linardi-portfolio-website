@@ -470,15 +470,6 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     targetWorld === "professional"
       ? ({ justifySelf: "end", textAlign: "right" } as CSSProperties)
       : undefined;
-  const swipeHintStyle = {
-    pointerEvents: "none",
-    cursor: "default",
-    border: "none",
-    background: "transparent",
-    boxShadow: "none",
-    backdropFilter: "none",
-    WebkitBackdropFilter: "none",
-  } as CSSProperties;
 
   return (
     <div
@@ -522,21 +513,31 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         </div>
       </div>
 
-      {/* [FLIP HINT] Swipe-first directional guidance; keyboard uses matching arrow key. */}
-      <div
-        aria-label={`Swipe ${swipeDirection} or use the ${swipeDirection} arrow key to open ${targetLabel.toLowerCase()}`}
-        className="signature-flipbook__edge-control"
-        role="note"
-        style={swipeHintStyle}
-      >
-        <span aria-hidden="true" className="signature-flipbook__edge-line" />
-        <span className="signature-flipbook__edge-copy">
-          <small>Swipe {swipeDirection}</small>
-          <strong>{targetShortLabel}</strong>
-        </span>
-        <span aria-hidden="true" className="signature-flipbook__edge-arrow">
-          {world === "professional" ? "←" : "→"}
-        </span>
+      {/* [FLIP HINT] Purely visual swipe guidance */}
+      <div aria-hidden="true" className="signature-flipbook__hint">
+        {world === "professional" ? (
+          <>
+            <span className="signature-flipbook__hint-arrow">←</span>
+            <span className="signature-flipbook__hint-text">
+              Swipe {swipeDirection}{" "}
+              <span className="signature-flipbook__hint-sep">·</span>{" "}
+              <span className="signature-flipbook__hint-target">
+                {targetShortLabel}
+              </span>
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="signature-flipbook__hint-text">
+              <span className="signature-flipbook__hint-target">
+                {targetShortLabel}
+              </span>{" "}
+              <span className="signature-flipbook__hint-sep">·</span> Swipe{" "}
+              {swipeDirection}
+            </span>
+            <span className="signature-flipbook__hint-arrow">→</span>
+          </>
+        )}
       </div>
 
       {/* [REDUCED MOTION] Side Switch Fallback */}
