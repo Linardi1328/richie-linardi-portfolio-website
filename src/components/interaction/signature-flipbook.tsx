@@ -9,6 +9,7 @@ import {
   type CSSProperties,
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
+  type WheelEvent as ReactWheelEvent,
 } from "react";
 import type { PortfolioWorld } from "@/data/world-navigation";
 import {
@@ -40,6 +41,12 @@ type PointerState = {
   velocity: number;
 };
 
+type TrackpadState = {
+  distance: number;
+  progress: number;
+  settleTimer: number;
+};
+
 type FlipGeometry = {
   angleLimit: number;
   originY: string;
@@ -47,12 +54,21 @@ type FlipGeometry = {
   viewportHeight: string;
 };
 
+type TurnMotion = {
+  fromProgress?: number;
+  velocity?: number;
+};
+
 const TURN_DURATION_MS = 660;
+const MIN_TURN_DURATION_MS = 220;
 const REDUCED_TURN_DURATION_MS = 150;
 const DRAG_COMMIT_THRESHOLD = 0.3;
 const FLICK_COMMIT_VELOCITY = 0.55;
 const SWIPE_START_DISTANCE = 12;
 const SWIPE_AXIS_BIAS = 1.2;
+const TRACKPAD_DRAG_DISTANCE = 260;
+const TRACKPAD_COMMIT_THRESHOLD = 0.24;
+const TRACKPAD_END_DELAY_MS = 90;
 
 const defaultGeometry: FlipGeometry = {
   angleLimit: 96,
@@ -81,6 +97,21 @@ function getAngleLimit(viewportWidth: number) {
   return 96;
 }
 
+function getTurnDuration(fromProgress: number, velocity: number) {
+  const remainingProgress = 1 - clamp(fromProgress);
+  const distanceDuration =
+    TURN_DURATION_MS * Math.max(0.34, remainingProgress);
+  const velocityFactor = clamp(1 - Math.max(velocity, 0) * 0.18, 0.72, 1);
+
+  return Math.round(
+    clamp(
+      distanceDuration * velocityFactor,
+      MIN_TURN_DURATION_MS,
+      TURN_DURATION_MS,
+    ),
+  );
+}
+
 function isInteractiveTarget(target: EventTarget | null) {
   if (!(target instanceof Element)) {
     return false;
@@ -99,9 +130,15 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
   const targetWorld = getOppositeWorld(world);
   const [phase, setPhase] = useState<FlipPhase>("idle");
   const [progress, setProgress] = useState(0);
+  const [turnDuration, setTurnDuration] = useState(TURN_DURATION_MS);
   const [geometry, setGeometry] = useState<FlipGeometry>(defaultGeometry);
   const busyRef = useRef(false);
   const pointerRef = useRef<PointerState | null>(null);
+  const trackpadRef = useRef<TrackpadState>({
+    distance: 0,
+    progress: 0,
+    settleTimer: 0,
+  });
 
   const targetLabel =
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
@@ -119,22 +156,27 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
   }, []);
 
   const startTurn = useCallback(
-    (requestedDestination?: string) => {
+    (requestedDestination?: string, motion: TurnMotion = {}) => {
       if (busyRef.current) {
         return;
       }
 
       busyRef.current = true;
+      window.clearTimeout(trackpadRef.current.settleTimer);
+      trackpadRef.current = { distance: 0, progress: 0, settleTimer: 0 };
       syncGeometry();
+
+      const duration = prefersReducedMotion()
+        ? REDUCED_TURN_DURATION_MS
+        : getTurnDuration(motion.fromProgress ?? 0, motion.velocity ?? 0);
+
+      setTurnDuration(duration);
       setPhase("turning");
       setProgress(1);
       markWorldFlipArrival(targetWorld);
 
       const destination =
         requestedDestination || resolveWorldDestination(targetWorld);
-      const duration = prefersReducedMotion()
-        ? REDUCED_TURN_DURATION_MS
-        : TURN_DURATION_MS;
 
       window.setTimeout(() => {
         router.push(destination);
@@ -164,6 +206,12 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       window.removeEventListener(WORLD_FLIP_REQUEST_EVENT, handleFlipRequest);
     };
   }, [startTurn, world]);
+
+  useEffect(() => {
+    return () => {
+      window.clearTimeout(trackpadRef.current.settleTimer);
+    };
+  }, []);
 
   useEffect(() => {
     if (!consumeWorldFlipArrival(world)) {
@@ -203,6 +251,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
     if (
       busyRef.current ||
+      phase !== "idle" ||
       !event.isPrimary ||
       isInteractiveTarget(event.target) ||
       (event.pointerType === "mouse" && event.button !== 0)
@@ -210,6 +259,8 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       return;
     }
 
+    window.clearTimeout(trackpadRef.current.settleTimer);
+    trackpadRef.current = { distance: 0, progress: 0, settleTimer: 0 };
     syncGeometry();
     pointerRef.current = {
       dragging: false,
@@ -289,7 +340,10 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       pointer.progress >= DRAG_COMMIT_THRESHOLD ||
       pointer.velocity >= FLICK_COMMIT_VELOCITY
     ) {
-      startTurn();
+      startTurn(undefined, {
+        fromProgress: pointer.progress,
+        velocity: pointer.velocity,
+      });
       return;
     }
 
@@ -309,6 +363,60 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     setPhase("idle");
   }
 
+  function handleWheel(event: ReactWheelEvent<HTMLDivElement>) {
+    if (
+      busyRef.current ||
+      pointerRef.current ||
+      event.ctrlKey ||
+      isInteractiveTarget(event.target)
+    ) {
+      return;
+    }
+
+    const horizontalMagnitude = Math.abs(event.deltaX);
+    const verticalMagnitude = Math.abs(event.deltaY);
+
+    if (
+      horizontalMagnitude < 2 ||
+      horizontalMagnitude <= verticalMagnitude * 1.05
+    ) {
+      return;
+    }
+
+    const directionalDelta =
+      world === "professional" ? event.deltaX : -event.deltaX;
+    const trackpad = trackpadRef.current;
+
+    trackpad.distance = Math.max(0, trackpad.distance + directionalDelta);
+    trackpad.progress = clamp(trackpad.distance / TRACKPAD_DRAG_DISTANCE);
+
+    if (trackpad.progress > 0) {
+      if (phase === "idle") {
+        syncGeometry();
+        setPhase("dragging");
+      }
+
+      setProgress(trackpad.progress);
+    }
+
+    window.clearTimeout(trackpad.settleTimer);
+    trackpad.settleTimer = window.setTimeout(() => {
+      const finalProgress = trackpadRef.current.progress;
+      trackpadRef.current = { distance: 0, progress: 0, settleTimer: 0 };
+
+      if (finalProgress >= TRACKPAD_COMMIT_THRESHOLD) {
+        startTurn(undefined, {
+          fromProgress: finalProgress,
+          velocity: 0.7,
+        });
+        return;
+      }
+
+      setProgress(0);
+      setPhase("idle");
+    }, TRACKPAD_END_DELAY_MS);
+  }
+
   const direction = world === "professional" ? -1 : 1;
   const angle = direction * progress * geometry.angleLimit;
   const style = {
@@ -319,7 +427,20 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     "--flip-viewport-height": geometry.viewportHeight,
     overscrollBehaviorX: "contain",
     touchAction: "pan-y pinch-zoom",
+    userSelect: phase === "dragging" ? "none" : undefined,
+    WebkitUserSelect: phase === "dragging" ? "none" : undefined,
   } as CSSProperties;
+  const pageStyle =
+    phase === "turning"
+      ? ({
+          transitionDuration: `${turnDuration}ms`,
+          transitionTimingFunction: "cubic-bezier(0.16, 0.84, 0.24, 1)",
+        } as CSSProperties)
+      : undefined;
+  const reverseTitleStyle =
+    targetWorld === "professional"
+      ? ({ justifySelf: "end", textAlign: "right" } as CSSProperties)
+      : undefined;
 
   return (
     <div
@@ -331,6 +452,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={finishPointerGesture}
+      onWheel={handleWheel}
       style={style}
     >
       {/* [TOUCH: full-page-swipe] [POINTER: edge-hover-peek] */}
@@ -346,7 +468,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         >
           <div className="signature-flipbook__reverse-grid">
             <span>{reverseEyebrow}</span>
-            <strong>{reverseTitle}</strong>
+            <strong style={reverseTitleStyle}>{reverseTitle}</strong>
             <p>{targetLabel}</p>
           </div>
         </div>
@@ -356,6 +478,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
           aria-hidden={phase === "turning" ? true : undefined}
           className="signature-flipbook__page"
           inert={phase === "turning"}
+          style={pageStyle}
         >
           {children}
         </div>
