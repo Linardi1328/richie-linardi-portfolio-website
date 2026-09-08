@@ -1,62 +1,59 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import type { MouseEvent } from "react";
 import type { PortfolioWorld } from "@/data/world-navigation";
 import { cn } from "@/lib/cn";
+import {
+  WORLD_FLIP_REQUEST_EVENT,
+  defaultWorldRoutes,
+  getOppositeWorld,
+  rememberWorldRoute,
+  resolveWorldDestination,
+  type WorldFlipRequestDetail,
+} from "@/lib/portfolio-world-transition";
 
 type WorldSwitcherProps = {
   className?: string;
   world: PortfolioWorld;
 };
 
-const routeKeys: Record<PortfolioWorld, string> = {
-  professional: "rbl:last-route:professional",
-  basketball: "rbl:last-route:basketball",
-};
-
-const defaultRoutes: Record<PortfolioWorld, string> = {
-  professional: "/",
-  basketball: "/basketball",
-};
-
-function rememberRoute(world: PortfolioWorld, pathname: string) {
-  try {
-    window.sessionStorage.setItem(routeKeys[world], pathname);
-  } catch {
-    // Storage can be unavailable in hardened/private browser contexts.
-  }
-}
-
-function readRememberedRoute(world: PortfolioWorld) {
-  try {
-    return window.sessionStorage.getItem(routeKeys[world]);
-  } catch {
-    return null;
-  }
-}
-
 export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
   const pathname = usePathname();
-  const router = useRouter();
-  const targetWorld: PortfolioWorld =
-    world === "professional" ? "basketball" : "professional";
+  const targetWorld = getOppositeWorld(world);
   const targetLabel =
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
 
   useEffect(() => {
-    rememberRoute(world, pathname || defaultRoutes[world]);
+    rememberWorldRoute(world, pathname || defaultWorldRoutes[world]);
   }, [pathname, world]);
 
   function handleWorldSwitch(event: MouseEvent<HTMLAnchorElement>) {
-    const rememberedTarget = readRememberedRoute(targetWorld);
-
-    if (rememberedTarget && rememberedTarget !== defaultRoutes[targetWorld]) {
-      event.preventDefault();
-      router.push(rememberedTarget);
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    ) {
+      return;
     }
+
+    event.preventDefault();
+
+    const detail: WorldFlipRequestDetail = {
+      destination: resolveWorldDestination(targetWorld),
+      sourceWorld: world,
+      targetWorld,
+    };
+
+    window.dispatchEvent(
+      new CustomEvent<WorldFlipRequestDetail>(WORLD_FLIP_REQUEST_EVENT, {
+        detail,
+      }),
+    );
   }
 
   return (
@@ -64,7 +61,7 @@ export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
       aria-label={`Turn to ${targetLabel.toLowerCase()}`}
       className={cn("world-switcher", className)}
       data-target-world={targetWorld}
-      href={defaultRoutes[targetWorld]}
+      href={defaultWorldRoutes[targetWorld]}
       onClick={handleWorldSwitch}
     >
       <span aria-hidden="true" className="world-switcher__edge" />
@@ -73,7 +70,7 @@ export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
         <span className="world-switcher__label">{targetLabel}</span>
       </span>
       <span aria-hidden="true" className="world-switcher__arrow">
-        {world === "professional" ? "→" : "←"}
+        {world === "professional" ? "←" : "→"}
       </span>
     </Link>
   );

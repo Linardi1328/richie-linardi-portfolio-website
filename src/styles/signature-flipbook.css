@@ -1,0 +1,538 @@
+.signature-flipbook {
+  --flip-angle: 0deg;
+  --flip-origin-y: 50vh;
+  --flip-progress: 0;
+  --flip-scroll-y: 0px;
+  --flip-viewport-height: 100vh;
+  position: relative;
+  min-height: 100vh;
+}
+
+.signature-flipbook__stage {
+  position: relative;
+  min-height: 100vh;
+}
+
+.signature-flipbook__page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.signature-flipbook__reverse {
+  position: absolute;
+  top: var(--flip-scroll-y);
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: var(--flip-viewport-height);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms var(--ease-standard);
+}
+
+.signature-flipbook__reverse::before,
+.signature-flipbook__reverse::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.signature-flipbook__reverse::before {
+  inset: 0;
+  opacity: 0.42;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 3%) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+}
+
+.signature-flipbook__reverse::after {
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(180deg, #745728, #e1c57c 48%, #6c5125);
+  box-shadow: 0 0 28px rgb(200 164 92 / 32%);
+}
+
+.signature-flipbook__reverse[data-reverse-world="professional"] {
+  color: #f4f7fb;
+  background:
+    radial-gradient(circle at 22% 18%, rgb(31 95 159 / 34%), transparent 28rem),
+    radial-gradient(
+      circle at 78% 76%,
+      rgb(184 148 77 / 18%),
+      transparent 24rem
+    ),
+    linear-gradient(145deg, #06101d, #0a2038 58%, #07111f);
+}
+
+.signature-flipbook__reverse[data-reverse-world="basketball"] {
+  color: #f7f1e4;
+  background:
+    radial-gradient(circle at 18% 72%, rgb(177 22 32 / 30%), transparent 26rem),
+    radial-gradient(
+      circle at 76% 18%,
+      rgb(200 164 92 / 22%),
+      transparent 28rem
+    ),
+    linear-gradient(145deg, #050504, #15120d 58%, #080705);
+}
+
+.signature-flipbook[data-world="professional"]
+  .signature-flipbook__reverse::after {
+  right: 0;
+}
+
+.signature-flipbook[data-world="basketball"]
+  .signature-flipbook__reverse::after {
+  left: 0;
+}
+
+.signature-flipbook__reverse-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100% - (var(--gutter) * 2), 1180px);
+  height: 100%;
+  margin-inline: auto;
+  align-content: center;
+  gap: 0.85rem;
+}
+
+.signature-flipbook__reverse-grid > span,
+.signature-flipbook__reverse-grid > p {
+  font-size: clamp(0.64rem, 1vw, 0.78rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.signature-flipbook__reverse-grid > span {
+  color: #d8bd7a;
+}
+
+.signature-flipbook__reverse-grid > strong {
+  color: transparent;
+  font-size: clamp(9rem, 36vw, 30rem);
+  font-weight: 900;
+  letter-spacing: -0.09em;
+  line-height: 0.72;
+  -webkit-text-stroke: 1px rgb(216 189 122 / 68%);
+}
+
+.signature-flipbook__reverse-grid > p {
+  max-width: 22rem;
+  color: currentColor;
+  opacity: 0.72;
+}
+
+.signature-flipbook[data-phase="dragging"] .signature-flipbook__stage,
+.signature-flipbook[data-phase="turning"] .signature-flipbook__stage,
+.signature-flipbook[data-phase="arriving"] .signature-flipbook__stage {
+  perspective: clamp(760px, 100vw, 1500px);
+  perspective-origin: 50% var(--flip-origin-y);
+}
+
+.signature-flipbook[data-phase="dragging"] .signature-flipbook__page,
+.signature-flipbook[data-phase="turning"] .signature-flipbook__page,
+.signature-flipbook[data-phase="arriving"] .signature-flipbook__page {
+  transform: rotateY(var(--flip-angle));
+}
+
+.signature-flipbook[data-world="professional"][data-phase="dragging"]
+  .signature-flipbook__page,
+.signature-flipbook[data-world="professional"][data-phase="turning"]
+  .signature-flipbook__page,
+.signature-flipbook[data-world="professional"][data-phase="arriving"]
+  .signature-flipbook__page {
+  transform-origin: right var(--flip-origin-y);
+  box-shadow: 34px 0 70px rgb(0 0 0 / 28%);
+}
+
+.signature-flipbook[data-world="basketball"][data-phase="dragging"]
+  .signature-flipbook__page,
+.signature-flipbook[data-world="basketball"][data-phase="turning"]
+  .signature-flipbook__page,
+.signature-flipbook[data-world="basketball"][data-phase="arriving"]
+  .signature-flipbook__page {
+  transform-origin: left var(--flip-origin-y);
+  box-shadow: -34px 0 70px rgb(0 0 0 / 36%);
+}
+
+.signature-flipbook[data-phase="dragging"] .signature-flipbook__page {
+  transition: none;
+}
+
+.signature-flipbook[data-phase="turning"] .signature-flipbook__page {
+  transition: transform 660ms cubic-bezier(0.22, 0.72, 0.2, 1);
+}
+
+.signature-flipbook[data-phase="arriving"] .signature-flipbook__page {
+  transition: transform 720ms cubic-bezier(0.18, 0.74, 0.18, 1);
+}
+
+.signature-flipbook[data-phase="dragging"] .signature-flipbook__reverse,
+.signature-flipbook[data-phase="turning"] .signature-flipbook__reverse,
+.signature-flipbook[data-phase="arriving"] .signature-flipbook__reverse {
+  opacity: clamp(0.12, calc(var(--flip-progress) * 1.06), 1);
+}
+
+.signature-flipbook__drag-zone {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 56;
+  width: 1.75rem;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.signature-flipbook[data-world="professional"] .signature-flipbook__drag-zone {
+  right: max(0.2rem, env(safe-area-inset-right));
+}
+
+.signature-flipbook[data-world="basketball"] .signature-flipbook__drag-zone {
+  left: max(0.2rem, env(safe-area-inset-left));
+}
+
+.signature-flipbook__edge-control {
+  position: fixed;
+  top: 50%;
+  z-index: 58;
+  display: grid;
+  min-width: 4.7rem;
+  min-height: 7.7rem;
+  cursor: pointer;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  border: 1px solid
+    color-mix(in srgb, var(--stage-accent) 54%, var(--stage-line));
+  background: color-mix(in srgb, var(--stage-paper-elevated) 94%, transparent);
+  box-shadow: 0 18px 45px rgb(0 0 0 / 16%);
+  color: var(--stage-ink);
+  transform: translateY(-50%);
+  transition:
+    transform 220ms var(--ease-standard),
+    border-color 220ms var(--ease-standard),
+    box-shadow 220ms var(--ease-standard),
+    background 220ms var(--ease-standard);
+  backdrop-filter: blur(16px);
+}
+
+.signature-flipbook[data-world="professional"]
+  .signature-flipbook__edge-control {
+  right: max(0.9rem, env(safe-area-inset-right));
+  border-radius: 0.8rem 0 0 0.8rem;
+}
+
+.signature-flipbook[data-world="basketball"] .signature-flipbook__edge-control {
+  left: max(0.9rem, env(safe-area-inset-left));
+  border-radius: 0 0.8rem 0.8rem 0;
+}
+
+.signature-flipbook__edge-line {
+  width: 3px;
+  height: 2.1rem;
+  justify-self: center;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #785b2c, #e0c27a, #755929);
+  box-shadow: 0 0 14px rgb(184 148 77 / 30%);
+}
+
+.signature-flipbook__edge-copy {
+  display: grid;
+  gap: 0.16rem;
+  padding-inline: 0.6rem;
+  text-align: center;
+}
+
+.signature-flipbook__edge-copy small {
+  color: var(--stage-muted);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.signature-flipbook__edge-copy strong {
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+}
+
+.signature-flipbook__edge-arrow {
+  position: absolute;
+  top: 0.55rem;
+  color: var(--stage-accent);
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.signature-flipbook[data-world="professional"] .signature-flipbook__edge-arrow {
+  left: 0.55rem;
+}
+
+.signature-flipbook[data-world="basketball"] .signature-flipbook__edge-arrow {
+  right: 0.55rem;
+}
+
+.signature-flipbook__edge-control:hover,
+.signature-flipbook__edge-control:focus-visible {
+  border-color: var(--stage-accent);
+  background: var(--stage-paper-elevated);
+  box-shadow: 0 22px 58px rgb(0 0 0 / 22%);
+}
+
+.signature-flipbook[data-world="professional"]
+  .signature-flipbook__edge-control:hover,
+.signature-flipbook[data-world="professional"]
+  .signature-flipbook__edge-control:focus-visible {
+  transform: translate(-0.18rem, -50%);
+}
+
+.signature-flipbook[data-world="basketball"]
+  .signature-flipbook__edge-control:hover,
+.signature-flipbook[data-world="basketball"]
+  .signature-flipbook__edge-control:focus-visible {
+  transform: translate(0.18rem, -50%);
+}
+
+.signature-flipbook__edge-control:disabled {
+  cursor: progress;
+  opacity: 0.68;
+}
+
+.signature-flipbook__status {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+/* [FLIP STATE 01] Hint */
+@media (hover: hover) and (pointer: fine) {
+  .signature-flipbook__drag-zone {
+    width: 1rem;
+    cursor: ew-resize;
+  }
+
+  .signature-flipbook[data-world="professional"][data-phase="idle"]
+    .signature-flipbook__drag-zone:hover
+    ~ .signature-flipbook__stage {
+    perspective: 1500px;
+    perspective-origin: 50% 50vh;
+  }
+
+  .signature-flipbook[data-world="professional"][data-phase="idle"]
+    .signature-flipbook__drag-zone:hover
+    ~ .signature-flipbook__stage
+    .signature-flipbook__page {
+    transform: rotateY(-2.4deg);
+    transform-origin: right 50vh;
+    box-shadow: 22px 0 45px rgb(0 0 0 / 14%);
+    transition: transform 180ms var(--ease-standard);
+  }
+
+  .signature-flipbook[data-world="basketball"][data-phase="idle"]
+    .signature-flipbook__drag-zone:hover
+    ~ .signature-flipbook__stage {
+    perspective: 1500px;
+    perspective-origin: 50% 50vh;
+  }
+
+  .signature-flipbook[data-world="basketball"][data-phase="idle"]
+    .signature-flipbook__drag-zone:hover
+    ~ .signature-flipbook__stage
+    .signature-flipbook__page {
+    transform: rotateY(2.4deg);
+    transform-origin: left 50vh;
+    box-shadow: -22px 0 45px rgb(0 0 0 / 20%);
+    transition: transform 180ms var(--ease-standard);
+  }
+
+  .signature-flipbook[data-phase="idle"]
+    .signature-flipbook__drag-zone:hover
+    ~ .signature-flipbook__stage
+    .signature-flipbook__reverse {
+    opacity: 0.18;
+  }
+}
+
+/* [MOBILE FLIP] Explicit Side Switch */
+@media (max-width: 767px) {
+  .signature-flipbook__edge-control {
+    top: auto;
+    bottom: max(0.85rem, env(safe-area-inset-bottom));
+    min-width: 0;
+    min-height: 3rem;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    gap: 0.55rem;
+    padding: 0.45rem 0.72rem;
+    border-radius: 999px;
+    transform: none;
+  }
+
+  .signature-flipbook[data-world="professional"]
+    .signature-flipbook__edge-control {
+    right: max(0.75rem, env(safe-area-inset-right));
+    border-radius: 999px;
+  }
+
+  .signature-flipbook[data-world="basketball"]
+    .signature-flipbook__edge-control {
+    left: max(0.75rem, env(safe-area-inset-left));
+    border-radius: 999px;
+  }
+
+  .signature-flipbook__edge-line {
+    width: 0.28rem;
+    height: 1.75rem;
+  }
+
+  .signature-flipbook__edge-copy {
+    padding: 0;
+    text-align: left;
+  }
+
+  .signature-flipbook__edge-copy small {
+    font-size: 0.48rem;
+  }
+
+  .signature-flipbook__edge-copy strong {
+    font-size: 0.68rem;
+  }
+
+  .signature-flipbook__edge-arrow {
+    position: static;
+  }
+
+  .signature-flipbook[data-world="professional"]
+    .signature-flipbook__edge-control:hover,
+  .signature-flipbook[data-world="professional"]
+    .signature-flipbook__edge-control:focus-visible,
+  .signature-flipbook[data-world="basketball"]
+    .signature-flipbook__edge-control:hover,
+  .signature-flipbook[data-world="basketball"]
+    .signature-flipbook__edge-control:focus-visible {
+    transform: none;
+  }
+}
+
+/* [RESPONSIVE: tablet-portrait] */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .signature-flipbook__edge-control {
+    min-width: 4.35rem;
+    min-height: 6.9rem;
+  }
+
+  .signature-flipbook__drag-zone {
+    width: 1.4rem;
+  }
+}
+
+/* [RESPONSIVE: short landscape] */
+@media (max-height: 560px) and (min-width: 600px) {
+  .signature-flipbook__edge-control {
+    top: auto;
+    bottom: max(0.7rem, env(safe-area-inset-bottom));
+    min-height: 3.25rem;
+    transform: none;
+  }
+
+  .signature-flipbook[data-world="professional"]
+    .signature-flipbook__edge-control:hover,
+  .signature-flipbook[data-world="professional"]
+    .signature-flipbook__edge-control:focus-visible,
+  .signature-flipbook[data-world="basketball"]
+    .signature-flipbook__edge-control:hover,
+  .signature-flipbook[data-world="basketball"]
+    .signature-flipbook__edge-control:focus-visible {
+    transform: none;
+  }
+}
+
+/* Typography polish: balanced headings, readable prose, predictable wrapping. */
+:where(
+  .portfolio-stage h1,
+  .portfolio-stage h2,
+  .portfolio-stage h3,
+  .type-display,
+  .type-h1,
+  .type-h2,
+  .type-h3,
+  .professional-shell-hero__title,
+  .basketball-shell-hero__title,
+  .foundation-route__hero h1,
+  .foundation-route__section h2
+) {
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+:where(
+  .portfolio-stage p,
+  .portfolio-stage li,
+  .portfolio-stage figcaption,
+  .type-body,
+  .type-body-small,
+  .type-body-large
+) {
+  text-wrap: pretty;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+:where(.portfolio-stage a, .portfolio-stage code, .portfolio-stage .type-mono) {
+  overflow-wrap: anywhere;
+}
+
+.world-navigation__name,
+.world-navigation__world,
+.world-switcher__label,
+.signature-flipbook__edge-copy strong {
+  text-wrap: nowrap;
+}
+
+/* [REDUCED MOTION] Side Switch Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .signature-flipbook__drag-zone {
+    display: none;
+  }
+
+  .signature-flipbook[data-phase="dragging"] .signature-flipbook__stage,
+  .signature-flipbook[data-phase="turning"] .signature-flipbook__stage,
+  .signature-flipbook[data-phase="arriving"] .signature-flipbook__stage {
+    perspective: none;
+  }
+
+  .signature-flipbook[data-phase="dragging"] .signature-flipbook__page,
+  .signature-flipbook[data-phase="turning"] .signature-flipbook__page,
+  .signature-flipbook[data-phase="arriving"] .signature-flipbook__page {
+    box-shadow: none;
+    transform: none;
+    transform-origin: center;
+  }
+
+  .signature-flipbook[data-phase="turning"] .signature-flipbook__page,
+  .signature-flipbook[data-phase="arriving"] .signature-flipbook__page {
+    opacity: calc(1 - var(--flip-progress));
+    transition: opacity 150ms linear;
+  }
+
+  .signature-flipbook[data-phase="turning"] .signature-flipbook__reverse,
+  .signature-flipbook[data-phase="arriving"] .signature-flipbook__reverse {
+    opacity: var(--flip-progress);
+    transition: opacity 150ms linear;
+  }
+}

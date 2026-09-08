@@ -17,9 +17,9 @@ export const professionalHomeData = {
   ],
   hero: {
     eyebrow: "Computer Science · Data Science · Software Systems",
-    title: "I build practical software with clear technical boundaries.",
+    title: "I build software that stays clear under pressure.",
     description:
-      "I’m Richie Linardi, a Computer Science student at Monash University Malaysia focused on data science, AI, automation, and reliable software engineering. My portfolio work prioritizes traceability, testing, and honest system boundaries over inflated demos.",
+      "I’m Richie Linardi, a Computer Science student at Monash University Malaysia specializing in Data Science. I build software, data, AI, and automation systems with an emphasis on testing, traceability, and clear operating boundaries.",
     tags: ["Python", "TypeScript", "Data & AI", "Automation", "System design"],
   },
   projects: projectCards,
@@ -28,7 +28,7 @@ export const professionalHomeData = {
       label: "Project experience",
       title: "Independent software systems",
       description:
-        "Building and documenting software across market research, accounting workflows, multilingual support, project operations, content verification, and sports-platform infrastructure.",
+        "Building software across market research, accounting workflows, multilingual support, project operations, content systems, and sports infrastructure.",
     },
     {
       label: "Education",

@@ -28,9 +28,9 @@ export default function BasketballPage() {
                 <h2>From academy to Indonesia.</h2>
               </div>
               <p>
-                The archive starts with the milestones that can already be
-                traced. Photography, source links, and deeper game context will
-                attach to these anchors as the site develops.
+                The archive begins with milestones already supported by
+                published records. Photography and deeper game context attach to
+                those anchors as verified media is added.
               </p>
             </div>
 
@@ -68,12 +68,11 @@ export default function BasketballPage() {
           <div className="basketball-shell-section__inner">
             <p className="basketball-shell-hero__kicker">Archive structure</p>
             <h2 className="mt-3 max-w-[16ch] text-[clamp(2.3rem,7vw,5rem)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[var(--stage-ink)]">
-              A career should read like a sequence, not a collage.
+              A career should read as a progression, not a collage.
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--stage-muted)]">
-              Progression, achievement, photography, statistics, and proof are
-              being built as one connected archive rather than separate showcase
-              pages.
+              Results, photography, statistics, and sources live in one
+              connected archive so each career chapter keeps its context.
             </p>
 
             <div className="basketball-shell-section__grid">
@@ -106,9 +105,9 @@ export default function BasketballPage() {
                 Proof stays attached to the story.
               </h2>
               <p className="mt-5 max-w-xl text-base leading-7 text-[var(--stage-muted)]">
-                The final archive will let a viewer move from a result to the
-                source, from a photograph to its event context, and from a stat
-                line back to the competition where it happened.
+                A viewer can move from a result to its source, from a photograph
+                to its event, and from a stat line back to the competition where
+                it happened.
               </p>
             </div>
 
@@ -142,14 +141,12 @@ export default function BasketballPage() {
               </div>
               <div>
                 <p>
-                  The visual layer will become more cinematic as verified media
-                  is attached, but the structure underneath is already designed
-                  to preserve the event, role, result, and source around every
-                  important moment.
+                  Verified media adds the cinematic layer while each important
+                  moment keeps its event, role, result, and source attached.
                 </p>
                 <div className="basketball-archive-direction__links">
-                  <Link href="/basketball/gallery">Browse gallery shell →</Link>
-                  <Link href="/basketball/stats">Open statistics shell →</Link>
+                  <Link href="/basketball/gallery">Browse gallery →</Link>
+                  <Link href="/basketball/stats">Open statistics →</Link>
                   <Link href="/basketball/media">Open media archive →</Link>
                 </div>
               </div>

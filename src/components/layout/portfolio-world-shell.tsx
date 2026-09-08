@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { PortfolioEffects } from "@/components/effects/portfolio-effects";
+import { SignatureFlipbook } from "@/components/interaction/signature-flipbook";
 import { WorldNavigation } from "@/components/navigation/world-navigation";
 import type {
   PortfolioWorld,
@@ -32,27 +33,28 @@ export function PortfolioWorldShell({
       <PortfolioEffects />
       <div aria-hidden="true" className="portfolio-atmosphere" />
       <div className="portfolio-book">
-        {/* [FLIP CONTROL] Page Edge / Corner */}
         <div aria-hidden="true" className="portfolio-book__spine" />
 
-        <div className="portfolio-page">
-          <div className="portfolio-page__chrome">
-            <WorldNavigation items={navigation} world={world} />
-          </div>
+        <SignatureFlipbook world={world}>
+          <div className="portfolio-page">
+            <div className="portfolio-page__chrome">
+              <WorldNavigation items={navigation} world={world} />
+            </div>
 
-          <div
-            className="portfolio-page__content"
-            id="portfolio-main"
-            tabIndex={-1}
-          >
-            {children}
-          </div>
+            <div
+              className="portfolio-page__content"
+              id="portfolio-main"
+              tabIndex={-1}
+            >
+              {children}
+            </div>
 
-          <footer className="portfolio-page__footer">
-            <p>One journey. Two sides. The same discipline.</p>
-            <span aria-hidden="true">RBL · 2026</span>
-          </footer>
-        </div>
+            <footer className="portfolio-page__footer">
+              <p>One journey. Two sides. The same discipline.</p>
+              <span aria-hidden="true">RBL · 2026</span>
+            </footer>
+          </div>
+        </SignatureFlipbook>
       </div>
     </div>
   );
