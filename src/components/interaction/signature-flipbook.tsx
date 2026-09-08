@@ -75,10 +75,7 @@ function getAngleLimit(viewportWidth: number) {
   return 96;
 }
 
-export function SignatureFlipbook({
-  children,
-  world,
-}: SignatureFlipbookProps) {
+export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
   const pathname = usePathname();
   const router = useRouter();
   const targetWorld = getOppositeWorld(world);
