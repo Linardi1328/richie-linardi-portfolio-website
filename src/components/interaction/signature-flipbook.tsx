@@ -31,10 +31,13 @@ type FlipPhase = "idle" | "dragging" | "turning" | "arriving";
 
 type PointerState = {
   dragging: boolean;
+  lastTime: number;
+  lastX: number;
   pointerId: number;
   progress: number;
   startX: number;
   startY: number;
+  velocity: number;
 };
 
 type FlipGeometry = {
@@ -46,7 +49,10 @@ type FlipGeometry = {
 
 const TURN_DURATION_MS = 660;
 const REDUCED_TURN_DURATION_MS = 150;
-const DRAG_COMMIT_THRESHOLD = 0.34;
+const DRAG_COMMIT_THRESHOLD = 0.3;
+const FLICK_COMMIT_VELOCITY = 0.55;
+const SWIPE_START_DISTANCE = 12;
+const SWIPE_AXIS_BIAS = 1.2;
 
 const defaultGeometry: FlipGeometry = {
   angleLimit: 96,
@@ -73,6 +79,18 @@ function getAngleLimit(viewportWidth: number) {
   }
 
   return 96;
+}
+
+function isInteractiveTarget(target: EventTarget | null) {
+  if (!(target instanceof Element)) {
+    return false;
+  }
+
+  return Boolean(
+    target.closest(
+      "a, button, input, textarea, select, option, video, audio, iframe, [role='button'], [role='link'], [role='slider'], [contenteditable='true'], [data-no-page-swipe]",
+    ),
+  );
 }
 
 export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
@@ -185,6 +203,8 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
     if (
       busyRef.current ||
+      !event.isPrimary ||
+      isInteractiveTarget(event.target) ||
       (event.pointerType === "mouse" && event.button !== 0)
     ) {
       return;
@@ -193,10 +213,13 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     syncGeometry();
     pointerRef.current = {
       dragging: false,
+      lastTime: event.timeStamp,
+      lastX: event.clientX,
       pointerId: event.pointerId,
       progress: 0,
       startX: event.clientX,
       startY: event.clientY,
+      velocity: 0,
     };
   }
 
@@ -215,13 +238,24 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
 
     if (
       !pointer.dragging &&
-      horizontalDistance > 12 &&
-      horizontalDistance > verticalDistance * 1.2
+      horizontalDistance > SWIPE_START_DISTANCE &&
+      horizontalDistance > verticalDistance * SWIPE_AXIS_BIAS
     ) {
       pointer.dragging = true;
       setPhase("dragging");
       event.currentTarget.setPointerCapture(event.pointerId);
     }
+
+    const elapsed = Math.max(event.timeStamp - pointer.lastTime, 1);
+    const frameDistance =
+      world === "professional"
+        ? pointer.lastX - event.clientX
+        : event.clientX - pointer.lastX;
+    const frameVelocity = frameDistance / elapsed;
+
+    pointer.velocity = pointer.velocity * 0.65 + frameVelocity * 0.35;
+    pointer.lastTime = event.timeStamp;
+    pointer.lastX = event.clientX;
 
     if (!pointer.dragging) {
       return;
@@ -251,7 +285,10 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
 
-    if (pointer.progress >= DRAG_COMMIT_THRESHOLD) {
+    if (
+      pointer.progress >= DRAG_COMMIT_THRESHOLD ||
+      pointer.velocity >= FLICK_COMMIT_VELOCITY
+    ) {
       startTurn();
       return;
     }
@@ -280,6 +317,8 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     "--flip-progress": `${progress}`,
     "--flip-scroll-y": geometry.scrollY,
     "--flip-viewport-height": geometry.viewportHeight,
+    overscrollBehaviorX: "contain",
+    touchAction: "pan-y pinch-zoom",
   } as CSSProperties;
 
   return (
@@ -288,17 +327,14 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       className="signature-flipbook"
       data-phase={phase}
       data-world={world}
+      onPointerCancel={cancelPointerGesture}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={finishPointerGesture}
       style={style}
     >
-      {/* [TOUCH: edge-swipe-zone] [POINTER: edge-hover-peek] */}
-      <div
-        aria-hidden="true"
-        className="signature-flipbook__drag-zone"
-        onPointerCancel={cancelPointerGesture}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={finishPointerGesture}
-      />
+      {/* [TOUCH: full-page-swipe] [POINTER: edge-hover-peek] */}
+      <div aria-hidden="true" className="signature-flipbook__drag-zone" />
 
       <div className="signature-flipbook__stage">
         {/* [FLIP STATE 03] Reverse Revealed */}
@@ -325,7 +361,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         </div>
       </div>
 
-      {/* [FLIP CONTROL] Page Edge / Corner */}
+      {/* [FLIP CONTROL] Page Edge / Keyboard Fallback */}
       <button
         aria-label={`Turn portfolio to ${targetLabel.toLowerCase()}`}
         className="signature-flipbook__edge-control"
@@ -335,7 +371,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       >
         <span aria-hidden="true" className="signature-flipbook__edge-line" />
         <span className="signature-flipbook__edge-copy">
-          <small>Turn page</small>
+          <small>Swipe or tap</small>
           <strong>
             {targetWorld === "basketball" ? "Basketball" : "Professional"}
           </strong>
