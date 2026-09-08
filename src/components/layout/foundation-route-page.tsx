@@ -128,14 +128,14 @@ export function FoundationRoutePage({
 
         <aside
           className="foundation-route__status"
-          aria-label="Content status"
+          aria-label="Source and verification note"
           data-reveal
         >
-          <span>Evidence-aware content</span>
+          <span>Source-aware portfolio</span>
           <p>
-            Published facts in this view are kept deliberately bounded. Deeper
-            media, telemetry, and records are added only when the underlying
-            evidence is ready to support them.
+            Public claims stay tied to verified records, repositories, or
+            first-party information. New media and deeper proof are added only
+            when the source is ready to support them.
           </p>
         </aside>
       </main>
