@@ -22,6 +22,22 @@ const defaultRoutes: Record<PortfolioWorld, string> = {
   basketball: "/basketball",
 };
 
+function rememberRoute(world: PortfolioWorld, pathname: string) {
+  try {
+    window.sessionStorage.setItem(routeKeys[world], pathname);
+  } catch {
+    // Storage can be unavailable in hardened/private browser contexts.
+  }
+}
+
+function readRememberedRoute(world: PortfolioWorld) {
+  try {
+    return window.sessionStorage.getItem(routeKeys[world]);
+  } catch {
+    return null;
+  }
+}
+
 export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -31,16 +47,11 @@ export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
 
   useEffect(() => {
-    window.sessionStorage.setItem(
-      routeKeys[world],
-      pathname || defaultRoutes[world],
-    );
+    rememberRoute(world, pathname || defaultRoutes[world]);
   }, [pathname, world]);
 
   function handleWorldSwitch(event: MouseEvent<HTMLAnchorElement>) {
-    const rememberedTarget = window.sessionStorage.getItem(
-      routeKeys[targetWorld],
-    );
+    const rememberedTarget = readRememberedRoute(targetWorld);
 
     if (rememberedTarget && rememberedTarget !== defaultRoutes[targetWorld]) {
       event.preventDefault();

@@ -26,6 +26,9 @@ export function PortfolioWorldShell({
       data-context={world}
       data-world={world}
     >
+      <a className="portfolio-skip-link" href="#portfolio-main">
+        Skip to main content
+      </a>
       <PortfolioEffects />
       <div aria-hidden="true" className="portfolio-atmosphere" />
       <div className="portfolio-book">
@@ -37,7 +40,13 @@ export function PortfolioWorldShell({
             <WorldNavigation items={navigation} world={world} />
           </div>
 
-          <div className="portfolio-page__content">{children}</div>
+          <div
+            className="portfolio-page__content"
+            id="portfolio-main"
+            tabIndex={-1}
+          >
+            {children}
+          </div>
 
           <footer className="portfolio-page__footer">
             <p>One journey. Two sides. The same discipline.</p>
