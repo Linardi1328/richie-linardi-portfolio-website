@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ProfessionalHero } from "@/components/hero/professional-hero";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { FeaturedProjectDossier } from "@/components/projects/featured-project-dossier";
@@ -26,6 +27,13 @@ const supportingProjectCards = featuredProject
     )
   : professionalHomeData.projects;
 
+const sharedDisciplines = [
+  "Preparation",
+  "Decision-making",
+  "Review",
+  "Iteration",
+] as const;
+
 export default function Home() {
   return (
     <PortfolioWorldShell
@@ -33,7 +41,10 @@ export default function Home() {
       world="professional"
     >
       <main className="theme-professional">
-        <ProfessionalHero {...professionalHomeData.hero} />
+        <ProfessionalHero
+          {...professionalHomeData.hero}
+          systemCount={publicProjectCatalogue.length}
+        />
 
         {/* [SECTION 01] Selected Technical Projects */}
         <Section aria-labelledby="projects-heading" id="projects">
@@ -76,6 +87,73 @@ export default function Home() {
             </div>
           </Container>
         </Section>
+
+        {/* [SECTION: identity-bridge] Same Skill, Two Worlds */}
+        <section
+          aria-labelledby="identity-bridge-heading"
+          className="professional-identity-bridge"
+        >
+          <div className="professional-identity-bridge__inner">
+            <div className="professional-identity-bridge__intro">
+              <p>Identity / 02</p>
+              <h2 id="identity-bridge-heading">Same skill. Two worlds.</h2>
+              <span>
+                Software and basketball are different arenas, but the working
+                habits underneath them are remarkably similar.
+              </span>
+            </div>
+
+            <div className="professional-identity-bridge__faces">
+              <article className="professional-identity-bridge__face professional-identity-bridge__face--systems">
+                <div className="professional-identity-bridge__face-index">
+                  <span>01</span>
+                  <span>PROFESSIONAL</span>
+                </div>
+                <div>
+                  <h3>Build systems that can explain themselves.</h3>
+                  <p>
+                    Architecture, tests, evidence, limitations, and human
+                    controls are treated as part of the product rather than
+                    hidden behind it.
+                  </p>
+                </div>
+                <Link href="/about">Read the identity story →</Link>
+              </article>
+
+              <div
+                aria-hidden="true"
+                className="professional-identity-bridge__spine"
+              >
+                <span>RBL</span>
+              </div>
+
+              <article className="professional-identity-bridge__face professional-identity-bridge__face--athlete">
+                <div className="professional-identity-bridge__face-index">
+                  <span>02</span>
+                  <span>ATHLETE</span>
+                </div>
+                <div>
+                  <h3>Perform where preparation becomes visible.</h3>
+                  <p>
+                    The basketball side follows the same evidence-first idea:
+                    progression, results, context, photography, and
+                    source-backed moments stay connected.
+                  </p>
+                </div>
+                <Link href="/basketball">Turn to basketball →</Link>
+              </article>
+            </div>
+
+            <div className="professional-identity-bridge__disciplines">
+              {sharedDisciplines.map((discipline, index) => (
+                <span key={discipline}>
+                  <i>{String(index + 1).padStart(2, "0")}</i>
+                  {discipline}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* [SECTION 02] Experience and Education */}
         <Section

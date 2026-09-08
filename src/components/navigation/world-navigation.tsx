@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type {
   PortfolioWorld,
   WorldNavigationItem,
@@ -17,11 +20,17 @@ const worldLabels: Record<PortfolioWorld, string> = {
   basketball: "Athlete archive",
 };
 
+function isActiveRoute(pathname: string, href: string) {
+  return pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
+}
+
 export function WorldNavigation({
   className,
   items,
   world,
 }: WorldNavigationProps) {
+  const pathname = usePathname();
+
   return (
     <header className={cn("world-navigation", className)}>
       <div className="world-navigation__bar">
@@ -46,13 +55,21 @@ export function WorldNavigation({
           className="world-navigation__desktop"
         >
           <ul className="world-navigation__links">
-            {items.map((item) => (
-              <li key={item.href}>
-                <Link className="world-navigation__link" href={item.href}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {items.map((item) => {
+              const isActive = isActiveRoute(pathname, item.href);
+
+              return (
+                <li key={item.href}>
+                  <Link
+                    aria-current={isActive ? "page" : undefined}
+                    className="world-navigation__link"
+                    href={item.href}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -66,16 +83,21 @@ export function WorldNavigation({
               className="world-navigation__menu-panel"
             >
               <ul>
-                {items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      className="world-navigation__menu-link"
-                      href={item.href}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
+                {items.map((item) => {
+                  const isActive = isActiveRoute(pathname, item.href);
+
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        aria-current={isActive ? "page" : undefined}
+                        className="world-navigation__menu-link"
+                        href={item.href}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
           </details>

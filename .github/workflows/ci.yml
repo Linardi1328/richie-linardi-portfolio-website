@@ -33,20 +33,77 @@ jobs:
       - name: Run validation
         run: npm run validate
 
-      - name: Smoke test production server
+      - name: Smoke test production route matrix
         shell: bash
         run: |
+          set -euo pipefail
+
           npm run start -- --hostname 127.0.0.1 --port 3000 > /tmp/portfolio-next.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid" 2>/dev/null || true' EXIT
 
+          ready=0
           for attempt in {1..30}; do
-            if curl --fail --silent --show-error http://127.0.0.1:3000 > /dev/null && \
-               curl --fail --silent --show-error http://127.0.0.1:3000/design-system > /dev/null; then
-              exit 0
+            if curl --fail --silent --show-error http://127.0.0.1:3000/ > /dev/null; then
+              ready=1
+              break
             fi
             sleep 1
           done
 
-          cat /tmp/portfolio-next.log
-          exit 1
+          if [ "$ready" -ne 1 ]; then
+            cat /tmp/portfolio-next.log
+            exit 1
+          fi
+
+          routes=(
+            "/"
+            "/about"
+            "/projects"
+            "/projects/spy-market-agent"
+            "/projects/personal-project-operator"
+            "/projects/ledgerpilot-ai"
+            "/projects/khlim-assist"
+            "/projects/rbl-content-engine"
+            "/projects/khlim-digital-ecosystem"
+            "/experience"
+            "/education"
+            "/resume"
+            "/contact"
+            "/basketball"
+            "/basketball/journey"
+            "/basketball/achievements"
+            "/basketball/stats"
+            "/basketball/gallery"
+            "/basketball/media"
+            "/design-system"
+            "/robots.txt"
+          )
+
+          for route in "${routes[@]}"; do
+            echo "Smoke testing $route"
+            if ! curl --fail --silent --show-error "http://127.0.0.1:3000${route}" > /dev/null; then
+              cat /tmp/portfolio-next.log
+              exit 1
+            fi
+          done
+
+          response_headers=$(curl --silent --head http://127.0.0.1:3000/)
+          printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^content-security-policy:'
+          printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^referrer-policy: strict-origin-when-cross-origin'
+          printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^x-content-type-options: nosniff'
+          printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^x-frame-options: DENY'
+
+          if printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^x-powered-by:'; then
+            echo "X-Powered-By must remain disabled in production."
+            exit 1
+          fi
+
+          not_found_status=$(curl --silent --output /dev/null --write-out "%{http_code}" \
+            http://127.0.0.1:3000/__production-smoke-missing__)
+
+          if [ "$not_found_status" != "404" ]; then
+            echo "Expected 404 for missing route, got $not_found_status"
+            cat /tmp/portfolio-next.log
+            exit 1
+          fi

@@ -1,0 +1,188 @@
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 620ms var(--ease-standard),
+    transform 760ms var(--ease-standard);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal-delay="1"] {
+  --reveal-delay: 70ms;
+}
+
+[data-reveal-delay="2"] {
+  --reveal-delay: 140ms;
+}
+
+[data-reveal-delay="3"] {
+  --reveal-delay: 210ms;
+}
+
+.portfolio-atmosphere {
+  animation: portfolio-atmosphere-drift 18s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.portfolio-book__spine::after {
+  position: absolute;
+  inset-inline: 0;
+  top: -20%;
+  height: 22%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgb(255 238 184 / 76%),
+    transparent
+  );
+  content: "";
+  animation: portfolio-spine-travel 7s ease-in-out infinite;
+}
+
+.professional-shell-hero__specimen::after {
+  animation: specimen-orbit-breathe 8s ease-in-out infinite alternate;
+}
+
+.professional-shell-hero__specimen::before {
+  animation: specimen-orbit-breathe 10s ease-in-out -2s infinite alternate;
+}
+
+.professional-shell-hero__specimen {
+  isolation: isolate;
+}
+
+.professional-shell-hero__specimen > * {
+  position: relative;
+  z-index: 2;
+}
+
+.professional-shell-hero__specimen::marker {
+  display: none;
+}
+
+.basketball-career-index__marker {
+  animation: archive-marker-pulse 3.2s ease-in-out infinite;
+}
+
+.basketball-shell-card,
+.foundation-route__primary-link,
+.featured-project-dossier a {
+  will-change: transform;
+}
+
+.basketball-shell-card:focus-visible,
+.foundation-route__primary-link:focus-visible {
+  outline: 2px solid var(--stage-accent);
+  outline-offset: 4px;
+}
+
+@keyframes portfolio-atmosphere-drift {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: scale(1.035) translate3d(0.6%, -0.45%, 0);
+  }
+}
+
+@keyframes portfolio-spine-travel {
+  0%,
+  18% {
+    transform: translateY(-125%);
+    opacity: 0;
+  }
+
+  36% {
+    opacity: 0.8;
+  }
+
+  66% {
+    opacity: 0.65;
+  }
+
+  82%,
+  100% {
+    transform: translateY(590%);
+    opacity: 0;
+  }
+}
+
+@keyframes specimen-orbit-breathe {
+  from {
+    transform: scale(0.96);
+    opacity: 0.65;
+  }
+
+  to {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes archive-marker-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgb(200 164 92 / 0%),
+      0 0 18px rgb(200 164 92 / 26%);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 0.45rem rgb(200 164 92 / 7%),
+      0 0 26px rgb(200 164 92 / 40%);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .professional-identity-bridge__face,
+  .foundation-route__section,
+  .basketball-record-card {
+    transition:
+      transform 260ms var(--ease-standard),
+      border-color 260ms var(--ease-standard),
+      background 260ms var(--ease-standard),
+      box-shadow 260ms var(--ease-standard);
+  }
+
+  .professional-identity-bridge__face:hover {
+    transform: translateY(-0.2rem);
+    background-color: rgb(255 255 255 / 2%);
+  }
+
+  .foundation-route__section:hover {
+    transform: translateX(0.2rem);
+  }
+
+  .basketball-record-card:hover {
+    transform: translateY(-0.25rem);
+    border-color: color-mix(
+      in srgb,
+      var(--stage-accent) 62%,
+      var(--stage-line)
+    );
+    box-shadow: 0 24px 60px rgb(0 0 0 / 18%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .portfolio-atmosphere,
+  .portfolio-book__spine::after,
+  .professional-shell-hero__specimen::before,
+  .professional-shell-hero__specimen::after,
+  .basketball-career-index__marker {
+    animation: none;
+  }
+}
