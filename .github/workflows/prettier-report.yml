@@ -1,0 +1,31 @@
+name: Prettier report
+
+on:
+  push:
+    branches:
+      - prod/04-signature-flipbook
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format target files and print diff
+        run: |
+          npx prettier --write src/components/interaction/signature-flipbook.tsx src/styles/signature-flipbook.css
+          git diff -- src/components/interaction/signature-flipbook.tsx src/styles/signature-flipbook.css
