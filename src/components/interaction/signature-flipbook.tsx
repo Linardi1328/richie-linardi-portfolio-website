@@ -99,8 +99,7 @@ function getAngleLimit(viewportWidth: number) {
 
 function getTurnDuration(fromProgress: number, velocity: number) {
   const remainingProgress = 1 - clamp(fromProgress);
-  const distanceDuration =
-    TURN_DURATION_MS * Math.max(0.34, remainingProgress);
+  const distanceDuration = TURN_DURATION_MS * Math.max(0.34, remainingProgress);
   const velocityFactor = clamp(1 - Math.max(velocity, 0) * 0.18, 0.72, 1);
 
   return Math.round(
