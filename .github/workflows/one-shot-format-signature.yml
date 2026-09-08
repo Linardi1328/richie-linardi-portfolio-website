@@ -1,0 +1,44 @@
+name: One-shot signature formatter
+
+on:
+  push:
+    branches:
+      - prod/04-signature-flipbook
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: prod/04-signature-flipbook
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format signature files
+        run: npx prettier --write src/components/interaction/signature-flipbook.tsx src/styles/signature-flipbook.css
+
+      - name: Commit formatting
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No formatting changes required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/components/interaction/signature-flipbook.tsx src/styles/signature-flipbook.css
+          git commit -m "chore: format signature flipbook"
+          git push origin HEAD:prod/04-signature-flipbook
