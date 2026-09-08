@@ -157,23 +157,29 @@ export function SignatureFlipbook({
 
     const reducedMotion = prefersReducedMotion();
     busyRef.current = true;
-    syncGeometry();
-    setPhase("arriving");
-    setProgress(1);
+    let settleTimer = 0;
+    let resetTimer = 0;
 
-    const settleTimer = window.setTimeout(
-      () => setProgress(0),
-      reducedMotion ? 20 : 48,
-    );
-    const resetTimer = window.setTimeout(
-      () => {
-        setPhase("idle");
-        busyRef.current = false;
-      },
-      reducedMotion ? 230 : 790,
-    );
+    const arrivalFrame = window.requestAnimationFrame(() => {
+      syncGeometry();
+      setPhase("arriving");
+      setProgress(1);
+
+      settleTimer = window.setTimeout(
+        () => setProgress(0),
+        reducedMotion ? 20 : 48,
+      );
+      resetTimer = window.setTimeout(
+        () => {
+          setPhase("idle");
+          busyRef.current = false;
+        },
+        reducedMotion ? 230 : 790,
+      );
+    });
 
     return () => {
+      window.cancelAnimationFrame(arrivalFrame);
       window.clearTimeout(settleTimer);
       window.clearTimeout(resetTimer);
     };
