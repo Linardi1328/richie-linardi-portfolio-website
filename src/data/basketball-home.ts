@@ -8,7 +8,7 @@ export type BasketballCareerMoment = {
 export const basketballCareerMoments = [
   {
     context: "Development",
-    detail: "The long-form basketball journey begins with DBL Academy.",
+    detail: "The basketball journey begins with DBL Academy.",
     label: "DBL Academy",
     year: "2016",
   },
@@ -20,8 +20,7 @@ export const basketballCareerMoments = [
   },
   {
     context: "East Java",
-    detail:
-      "52 points · 21 rebounds · 13 assists across the season · Second Team.",
+    detail: "52 points · 21 rebounds · 13 assists · Second Team.",
     label: "DBL season",
     year: "2022",
   },
@@ -40,8 +39,8 @@ export const basketballCareerMoments = [
   {
     context: "National team",
     detail:
-      "ASEAN School Games Gold · Indonesia defeated the Philippines 56–54 in the final.",
-    label: "ASEAN School Games",
+      "ASEAN Schools Games Gold · Indonesia beat the Philippines 56–54 in the final.",
+    label: "ASEAN Schools Games",
     year: "2024",
   },
   {
@@ -55,21 +54,21 @@ export const basketballCareerMoments = [
 export const basketballArchiveModules = [
   {
     description:
-      "A chronological interface connecting development chapters, teams, tournaments, and source-backed milestones.",
+      "Development chapters, teams, tournaments, and verified milestones in one timeline.",
     href: "/basketball/journey",
     index: "01",
     title: "Journey timeline",
   },
   {
     description:
-      "Results presented as a ledger with event context, role, supporting media, and source records attached.",
+      "Results shown with event context, role, supporting media, and source records.",
     href: "/basketball/achievements",
     index: "02",
     title: "Achievement ledger",
   },
   {
     description:
-      "Photography opens into event context instead of living as an isolated social-media-style image grid.",
+      "Photography connected to the event, result, and career chapter behind each moment.",
     href: "/basketball/gallery",
     index: "03",
     title: "Proof gallery",
