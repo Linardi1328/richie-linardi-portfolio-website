@@ -141,6 +141,10 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
 
   const targetLabel =
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
+  const targetShortLabel =
+    targetWorld === "basketball" ? "Basketball" : "Professional";
+  const swipeDirection = world === "professional" ? "left" : "right";
+  const keyboardKey = world === "professional" ? "ArrowLeft" : "ArrowRight";
   const reverseEyebrow =
     targetWorld === "basketball" ? "ATHLETE ARCHIVE" : "SOFTWARE · DATA · AI";
   const reverseTitle = targetWorld === "basketball" ? "13" : "RBL";
@@ -205,6 +209,32 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       window.removeEventListener(WORLD_FLIP_REQUEST_EVENT, handleFlipRequest);
     };
   }, [startTurn, world]);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (
+        busyRef.current ||
+        event.repeat ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.shiftKey ||
+        isInteractiveTarget(event.target) ||
+        event.key !== keyboardKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      startTurn();
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [keyboardKey, startTurn]);
 
   useEffect(() => {
     return () => {
@@ -440,6 +470,15 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     targetWorld === "professional"
       ? ({ justifySelf: "end", textAlign: "right" } as CSSProperties)
       : undefined;
+  const swipeHintStyle = {
+    pointerEvents: "none",
+    cursor: "default",
+    border: "none",
+    background: "transparent",
+    boxShadow: "none",
+    backdropFilter: "none",
+    WebkitBackdropFilter: "none",
+  } as CSSProperties;
 
   return (
     <div
@@ -483,25 +522,22 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         </div>
       </div>
 
-      {/* [FLIP CONTROL] Page Edge / Keyboard Fallback */}
-      <button
-        aria-label={`Turn portfolio to ${targetLabel.toLowerCase()}`}
+      {/* [FLIP HINT] Swipe-first directional guidance; keyboard uses matching arrow key. */}
+      <div
+        aria-label={`Swipe ${swipeDirection} or use the ${swipeDirection} arrow key to open ${targetLabel.toLowerCase()}`}
         className="signature-flipbook__edge-control"
-        disabled={phase === "turning"}
-        onClick={() => startTurn()}
-        type="button"
+        role="note"
+        style={swipeHintStyle}
       >
         <span aria-hidden="true" className="signature-flipbook__edge-line" />
         <span className="signature-flipbook__edge-copy">
-          <small>Swipe or tap</small>
-          <strong>
-            {targetWorld === "basketball" ? "Basketball" : "Professional"}
-          </strong>
+          <small>Swipe {swipeDirection}</small>
+          <strong>{targetShortLabel}</strong>
         </span>
         <span aria-hidden="true" className="signature-flipbook__edge-arrow">
           {world === "professional" ? "←" : "→"}
         </span>
-      </button>
+      </div>
 
       {/* [REDUCED MOTION] Side Switch Fallback */}
       <span aria-live="polite" className="signature-flipbook__status">
