@@ -70,7 +70,6 @@ jobs:
             "/education"
             "/resume"
             "/contact"
-            "/journey"
             "/basketball"
             "/basketball/journey"
             "/basketball/achievements"
@@ -88,6 +87,17 @@ jobs:
               exit 1
             fi
           done
+
+          response_headers=$(curl --silent --head http://127.0.0.1:3000/)
+          printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^content-security-policy:'
+          printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^referrer-policy: strict-origin-when-cross-origin'
+          printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^x-content-type-options: nosniff'
+          printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^x-frame-options: DENY'
+
+          if printf '%s\n' "$response_headers" | grep --ignore-case --quiet '^x-powered-by:'; then
+            echo "X-Powered-By must remain disabled in production."
+            exit 1
+          fi
 
           not_found_status=$(curl --silent --output /dev/null --write-out "%{http_code}" \
             http://127.0.0.1:3000/__production-smoke-missing__)
