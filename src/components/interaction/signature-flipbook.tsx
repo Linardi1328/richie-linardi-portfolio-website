@@ -141,6 +141,10 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
 
   const targetLabel =
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
+  const targetShortLabel =
+    targetWorld === "basketball" ? "Basketball" : "Professional";
+  const swipeDirection = world === "professional" ? "left" : "right";
+  const keyboardKey = world === "professional" ? "ArrowLeft" : "ArrowRight";
   const reverseEyebrow =
     targetWorld === "basketball" ? "ATHLETE ARCHIVE" : "SOFTWARE · DATA · AI";
   const reverseTitle = targetWorld === "basketball" ? "13" : "RBL";
@@ -205,6 +209,32 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       window.removeEventListener(WORLD_FLIP_REQUEST_EVENT, handleFlipRequest);
     };
   }, [startTurn, world]);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (
+        busyRef.current ||
+        event.repeat ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.shiftKey ||
+        isInteractiveTarget(event.target) ||
+        event.key !== keyboardKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      startTurn();
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [keyboardKey, startTurn]);
 
   useEffect(() => {
     return () => {
@@ -483,25 +513,32 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         </div>
       </div>
 
-      {/* [FLIP CONTROL] Page Edge / Keyboard Fallback */}
-      <button
-        aria-label={`Turn portfolio to ${targetLabel.toLowerCase()}`}
-        className="signature-flipbook__edge-control"
-        disabled={phase === "turning"}
-        onClick={() => startTurn()}
-        type="button"
-      >
-        <span aria-hidden="true" className="signature-flipbook__edge-line" />
-        <span className="signature-flipbook__edge-copy">
-          <small>Swipe or tap</small>
-          <strong>
-            {targetWorld === "basketball" ? "Basketball" : "Professional"}
-          </strong>
-        </span>
-        <span aria-hidden="true" className="signature-flipbook__edge-arrow">
-          {world === "professional" ? "←" : "→"}
-        </span>
-      </button>
+      {/* [FLIP HINT] Purely visual swipe guidance */}
+      <div aria-hidden="true" className="signature-flipbook__hint">
+        {world === "professional" ? (
+          <>
+            <span className="signature-flipbook__hint-arrow">←</span>
+            <span className="signature-flipbook__hint-text">
+              Swipe {swipeDirection}{" "}
+              <span className="signature-flipbook__hint-sep">·</span>{" "}
+              <span className="signature-flipbook__hint-target">
+                {targetShortLabel}
+              </span>
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="signature-flipbook__hint-text">
+              <span className="signature-flipbook__hint-target">
+                {targetShortLabel}
+              </span>{" "}
+              <span className="signature-flipbook__hint-sep">·</span> Swipe{" "}
+              {swipeDirection}
+            </span>
+            <span className="signature-flipbook__hint-arrow">→</span>
+          </>
+        )}
+      </div>
 
       {/* [REDUCED MOTION] Side Switch Fallback */}
       <span aria-live="polite" className="signature-flipbook__status">
