@@ -38,6 +38,7 @@ type PointerState = {
 };
 
 type FlipGeometry = {
+  angleLimit: number;
   originY: string;
   scrollY: string;
   viewportHeight: string;
@@ -48,6 +49,7 @@ const REDUCED_TURN_DURATION_MS = 150;
 const DRAG_COMMIT_THRESHOLD = 0.34;
 
 const defaultGeometry: FlipGeometry = {
+  angleLimit: 96,
   originY: "50vh",
   scrollY: "0px",
   viewportHeight: "100vh",
@@ -59,6 +61,18 @@ function clamp(value: number, minimum = 0, maximum = 1) {
 
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getAngleLimit(viewportWidth: number) {
+  if (viewportWidth < 600) {
+    return 72;
+  }
+
+  if (viewportWidth < 1024) {
+    return 84;
+  }
+
+  return 96;
 }
 
 export function SignatureFlipbook({
@@ -78,11 +92,11 @@ export function SignatureFlipbook({
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
   const reverseEyebrow =
     targetWorld === "basketball" ? "ATHLETE ARCHIVE" : "SOFTWARE · DATA · AI";
-  const reverseTitle =
-    targetWorld === "basketball" ? "13" : "RBL";
+  const reverseTitle = targetWorld === "basketball" ? "13" : "RBL";
 
   const syncGeometry = useCallback(() => {
     setGeometry({
+      angleLimit: getAngleLimit(window.innerWidth),
       originY: `${window.scrollY + window.innerHeight / 2}px`,
       scrollY: `${window.scrollY}px`,
       viewportHeight: `${window.innerHeight}px`,
@@ -147,30 +161,29 @@ export function SignatureFlipbook({
     setPhase("arriving");
     setProgress(1);
 
-    const firstFrame = window.requestAnimationFrame(() => {
-      const secondFrame = window.requestAnimationFrame(() => {
-        setProgress(0);
-      });
-
-      window.setTimeout(() => window.cancelAnimationFrame(secondFrame), 0);
-    });
-
+    const settleTimer = window.setTimeout(
+      () => setProgress(0),
+      reducedMotion ? 20 : 48,
+    );
     const resetTimer = window.setTimeout(
       () => {
         setPhase("idle");
         busyRef.current = false;
       },
-      reducedMotion ? 230 : 760,
+      reducedMotion ? 230 : 790,
     );
 
     return () => {
-      window.cancelAnimationFrame(firstFrame);
+      window.clearTimeout(settleTimer);
       window.clearTimeout(resetTimer);
     };
   }, [syncGeometry, world]);
 
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-    if (busyRef.current || (event.pointerType === "mouse" && event.button !== 0)) {
+    if (
+      busyRef.current ||
+      (event.pointerType === "mouse" && event.button !== 0)
+    ) {
       return;
     }
 
@@ -257,7 +270,7 @@ export function SignatureFlipbook({
   }
 
   const direction = world === "professional" ? -1 : 1;
-  const angle = direction * progress * 96;
+  const angle = direction * progress * geometry.angleLimit;
   const style = {
     "--flip-angle": `${angle}deg`,
     "--flip-origin-y": geometry.originY,
@@ -320,7 +333,9 @@ export function SignatureFlipbook({
         <span aria-hidden="true" className="signature-flipbook__edge-line" />
         <span className="signature-flipbook__edge-copy">
           <small>Turn page</small>
-          <strong>{targetWorld === "basketball" ? "Basketball" : "Professional"}</strong>
+          <strong>
+            {targetWorld === "basketball" ? "Basketball" : "Professional"}
+          </strong>
         </span>
         <span aria-hidden="true" className="signature-flipbook__edge-arrow">
           {world === "professional" ? "←" : "→"}
