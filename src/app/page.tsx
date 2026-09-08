@@ -50,10 +50,10 @@ export default function Home() {
         <Section aria-labelledby="projects-heading" id="projects">
           <Container size="wide">
             <SectionHeading
-              description="A small set of technical projects with scope and status stated as they exist today."
+              description="Six systems, each shown with its current scope, status, and supporting evidence."
               eyebrow="Selected technical projects"
               id="projects-heading"
-              title="Work built around evidence, controls, and maintainable boundaries."
+              title="Systems built to be understood, tested, and maintained."
             />
 
             {featuredProject ? (
@@ -74,8 +74,8 @@ export default function Home() {
                   </h3>
                 </div>
                 <p className="hidden max-w-md text-right text-sm leading-6 text-text-muted min-[768px]:block">
-                  Each system stays attached to its real implementation state,
-                  constraints, and repository evidence.
+                  Every card links the current implementation, constraints, and
+                  evidence behind the work.
                 </p>
               </div>
 
@@ -98,8 +98,8 @@ export default function Home() {
               <p>Identity / 02</p>
               <h2 id="identity-bridge-heading">Same skill. Two worlds.</h2>
               <span>
-                Software and basketball are different arenas, but the working
-                habits underneath them are remarkably similar.
+                Different arenas, same habits: prepare well, make clear
+                decisions, review the result, and improve.
               </span>
             </div>
 
@@ -112,9 +112,8 @@ export default function Home() {
                 <div>
                   <h3>Build systems that can explain themselves.</h3>
                   <p>
-                    Architecture, tests, evidence, limitations, and human
-                    controls are treated as part of the product rather than
-                    hidden behind it.
+                    Architecture, tests, evidence, limits, and human controls
+                    stay visible as part of the product.
                   </p>
                 </div>
                 <Link href="/about">Read the identity story →</Link>
@@ -135,9 +134,8 @@ export default function Home() {
                 <div>
                   <h3>Perform where preparation becomes visible.</h3>
                   <p>
-                    The basketball side follows the same evidence-first idea:
-                    progression, results, context, photography, and
-                    source-backed moments stay connected.
+                    Progression, results, media, and sources stay connected to
+                    the competition behind each moment.
                   </p>
                 </div>
                 <Link href="/basketball">Turn to basketball →</Link>
@@ -165,10 +163,10 @@ export default function Home() {
             <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
               <div>
                 <SectionHeading
-                  description="A compact snapshot of the academic and project context behind the work."
+                  description="A concise view of the academic, teaching, and project work behind the portfolio."
                   eyebrow="Experience & education"
                   id="experience-heading"
-                  title="Computer science in practice and in the classroom."
+                  title="Computer science, taught and applied."
                 />
                 <div className="mt-9">
                   {professionalHomeData.milestones.map((milestone) => (
@@ -186,16 +184,15 @@ export default function Home() {
               {/* [SECTION 03] Technical Focus */}
               <div id="skills">
                 <SectionHeading
-                  description="Tools and areas that recur across my current software projects."
+                  description="The tools and engineering areas that recur across my current projects."
                   eyebrow="Technical focus"
-                  title="A practical stack, not a keyword wall."
+                  title="Tools I use to build dependable systems."
                 />
                 <Surface className="mt-9 rounded-card">
                   <TagGroup tags={[...professionalHomeData.technicalFocus]} />
                   <p className="type-body-small mt-6 text-text-secondary">
                     I’m most interested in systems where data, automation, and
-                    AI need strong validation, traceability, and explicit human
-                    control.
+                    AI need validation, traceability, and clear human control.
                   </p>
                 </Surface>
               </div>
@@ -214,11 +211,11 @@ export default function Home() {
                 className="type-h2 mt-3 text-text-primary"
                 id="contact-heading"
               >
-                The repositories carry the implementation details.
+                Code, docs, and tests live on GitHub.
               </h2>
               <p className="type-body mt-4 text-text-secondary">
-                Browse the code, docs, tests, and project boundaries directly on
-                GitHub.
+                Open the repositories for implementation details, project
+                decisions, and current boundaries.
               </p>
               <div className="mt-6 flex justify-center">
                 <TextLink external href="https://github.com/Linardi1328">
