@@ -42,8 +42,10 @@ export function PortfolioEffects() {
         },
         {
           // threshold: 0 ensures elements of any height (even 6000px+ tall mobile sections)
-          // trigger as soon as their leading edge enters the viewport.
-          rootMargin: "0px 0px -20px 0px",
+          // trigger as soon as their leading edge crosses the reveal line.
+          // -12% bottom margin delays triggering until the element is 12% inside the viewport,
+          // giving a crisp, visible entry animation as the user scrolls.
+          rootMargin: "0px 0px -12% 0px",
           threshold: 0,
         },
       );
@@ -58,7 +60,9 @@ export function PortfolioEffects() {
     // Progressive enhancement scroll/failsafe fallback:
     // Ensure any content scrolled near/past or remaining unrevealed becomes visible.
     function checkVisibilityFallback() {
-      const viewportBottom = window.innerHeight + 60;
+      // revealLine matches the observer's -12% bottom margin (88% of viewport height).
+      // Elements reveal only when their top edge crosses into the visible trigger zone.
+      const revealLine = window.innerHeight * 0.88;
       let remaining = false;
 
       targets.forEach((target) => {
@@ -67,7 +71,7 @@ export function PortfolioEffects() {
         }
 
         const rect = target.getBoundingClientRect();
-        if (rect.top <= viewportBottom) {
+        if (rect.top <= revealLine) {
           target.classList.add("is-visible");
           observer?.unobserve(target);
         } else {
