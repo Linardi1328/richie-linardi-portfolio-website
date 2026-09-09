@@ -110,17 +110,21 @@ export function FoundationRoutePage({
               >
                 {String(index + 1).padStart(2, "0")}
               </div>
-              <div>
-                <p className="foundation-route__eyebrow">{section.eyebrow}</p>
-                <h2>{section.title}</h2>
-                <p>{section.description}</p>
-                {section.items ? (
-                  <ul>
-                    {section.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                ) : null}
+              <div className="foundation-route__section-content">
+                <div className="foundation-route__section-header">
+                  <p className="foundation-route__eyebrow">{section.eyebrow}</p>
+                  <h2>{section.title}</h2>
+                </div>
+                <div className="foundation-route__section-body">
+                  <p>{section.description}</p>
+                  {section.items ? (
+                    <ul>
+                      {section.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
               </div>
             </article>
           ))}

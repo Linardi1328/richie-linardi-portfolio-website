@@ -59,10 +59,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="foundation-route__section-index" aria-hidden="true">
               01
             </div>
-            <div>
-              <p className="foundation-route__eyebrow">Current state</p>
-              <h2>What exists now.</h2>
-              <div>
+            <div className="foundation-route__section-content">
+              <div className="foundation-route__section-header">
+                <p className="foundation-route__eyebrow">Current state</p>
+                <h2>What exists now.</h2>
+              </div>
+              <div className="foundation-route__section-body">
                 <p>{project.currentStatus}</p>
                 <ul>
                   <li>Verified {project.statusVerifiedAt}</li>
@@ -77,14 +79,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="foundation-route__section-index" aria-hidden="true">
               02
             </div>
-            <div>
-              <p className="foundation-route__eyebrow">Operating boundaries</p>
-              <h2>What this project does not claim.</h2>
-              <ul>
-                {project.boundaries.map((boundary) => (
-                  <li key={boundary}>{boundary}</li>
-                ))}
-              </ul>
+            <div className="foundation-route__section-content">
+              <div className="foundation-route__section-header">
+                <p className="foundation-route__eyebrow">
+                  Operating boundaries
+                </p>
+                <h2>What this project does not claim.</h2>
+              </div>
+              <div className="foundation-route__section-body">
+                <ul>
+                  {project.boundaries.map((boundary) => (
+                    <li key={boundary}>{boundary}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </article>
 
@@ -92,14 +100,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="foundation-route__section-index" aria-hidden="true">
               03
             </div>
-            <div>
-              <p className="foundation-route__eyebrow">Evidence</p>
-              <h2>Proof stays visible.</h2>
-              <ul>
-                {evidence.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+            <div className="foundation-route__section-content">
+              <div className="foundation-route__section-header">
+                <p className="foundation-route__eyebrow">Evidence</p>
+                <h2>Proof stays visible.</h2>
+              </div>
+              <div className="foundation-route__section-body">
+                <ul>
+                  {evidence.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </article>
 
@@ -107,10 +119,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="foundation-route__section-index" aria-hidden="true">
               04
             </div>
-            <div>
-              <p className="foundation-route__eyebrow">Next interface pass</p>
-              <h2>Architecture, workflow, decisions, limitations, roadmap.</h2>
-              <div>
+            <div className="foundation-route__section-content">
+              <div className="foundation-route__section-header">
+                <p className="foundation-route__eyebrow">Next interface pass</p>
+                <h2>
+                  Architecture, workflow, decisions, limitations, roadmap.
+                </h2>
+              </div>
+              <div className="foundation-route__section-body">
                 <p>
                   The detailed visual case-study modules will be filled after
                   the preview review. The route, evidence model, truth boundary,

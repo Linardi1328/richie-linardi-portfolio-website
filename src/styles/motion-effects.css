@@ -1,9 +1,9 @@
 [data-reveal] {
   opacity: 0;
-  transform: translateY(1.5rem);
+  transform: translateY(1.25rem);
   transition:
-    opacity 620ms var(--ease-standard),
-    transform 760ms var(--ease-standard);
+    opacity 540ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -13,15 +13,19 @@
 }
 
 [data-reveal-delay="1"] {
-  --reveal-delay: 70ms;
+  --reveal-delay: 60ms;
 }
 
 [data-reveal-delay="2"] {
-  --reveal-delay: 140ms;
+  --reveal-delay: 120ms;
 }
 
 [data-reveal-delay="3"] {
-  --reveal-delay: 210ms;
+  --reveal-delay: 180ms;
+}
+
+[data-reveal-delay="4"] {
+  --reveal-delay: 240ms;
 }
 
 .portfolio-atmosphere {
@@ -76,9 +80,12 @@
 }
 
 .basketball-shell-card:focus-visible,
-.foundation-route__primary-link:focus-visible {
+.foundation-route__primary-link:focus-visible,
+.featured-project-dossier a:focus-visible,
+.identity-btn:focus-visible,
+.about-nav-card:focus-visible {
   outline: 2px solid var(--stage-accent);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
 @keyframes portfolio-atmosphere-drift {
@@ -142,32 +149,34 @@
 
 @media (hover: hover) and (pointer: fine) {
   .professional-identity-bridge__face,
-  .foundation-route__section,
-  .basketball-record-card {
+  .basketball-record-card,
+  .experience-dna__card,
+  .experience-dossier-card,
+  .about-nav-card {
     transition:
-      transform 260ms var(--ease-standard),
-      border-color 260ms var(--ease-standard),
-      background 260ms var(--ease-standard),
-      box-shadow 260ms var(--ease-standard);
+      transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .professional-identity-bridge__face:hover {
-    transform: translateY(-0.2rem);
+    transform: translateY(-2px);
     background-color: rgb(255 255 255 / 2%);
   }
 
-  .foundation-route__section:hover {
-    transform: translateX(0.2rem);
-  }
-
   .basketball-record-card:hover {
-    transform: translateY(-0.25rem);
+    transform: translateY(-2px);
     border-color: color-mix(
       in srgb,
       var(--stage-accent) 62%,
       var(--stage-line)
     );
-    box-shadow: 0 24px 60px rgb(0 0 0 / 18%);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 14%);
+  }
+
+  .foundation-route__section {
+    transition: border-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 

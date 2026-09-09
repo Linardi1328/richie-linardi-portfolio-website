@@ -50,7 +50,8 @@
 .world-navigation__menu-link:focus-visible,
 .world-navigation__menu-trigger:focus-visible,
 .world-switcher:focus-visible {
-  outline-color: var(--stage-accent);
+  outline: 2px solid var(--stage-accent);
+  outline-offset: 3px;
 }
 
 @supports not ((backdrop-filter: blur(1px))) {
