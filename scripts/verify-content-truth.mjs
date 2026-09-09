@@ -47,14 +47,105 @@ for (const file of srcFiles) {
   }
 }
 
-// 2. Audit for unsupported biographical/operational elaborations in supporting routes
+// 2. Target files for route-specific identity content checks
 const supportingFiles = [
   join(projectRoot, "src/components/about/about-identity-page.tsx"),
   join(projectRoot, "src/components/experience/experience-record-page.tsx"),
   join(projectRoot, "src/components/education/education-monash-page.tsx"),
+  join(projectRoot, "src/data/foundation-pages.ts"),
 ];
 
-const unverifiedPhrases = [
+// 2a. Stale current-profile terms for production-facing identity routes
+const staleCurrentProfilePhrases = ["FIT1045", "Teaching Assistant"];
+
+for (const file of supportingFiles) {
+  try {
+    const content = readFileSync(file, "utf8");
+    for (const phrase of staleCurrentProfilePhrases) {
+      if (content.includes(phrase)) {
+        console.error(
+          `❌ Stale current-profile term "${phrase}" found in production-facing identity route ${file}`,
+        );
+        hasError = true;
+      }
+    }
+  } catch (err) {
+    console.error(`❌ Could not read supporting file ${file}:`, err.message);
+    hasError = true;
+  }
+}
+
+// 2b. Unverified coursework claims (must not be presented as Monash coursework)
+const unverifiedCourseworkPhrases = [
+  "data structures",
+  "computational complexity",
+  "statistical inference",
+  "machine learning",
+  "software architecture",
+  "production engineering standards",
+  "full-stack coursework",
+  "AI-model development",
+];
+
+const educationFile = join(
+  projectRoot,
+  "src/components/education/education-monash-page.tsx",
+);
+try {
+  const content = readFileSync(educationFile, "utf8");
+  for (const phrase of unverifiedCourseworkPhrases) {
+    if (content.toLowerCase().includes(phrase.toLowerCase())) {
+      console.error(
+        `❌ Unverified Monash coursework claim "${phrase}" found in ${educationFile}`,
+      );
+      hasError = true;
+    }
+  }
+} catch (err) {
+  console.error(`❌ Could not read ${educationFile}:`, err.message);
+  hasError = true;
+}
+
+// 2c. Guardrails for unverified specifics, titles, and boundaries
+const unverifiedSpecifics = [
+  "Monash Basketball Club",
+  "KH Lim Basketball Club",
+  "1:49",
+  "1 minute 49",
+  "two-person team",
+  "2-person team",
+  "hackathon winner",
+  "hackathon award",
+  "hackathon placement",
+  "hackathon prize",
+  "hackathon first place",
+  "hackathon 1st place",
+  "hackathon podium",
+  "Club Manager",
+  "Head Coach",
+  "Committee Head",
+  "Lead Systems Builder",
+];
+
+for (const file of supportingFiles) {
+  try {
+    const content = readFileSync(file, "utf8");
+    for (const phrase of unverifiedSpecifics) {
+      if (content.toLowerCase().includes(phrase.toLowerCase())) {
+        console.error(
+          `❌ Unverified specific or title "${phrase}" found in ${file}`,
+        );
+        hasError = true;
+      }
+    }
+  } catch (err) {
+    console.error(`❌ Could not read ${file}:`, err.message);
+    hasError = true;
+  }
+}
+
+// 2d. Unsupported biographical/operational elaborations
+const unverifiedBiographicalPhrases = [
   {
     phrase: "School of Information Technology",
     file: "experience-record-page.tsx",
@@ -80,7 +171,7 @@ const unverifiedPhrases = [
 for (const file of supportingFiles) {
   try {
     const content = readFileSync(file, "utf8");
-    for (const { phrase, file: targetFile } of unverifiedPhrases) {
+    for (const { phrase, file: targetFile } of unverifiedBiographicalPhrases) {
       if (targetFile === "all" || file.endsWith(targetFile)) {
         if (content.includes(phrase)) {
           console.error(

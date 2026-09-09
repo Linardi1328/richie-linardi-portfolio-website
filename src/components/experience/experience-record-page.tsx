@@ -34,13 +34,13 @@ const leadershipPrinciples = [
     index: "01",
     title: "Lead by Example",
     description:
-      "Set the benchmark in preparation, code quality, and work ethic before expecting it from peers or students.",
+      "Set the benchmark in preparation, code quality, and work ethic before expecting it from teammates or collaborators.",
   },
   {
     index: "02",
     title: "Empower Others",
     description:
-      "In teaching and team collaboration, provide the mental models that enable others to debug and solve problems independently.",
+      "In engineering and team collaboration, provide the mental models and clear abstractions that enable others to solve problems independently.",
   },
   {
     index: "03",
@@ -130,14 +130,6 @@ export function ExperienceRecordPage() {
         <div className="identity-container">
           <div className="experience-strip__grid">
             <div className="experience-strip__item">
-              <span className="experience-strip__label">
-                University Teaching
-              </span>
-              <span className="experience-strip__value">
-                FIT1045 TA · Monash University Malaysia
-              </span>
-            </div>
-            <div className="experience-strip__item">
               <span className="experience-strip__label">Applied Systems</span>
               <span className="experience-strip__value">
                 6 Public Software Repositories
@@ -145,10 +137,16 @@ export function ExperienceRecordPage() {
             </div>
             <div className="experience-strip__item">
               <span className="experience-strip__label">
-                Athletic Track Record
+                Industry Internship
               </span>
               <span className="experience-strip__value">
-                DBL All-Star & Indonesia National Team
+                Marketing Intern · PT. Vinindo Inti Pratama
+              </span>
+            </div>
+            <div className="experience-strip__item">
+              <span className="experience-strip__label">Athletic & Campus</span>
+              <span className="experience-strip__value">
+                DBL All-Star & Monash University Team
               </span>
             </div>
           </div>
@@ -165,95 +163,21 @@ export function ExperienceRecordPage() {
           <header className="identity-section-header">
             <p className="identity-eyebrow">Experience Dossiers</p>
             <h2 id="experience-dossiers-heading">
-              Teaching, systems, and team performance.
+              Systems, campus involvement, and industry experience.
             </h2>
             <p>
-              Work structured across three verified pillars: university computer
-              science education, independent software systems, and competitive
-              basketball experience.
+              Work structured across five verified areas: independent software
+              systems, university club operations, industry marketing,
+              collaborative AI, and competitive basketball.
             </p>
           </header>
 
           <div className="experience-dossiers__list">
-            {/* [CARD 01] Teaching & Mentorship */}
+            {/* [CARD 01] Applied Systems Engineering */}
             <article className="experience-dossier-card">
               <header className="experience-dossier-card__header">
                 <div className="experience-dossier-card__meta">
-                  <span>01 · Teaching & Mentorship</span>
-                  <span
-                    aria-hidden="true"
-                    className="experience-dossier-card__meta-separator"
-                  >
-                    /
-                  </span>
-                  <span>Monash University Malaysia</span>
-                  <span
-                    aria-hidden="true"
-                    className="experience-dossier-card__meta-separator"
-                  >
-                    /
-                  </span>
-                  <span>Current Academic Appointment</span>
-                </div>
-                <div className="experience-dossier-card__title-row">
-                  <h3>FIT1045 Teaching Assistant</h3>
-                  <p className="experience-dossier-card__org">
-                    Monash University Malaysia
-                  </p>
-                </div>
-                <p className="experience-dossier-card__summary">
-                  At Monash University, I support FIT1045 students with
-                  introductory programming and problem solving. Teaching keeps
-                  technical communication clear, practical, and grounded in how
-                  people actually learn.
-                </p>
-              </header>
-
-              <div className="experience-dossier-card__body">
-                <div>
-                  <p className="experience-dossier-card__section-label">
-                    Focus Areas & Pedagogy
-                  </p>
-                  <ul className="experience-dossier-card__responsibilities">
-                    <li>
-                      <strong>Programming fundamentals:</strong> Supporting
-                      students with introductory programming syntax, control
-                      flow, and computational problem solving.
-                    </li>
-                    <li>
-                      <strong>Problem decomposition:</strong> Helping students
-                      break larger programming exercises into structured,
-                      manageable components.
-                    </li>
-                    <li>
-                      <strong>Debugging and reasoning:</strong> Assisting
-                      students in tracing program execution, diagnosing
-                      mistakes, and developing systematic problem-solving
-                      habits.
-                    </li>
-                    <li>
-                      <strong>Clear technical communication:</strong> Explaining
-                      technical concepts in practical, direct terms that keep
-                      reasoning transparent and grounded.
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="experience-dossier-card__tags">
-                  <span className="experience-tag">Python</span>
-                  <span className="experience-tag">Algorithms</span>
-                  <span className="experience-tag">Problem Decomposition</span>
-                  <span className="experience-tag">Debugging</span>
-                  <span className="experience-tag">Technical Mentorship</span>
-                </div>
-              </div>
-            </article>
-
-            {/* [CARD 02] Applied Systems Engineering */}
-            <article className="experience-dossier-card">
-              <header className="experience-dossier-card__header">
-                <div className="experience-dossier-card__meta">
-                  <span>02 · Applied Systems</span>
+                  <span>01 · Applied Systems</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
@@ -270,7 +194,10 @@ export function ExperienceRecordPage() {
                   <span>Current Portfolio Systems</span>
                 </div>
                 <div className="experience-dossier-card__title-row">
-                  <h3>Applied systems work across six public projects</h3>
+                  <h3>
+                    Independent applied systems development across six public
+                    portfolio projects
+                  </h3>
                   <p className="experience-dossier-card__org">
                     Independent software development across public repositories
                   </p>
@@ -314,18 +241,235 @@ export function ExperienceRecordPage() {
               </div>
             </article>
 
-            {/* [CARD 03] High-Performance Leadership & Team Dynamics */}
+            {/* [CARD 02] Monash University Involvement */}
             <article className="experience-dossier-card">
               <header className="experience-dossier-card__header">
                 <div className="experience-dossier-card__meta">
-                  <span>03 · Team Performance & Leadership</span>
+                  <span>02 · University Involvement</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
                   >
                     /
                   </span>
-                  <span>Competitive Team Sport</span>
+                  <span>Monash University Malaysia</span>
+                  <span
+                    aria-hidden="true"
+                    className="experience-dossier-card__meta-separator"
+                  >
+                    /
+                  </span>
+                  <span>Apr 2025 – Present</span>
+                </div>
+                <div className="experience-dossier-card__title-row">
+                  <h3>
+                    Club operations, tournament representation & team coaching
+                  </h3>
+                  <p className="experience-dossier-card__org">
+                    Monash University Malaysia · Freelance · Subang Jaya,
+                    Selangor, Malaysia · On-site
+                  </p>
+                </div>
+                <p className="experience-dossier-card__summary">
+                  Active on-site university involvement at Monash University
+                  Malaysia spanning weekly club training sessions, competitive
+                  tournament representation, volunteer coaching, and semester
+                  tryout evaluations.
+                </p>
+              </header>
+
+              <div className="experience-dossier-card__body">
+                <div>
+                  <p className="experience-dossier-card__section-label">
+                    Supported Activities & Scope
+                  </p>
+                  <ul className="experience-dossier-card__responsibilities">
+                    <li>
+                      <strong>Weekly club training:</strong> Assisted in
+                      organising weekly club training sessions and activities.
+                    </li>
+                    <li>
+                      <strong>Tournament representation:</strong> Represented
+                      the Monash Men&apos;s Basketball Team in university
+                      tournaments including the College University Basketball
+                      Championship (CUBC) and University Basketball League
+                      (UBL).
+                    </li>
+                    <li>
+                      <strong>Volunteer coaching:</strong> Volunteered as coach
+                      for the Monash Women&apos;s Team, with the profile stating
+                      CUBC 2025 Second Runner-Up.
+                    </li>
+                    <li>
+                      <strong>Semester tryouts:</strong> Participated in
+                      semester team-selection tryouts, evaluating and choosing
+                      among roughly 50–80 participants.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="experience-dossier-card__tags">
+                  <span className="experience-tag">
+                    Monash University Malaysia
+                  </span>
+                  <span className="experience-tag">Club Operations</span>
+                  <span className="experience-tag">CUBC & UBL</span>
+                  <span className="experience-tag">Team Selection</span>
+                  <span className="experience-tag">Volunteer Coaching</span>
+                </div>
+              </div>
+            </article>
+
+            {/* [CARD 03] Industry Internship */}
+            <article className="experience-dossier-card">
+              <header className="experience-dossier-card__header">
+                <div className="experience-dossier-card__meta">
+                  <span>03 · Industry Internship</span>
+                  <span
+                    aria-hidden="true"
+                    className="experience-dossier-card__meta-separator"
+                  >
+                    /
+                  </span>
+                  <span>PT. Vinindo Inti Pratama</span>
+                  <span
+                    aria-hidden="true"
+                    className="experience-dossier-card__meta-separator"
+                  >
+                    /
+                  </span>
+                  <span>Sep 2024 – Nov 2024</span>
+                </div>
+                <div className="experience-dossier-card__title-row">
+                  <h3>Marketing Intern</h3>
+                  <p className="experience-dossier-card__org">
+                    PT. Vinindo Inti Pratama · Internship (3 mos) · Surabaya,
+                    East Java, Indonesia · On-site
+                  </p>
+                </div>
+                <p className="experience-dossier-card__summary">
+                  Three-month on-site marketing internship supporting day-to-day
+                  operations, targeted B2B client outreach, and external
+                  communication.
+                </p>
+              </header>
+
+              <div className="experience-dossier-card__body">
+                <div>
+                  <p className="experience-dossier-card__section-label">
+                    Focus Areas & Operations
+                  </p>
+                  <ul className="experience-dossier-card__responsibilities">
+                    <li>
+                      <strong>Targeted B2B outreach:</strong> Conducted direct
+                      outreach to potential clients, specifically architects and
+                      interior designers, across Instagram DM, WhatsApp, and
+                      email channels.
+                    </li>
+                    <li>
+                      <strong>Operations and communication:</strong> Handled
+                      day-to-day operations and external communication to
+                      support marketing initiatives.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="experience-dossier-card__tags">
+                  <span className="experience-tag">Marketing Internship</span>
+                  <span className="experience-tag">B2B Outreach</span>
+                  <span className="experience-tag">Client Communication</span>
+                  <span className="experience-tag">Operations</span>
+                </div>
+              </div>
+            </article>
+
+            {/* [CARD 04] Collaborative AI / Hackathon */}
+            <article className="experience-dossier-card">
+              <header className="experience-dossier-card__header">
+                <div className="experience-dossier-card__meta">
+                  <span>04 · Collaborative AI</span>
+                  <span
+                    aria-hidden="true"
+                    className="experience-dossier-card__meta-separator"
+                  >
+                    /
+                  </span>
+                  <span>AI Video Hackathon KL 2026</span>
+                  <span
+                    aria-hidden="true"
+                    className="experience-dossier-card__meta-separator"
+                  >
+                    /
+                  </span>
+                  <span>Hackathon Project</span>
+                </div>
+                <div className="experience-dossier-card__title-row">
+                  <h3>&ldquo;One Team, One Dream&rdquo; · Midnight Owls</h3>
+                  <p className="experience-dossier-card__org">
+                    AI Video Hackathon KL 2026 · Organized by Topview AI & AWS
+                  </p>
+                </div>
+                <p className="experience-dossier-card__summary">
+                  Teamed with Esther Lim Jia Xin as Midnight Owls during the AI
+                  Video Hackathon KL 2026, organized by Topview AI and AWS, to
+                  produce &ldquo;One Team, One Dream&rdquo;, an AI-generated
+                  basketball short film exploring sports as a unifier across
+                  diverse Malaysian backgrounds.
+                </p>
+              </header>
+
+              <div className="experience-dossier-card__body">
+                <div>
+                  <p className="experience-dossier-card__section-label">
+                    Project Context & Collaboration
+                  </p>
+                  <ul className="experience-dossier-card__responsibilities">
+                    <li>
+                      <strong>Narrative & cultural unity:</strong> Explored a
+                      storyline centered on basketball bringing together people
+                      from different Malaysian backgrounds, demonstrating how
+                      sport unites cultures.
+                    </li>
+                    <li>
+                      <strong>Event & tooling:</strong> Organized by Topview AI
+                      and AWS, with the source post separately crediting Topview
+                      AI with providing tools.
+                    </li>
+                    <li>
+                      <strong>Collaborative production:</strong> Built in
+                      collaboration with teammate Esther Lim Jia Xin, whose post
+                      described her role as character and environment
+                      references, scene planning, prompt refinement, clip
+                      generation, and visual consistency.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="experience-dossier-card__tags">
+                  <span className="experience-tag">
+                    AI Video Hackathon KL 2026
+                  </span>
+                  <span className="experience-tag">Midnight Owls</span>
+                  <span className="experience-tag">Generative Video</span>
+                  <span className="experience-tag">Topview AI</span>
+                  <span className="experience-tag">AWS</span>
+                  <span className="experience-tag">Storytelling</span>
+                </div>
+              </div>
+            </article>
+
+            {/* [CARD 05] Competitive Team Athletics */}
+            <article className="experience-dossier-card">
+              <header className="experience-dossier-card__header">
+                <div className="experience-dossier-card__meta">
+                  <span>05 · Competitive Team Sport</span>
+                  <span
+                    aria-hidden="true"
+                    className="experience-dossier-card__meta-separator"
+                  >
+                    /
+                  </span>
+                  <span>Athletic Foundation</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
@@ -407,8 +551,8 @@ export function ExperienceRecordPage() {
               Leadership & Engineering Principles
             </h2>
             <p>
-              Five core principles drawn from classroom teaching, autonomous
-              systems development, and competitive athletics.
+              Five core principles drawn from applied systems development,
+              collaborative engineering, and competitive athletics.
             </p>
           </header>
 
@@ -441,8 +585,11 @@ export function ExperienceRecordPage() {
           </h2>
           <p className="about-closing__context">
             Public claims stay tied to verified records, repositories, or
-            first-party information. New media and deeper proof are added only
-            when the source is ready to support them.
+            first-party information. Additional background includes IPH Schools
+            Student Council membership (2018–2019) and athletic honors (DBL
+            All-Star 2024, Indonesia Youth National Team pool). New media and
+            deeper proof are added only when the source is ready to support
+            them.
           </p>
           <div
             className="identity-hero__actions"

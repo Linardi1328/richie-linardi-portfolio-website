@@ -4,48 +4,48 @@ import { foundationPages } from "@/data/foundation-pages";
 const academicFoundations = [
   {
     index: "01",
-    title: "Programming Fundamentals",
+    title: "Programming",
     description:
-      "Core programming concepts, structured procedural decomposition, modular code organization, and systematic debugging practices.",
+      "Core programming mechanics, structured procedural decomposition, modular code organization, and systematic debugging practices.",
   },
   {
     index: "02",
-    title: "Algorithms & Problem Solving",
+    title: "Algorithms",
     description:
-      "Algorithmic reasoning, computational efficiency, problem decomposition, and step-by-step logic design.",
+      "Algorithmic reasoning, step-by-step logic design, and computational problem decomposition.",
   },
   {
     index: "03",
     title: "Probability & Random Variables",
     description:
-      "Theoretical probability distributions, random variables, and mathematical models that underpin data-oriented reasoning.",
+      "Theoretical probability distributions, random variables, and mathematical models supporting data-oriented reasoning.",
   },
   {
     index: "04",
     title: "Software Design & Data Reasoning",
     description:
-      "Software design principles and analytical data interpretation, connecting academic theory to practical systems.",
+      "Principles of software design and analytical data-oriented reasoning connecting coursework to practical software projects.",
   },
 ] as const;
 
 const technicalProgression = [
   {
     phase: "Phase 01 · Foundations",
-    title: "Foundational Computation",
+    title: "Programming & Computation",
     description:
-      "Core programming mechanics, procedural decomposition, and basic algorithmic problem solving.",
+      "Foundational programming mechanics, procedural decomposition, and algorithmic problem solving.",
   },
   {
-    phase: "Phase 02 · Theory & Rigor",
-    title: "Mathematical & Algorithmic Rigor",
+    phase: "Phase 02 · Mathematical Depth",
+    title: "Probability & Random Variables",
     description:
-      "Probability distributions, random variables, computational problem solving, and structured software design.",
+      "Probability distributions, random variables, and mathematical models underpinning data-oriented reasoning.",
   },
   {
-    phase: "Phase 03 · Applied Synthesis",
-    title: "Applied Data-Oriented Systems",
+    phase: "Phase 03 · Practical Application",
+    title: "Software Design & Data Reasoning",
     description:
-      "Data-oriented reasoning and analytical methods applied to personal software engineering and real-world system pipelines.",
+      "Software design principles and analytical data reasoning applied to independent software projects.",
   },
 ] as const;
 
@@ -67,26 +67,26 @@ const verifiedTools = [
   },
 ] as const;
 
-const teachingPillars = [
+const applicationPillars = [
   {
-    title: "Programming Fundamentals",
+    title: "Programming",
     description:
-      "Guiding students through introductory programming mechanics, syntax, and structured problem decomposition.",
+      "Core programming mechanics, syntax, and structured problem decomposition applied across independent codebases.",
   },
   {
-    title: "Problem Decomposition",
+    title: "Algorithms",
     description:
-      "Helping students break down complex computational problems into smaller, structured, and manageable steps.",
+      "Step-by-step computational logic and algorithmic reasoning used to address concrete engineering problems.",
   },
   {
-    title: "Debugging & Reasoning",
+    title: "Probability & Random Variables",
     description:
-      "Assisting students in tracing program execution and diagnosing logic errors systematically.",
+      "Mathematical models of probability and random variables that support data-oriented thinking.",
   },
   {
-    title: "Clear Technical Communication",
+    title: "Software Design & Data Reasoning",
     description:
-      "Explaining technical concepts in practical terms and adapting explanations to another student's way of thinking.",
+      "Principles of software design and analytical data reasoning connecting coursework to practical software projects.",
   },
 ] as const;
 
@@ -111,7 +111,7 @@ export function EducationMonashPage() {
                 <span aria-hidden="true">→</span>
               </Link>
               <Link className="identity-btn" href="/experience">
-                View teaching & experience
+                View experience & leadership
                 <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -177,8 +177,8 @@ export function EducationMonashPage() {
                   <dd>2027</dd>
                 </div>
                 <div className="education-glance-item">
-                  <dt>Academic Appointment</dt>
-                  <dd>FIT1045 Teaching Assistant</dd>
+                  <dt>Campus Team</dt>
+                  <dd>Monash Men&apos;s Basketball Team</dd>
                 </div>
               </dl>
             </aside>
@@ -285,28 +285,29 @@ export function EducationMonashPage() {
         </div>
       </section>
 
-      {/* [SECTION 05] Academic Experience & Teaching Loop */}
+      {/* [SECTION 05] Academic Foundations & Application Loop */}
       <section
-        aria-labelledby="education-teaching-heading"
+        aria-labelledby="education-translation-heading"
         className="education-teaching-loop"
         data-reveal
       >
         <div className="identity-container">
           <article className="education-teaching-loop__card">
             <header className="education-teaching-loop__header">
-              <p className="identity-eyebrow">Teaching Loop</p>
-              <h2 id="education-teaching-heading">
-                Learning sharpens when you explain it.
+              <p className="identity-eyebrow">Applied Translation</p>
+              <h2 id="education-translation-heading">
+                Foundations connect to operating software.
               </h2>
               <p className="education-teaching-loop__lead">
-                Working as a FIT1045 Teaching Assistant creates a useful
-                feedback loop: concepts need to be understood well enough to
-                explain, debug, and adapt to another student’s way of thinking.
+                Foundational coursework in programming, algorithms, probability
+                and random variables, software design, and data-oriented
+                reasoning provides computational and analytical depth that
+                connects directly to independent software projects.
               </p>
             </header>
 
             <div className="education-teaching-loop__pillars">
-              {teachingPillars.map((pillar) => (
+              {applicationPillars.map((pillar) => (
                 <div className="education-teaching-pillar" key={pillar.title}>
                   <h3>{pillar.title}</h3>
                   <p>{pillar.description}</p>
@@ -339,7 +340,7 @@ export function EducationMonashPage() {
               <span aria-hidden="true">→</span>
             </Link>
             <Link className="identity-btn" href="/experience">
-              View teaching & experience
+              View experience & leadership
               <span aria-hidden="true">→</span>
             </Link>
           </div>

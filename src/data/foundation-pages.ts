@@ -66,27 +66,35 @@ export const foundationPages = {
   experience: {
     world: "professional",
     eyebrow: "Experience",
-    title: "Experience built through teaching, systems, and teams.",
+    title: "Experience built through systems, teams, and industry.",
     description:
-      "My experience combines university teaching, independent software development, and leadership through competitive sport. The focus is on responsibility, communication, and work that can be inspected directly.",
+      "My experience combines independent software development across public repositories, university club operations and team representation at Monash, industry marketing, collaborative AI, and competitive athletics. The focus is on responsibility, communication, and work that can be inspected directly.",
     sections: [
       {
-        eyebrow: "Teaching",
-        title: "FIT1045 Teaching Assistant.",
-        description:
-          "At Monash University, I support FIT1045 students with introductory programming and problem solving. Teaching keeps technical communication clear, practical, and grounded in how people actually learn.",
-        items: [
-          "Programming fundamentals",
-          "Problem decomposition",
-          "Debugging and reasoning",
-          "Clear technical communication",
-        ],
-      },
-      {
         eyebrow: "Applied systems",
-        title: "Projects treated as operating software.",
+        title:
+          "Independent applied systems development across six public portfolio projects.",
         description:
           "The portfolio includes systems for market research, project operations, accounting workflows, event support, content operations, and sports infrastructure. Each project shows its current phase, constraints, evidence, and repository.",
+      },
+      {
+        eyebrow: "University involvement",
+        title:
+          "Monash University Malaysia club operations & tournament representation.",
+        description:
+          "Active on-site involvement organizing weekly club training sessions, evaluating 50–80 tryout participants, representing the Monash Men’s Basketball Team in CUBC and UBL, and volunteering as coach for the Monash Women’s Team (CUBC 2025 Second Runner-Up).",
+      },
+      {
+        eyebrow: "Industry internship",
+        title: "Marketing Intern at PT. Vinindo Inti Pratama.",
+        description:
+          "On-site marketing internship supporting daily operations, client outreach to architects and interior designers, and B2B communication.",
+      },
+      {
+        eyebrow: "Collaborative AI",
+        title: "AI Video Hackathon KL 2026 · Midnight Owls.",
+        description:
+          "Teamed with Esther Lim Jia Xin on 'One Team, One Dream', an AI-generated basketball short film exploring sports as a unifier across diverse Malaysian backgrounds. The hackathon was organized by Topview AI and AWS, with the source post separately crediting Topview AI with providing tools.",
       },
       {
         eyebrow: "Leadership",
@@ -123,10 +131,10 @@ export const foundationPages = {
           "My studies include programming, algorithms, probability and random variables, software design, and data-oriented reasoning. Personal projects give those ideas a larger, more practical setting.",
       },
       {
-        eyebrow: "Teaching loop",
-        title: "Learning sharpens when you explain it.",
+        eyebrow: "Applied translation",
+        title: "Foundations connect to operating software.",
         description:
-          "Working as a FIT1045 Teaching Assistant creates a useful feedback loop: concepts need to be understood well enough to explain, debug, and adapt to another student’s way of thinking.",
+          "Foundational coursework in programming, algorithms, probability and random variables, software design, and data-oriented reasoning provides computational and analytical depth that connects directly to independent software projects.",
       },
     ],
     primaryHref: "/projects",
@@ -168,7 +176,7 @@ export const foundationPages = {
     eyebrow: "Web résumé",
     title: "A concise record, with the evidence one click away.",
     description:
-      "Computer Science student specializing in Data Science, FIT1045 Teaching Assistant, applied software builder, and competitive basketball athlete. Project and athlete pages carry the deeper proof behind this summary.",
+      "Computer Science student specializing in Data Science at Monash University Malaysia, independent software builder, and competitive basketball athlete. Project and athlete pages carry the deeper proof behind this summary.",
     portrait: {
       src: "/portraits/richie-professional.jpg",
       alt: "Richie Linardi wearing a black blazer and white shirt",
@@ -188,10 +196,10 @@ export const foundationPages = {
         ],
       },
       {
-        eyebrow: "Education & teaching",
+        eyebrow: "Academic foundations",
         title: "Monash University Malaysia.",
         description:
-          "Bachelor of Computer Science, Data Science specialization, expected 2027. Teaching Assistant for FIT1045 with a focus on programming fundamentals and problem solving.",
+          "Bachelor of Computer Science, Data Science specialization, expected 2027. Foundations in programming, algorithms, probability and random variables, software design, and data-oriented reasoning.",
       },
       {
         eyebrow: "Selected systems",

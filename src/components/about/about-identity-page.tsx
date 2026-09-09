@@ -184,6 +184,20 @@ export function AboutIdentityPage() {
               </div>
 
               <div>
+                <h3>Collaborative experimentation & applied AI</h3>
+                <p>
+                  Recent collaborative work includes teaming with Esther Lim Jia
+                  Xin as Midnight Owls in the AI Video Hackathon KL 2026,
+                  organized by Topview AI and AWS, with the source post
+                  separately crediting Topview AI with providing tools. The
+                  project, &ldquo;One Team, One Dream&rdquo;, explored how
+                  basketball unites diverse cultures across Malaysia, connecting
+                  athletic themes with generative video experimentation across
+                  domains.
+                </p>
+              </div>
+
+              <div>
                 <h3>Athletics built on long-term development</h3>
                 <p>
                   The athlete record follows the path from development and
@@ -224,8 +238,12 @@ export function AboutIdentityPage() {
                   <dd>Data Science</dd>
                 </div>
                 <div className="about-dossier__fact">
-                  <dt>Academic Role</dt>
-                  <dd>FIT1045 Teaching Assistant</dd>
+                  <dt>Expected Completion</dt>
+                  <dd>2027</dd>
+                </div>
+                <div className="about-dossier__fact">
+                  <dt>Campus Involvement</dt>
+                  <dd>Monash Men&apos;s Basketball Team</dd>
                 </div>
                 <div className="about-dossier__fact">
                   <dt>Athletic Honors</dt>
