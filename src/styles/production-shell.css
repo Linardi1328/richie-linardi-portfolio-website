@@ -67,7 +67,8 @@
 .portfolio-page {
   position: relative;
   min-height: 100vh;
-  overflow: clip;
+  overflow-x: clip;
+  overflow-y: visible;
   background: var(--stage-paper);
   color: var(--stage-ink);
 }
