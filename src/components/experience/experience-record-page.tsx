@@ -137,10 +137,10 @@ export function ExperienceRecordPage() {
             </div>
             <div className="experience-strip__item">
               <span className="experience-strip__label">
-                Industry Internship
+                Statistics & Operations
               </span>
               <span className="experience-strip__value">
-                Marketing Intern · PT. Vinindo Inti Pratama
+                350+ Matches Tracked · KHLIM
               </span>
             </div>
             <div className="experience-strip__item">
@@ -163,21 +163,21 @@ export function ExperienceRecordPage() {
           <header className="identity-section-header">
             <p className="identity-eyebrow">Experience Dossiers</p>
             <h2 id="experience-dossiers-heading">
-              Systems, campus involvement, and industry experience.
+              Systems, analytics, and verification.
             </h2>
             <p>
               Work structured across five verified areas: independent software
-              systems, university club operations, industry marketing,
+              systems, competition statistics operations, financial audit,
               collaborative AI, and competitive basketball.
             </p>
           </header>
 
           <div className="experience-dossiers__list">
-            {/* [CARD 01] Applied Systems Engineering */}
+            {/* [CARD 01] Applied Systems */}
             <article className="experience-dossier-card">
               <header className="experience-dossier-card__header">
                 <div className="experience-dossier-card__meta">
-                  <span>01 · Applied Systems</span>
+                  <span>01 · Independent Applied Systems</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
@@ -241,144 +241,134 @@ export function ExperienceRecordPage() {
               </div>
             </article>
 
-            {/* [CARD 02] Monash University Involvement */}
+            {/* [CARD 02] Statistics & Competition Operations */}
             <article className="experience-dossier-card">
               <header className="experience-dossier-card__header">
                 <div className="experience-dossier-card__meta">
-                  <span>02 · University Involvement</span>
+                  <span>02 · Statistics & Competition Operations</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
                   >
                     /
                   </span>
-                  <span>Monash University Malaysia</span>
+                  <span>KHLIM Basketball Club</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
                   >
                     /
                   </span>
-                  <span>Apr 2025 – Present</span>
+                  <span>Jan 2026 – Present</span>
                 </div>
                 <div className="experience-dossier-card__title-row">
-                  <h3>
-                    Club operations, tournament representation & team coaching
-                  </h3>
+                  <h3>Stats Team Leader</h3>
                   <p className="experience-dossier-card__org">
-                    Monash University Malaysia · Freelance · Subang Jaya,
-                    Selangor, Malaysia · On-site
+                    KHLIM Basketball Club · Jan 2026 – Present
                   </p>
                 </div>
                 <p className="experience-dossier-card__summary">
-                  Active on-site university involvement at Monash University
-                  Malaysia spanning weekly club training sessions, competitive
-                  tournament representation, volunteer coaching, and semester
-                  tryout evaluations.
+                  Designed an automated points-tracking system covering more
+                  than 350 matches across two competitions. Managed match
+                  statistics, scheduling, and scoring flow to keep competition
+                  data accurate and current.
                 </p>
               </header>
 
               <div className="experience-dossier-card__body">
                 <div>
                   <p className="experience-dossier-card__section-label">
-                    Supported Activities & Scope
+                    Competition Statistics & Operations
                   </p>
                   <ul className="experience-dossier-card__responsibilities">
                     <li>
-                      <strong>Weekly club training:</strong> Assisted in
-                      organising weekly club training sessions and activities.
+                      <strong>Automated points tracking:</strong> Designed an
+                      automated points-tracking system covering more than 350
+                      matches across two competitions.
                     </li>
                     <li>
-                      <strong>Tournament representation:</strong> Represented
-                      the Monash Men&apos;s Basketball Team in university
-                      tournaments including the College University Basketball
-                      Championship (CUBC) and University Basketball League
-                      (UBL).
-                    </li>
-                    <li>
-                      <strong>Volunteer coaching:</strong> Volunteered as coach
-                      for the Monash Women&apos;s Team, with the profile stating
-                      CUBC 2025 Second Runner-Up.
-                    </li>
-                    <li>
-                      <strong>Semester tryouts:</strong> Participated in
-                      semester team-selection tryouts, evaluating and choosing
-                      among roughly 50–80 participants.
+                      <strong>Match statistics & scheduling:</strong> Managed
+                      match statistics, scheduling, and scoring flow to keep
+                      competition data accurate and current.
                     </li>
                   </ul>
                 </div>
 
                 <div className="experience-dossier-card__tags">
                   <span className="experience-tag">
-                    Monash University Malaysia
+                    Automated Points Tracking
                   </span>
-                  <span className="experience-tag">Club Operations</span>
-                  <span className="experience-tag">CUBC & UBL</span>
-                  <span className="experience-tag">Team Selection</span>
-                  <span className="experience-tag">Volunteer Coaching</span>
+                  <span className="experience-tag">Match Statistics</span>
+                  <span className="experience-tag">Competition Operations</span>
+                  <span className="experience-tag">Scheduling</span>
+                  <span className="experience-tag">Data Accuracy</span>
                 </div>
               </div>
             </article>
 
-            {/* [CARD 03] Industry Internship */}
+            {/* [CARD 03] Audit & Data Verification */}
             <article className="experience-dossier-card">
               <header className="experience-dossier-card__header">
                 <div className="experience-dossier-card__meta">
-                  <span>03 · Industry Internship</span>
+                  <span>03 · Audit & Data Verification</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
                   >
                     /
                   </span>
-                  <span>PT. Vinindo Inti Pratama</span>
+                  <span>KHLIM Group of Companies</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
                   >
                     /
                   </span>
-                  <span>Sep 2024 – Nov 2024</span>
+                  <span>Dec 2025 – Present</span>
                 </div>
                 <div className="experience-dossier-card__title-row">
-                  <h3>Marketing Intern</h3>
+                  <h3>Auditor</h3>
                   <p className="experience-dossier-card__org">
-                    PT. Vinindo Inti Pratama · Internship (3 mos) · Surabaya,
-                    East Java, Indonesia · On-site
+                    KHLIM Group of Companies · Dec 2025 – Present
                   </p>
                 </div>
                 <p className="experience-dossier-card__summary">
-                  Three-month on-site marketing internship supporting day-to-day
-                  operations, targeted B2B client outreach, and external
-                  communication.
+                  Financial record verification, audit working-paper preparation
+                  and review, inventory stock counts, and external audit
+                  assignments across three companies.
                 </p>
               </header>
 
               <div className="experience-dossier-card__body">
                 <div>
                   <p className="experience-dossier-card__section-label">
-                    Focus Areas & Operations
+                    Audit Scope & Evidence Verification
                   </p>
                   <ul className="experience-dossier-card__responsibilities">
                     <li>
-                      <strong>Targeted B2B outreach:</strong> Conducted direct
-                      outreach to potential clients, specifically architects and
-                      interior designers, across Instagram DM, WhatsApp, and
-                      email channels.
+                      <strong>Audit working papers:</strong> Prepared and
+                      reviewed audit working papers, including Profit & Loss
+                      statements, Balance Sheets, and supporting schedules.
                     </li>
                     <li>
-                      <strong>Operations and communication:</strong> Handled
-                      day-to-day operations and external communication to
-                      support marketing initiatives.
+                      <strong>Source verification:</strong> Verified financial
+                      figures against source documents and obtained relevant
+                      audit evidence.
+                    </li>
+                    <li>
+                      <strong>Inventory & external assignments:</strong>{" "}
+                      Conducted inventory stock counts and external audit
+                      assignments across three companies.
                     </li>
                   </ul>
                 </div>
 
                 <div className="experience-dossier-card__tags">
-                  <span className="experience-tag">Marketing Internship</span>
-                  <span className="experience-tag">B2B Outreach</span>
-                  <span className="experience-tag">Client Communication</span>
-                  <span className="experience-tag">Operations</span>
+                  <span className="experience-tag">Financial Audit</span>
+                  <span className="experience-tag">Data Verification</span>
+                  <span className="experience-tag">Audit Working Papers</span>
+                  <span className="experience-tag">Balance Sheets</span>
+                  <span className="experience-tag">Inventory Stock Counts</span>
                 </div>
               </div>
             </article>
@@ -462,7 +452,7 @@ export function ExperienceRecordPage() {
             <article className="experience-dossier-card">
               <header className="experience-dossier-card__header">
                 <div className="experience-dossier-card__meta">
-                  <span>05 · Competitive Team Sport</span>
+                  <span>05 · Competitive Basketball</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
@@ -585,11 +575,12 @@ export function ExperienceRecordPage() {
           </h2>
           <p className="about-closing__context">
             Public claims stay tied to verified records, repositories, or
-            first-party information. Additional background includes IPH Schools
-            Student Council membership (2018–2019) and athletic honors (DBL
-            All-Star 2024, Indonesia national-team competition in 2024). New
-            media and deeper proof are added only when the source is ready to
-            support them.
+            first-party information. Additional background includes Monash
+            University campus tournament representation, IPH Schools Student
+            Council membership (2018–2019), and athletic honors (DBL All-Star
+            2024, Indonesia national-team competition in 2024). New media and
+            deeper proof are added only when the source is ready to support
+            them.
           </p>
           <div
             className="identity-hero__actions"

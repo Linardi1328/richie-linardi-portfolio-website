@@ -66,9 +66,9 @@ export const foundationPages = {
   experience: {
     world: "professional",
     eyebrow: "Experience",
-    title: "Experience built through systems, teams, and industry.",
+    title: "Experience built through systems, analytics, and verification.",
     description:
-      "My experience combines independent software development across public repositories, university club operations and team representation at Monash, industry marketing, collaborative AI, and competitive athletics. The focus is on responsibility, communication, and work that can be inspected directly.",
+      "My experience combines independent software development across public repositories, competition statistics operations, financial audit, collaborative AI, and competitive athletics. The focus is on responsibility, communication, and work that can be inspected directly.",
     sections: [
       {
         eyebrow: "Applied systems",
@@ -78,17 +78,16 @@ export const foundationPages = {
           "The portfolio includes systems for market research, project operations, accounting workflows, event support, content operations, and sports infrastructure. Each project shows its current phase, constraints, evidence, and repository.",
       },
       {
-        eyebrow: "University involvement",
-        title:
-          "Monash University Malaysia club operations & tournament representation.",
+        eyebrow: "Statistics & operations",
+        title: "Stats Team Leader · KHLIM Basketball Club.",
         description:
-          "Active on-site involvement organizing weekly club training sessions, evaluating 50–80 tryout participants, representing the Monash Men’s Basketball Team in CUBC and UBL, and volunteering as coach for the Monash Women’s Team (CUBC 2025 Second Runner-Up).",
+          "Designed an automated points-tracking system covering more than 350 matches across two competitions. Managed match statistics, scheduling, and scoring flow to keep competition data accurate and current.",
       },
       {
-        eyebrow: "Industry internship",
-        title: "Marketing Intern at PT. Vinindo Inti Pratama.",
+        eyebrow: "Audit & verification",
+        title: "Auditor · KHLIM Group of Companies.",
         description:
-          "On-site marketing internship supporting daily operations, client outreach to architects and interior designers, and B2B communication.",
+          "Financial record verification, audit working-paper preparation and review, inventory stock counts, and external audit assignments across three companies.",
       },
       {
         eyebrow: "Collaborative AI",

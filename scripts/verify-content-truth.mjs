@@ -109,7 +109,6 @@ try {
 // 2c. Guardrails for unverified specifics, titles, and boundaries
 const unverifiedSpecifics = [
   "Monash Basketball Club",
-  "KH Lim Basketball Club",
   "1:49",
   "1 minute 49",
   "two-person team",
@@ -125,6 +124,16 @@ const unverifiedSpecifics = [
   "Head Coach",
   "Committee Head",
   "Lead Systems Builder",
+  "Statistics Specialist",
+  "court-side scoring flow",
+  "three group companies",
+  "certified public accountant",
+  "CPA certification",
+  "CPA qualification",
+  "audit sign-off",
+  "audit partner",
+  "audit manager",
+  "autonomous audit",
 ];
 
 for (const file of supportingFiles) {
