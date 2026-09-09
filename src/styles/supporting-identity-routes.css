@@ -185,34 +185,91 @@
   border-bottom: 1px solid var(--stage-line);
 }
 
-.about-bridge__grid {
-  display: grid;
-  gap: 1.25rem;
-}
-
-.about-bridge__card {
-  display: grid;
-  grid-template-columns: 1fr;
+.about-bridge__table-wrap {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--stage-line);
   background: var(--stage-paper-elevated);
-  transition:
-    border-color var(--motion-fast) ease,
-    box-shadow var(--motion-fast) ease;
+  box-shadow: 0 10px 30px rgb(7 17 31 / 4%);
 }
 
-.about-bridge__card:hover {
-  border-color: var(--stage-accent);
-  box-shadow: 0 10px 30px rgb(7 17 31 / 5%);
+.about-bridge__table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  text-align: left;
 }
 
-.about-bridge__quality {
-  padding: 1.5rem;
+.about-bridge__table thead {
   background: color-mix(
     in srgb,
     var(--stage-paper-elevated) 90%,
     var(--stage-accent-soft)
   );
   border-bottom: 1px solid var(--stage-line);
+}
+
+.about-bridge__table th,
+.about-bridge__table td {
+  padding: clamp(1.15rem, 2vw, 1.65rem);
+  vertical-align: top;
+}
+
+.about-bridge__th-quality {
+  width: 22%;
+  min-width: 11rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.about-bridge__th-realm {
+  width: 39%;
+  min-width: 16.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.about-bridge__th-realm:nth-child(2) {
+  color: var(--deep-blue);
+  border-left: 1px solid var(--stage-line);
+}
+
+.about-bridge__th-realm:nth-child(3) {
+  color: var(--stage-accent);
+  border-left: 1px solid var(--stage-line);
+}
+
+.about-bridge__row {
+  border-bottom: 1px solid var(--stage-line);
+  transition: background-color var(--motion-fast) ease;
+}
+
+.about-bridge__row:last-child {
+  border-bottom: none;
+}
+
+.about-bridge__row:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--stage-paper-elevated) 95%,
+    var(--stage-accent-soft)
+  );
+}
+
+.about-bridge__cell-quality {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
 }
 
 .about-bridge__index {
@@ -223,47 +280,21 @@
   letter-spacing: 0.1em;
 }
 
-.about-bridge__quality h3 {
-  margin: 0.35rem 0 0;
-  font-size: 1.35rem;
+.about-bridge__quality-title {
+  font-size: 1.25rem;
   font-weight: 750;
   letter-spacing: -0.02em;
+  color: var(--stage-ink);
 }
 
-.about-bridge__realms {
-  display: grid;
-  grid-template-columns: 1fr;
+.about-bridge__cell {
+  border-left: 1px solid var(--stage-line);
 }
 
-.about-bridge__realm {
-  padding: 1.5rem;
-}
-
-.about-bridge__realm + .about-bridge__realm {
-  border-top: 1px solid var(--stage-line);
-}
-
-.about-bridge__realm-label {
-  margin: 0 0 0.5rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.68rem;
-  font-weight: 750;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.about-bridge__realm--software .about-bridge__realm-label {
-  color: var(--deep-blue);
-}
-
-.about-bridge__realm--basketball .about-bridge__realm-label {
-  color: var(--stage-accent);
-}
-
-.about-bridge__realm p {
+.about-bridge__cell p {
   margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: 0.94rem;
+  line-height: 1.65;
   color: var(--stage-muted);
 }
 
@@ -1243,24 +1274,6 @@
 
 /* [RESPONSIVE: tablet-portrait] (768px - 899px) */
 @media (min-width: 768px) {
-  .about-bridge__card {
-    grid-template-columns: 16rem 1fr;
-  }
-
-  .about-bridge__quality {
-    border-bottom: none;
-    border-right: 1px solid var(--stage-line);
-  }
-
-  .about-bridge__realms {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .about-bridge__realm + .about-bridge__realm {
-    border-top: none;
-    border-left: 1px solid var(--stage-line);
-  }
-
   .about-dossier__layout {
     grid-template-columns: minmax(0, 1.3fr) minmax(17rem, 0.7fr);
     align-items: start;
@@ -1338,10 +1351,6 @@
     min-height: 30rem;
   }
 
-  .about-bridge__card {
-    grid-template-columns: 18rem 1fr;
-  }
-
   .education-foundations__grid {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -1357,7 +1366,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .identity-btn,
-  .about-bridge__card,
+  .about-bridge__row,
   .about-principle-card,
   .about-nav-card,
   .experience-dna__card,

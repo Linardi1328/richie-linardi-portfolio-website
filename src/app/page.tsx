@@ -49,21 +49,23 @@ export default function Home() {
         {/* [SECTION 01] Selected Technical Projects */}
         <Section aria-labelledby="projects-heading" id="projects">
           <Container size="wide">
-            <SectionHeading
-              description="Six systems, each shown with its current scope, status, and supporting evidence."
-              eyebrow="Selected technical projects"
-              id="projects-heading"
-              title="Systems built to be understood, tested, and maintained."
-            />
+            <div data-reveal>
+              <SectionHeading
+                description="Six systems, each shown with its current scope, status, and supporting evidence."
+                eyebrow="Selected technical projects"
+                id="projects-heading"
+                title="Systems built to be understood, tested, and maintained."
+              />
+            </div>
 
             {featuredProject ? (
-              <div className="mt-10">
+              <div className="mt-10" data-reveal data-reveal-delay="1">
                 <FeaturedProjectDossier project={featuredProject} />
               </div>
             ) : null}
 
             {/* [SECTION 01A] Supporting Systems Catalogue */}
-            <div className="mt-12">
+            <div className="mt-12" data-reveal data-reveal-delay="2">
               <div className="mb-5 flex items-end justify-between gap-6 border-b border-border pb-4">
                 <div>
                   <p className="type-eyebrow text-context-accent">
@@ -92,6 +94,7 @@ export default function Home() {
         <section
           aria-labelledby="identity-bridge-heading"
           className="professional-identity-bridge"
+          data-reveal
         >
           <div className="professional-identity-bridge__inner">
             <div className="professional-identity-bridge__intro">
@@ -161,12 +164,12 @@ export default function Home() {
         >
           <Container size="wide">
             <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
-              <div>
+              <div data-reveal>
                 <SectionHeading
-                  description="A concise view of the academic, teaching, and project work behind the portfolio."
+                  description="A concise view of the software, analytics, and academic foundations behind the portfolio."
                   eyebrow="Experience & education"
                   id="experience-heading"
-                  title="Computer science, taught and applied."
+                  title="Computer science, analytics, and applied systems."
                 />
                 <div className="mt-9">
                   {professionalHomeData.milestones.map((milestone) => (
@@ -182,7 +185,7 @@ export default function Home() {
               </div>
 
               {/* [SECTION 03] Technical Focus */}
-              <div id="skills">
+              <div data-reveal data-reveal-delay="1" id="skills">
                 <SectionHeading
                   description="The tools and engineering areas that recur across my current projects."
                   eyebrow="Technical focus"
@@ -201,7 +204,7 @@ export default function Home() {
         </Section>
 
         {/* [SECTION 04] Professional CTA */}
-        <Section aria-labelledby="contact-heading">
+        <Section aria-labelledby="contact-heading" data-reveal>
           <Container size="narrow">
             <div className="text-center">
               <p className="type-eyebrow text-context-accent">

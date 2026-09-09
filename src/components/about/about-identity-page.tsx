@@ -128,31 +128,42 @@ export function AboutIdentityPage() {
             </p>
           </header>
 
-          <div className="about-bridge__grid">
-            {sharedQualities.map((item) => (
-              <article className="about-bridge__card" key={item.quality}>
-                <div className="about-bridge__quality">
-                  <span aria-hidden="true" className="about-bridge__index">
-                    {item.index}
-                  </span>
-                  <h3>{item.quality}</h3>
-                </div>
-                <div className="about-bridge__realms">
-                  <div className="about-bridge__realm about-bridge__realm--software">
-                    <p className="about-bridge__realm-label">
-                      Software & Systems
-                    </p>
-                    <p>{item.builder}</p>
-                  </div>
-                  <div className="about-bridge__realm about-bridge__realm--basketball">
-                    <p className="about-bridge__realm-label">
-                      Competitive Basketball
-                    </p>
-                    <p>{item.athlete}</p>
-                  </div>
-                </div>
-              </article>
-            ))}
+          <div className="about-bridge__table-wrap" data-no-page-swipe>
+            <table className="about-bridge__table">
+              <thead>
+                <tr>
+                  <th className="about-bridge__th-quality" scope="col">
+                    Quality
+                  </th>
+                  <th className="about-bridge__th-realm" scope="col">
+                    Software & Systems
+                  </th>
+                  <th className="about-bridge__th-realm" scope="col">
+                    Competitive Basketball
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {sharedQualities.map((item) => (
+                  <tr className="about-bridge__row" key={item.quality}>
+                    <th className="about-bridge__cell-quality" scope="row">
+                      <span aria-hidden="true" className="about-bridge__index">
+                        {item.index}
+                      </span>
+                      <span className="about-bridge__quality-title">
+                        {item.quality}
+                      </span>
+                    </th>
+                    <td className="about-bridge__cell about-bridge__cell--software">
+                      <p>{item.builder}</p>
+                    </td>
+                    <td className="about-bridge__cell about-bridge__cell--basketball">
+                      <p>{item.athlete}</p>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>

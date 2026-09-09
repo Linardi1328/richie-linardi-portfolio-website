@@ -496,9 +496,19 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
           inert
         >
           <div className="signature-flipbook__reverse-grid">
-            <span>{reverseEyebrow}</span>
-            <strong style={reverseTitleStyle}>{reverseTitle}</strong>
-            <p>{targetLabel}</p>
+            <strong
+              aria-hidden="true"
+              className="signature-flipbook__reverse-watermark"
+              style={reverseTitleStyle}
+            >
+              {reverseTitle}
+            </strong>
+            <div className="signature-flipbook__reverse-meta">
+              <span className="signature-flipbook__reverse-eyebrow">
+                {reverseEyebrow}
+              </span>
+              <p className="signature-flipbook__reverse-label">{targetLabel}</p>
+            </div>
           </div>
         </div>
 
