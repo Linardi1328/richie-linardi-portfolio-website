@@ -548,7 +548,7 @@ export function ExperienceRecordPage() {
           <header className="identity-section-header">
             <p className="identity-eyebrow">Operating Standard</p>
             <h2 id="experience-principles-heading">
-              Leadership & Engineering Principles
+              Engineering & Performance Principles
             </h2>
             <p>
               Five core principles drawn from applied systems development,
@@ -587,9 +587,9 @@ export function ExperienceRecordPage() {
             Public claims stay tied to verified records, repositories, or
             first-party information. Additional background includes IPH Schools
             Student Council membership (2018–2019) and athletic honors (DBL
-            All-Star 2024, Indonesia Youth National Team pool). New media and
-            deeper proof are added only when the source is ready to support
-            them.
+            All-Star 2024, Indonesia national-team competition in 2024). New
+            media and deeper proof are added only when the source is ready to
+            support them.
           </p>
           <div
             className="identity-hero__actions"

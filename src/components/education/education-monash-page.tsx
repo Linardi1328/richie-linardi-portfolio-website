@@ -111,7 +111,7 @@ export function EducationMonashPage() {
                 <span aria-hidden="true">→</span>
               </Link>
               <Link className="identity-btn" href="/experience">
-                View experience & leadership
+                View experience
                 <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -340,7 +340,7 @@ export function EducationMonashPage() {
               <span aria-hidden="true">→</span>
             </Link>
             <Link className="identity-btn" href="/experience">
-              View experience & leadership
+              View experience
               <span aria-hidden="true">→</span>
             </Link>
           </div>
