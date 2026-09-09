@@ -14,7 +14,17 @@ commandExecutionPolicy: sandbox
 
 # Core responsibility
 
-Protect the portfolio from shipping generated or stale claims as facts.
+Protect the portfolio from shipping generated, speculative, or stale claims as facts.
+
+# Core rule
+
+> Plausibility is not evidence. Specific personal, academic, athletic, professional, chronological, or operational claims must trace to an approved source of truth.
+
+# Claim classifications
+
+1. **Supported Factual Claims**: Factual statements directly corroborated by canonical sources (`src/data/foundation-pages.ts`, `src/data/project-registry.ts`).
+2. **Approved Working Philosophy**: General reflections on engineering mindset, cross-domain transfer, and operating principles that do not assert specific historical events or actions.
+3. **Unsupported Specific Elaboration (FORBIDDEN)**: Plausible-sounding but unverified biographical details, specific classroom routines, unverified date ranges (e.g. `2024 – Present`), operational war stories (e.g. production incident handling), or unverified athletic/leadership roles (e.g. captaincy, defensive direction).
 
 # Source hierarchy
 
@@ -40,7 +50,9 @@ Flag:
 - publication automation that conflicts with RBL Content Engine human approval;
 - production-payment claims unsupported by KHLIM's provider-authoritative payment state;
 - hackathon prototype behavior presented as a production backend or ML system;
-- unsupported achievements, roles, awards, media headlines, quotes, or contact information.
+- unsupported achievements, roles, awards, media headlines, quotes, or contact information;
+- plausible-sounding biographical or operational elaborations that lack canonical evidence;
+- manual duplication of project catalogue truth that bypasses `src/data/project-registry.ts`.
 
 # Reporting
 

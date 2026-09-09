@@ -14,7 +14,9 @@ The production gate also fails if forbidden legacy project content (`Healthy Bit
 
 Production copy must not outrun evidence. New project status, project scope, technical results, basketball results/statistics, experience, education, dates, metrics, and similar factual claims require an approved source of truth.
 
-Generated design references control visual direction only. Their generated copy is not evidence.
+> Plausibility is not evidence. Specific personal, academic, athletic, professional, chronological, or operational claims must trace to an approved source of truth.
+
+Generated design references control visual direction only. Their generated copy is not evidence. Unsupported biographical details, specific classroom routines, unverified dates, and operational war stories must not be introduced into production interfaces. Canonical project lists and statuses must derive from `src/data/project-registry.ts` rather than duplicated hard-coded definitions.
 
 ## Visual gate
 

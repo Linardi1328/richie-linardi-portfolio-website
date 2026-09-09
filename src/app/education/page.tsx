@@ -1,6 +1,14 @@
-import { FoundationRoutePage } from "@/components/layout/foundation-route-page";
-import { foundationPages } from "@/data/foundation-pages";
+import { EducationMonashPage } from "@/components/education/education-monash-page";
+import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
+import { professionalWorldNavigation } from "@/data/world-navigation";
 
 export default function EducationPage() {
-  return <FoundationRoutePage {...foundationPages.education} />;
+  return (
+    <PortfolioWorldShell
+      navigation={professionalWorldNavigation}
+      world="professional"
+    >
+      <EducationMonashPage />
+    </PortfolioWorldShell>
+  );
 }
