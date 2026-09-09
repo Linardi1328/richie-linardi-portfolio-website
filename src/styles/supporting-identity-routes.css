@@ -1,0 +1,1371 @@
+/* ==========================================================================
+   Supporting Identity Routes: /about, /experience, /education
+   Matches approved visual direction while preserving verified factual content.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Shared Layout & Container Foundations
+   -------------------------------------------------------------------------- */
+
+.identity-page {
+  min-height: 70vh;
+  color: var(--stage-ink);
+}
+
+.identity-container {
+  width: min(100%, 86rem);
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 4vw, 4rem);
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section (Shared Baseline across all 3 routes)
+   -------------------------------------------------------------------------- */
+
+.identity-hero {
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.identity-hero__inner {
+  padding-top: clamp(3.5rem, 8vw, 7rem);
+  padding-bottom: clamp(3rem, 6vw, 5.5rem);
+}
+
+.identity-hero__inner--split {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: end;
+}
+
+.identity-eyebrow {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.identity-hero__title {
+  max-width: 16ch;
+  margin: 0.85rem 0 0;
+  font-size: clamp(2.6rem, 7.5vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: var(--stage-ink);
+}
+
+.identity-hero__lede {
+  max-width: 46rem;
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--stage-muted);
+}
+
+.identity-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.identity-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.35rem;
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--stage-ink);
+  text-decoration: none;
+  transition:
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+.identity-btn:hover,
+.identity-btn:focus-visible {
+  border-color: var(--stage-accent);
+  color: var(--stage-accent);
+  background: var(--stage-paper-elevated);
+}
+
+.identity-btn--primary {
+  border-color: var(--stage-accent);
+  background: var(--stage-accent-soft);
+  color: var(--stage-ink);
+}
+
+.identity-btn--primary:hover,
+.identity-btn--primary:focus-visible {
+  border-color: var(--stage-accent-hover);
+  background: var(--stage-accent);
+  color: #ffffff;
+}
+
+/* Portrait Card */
+.identity-portrait {
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.identity-portrait__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  min-height: 20rem;
+  overflow: hidden;
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  box-shadow: 0 20px 50px rgb(7 17 31 / 8%);
+}
+
+.identity-portrait__frame img {
+  object-fit: cover;
+  object-position: center 24%;
+  filter: saturate(0.92) contrast(1.02);
+}
+
+.identity-portrait figcaption {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+.identity-portrait__label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.identity-portrait__note {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--stage-muted);
+}
+
+/* Section Header */
+.identity-section-header {
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.identity-section-header h2 {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.85rem, 4.5vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--stage-ink);
+}
+
+.identity-section-header p:not(.identity-eyebrow) {
+  max-width: 44rem;
+  margin: 0.85rem 0 0;
+  font-size: clamp(0.98rem, 1.8vw, 1.12rem);
+  line-height: 1.65;
+  color: var(--stage-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Route: /about — Identity & Shared Qualities
+   -------------------------------------------------------------------------- */
+
+.about-bridge {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.about-bridge__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.about-bridge__card {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.about-bridge__card:hover {
+  border-color: var(--stage-accent);
+  box-shadow: 0 10px 30px rgb(7 17 31 / 5%);
+}
+
+.about-bridge__quality {
+  padding: 1.5rem;
+  background: color-mix(
+    in srgb,
+    var(--stage-paper-elevated) 90%,
+    var(--stage-accent-soft)
+  );
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.about-bridge__index {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--stage-accent);
+  letter-spacing: 0.1em;
+}
+
+.about-bridge__quality h3 {
+  margin: 0.35rem 0 0;
+  font-size: 1.35rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.about-bridge__realms {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.about-bridge__realm {
+  padding: 1.5rem;
+}
+
+.about-bridge__realm + .about-bridge__realm {
+  border-top: 1px solid var(--stage-line);
+}
+
+.about-bridge__realm-label {
+  margin: 0 0 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-bridge__realm--software .about-bridge__realm-label {
+  color: var(--deep-blue);
+}
+
+.about-bridge__realm--basketball .about-bridge__realm-label {
+  color: var(--stage-accent);
+}
+
+.about-bridge__realm p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--stage-muted);
+}
+
+/* About Narrative + At a Glance Rail */
+.about-dossier {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.about-dossier__layout {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.about-dossier__narrative {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.about-dossier__narrative h3 {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.about-dossier__narrative p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--stage-muted);
+}
+
+.about-dossier__sidebar {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 1.5rem;
+  align-self: start;
+}
+
+.about-dossier__sidebar-title {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.about-dossier__fact-list {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-dossier__fact dt {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stage-muted);
+  margin-bottom: 0.25rem;
+}
+
+.about-dossier__fact dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--stage-ink);
+  line-height: 1.45;
+}
+
+/* About Principles */
+.about-principles {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.about-principles__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about-principle-card {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: grid;
+  gap: 1rem;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.about-principle-card:hover {
+  border-color: var(--stage-accent);
+  box-shadow: 0 12px 36px rgb(7 17 31 / 6%);
+}
+
+.about-principle-card__eyebrow {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.about-principle-card h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.about-principle-card p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--stage-muted);
+}
+
+.about-principle-card ul {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-principle-card li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--stage-ink);
+}
+
+.about-principle-card li::before {
+  position: absolute;
+  top: 0.58em;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--stage-accent);
+  content: "";
+}
+
+/* About Route Navigation Cards */
+.about-nav-cards {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.about-nav-cards__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about-nav-card {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+  text-decoration: none;
+  color: var(--stage-ink);
+  display: grid;
+  gap: 1rem;
+  transition:
+    border-color var(--motion-fast) ease,
+    transform var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.about-nav-card:hover,
+.about-nav-card:focus-visible {
+  border-color: var(--stage-accent);
+  box-shadow: 0 14px 40px rgb(7 17 31 / 7%);
+  transform: translateY(-2px);
+}
+
+.about-nav-card__tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.about-nav-card h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.about-nav-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--stage-muted);
+}
+
+.about-nav-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 750;
+  font-size: 0.9rem;
+  color: var(--stage-accent);
+  margin-top: 0.5rem;
+}
+
+/* About Closing Statement Banner */
+.about-closing {
+  padding-block: clamp(3rem, 7vw, 6rem);
+  border-bottom: 1px solid var(--stage-line);
+  background: color-mix(
+    in srgb,
+    var(--stage-paper-elevated) 70%,
+    var(--stage-accent-soft)
+  );
+}
+
+.about-closing__content {
+  text-align: center;
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+.about-closing__statement {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: var(--stage-ink);
+}
+
+.about-closing__context {
+  margin: 1.25rem 0 0;
+  font-size: 1rem;
+  color: var(--stage-muted);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   Route: /experience — Professional Experience & Leadership
+   -------------------------------------------------------------------------- */
+
+/* Professional DNA Panel */
+.experience-dna {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.experience-dna__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.experience-dna__card {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.experience-dna__card:hover {
+  border-color: var(--stage-accent);
+  box-shadow: 0 8px 24px rgb(7 17 31 / 5%);
+}
+
+.experience-dna__index {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--stage-accent);
+}
+
+.experience-dna__card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.experience-dna__card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--stage-muted);
+}
+
+/* Principle Strip */
+.experience-strip {
+  padding-block: 1.75rem;
+  border-bottom: 1px solid var(--stage-line);
+  background: color-mix(
+    in srgb,
+    var(--stage-paper-elevated) 85%,
+    var(--stage-accent-soft)
+  );
+}
+
+.experience-strip__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.experience-strip__item {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.experience-strip__label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.experience-strip__value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--stage-ink);
+}
+
+/* Experience Dossiers */
+.experience-dossiers {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.experience-dossiers__list {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+.experience-dossier-card {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  box-shadow: 0 12px 36px rgb(7 17 31 / 4%);
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.experience-dossier-card:hover {
+  border-color: var(--stage-accent);
+  box-shadow: 0 16px 48px rgb(7 17 31 / 7%);
+}
+
+.experience-dossier-card__header {
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  border-bottom: 1px solid var(--stage-line);
+  display: grid;
+  gap: 1rem;
+}
+
+.experience-dossier-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.74rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stage-muted);
+}
+
+.experience-dossier-card__meta span:first-child {
+  color: var(--stage-accent);
+}
+
+.experience-dossier-card__meta-separator {
+  color: var(--stage-line);
+}
+
+.experience-dossier-card__title-row {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.experience-dossier-card__title-row h3 {
+  margin: 0;
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.experience-dossier-card__org {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--deep-blue);
+}
+
+.experience-dossier-card__summary {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--stage-muted);
+}
+
+.experience-dossier-card__body {
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  display: grid;
+  gap: 1.75rem;
+}
+
+.experience-dossier-card__section-label {
+  margin: 0 0 0.85rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.experience-dossier-card__responsibilities {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.experience-dossier-card__responsibilities li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--stage-ink);
+}
+
+.experience-dossier-card__responsibilities li::before {
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--stage-accent);
+  content: "";
+}
+
+.experience-dossier-card__projects-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.experience-project-pill {
+  border: 1px solid var(--stage-line);
+  background: color-mix(
+    in srgb,
+    var(--stage-paper-elevated) 95%,
+    var(--stage-accent-soft)
+  );
+  padding: 1rem 1.25rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.experience-project-pill h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--stage-ink);
+}
+
+.experience-project-pill p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--stage-muted);
+}
+
+.experience-dossier-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.experience-tag {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--stage-ink);
+}
+
+/* Experience Leadership Principles */
+.experience-principles {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.experience-principles__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.experience-principle-item {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.6rem;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.experience-principle-item:hover {
+  border-color: var(--stage-accent);
+  box-shadow: 0 8px 24px rgb(7 17 31 / 5%);
+}
+
+.experience-principle-item__index {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--stage-accent);
+}
+
+.experience-principle-item h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.experience-principle-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--stage-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Route: /education — Monash University Academic Record
+   -------------------------------------------------------------------------- */
+
+.education-overview {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.education-overview__layout {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+.education-degree-card {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  display: grid;
+  gap: 1.5rem;
+  box-shadow: 0 14px 42px rgb(7 17 31 / 5%);
+}
+
+.education-degree-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--stage-accent);
+  background: var(--stage-accent-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stage-ink);
+  width: fit-content;
+}
+
+.education-degree-card h3 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.education-degree-card__institution {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 650;
+  color: var(--deep-blue);
+}
+
+.education-degree-card__summary {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--stage-muted);
+}
+
+.education-degree-card__highlights {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.education-degree-card__highlights li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--stage-ink);
+}
+
+.education-degree-card__highlights li::before {
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--stage-accent);
+  content: "";
+}
+
+.education-glance-card {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 1.35rem;
+  align-self: start;
+}
+
+.education-glance-card__title {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.education-glance-list {
+  display: grid;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.education-glance-item dt {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stage-muted);
+  margin-bottom: 0.2rem;
+}
+
+.education-glance-item dd {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 650;
+  color: var(--stage-ink);
+  line-height: 1.4;
+}
+
+/* Education Academic Foundations */
+.education-foundations {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.education-foundations__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.education-foundation-card {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 0.85rem;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.education-foundation-card:hover {
+  border-color: var(--stage-accent);
+  box-shadow: 0 10px 30px rgb(7 17 31 / 5%);
+}
+
+.education-foundation-card__index {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--stage-accent);
+}
+
+.education-foundation-card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.education-foundation-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--stage-muted);
+}
+
+/* Education Technical Progression */
+.education-progression {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.education-progression__timeline {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.education-progression-step {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 0.75rem;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.education-progression-step:hover {
+  border-color: var(--stage-accent);
+  box-shadow: 0 8px 24px rgb(7 17 31 / 5%);
+}
+
+.education-progression-step__phase {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.education-progression-step h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.education-progression-step p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--stage-muted);
+}
+
+/* Education Tools & Technologies */
+.education-tools {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.education-tools__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.education-tool-group {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  display: grid;
+  gap: 1rem;
+}
+
+.education-tool-group h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.education-tool-group__note {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--stage-muted);
+}
+
+.education-tool-group__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Education Teaching Assistant Loop */
+.education-teaching-loop {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stage-line);
+  background: color-mix(
+    in srgb,
+    var(--stage-paper-elevated) 80%,
+    var(--stage-accent-soft)
+  );
+}
+
+.education-teaching-loop__card {
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  display: grid;
+  gap: 1.5rem;
+  box-shadow: 0 12px 36px rgb(7 17 31 / 5%);
+}
+
+.education-teaching-loop__header h2,
+.education-teaching-loop__header h3 {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 750;
+  letter-spacing: -0.025em;
+}
+
+.education-teaching-loop__lead {
+  margin: 0.85rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--stage-muted);
+}
+
+.education-teaching-loop__pillars {
+  display: grid;
+  gap: 1rem;
+}
+
+.education-teaching-pillar {
+  border: 1px solid var(--stage-line);
+  background: color-mix(
+    in srgb,
+    var(--stage-paper-elevated) 95%,
+    var(--stage-accent-soft)
+  );
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.education-teaching-pillar h3,
+.education-teaching-pillar h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.education-teaching-pillar p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--stage-muted);
+}
+
+/* Education CTA */
+.education-cta {
+  padding-block: clamp(3rem, 7vw, 6rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.education-cta__content {
+  max-width: 50rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.education-cta__content h2 {
+  margin: 0;
+  font-size: clamp(1.85rem, 4vw, 2.85rem);
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.education-cta__content p {
+  margin: 1rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--stage-muted);
+}
+
+.education-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Layout Behavior (Multi-breakpoint Matrix)
+   -------------------------------------------------------------------------- */
+
+/* [RESPONSIVE: phone] (320px - 599px) is base styles above */
+
+/* [RESPONSIVE: small-tablet] (600px - 767px) */
+@media (min-width: 600px) {
+  .experience-dna__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .experience-strip__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .experience-principles__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .education-foundations__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .education-tools__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .education-teaching-loop__pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-nav-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* [RESPONSIVE: tablet-portrait] (768px - 899px) */
+@media (min-width: 768px) {
+  .about-bridge__card {
+    grid-template-columns: 16rem 1fr;
+  }
+
+  .about-bridge__quality {
+    border-bottom: none;
+    border-right: 1px solid var(--stage-line);
+  }
+
+  .about-bridge__realms {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-bridge__realm + .about-bridge__realm {
+    border-top: none;
+    border-left: 1px solid var(--stage-line);
+  }
+
+  .about-dossier__layout {
+    grid-template-columns: minmax(0, 1.3fr) minmax(17rem, 0.7fr);
+    align-items: start;
+  }
+
+  .education-overview__layout {
+    grid-template-columns: minmax(0, 1.3fr) minmax(17rem, 0.7fr);
+    align-items: start;
+  }
+
+  .experience-dossier-card__projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .education-progression__timeline {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* [RESPONSIVE: tablet-landscape] (900px - 1279px) */
+@media (min-width: 900px) {
+  .identity-hero__inner--split {
+    grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr);
+  }
+
+  .identity-portrait__frame {
+    min-height: 26rem;
+  }
+
+  .about-dossier__layout {
+    grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+  }
+
+  .about-principles__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .experience-dna__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* 6-column balanced layout for 5 items: 3 in top row (span 2 each), 2 in bottom row (span 3 each) */
+  .experience-principles__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .experience-principles__grid > .experience-principle-item:nth-child(1),
+  .experience-principles__grid > .experience-principle-item:nth-child(2),
+  .experience-principles__grid > .experience-principle-item:nth-child(3) {
+    grid-column: span 2;
+  }
+
+  .experience-principles__grid > .experience-principle-item:nth-child(4),
+  .experience-principles__grid > .experience-principle-item:nth-child(5) {
+    grid-column: span 3;
+  }
+
+  .education-overview__layout {
+    grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+  }
+
+  .education-tools__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* [RESPONSIVE: desktop] (1280px+) */
+@media (min-width: 1280px) {
+  .identity-hero__inner {
+    padding-top: 6.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .identity-portrait__frame {
+    min-height: 30rem;
+  }
+
+  .about-bridge__card {
+    grid-template-columns: 18rem 1fr;
+  }
+
+  .education-foundations__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .education-teaching-loop__pillars {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   [REDUCED MOTION]
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .identity-btn,
+  .about-bridge__card,
+  .about-principle-card,
+  .about-nav-card,
+  .experience-dna__card,
+  .experience-dossier-card,
+  .experience-principle-item,
+  .education-foundation-card,
+  .education-progression-step {
+    transition: none !important;
+    transform: none !important;
+  }
+}

@@ -1,6 +1,14 @@
-import { FoundationRoutePage } from "@/components/layout/foundation-route-page";
-import { foundationPages } from "@/data/foundation-pages";
+import { AboutIdentityPage } from "@/components/about/about-identity-page";
+import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
+import { professionalWorldNavigation } from "@/data/world-navigation";
 
 export default function AboutPage() {
-  return <FoundationRoutePage {...foundationPages.about} />;
+  return (
+    <PortfolioWorldShell
+      navigation={professionalWorldNavigation}
+      world="professional"
+    >
+      <AboutIdentityPage />
+    </PortfolioWorldShell>
+  );
 }

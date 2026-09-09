@@ -1,6 +1,14 @@
-import { FoundationRoutePage } from "@/components/layout/foundation-route-page";
-import { foundationPages } from "@/data/foundation-pages";
+import { ExperienceRecordPage } from "@/components/experience/experience-record-page";
+import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
+import { professionalWorldNavigation } from "@/data/world-navigation";
 
 export default function ExperiencePage() {
-  return <FoundationRoutePage {...foundationPages.experience} />;
+  return (
+    <PortfolioWorldShell
+      navigation={professionalWorldNavigation}
+      world="professional"
+    >
+      <ExperienceRecordPage />
+    </PortfolioWorldShell>
+  );
 }

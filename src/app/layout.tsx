@@ -9,6 +9,7 @@ import "../styles/motion-effects.css";
 import "../styles/basketball-record.css";
 import "../styles/production-hardening.css";
 import "../styles/signature-flipbook.css";
+import "../styles/supporting-identity-routes.css";
 
 const portfolioTitle = "Richie Linardi | Software, Data & Basketball";
 const portfolioDescription =
