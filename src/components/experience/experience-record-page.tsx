@@ -169,8 +169,8 @@ export function ExperienceRecordPage() {
             </h2>
             <p>
               Work structured across three verified pillars: university computer
-              science education, production-grade independent systems, and elite
-              athletic team habits.
+              science education, independent software systems, and competitive
+              basketball experience.
             </p>
           </header>
 

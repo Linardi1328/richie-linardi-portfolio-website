@@ -297,8 +297,8 @@ export function AboutIdentityPage() {
               <span className="about-nav-card__tag">Professional World</span>
               <h3>Explore Software Systems</h3>
               <p>
-                Inspect six public systems with live architectures, verified
-                evidence, current operational phases, and source repositories.
+                Inspect six public systems with documented architectures,
+                verified evidence, current phases, and source repositories.
               </p>
               <span className="about-nav-card__cta">
                 View project catalogue <span aria-hidden="true">→</span>
