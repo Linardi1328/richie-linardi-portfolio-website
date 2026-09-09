@@ -34,10 +34,12 @@ export default function ProjectsPage() {
               >
                 {String(index + 1).padStart(2, "0")}
               </div>
-              <div>
-                <p className="foundation-route__eyebrow">{project.phase}</p>
-                <h2>{project.title}</h2>
-                <div>
+              <div className="foundation-route__section-content">
+                <div className="foundation-route__section-header">
+                  <p className="foundation-route__eyebrow">{project.phase}</p>
+                  <h2>{project.title}</h2>
+                </div>
+                <div className="foundation-route__section-body">
                   <p>{project.summary}</p>
                   <ul>
                     <li>{project.currentStatus}</li>
