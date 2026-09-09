@@ -7,25 +7,25 @@ const sharedQualities = [
     index: "01",
     quality: "Discipline",
     builder:
-      "Testable boundaries, rigorous code review, systematic debugging, and clean architecture.",
+      "Testable boundaries, rigorous review, systematic debugging, and clean architecture.",
     athlete:
-      "Daily fundamental skill work, structured physical conditioning, and execution under exhaustion.",
+      "Consistent fundamental repetition, physical preparation, and steady execution under fatigue.",
   },
   {
     index: "02",
     quality: "Leadership",
     builder:
-      "Setting technical standards, mentoring peers, clear communication, and owning critical paths.",
+      "Clear technical communication, assisting peers through problems, and taking ownership of software boundaries.",
     athlete:
-      "On-court communication, vocal defensive direction, team accountability, and leading by example.",
+      "On-court communication, role accountability, and setting an example through preparation.",
   },
   {
     index: "03",
     quality: "Resilience",
     builder:
-      "Diagnosing subtle failures, handling production regressions, and calmly refactoring dead-end logic.",
+      "Diagnosing subtle errors, refactoring complex logic, and recovering systematically when approaches fail.",
     athlete:
-      "Overcoming late-game deficits, rebounding from tough losses, and sustaining focus through high-stakes games.",
+      "Responding to difficult game situations, reviewing mistakes objectively, and maintaining composure under competitive pressure.",
   },
   {
     index: "04",
@@ -33,7 +33,7 @@ const sharedQualities = [
     builder:
       "Evaluating trade-offs between speed, safety, and complexity under incomplete information.",
     athlete:
-      "Processing defensive coverages, making split-second reads, and executing with composure under pressure.",
+      "Processing game situations quickly, making deliberate reads, and executing with composure under pressure.",
   },
   {
     index: "05",
@@ -41,15 +41,15 @@ const sharedQualities = [
     builder:
       "Architecture specifications, edge-case testing, and deterministic failure planning before deployment.",
     athlete:
-      "Tactical walkthroughs, film study of opponent tendencies, and physical readiness routines.",
+      "Tactical preparation, understanding team strategy, and structured physical readiness.",
   },
   {
     index: "06",
     quality: "Teamwork",
     builder:
-      "Explicit API contracts, unblocking teammates, collaborative Git reviews, and shared ownership.",
+      "Explicit API contracts, unblocking teammates, collaborative reviews, and shared ownership.",
     athlete:
-      "Setting screens, executing set plays, self-sacrificing boxouts, and collective defensive cohesion.",
+      "Executing team roles, communicating clearly, and prioritizing collective performance over individual highlights.",
   },
 ] as const;
 

@@ -69,24 +69,24 @@ const verifiedTools = [
 
 const teachingPillars = [
   {
-    title: "Concept Translation",
+    title: "Programming Fundamentals",
     description:
-      "Breaking down abstract algorithmic concepts into intuitive, first-principles explanations.",
+      "Guiding students through introductory programming mechanics, syntax, and structured problem decomposition.",
   },
   {
-    title: "Diagnostic Speed",
+    title: "Problem Decomposition",
     description:
-      "Rapidly identifying syntax, logic, and runtime errors in live student code.",
+      "Helping students break down complex computational problems into smaller, structured, and manageable steps.",
   },
   {
-    title: "Pedagogical Empathy",
+    title: "Debugging & Reasoning",
     description:
-      "Adapting explanations to diverse student backgrounds and different learning styles.",
+      "Assisting students in tracing program execution and diagnosing logic errors systematically.",
   },
   {
-    title: "Reinforced Foundations",
+    title: "Clear Technical Communication",
     description:
-      "Deepening personal mastery of programming mechanics through continuous explanation and review.",
+      "Explaining technical concepts in practical terms and adapting explanations to another student's way of thinking.",
   },
 ] as const;
 

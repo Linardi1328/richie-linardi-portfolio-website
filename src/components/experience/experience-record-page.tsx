@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { foundationPages } from "@/data/foundation-pages";
+import { publicProjectCatalogue } from "@/data/project-registry";
 
 const professionalDNA = [
   {
@@ -215,26 +216,25 @@ export function ExperienceRecordPage() {
                   </p>
                   <ul className="experience-dossier-card__responsibilities">
                     <li>
-                      <strong>Programming fundamentals:</strong> Mentoring
-                      students in introductory programming syntax, algorithmic
-                      problem decomposition, and modular functional structure.
+                      <strong>Programming fundamentals:</strong> Supporting
+                      students with introductory programming syntax, control
+                      flow, and computational problem solving.
                     </li>
                     <li>
-                      <strong>Debugging and reasoning:</strong> Leading live
-                      debugging sessions to help students isolate edge cases,
-                      trace runtime errors systematically, and develop robust
-                      mental models.
+                      <strong>Problem decomposition:</strong> Helping students
+                      break larger programming exercises into structured,
+                      manageable components.
                     </li>
                     <li>
-                      <strong>Clear technical communication:</strong>{" "}
-                      Translating abstract computational concepts into
-                      intuitive, actionable explanations tailored to individual
-                      student learning styles.
+                      <strong>Debugging and reasoning:</strong> Assisting
+                      students in tracing program execution, diagnosing
+                      mistakes, and developing systematic problem-solving
+                      habits.
                     </li>
                     <li>
-                      <strong>Review and reinforcement:</strong> Reviewing code
-                      for readability, testability, and edge-case handling
-                      rather than merely passing default test cases.
+                      <strong>Clear technical communication:</strong> Explaining
+                      technical concepts in practical, direct terms that keep
+                      reasoning transparent and grounded.
                     </li>
                   </ul>
                 </div>
@@ -260,19 +260,19 @@ export function ExperienceRecordPage() {
                   >
                     /
                   </span>
-                  <span>Self-Directed Portfolio Engineering</span>
+                  <span>Independent Systems Development</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
                   >
                     /
                   </span>
-                  <span>2024 – Present</span>
+                  <span>Current Portfolio Systems</span>
                 </div>
                 <div className="experience-dossier-card__title-row">
                   <h3>Applied systems work across six public projects</h3>
                   <p className="experience-dossier-card__org">
-                    Independent Software Engineering & Systems Architecture
+                    Independent software development across public repositories
                   </p>
                 </div>
                 <p className="experience-dossier-card__summary">
@@ -290,53 +290,15 @@ export function ExperienceRecordPage() {
                     Six Public Operating Systems
                   </p>
                   <div className="experience-dossier-card__projects-grid">
-                    <div className="experience-project-pill">
-                      <h4>SPY Market Agent</h4>
-                      <p>
-                        Leakage-aware market research and paper-operation system
-                        with deterministic safety gates, walk-forward research,
-                        and fail-closed boundaries.
-                      </p>
-                    </div>
-                    <div className="experience-project-pill">
-                      <h4>Personal Project Operator</h4>
-                      <p>
-                        Phone-controlled project command center combining live
-                        GitHub state, deterministic planning, controlled write
-                        approvals, and bounded lifecycles.
-                      </p>
-                    </div>
-                    <div className="experience-project-pill">
-                      <h4>LedgerPilot AI</h4>
-                      <p>
-                        Accounting workflow system with human-in-the-loop
-                        review, strict intake validation, audit history, and
-                        fail-closed posting controls.
-                      </p>
-                    </div>
-                    <div className="experience-project-pill">
-                      <h4>KHLIM Assist</h4>
-                      <p>
-                        AI triage engine for participant communication with
-                        deterministic policy enforcement and human organizer
-                        oversight.
-                      </p>
-                    </div>
-                    <div className="experience-project-pill">
-                      <h4>RBL Content Engine</h4>
-                      <p>
-                        Platform-intelligence workflow system with structured
-                        intake and human review gating before publication.
-                      </p>
-                    </div>
-                    <div className="experience-project-pill">
-                      <h4>KHLIM Digital Sports Ecosystem</h4>
-                      <p>
-                        Multi-surface sports platform connecting public
-                        discovery, family accounts, programmes, memberships,
-                        billing, and staff operations.
-                      </p>
-                    </div>
+                    {publicProjectCatalogue.map((project) => (
+                      <div
+                        className="experience-project-pill"
+                        key={project.slug}
+                      >
+                        <h4>{project.title}</h4>
+                        <p>{project.summary}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -363,20 +325,19 @@ export function ExperienceRecordPage() {
                   >
                     /
                   </span>
-                  <span>National Representation & DBL</span>
+                  <span>Competitive Team Sport</span>
                   <span
                     aria-hidden="true"
                     className="experience-dossier-card__meta-separator"
                   >
                     /
                   </span>
-                  <span>2016 – Present</span>
+                  <span>Cross-Domain Transfer</span>
                 </div>
                 <div className="experience-dossier-card__title-row">
                   <h3>Team performance is a system too</h3>
                   <p className="experience-dossier-card__org">
-                    DBL Indonesia All-Star 2024 · Indonesia National Team · SMA
-                    Gloria 1
+                    Habits developed through competitive basketball
                   </p>
                 </div>
                 <p className="experience-dossier-card__summary">
@@ -394,39 +355,38 @@ export function ExperienceRecordPage() {
                   </p>
                   <ul className="experience-dossier-card__responsibilities">
                     <li>
-                      <strong>Preparation transfers between worlds:</strong>{" "}
-                      Daily repetition, film review, and conditioning mirror
-                      technical specifications, test writing, and continuous
-                      validation.
+                      <strong>Preparation and repetition:</strong> The
+                      discipline of consistent preparation and structured
+                      repetition carries directly into how technical systems are
+                      designed, tested, and reviewed.
                     </li>
                     <li>
-                      <strong>Role clarity under pressure:</strong> Clear team
-                      roles prevent confusion during high-stress tournament
-                      possessions, directly translating to explicit software API
-                      boundaries.
+                      <strong>Role clarity and communication:</strong>{" "}
+                      High-stakes team competition demands explicit role
+                      definitions and direct communication, mirroring clear
+                      software interfaces and modular boundaries.
                     </li>
                     <li>
                       <strong>Accountability and review loops:</strong>{" "}
-                      Analyzing mistakes immediately without ego mirrors
-                      blameless post-mortem engineering cultures.
+                      Reviewing mistakes objectively without ego builds rapid
+                      recovery and iterative improvement habits across both
+                      domains.
                     </li>
                     <li>
-                      <strong>Decision-making under fatigue:</strong> Executing
-                      tactical reads calmly in fourth-quarter scenarios builds
-                      the temperament required to debug critical production
-                      incidents.
+                      <strong>Decision-making under pressure:</strong>{" "}
+                      Navigating competitive pressure reinforces calm,
+                      deliberate reasoning when evaluating complex engineering
+                      trade-offs.
                     </li>
                   </ul>
                 </div>
 
                 <div className="experience-dossier-card__tags">
-                  <span className="experience-tag">Team Leadership</span>
-                  <span className="experience-tag">
-                    High-Pressure Execution
-                  </span>
-                  <span className="experience-tag">Accountability</span>
-                  <span className="experience-tag">Review Loops</span>
                   <span className="experience-tag">Preparation</span>
+                  <span className="experience-tag">Role Clarity</span>
+                  <span className="experience-tag">Communication</span>
+                  <span className="experience-tag">Accountability</span>
+                  <span className="experience-tag">Decision-Making</span>
                 </div>
               </div>
             </article>
