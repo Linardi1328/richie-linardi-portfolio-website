@@ -17,8 +17,6 @@
   position: relative;
   z-index: 2;
   min-height: 100vh;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
 }
 
 .signature-flipbook__reverse {
@@ -31,6 +29,7 @@
   overflow: hidden;
   pointer-events: none;
   opacity: 0;
+  visibility: hidden;
   transition: opacity 220ms var(--ease-standard);
 }
 
@@ -95,39 +94,85 @@
 .signature-flipbook__reverse-grid {
   position: relative;
   z-index: 1;
-  display: grid;
+  display: flex;
+  align-items: center;
   width: min(100% - (var(--gutter) * 2), 1180px);
   height: 100%;
   margin-inline: auto;
-  align-content: center;
-  gap: 0.85rem;
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
 }
 
-.signature-flipbook__reverse-grid > span,
-.signature-flipbook__reverse-grid > p {
-  font-size: clamp(0.64rem, 1vw, 0.78rem);
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.signature-flipbook[data-world="professional"]
+  .signature-flipbook__reverse-grid {
+  justify-content: flex-start;
 }
 
-.signature-flipbook__reverse-grid > span {
-  color: #d8bd7a;
+.signature-flipbook[data-world="basketball"] .signature-flipbook__reverse-grid {
+  justify-content: flex-end;
 }
 
-.signature-flipbook__reverse-grid > strong {
+.signature-flipbook__reverse-watermark {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
   color: transparent;
-  font-size: clamp(9rem, 36vw, 30rem);
+  font-size: clamp(5.5rem, 22vw, 20rem);
   font-weight: 900;
-  letter-spacing: -0.09em;
-  line-height: 0.72;
-  -webkit-text-stroke: 1px rgb(216 189 122 / 68%);
+  letter-spacing: -0.08em;
+  line-height: 0.76;
+  -webkit-text-stroke: 1.5px rgb(216 189 122 / 45%);
 }
 
-.signature-flipbook__reverse-grid > p {
-  max-width: 22rem;
-  color: currentColor;
-  opacity: 0.72;
+.signature-flipbook[data-world="professional"]
+  .signature-flipbook__reverse-watermark {
+  left: clamp(1rem, 5vw, 4rem);
+}
+
+.signature-flipbook[data-world="basketball"]
+  .signature-flipbook__reverse-watermark {
+  right: clamp(1rem, 5vw, 4rem);
+}
+
+.signature-flipbook__reverse-meta {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-width: 28rem;
+}
+
+.signature-flipbook[data-world="basketball"] .signature-flipbook__reverse-meta {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.signature-flipbook[data-world="professional"]
+  .signature-flipbook__reverse-meta {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.signature-flipbook__reverse-eyebrow {
+  font-size: clamp(0.72rem, 1.2vw, 0.85rem);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e1c57c;
+  text-shadow: 0 2px 10px rgb(0 0 0 / 70%);
+}
+
+.signature-flipbook__reverse-label {
+  margin: 0;
+  font-size: clamp(1.35rem, 3.4vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #f7f3ec;
+  text-shadow: 0 2px 14px rgb(0 0 0 / 85%);
 }
 
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__stage,
@@ -140,6 +185,8 @@
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__page,
 .signature-flipbook[data-phase="turning"] .signature-flipbook__page,
 .signature-flipbook[data-phase="arriving"] .signature-flipbook__page {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
   transform: rotateY(var(--flip-angle));
 }
 
@@ -178,6 +225,7 @@
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__reverse,
 .signature-flipbook[data-phase="turning"] .signature-flipbook__reverse,
 .signature-flipbook[data-phase="arriving"] .signature-flipbook__reverse {
+  visibility: visible;
   opacity: clamp(0.12, calc(var(--flip-progress) * 1.06), 1);
 }
 
@@ -203,7 +251,7 @@
 /* [FLIP HINT] Purely visual swipe guidance */
 .signature-flipbook__hint {
   position: fixed;
-  top: 50%;
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
   z-index: 55;
   display: inline-flex;
   align-items: center;
@@ -217,17 +265,17 @@
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
-  opacity: 0.68;
-  transform: translateY(-50%);
-  transition: opacity 200ms var(--ease-standard);
+  opacity: 0.52;
+  transform: none;
+  transition: opacity 220ms var(--ease-standard);
 }
 
 .signature-flipbook[data-world="professional"] .signature-flipbook__hint {
-  right: max(1.25rem, env(safe-area-inset-right));
+  right: max(1.75rem, env(safe-area-inset-right));
 }
 
 .signature-flipbook[data-world="basketball"] .signature-flipbook__hint {
-  left: max(1.25rem, env(safe-area-inset-left));
+  left: max(1.75rem, env(safe-area-inset-left));
 }
 
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__hint,
@@ -238,7 +286,7 @@
 
 .signature-flipbook__hint-arrow {
   color: var(--stage-accent);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 800;
   line-height: 1;
   flex: 0 0 auto;
@@ -246,9 +294,9 @@
 
 .signature-flipbook__hint-text {
   color: var(--stage-muted);
-  font-size: 0.64rem;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
   line-height: 1;
@@ -292,6 +340,8 @@
     .signature-flipbook__drag-zone:hover
     ~ .signature-flipbook__stage
     .signature-flipbook__page {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
     transform: rotateY(-2.4deg);
     transform-origin: right 50vh;
     box-shadow: 22px 0 45px rgb(0 0 0 / 14%);
@@ -309,6 +359,8 @@
     .signature-flipbook__drag-zone:hover
     ~ .signature-flipbook__stage
     .signature-flipbook__page {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
     transform: rotateY(2.4deg);
     transform-origin: left 50vh;
     box-shadow: -22px 0 45px rgb(0 0 0 / 20%);
@@ -319,6 +371,7 @@
     .signature-flipbook__drag-zone:hover
     ~ .signature-flipbook__stage
     .signature-flipbook__reverse {
+    visibility: visible;
     opacity: 0.18;
   }
 }
