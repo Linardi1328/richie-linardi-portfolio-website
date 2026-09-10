@@ -201,7 +201,31 @@ export function AthleteAchievementsPage() {
                 role="region"
               >
                 {records.map((record: AthleteCareerRecord) => {
-                  const isVerified = record.verificationStatus === "verified";
+                  const hasClaims = Boolean(
+                    record.claims && record.claims.length > 0,
+                  );
+                  const isFullyVerified = hasClaims
+                    ? record.claims!.every(
+                        (c) => c.verificationStatus === "verified",
+                      )
+                    : record.verificationStatus === "verified";
+                  const hasVerified = hasClaims
+                    ? record.claims!.some(
+                        (c) => c.verificationStatus === "verified",
+                      )
+                    : record.verificationStatus === "verified";
+                  const hasPending = hasClaims
+                    ? record.claims!.some(
+                        (c) => c.verificationStatus !== "verified",
+                      )
+                    : record.verificationStatus !== "verified";
+
+                  const containerBadgeText = isFullyVerified
+                    ? "Verified Record"
+                    : hasVerified && hasPending
+                      ? "Verified & Portfolio Records"
+                      : "Portfolio Record";
+
                   return (
                     <article
                       className={`athlete-ledger-card ${
@@ -221,12 +245,14 @@ export function AthleteAchievementsPage() {
 
                         <span
                           className={`athlete-ledger-card__status ${
-                            isVerified
+                            isFullyVerified
                               ? "athlete-ledger-card__status--verified"
-                              : "athlete-ledger-card__status--record"
+                              : hasVerified && hasPending
+                                ? "athlete-ledger-card__status--mixed"
+                                : "athlete-ledger-card__status--record"
                           }`}
                         >
-                          {isVerified ? "Verified Record" : "Portfolio Record"}
+                          {containerBadgeText}
                         </span>
                       </div>
 
@@ -236,11 +262,57 @@ export function AthleteAchievementsPage() {
                       <p className="athlete-ledger-card__context">
                         {record.event}
                       </p>
-                      {record.statLine ? (
-                        <p className="athlete-ledger-card__statline">
-                          {record.statLine}
-                        </p>
-                      ) : null}
+                      {hasClaims ? (
+                        <div className="athlete-ladder-tier__results mt-3">
+                          <span className="athlete-ladder-tier__results-label">
+                            Claim-level verification:
+                          </span>
+                          <ul className="athlete-ladder-tier__results-list">
+                            {record.claims!.map((claim, cIdx) => {
+                              const isClaimVerified =
+                                claim.verificationStatus === "verified";
+                              return (
+                                <li
+                                  className="athlete-ladder-tier__result-row"
+                                  key={cIdx}
+                                >
+                                  <div className="athlete-ladder-tier__result-main">
+                                    <span
+                                      aria-hidden="true"
+                                      className="athlete-bullet"
+                                    />
+                                    <span className="athlete-ladder-tier__result-text">
+                                      {claim.label}
+                                    </span>
+                                  </div>
+                                  {isClaimVerified && claim.source ? (
+                                    <a
+                                      className="athlete-ladder-tier__pill athlete-ladder-tier__pill--verified"
+                                      href={claim.source.href}
+                                      rel="noreferrer"
+                                      target="_blank"
+                                    >
+                                      Verified ↗
+                                    </a>
+                                  ) : (
+                                    <span className="athlete-ladder-tier__pill athlete-ladder-tier__pill--pending">
+                                      Portfolio Record
+                                    </span>
+                                  )}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      ) : (
+                        <>
+                          {record.statLine ? (
+                            <p className="athlete-ledger-card__statline">
+                              {record.statLine}
+                            </p>
+                          ) : null}
+                        </>
+                      )}
                       {record.roleContext ? (
                         <p className="athlete-ledger-card__detail">
                           {record.roleContext}

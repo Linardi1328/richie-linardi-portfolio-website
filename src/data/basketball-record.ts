@@ -78,7 +78,7 @@ export const basketballSources = {
   },
   basketyuk: {
     label: "Basketyuk · Kualifikasi Kejurnas KU-17 Wilayah 5",
-    href: "https://basketyuk.id/event/atlet-detail/kualifikasi-kejurnas-ku-17-wilayah-5?d=Y2M4OTNhZTAwOGE3YzAxMTIzNTEyNTE3YWQ1Y2NjMTcyMTY4YmIxZjk0ZmJhYTMwZTE0NjJjYTcyNDM2YzViNzZjODZjMDlkY2M1NmMzNTdhMTg1OTNlNDBlZDU4NWE4YmNlMDkzMDQ1MDViYjVjZTk4YzA0ZmYwYjgwMDYzNGZDdFY2WU5Ca0FjYmxQbDZGRlRMcnVZV3BrSk9TYjU5bDZKeG5XMlVQWHlKK3NoSnVYaVc3d0N4QUVWTGxUb3VJYUtlTFVWdXFrSUVBUUZnZVAzZThUblZRTGIvNjRjSTkvSGJCL0xWRTdmVXlYUm1jWmxuQi93Tll4eFg5V1IybU9wc05xUHQ2VERCamlKb1NCRU84ekE9PQ==",
+    href: "https://basketyuk.id/event/atlet-detail/kualifikasi-kejurnas-ku-17-wilayah-5?d=YWEyNzQzYTY1YmNiOWE3MzY5ZTMwYWY3ODE3ZDVhZWM3ZjIxMzczOTUxZDZiZmMyODIxZDdjMzcxNzYzYjJmOTMzYThkMmU0N2IxNWVkOTFjMGQwNjg1NzdhZmNkM2EzMTE3YTg2MDYyMDllNWI0OTQ3MjE5NTFjZTliZTk1MWNmeDl0UitoYlRDdlE3UlRLOElpNHhHYUFmbE5JZTh5OS9JeHlVdzNqMnIxbEhYRTNYOVR0ZjFyb2xrbkp4SzhwUXFjLytQak9QVDdmSm50d2tDS2J3WEUvS1BXYkt5RGF0bW5CZnp5Qm9rZVpuc1hiYitLd21iVGxmM3J2RlQvWDN2bnRCNnhjL0JOOFl3SWdzSC82VHc9PQ==",
   },
   basketyukFgLeaderboard: {
     label: "Basketyuk · KU-17 Top Player Average Field Goal Leaderboard",
@@ -294,6 +294,12 @@ export type AthleteCompetitionLevel =
   | "international"
   | "university";
 
+export type AthleteCareerClaim = {
+  label: string;
+  verificationStatus: AthleteVerificationStatus;
+  source?: BasketballSource;
+};
+
 export type AthleteCareerRecord = {
   id: string;
   year: string;
@@ -302,8 +308,11 @@ export type AthleteCareerRecord = {
   level: AthleteCompetitionLevel;
   team: string;
   result: string;
+  resultVerificationStatus?: AthleteVerificationStatus;
   location?: string;
   statLine?: string;
+  statVerificationStatus?: AthleteVerificationStatus;
+  claims?: readonly AthleteCareerClaim[];
   roleContext?: string;
   sources: readonly BasketballSource[];
   verificationStatus: AthleteVerificationStatus;
@@ -471,9 +480,27 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     level: "club",
     team: "CLS Surabaya",
     result: "Champion · CLS Surabaya",
+    resultVerificationStatus: "owner-provided",
     location: "Surabaya, Indonesia",
     statLine:
       "3 GP · 58:27 MIN · 31 PTS · 12 REB · 3 AST · 2 STL · 2 BLK · EF 31 · 64.29 FG% (Rank #1)",
+    statVerificationStatus: "verified",
+    claims: [
+      {
+        label: "Champion · CLS Surabaya",
+        verificationStatus: "owner-provided",
+      },
+      {
+        label: "3 GP · 31 PTS · 12 REB · 3 AST · 2 STL · 2 BLK · EF 31",
+        verificationStatus: "verified",
+        source: basketballSources.basketyuk,
+      },
+      {
+        label: "64.29 FG% · Rank #1",
+        verificationStatus: "verified",
+        source: basketballSources.basketyukFgLeaderboard,
+      },
+    ],
     roleContext:
       "Inter-club qualification tournament with CLS Surabaya; official tournament totals and 64.29 FG% / rank #1 leaderboard verified via Basketyuk; Champion result owner-provided pending published classification report",
     sources: [

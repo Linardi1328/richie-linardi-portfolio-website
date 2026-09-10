@@ -1974,6 +1974,12 @@
   color: var(--stage-muted);
 }
 
+.athlete-ledger-card__status--mixed {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 8%, transparent);
+  color: var(--stage-accent);
+}
+
 .athlete-ledger-card__title {
   margin-top: 1rem;
   color: var(--stage-ink);
