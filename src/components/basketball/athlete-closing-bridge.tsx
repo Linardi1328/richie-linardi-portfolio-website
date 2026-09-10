@@ -8,7 +8,7 @@ export function AthleteClosingBridge() {
         <div className="athlete-closing__inner">
           <div data-reveal>
             <p className="athlete-kicker">Two arenas · One discipline</p>
-            <h2 className="athlete-title-display mt-3">
+            <h2 className="athlete-title-display">
               Built on work. Backed by proof.
             </h2>
             <p className="athlete-lead mt-5 max-w-2xl">

@@ -24,6 +24,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  margin-bottom: clamp(0.85rem, 1.4vw, 1.15rem);
   color: var(--stage-accent);
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -129,11 +130,19 @@
   display: flex;
   flex-direction: column;
   max-width: 44rem;
+  min-width: 0;
 }
 
 .athlete-hero__title {
-  margin-top: 1.25rem;
-  font-size: clamp(3rem, 9vw, 6.8rem);
+  margin-top: 0;
+  font-size: clamp(2.4rem, 4.4vw, 4.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  max-width: 15ch;
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 
 .athlete-hero__description {
@@ -315,7 +324,7 @@
 .athlete-section-heading {
   display: grid;
   gap: 1.25rem;
-  margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+  margin-bottom: clamp(2.75rem, 5.5vw, 4.5rem);
 }
 
 .athlete-section-heading h2 {
@@ -328,10 +337,11 @@
   line-height: 1.72;
 }
 
-/* Progression Stepped Track */
+/* Progression Stepped Track / 3-Chapter System */
+.athlete-progression__chapters,
 .athlete-progression__track {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .athlete-progression__card {
@@ -413,6 +423,165 @@
   font-size: 0.68rem;
   font-weight: 750;
   letter-spacing: 0.05em;
+}
+
+/* Chapter 02: School Competition Era (Centerpiece Hero Card) */
+.athlete-progression__card--school-era {
+  border-color: color-mix(in srgb, var(--stage-accent) 30%, var(--stage-line));
+  background:
+    radial-gradient(circle at 80% 20%, rgb(200 164 92 / 8%), transparent 18rem),
+    var(--stage-paper-elevated);
+}
+
+.athlete-school-era__header {
+  padding-bottom: 0.5rem;
+}
+
+.athlete-school-era__title {
+  margin-top: 0.45rem;
+  color: var(--stage-ink);
+  font-size: clamp(1.22rem, 2.2vw, 1.48rem);
+  font-weight: 820;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+}
+
+.athlete-school-era__summary {
+  margin-top: 0.55rem;
+  color: var(--stage-muted);
+  font-size: 0.86rem;
+  line-height: 1.62;
+}
+
+.athlete-school-era__seasons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+.athlete-school-era__col {
+  display: flex;
+  flex-direction: column;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.athlete-school-era__col-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.athlete-school-era__year {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.athlete-school-era__stage {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.athlete-school-era__col-title {
+  margin-top: 0.35rem;
+  color: var(--stage-ink);
+  font-size: 0.96rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.athlete-school-era__col-detail {
+  margin-top: 0.45rem;
+  color: var(--stage-muted);
+  font-size: 0.82rem;
+  line-height: 1.58;
+}
+
+.athlete-school-era__col-footer {
+  margin-top: 0.85rem;
+  padding-top: 0.65rem;
+}
+
+.athlete-school-era__col-footer .athlete-progression__badge {
+  margin-top: 0;
+}
+
+/* Extensible Competition Ladder Slot */
+.athlete-school-era__ladder {
+  margin-top: 1.25rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid
+    color-mix(in srgb, var(--stage-accent) 25%, var(--stage-line));
+  background: color-mix(in srgb, var(--stage-paper) 70%, transparent);
+}
+
+.athlete-school-era__ladder-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.athlete-school-era__ladder-tag {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.athlete-school-era__ladder-status {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+}
+
+.athlete-school-era__ladder-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.athlete-school-era__ladder-tier {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+}
+
+.athlete-school-era__ladder-index {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.athlete-school-era__ladder-name {
+  color: var(--stage-ink);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* Pinnacle 2024 Card Emphasis */
@@ -873,15 +1042,28 @@
     grid-column: span 2;
   }
 
-  .athlete-progression__track {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+  .athlete-school-era__seasons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--stage-line);
+    border-bottom: 1px solid var(--stage-line);
+  }
+
+  .athlete-school-era__col {
+    padding: 1.25rem 0.85rem;
+    border-bottom: none;
+    border-right: 1px solid var(--stage-line);
+  }
+
+  .athlete-school-era__col:last-child {
+    border-right: none;
   }
 }
 
 @media (min-width: 900px) {
   .athlete-section-heading {
     grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+    column-gap: clamp(3rem, 5vw, 5rem);
+    row-gap: 1.5rem;
     align-items: end;
   }
 
@@ -920,16 +1102,17 @@
     grid-column: auto;
   }
 
-  .athlete-progression__track {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+  .athlete-progression__chapters {
+    grid-template-columns: minmax(13rem, 1fr) minmax(28rem, 2.5fr) minmax(
+        14rem,
+        1.1fr
+      );
+    gap: 1.25rem;
+    align-items: stretch;
   }
-}
 
-@media (min-width: 1280px) {
-  .athlete-progression__track {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 1rem;
+  .athlete-school-era__col {
+    padding: 1.25rem 1rem;
   }
 }
 
