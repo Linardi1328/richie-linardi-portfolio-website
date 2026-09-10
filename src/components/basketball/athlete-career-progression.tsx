@@ -9,8 +9,10 @@ type ProgressionMilestone = {
   step: string;
   title: string;
   year: string;
-  sourceLabel?: string;
-  sourceUrl?: string;
+  sources: readonly {
+    label: string;
+    href: string;
+  }[];
 };
 
 const progressionMilestones: readonly ProgressionMilestone[] = [
@@ -22,8 +24,12 @@ const progressionMilestones: readonly ProgressionMilestone[] = [
     step: "01",
     title: "DBL Academy",
     year: "2016",
-    sourceLabel: "DBL Academy Record",
-    sourceUrl: basketballSources.dblAcademy.href,
+    sources: [
+      {
+        label: "DBL Academy record",
+        href: basketballSources.dblAcademy.href,
+      },
+    ],
   },
   {
     badge: "Second Team",
@@ -33,8 +39,12 @@ const progressionMilestones: readonly ProgressionMilestone[] = [
     step: "02",
     title: "DBL East Java",
     year: "2021",
-    sourceLabel: "DBL Player Profile",
-    sourceUrl: basketballSources.dblProfile.href,
+    sources: [
+      {
+        label: "DBL player profile",
+        href: basketballSources.dblProfile.href,
+      },
+    ],
   },
   {
     badge: "Regional Playoff",
@@ -44,8 +54,12 @@ const progressionMilestones: readonly ProgressionMilestone[] = [
     step: "03",
     title: "Regional Campaign",
     year: "2022",
-    sourceLabel: "DBL Match Record",
-    sourceUrl: basketballSources.dblProfile.href,
+    sources: [
+      {
+        label: "DBL match record",
+        href: basketballSources.dblProfile.href,
+      },
+    ],
   },
   {
     badge: "First Team & Finalist",
@@ -55,8 +69,16 @@ const progressionMilestones: readonly ProgressionMilestone[] = [
     step: "04",
     title: "East Java Final Run",
     year: "2023",
-    sourceLabel: "DBL Final Report",
-    sourceUrl: basketballSources.dblFirstTeam.href,
+    sources: [
+      {
+        label: "DBL final report",
+        href: basketballSources.dblFirstTeam.href,
+      },
+      {
+        label: "DBL season profile",
+        href: basketballSources.dblProfile.href,
+      },
+    ],
   },
   {
     badge: "Gold Medal & All-Star",
@@ -67,8 +89,20 @@ const progressionMilestones: readonly ProgressionMilestone[] = [
     step: "05",
     title: "International Competition",
     year: "2024",
-    sourceLabel: "FIBA Profile",
-    sourceUrl: basketballSources.fiba.href,
+    sources: [
+      {
+        label: "DBL All-Star roster",
+        href: basketballSources.dblAllStar.href,
+      },
+      {
+        label: "ASG final box score",
+        href: basketballSources.asgBox.href,
+      },
+      {
+        label: "FIBA player profile",
+        href: basketballSources.fiba.href,
+      },
+    ],
   },
 ];
 
@@ -89,8 +123,8 @@ export function AthleteCareerProgression() {
           </div>
           <p>
             The athlete timeline tracks development as an intentional
-            progression: from early academy training through high-school
-            championships in Surabaya to representing Indonesia on continental
+            progression: from early academy training through school competition
+            with SMA Gloria 1 Surabaya to representing Indonesia on continental
             courts in 2024.
           </p>
         </div>
@@ -133,16 +167,19 @@ export function AthleteCareerProgression() {
                   {m.badge}
                 </div>
 
-                {m.sourceUrl ? (
-                  <div className="mt-3">
-                    <a
-                      className="athlete-source-link"
-                      href={m.sourceUrl}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      {m.sourceLabel || "Source record"} ↗
-                    </a>
+                {m.sources.length > 0 ? (
+                  <div className="athlete-progression__sources">
+                    {m.sources.map((source) => (
+                      <a
+                        className="athlete-source-link"
+                        href={source.href}
+                        key={`${m.year}-${source.label}`}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {source.label} ↗
+                      </a>
+                    ))}
                   </div>
                 ) : null}
               </div>
