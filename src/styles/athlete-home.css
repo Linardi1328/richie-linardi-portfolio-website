@@ -1015,13 +1015,76 @@
   list-style: none;
 }
 
-.athlete-ladder-tier__results-list li {
+.athlete-ladder-tier__results-list li,
+.athlete-ladder-tier__result-row {
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
-  gap: 0.55rem;
+  gap: 0.75rem;
+  flex-wrap: wrap;
   color: var(--stage-ink);
   font-size: 0.84rem;
   line-height: 1.5;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed
+    color-mix(in srgb, var(--stage-line) 50%, transparent);
+}
+
+.athlete-ladder-tier__results-list li:last-child,
+.athlete-ladder-tier__result-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.athlete-ladder-tier__result-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+
+.athlete-ladder-tier__result-text {
+  word-break: break-word;
+}
+
+.athlete-ladder-tier__pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.athlete-ladder-tier__pill--verified {
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 12%, transparent);
+  color: var(--stage-accent);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.athlete-ladder-tier__pill--verified:hover {
+  background: color-mix(in srgb, var(--stage-accent) 24%, transparent);
+  border-color: var(--stage-accent);
+}
+
+.athlete-ladder-tier__pill--verified:focus-visible {
+  outline: 2px solid var(--stage-accent);
+  outline-offset: 2px;
+  background: color-mix(in srgb, var(--stage-accent) 24%, transparent);
+}
+
+.athlete-ladder-tier__pill--pending {
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 80%, transparent);
+  color: var(--stage-muted);
 }
 
 .athlete-bullet {
@@ -1032,12 +1095,6 @@
   background: var(--stage-accent);
   flex-shrink: 0;
   transform: translateY(-2px);
-}
-
-.athlete-ladder-tier__footer {
-  display: flex;
-  align-items: center;
-  margin-top: 0.4rem;
 }
 
 .athlete-ladder__cta-row {

@@ -20,7 +20,7 @@ export const basketballCareerMoments = [
   },
   {
     context: "East Java",
-    detail: "52 points · 21 rebounds · 13 assists · Second Team.",
+    detail: "52 points · 21 rebounds · 13 assists in North Region play.",
     label: "DBL season",
     year: "2022",
   },

@@ -33,7 +33,7 @@ export function AthleteJourneyPage() {
                 An intentional progression structured across three continuous
                 tracks: grassroots club fundamentals, long-term academy
                 development, and school-to-university competition. Trace each
-                milestone across ten competitive seasons.
+                milestone across a decade-plus competitive pathway.
               </p>
               <div className="athlete-hero__actions">
                 <Link className="athlete-btn-primary" href="#tracks">
@@ -80,22 +80,26 @@ export function AthleteJourneyPage() {
                 </svg>
 
                 <div aria-hidden="true" className="athlete-hero__number">
-                  10Y
+                  13
                 </div>
               </div>
 
               <div className="athlete-hero__identity-meta">
                 <div>
                   <span>Club track</span>
-                  <strong>5 Milestones</strong>
+                  <strong>{athletePathwayTracks.club.length} Milestones</strong>
                 </div>
                 <div>
                   <span>Academy track</span>
-                  <strong>8-Year Program</strong>
+                  <strong>
+                    {athletePathwayTracks.development.length} Milestones
+                  </strong>
                 </div>
                 <div>
                   <span>School / Varsity</span>
-                  <strong>6 Campaigns</strong>
+                  <strong>
+                    {athletePathwayTracks.schoolUniversity.length} Campaigns
+                  </strong>
                 </div>
                 <div>
                   <span>Verification</span>

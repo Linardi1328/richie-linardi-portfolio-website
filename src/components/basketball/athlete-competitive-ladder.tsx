@@ -36,7 +36,18 @@ export function AthleteCompetitiveLadder() {
         >
           {athleteCompetitiveLadder.map(
             (tier: AthleteCompetitiveLadderTier) => {
-              const isVerified = tier.verificationStatus === "verified";
+              const allVerified = tier.signatureResults.every(
+                (r) => r.verificationStatus === "verified",
+              );
+              const hasVerified = tier.signatureResults.some(
+                (r) => r.verificationStatus === "verified",
+              );
+              const containerBadgeText = allVerified
+                ? "Verified Tier"
+                : hasVerified
+                  ? "Verified & Portfolio Records"
+                  : "Portfolio Records";
+
               return (
                 <article
                   className={`athlete-ladder-tier ${
@@ -75,12 +86,12 @@ export function AthleteCompetitiveLadder() {
                       <div className="athlete-ladder-tier__badges">
                         <span
                           className={`athlete-ladder-tier__status ${
-                            isVerified
+                            allVerified
                               ? "athlete-ladder-tier__status--verified"
                               : "athlete-ladder-tier__status--record"
                           }`}
                         >
-                          {isVerified ? "Verified Record" : "Portfolio Record"}
+                          {containerBadgeText}
                         </span>
                       </div>
                     </div>
@@ -92,30 +103,42 @@ export function AthleteCompetitiveLadder() {
                         Signature outcomes:
                       </span>
                       <ul className="athlete-ladder-tier__results-list">
-                        {tier.signatureResults.map((result, idx) => (
-                          <li key={idx}>
-                            <span
-                              aria-hidden="true"
-                              className="athlete-bullet"
-                            />
-                            <span>{result}</span>
-                          </li>
-                        ))}
+                        {tier.signatureResults.map((result, idx) => {
+                          const isOutcomeVerified =
+                            result.verificationStatus === "verified";
+                          return (
+                            <li
+                              className="athlete-ladder-tier__result-row"
+                              key={idx}
+                            >
+                              <div className="athlete-ladder-tier__result-main">
+                                <span
+                                  aria-hidden="true"
+                                  className="athlete-bullet"
+                                />
+                                <span className="athlete-ladder-tier__result-text">
+                                  {result.label}
+                                </span>
+                              </div>
+                              {isOutcomeVerified && result.source ? (
+                                <a
+                                  className="athlete-ladder-tier__pill athlete-ladder-tier__pill--verified"
+                                  href={result.source.href}
+                                  rel="noreferrer"
+                                  target="_blank"
+                                >
+                                  Verified ↗
+                                </a>
+                              ) : (
+                                <span className="athlete-ladder-tier__pill athlete-ladder-tier__pill--pending">
+                                  Portfolio Record
+                                </span>
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
-
-                    {tier.source ? (
-                      <div className="athlete-ladder-tier__footer">
-                        <a
-                          className="athlete-source-link"
-                          href={tier.source.href}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          {tier.source.label} ↗
-                        </a>
-                      </div>
-                    ) : null}
                   </div>
                 </article>
               );

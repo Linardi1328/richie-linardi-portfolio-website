@@ -25,27 +25,43 @@ export type BasketballSeasonStat = {
 
 export const basketballSources = {
   dblProfile: {
-    label: "DBL Indonesia player profile",
+    label: "DBL Indonesia · Richie player profile",
     href: "https://www.dbl.id/u/profile/27842/richie-bertrand-linardi",
+  },
+  dblTag: {
+    label: "DBL Indonesia · Richie coverage archive",
+    href: "https://www.dbl.id/t/20340/richie-bertrand-linardi",
   },
   dblAllStar: {
     label: "DBL Indonesia · All-Star 2024 roster",
     href: "https://www.dbl.id/r/19689/skuad-putra-kopi-good-day-dbl-indonesia-all-star-2024",
   },
   dblAcademy: {
-    label: "DBL Indonesia · Academy journey",
+    label: "DBL Indonesia · Academy retrospective",
     href: "https://www.dbl.id/r/23090/begini-wejangan-richie-dan-kennie-untuk-dbl-academy-selection-team-2024",
   },
   dblFirstTeam: {
     label: "DBL Indonesia · Gloria 1 final run",
     href: "https://www.dbl.id/r/19150/richie-bertrand-dan-kenangan-manis-bawa-gloria-1-ke-partai-final",
   },
-  dblTag: {
-    label: "DBL Indonesia · Richie coverage archive",
-    href: "https://www.dbl.id/t/20340/richie-bertrand-linardi",
+  dblThailand: {
+    label: "Detik Sport · Selection Team Thailand 2018",
+    href: "https://sport.detik.com/basket/d-4164131/para-pebasket-muda-indonesia-ini-ikut-turnamen-di-thailand",
+  },
+  dblMalaysia: {
+    label: "DBL Indonesia · Selection Team Malaysia 2019",
+    href: "https://www.dbl.id/r/74/giliran-tim-dbl-academy-selection-ku-13-sabet-runner-up-di-malaysia",
+  },
+  dblVegas: {
+    label: "DBL Indonesia · Impact Basketball Las Vegas 2022",
+    href: "https://www.dbl.id/r/9522/ikuti-program-dbl-academy-richie-bertrand-punya-impian-jadi-pemain-profesional",
+  },
+  dblPerth: {
+    label: "DBL Indonesia · Selection Team Australia 2022",
+    href: "https://www.dbl.id/r/11064/dbl-academy-selection-team-berangkat-ke-australia",
   },
   asgBox: {
-    label: "IBL Indonesia · ASG 2024 final",
+    label: "IBL Indonesia · ASG 2024 final box score",
     href: "https://iblindonesia.com/news/timnas-putra-indonesia-sabet-medali-emas-asg-2024",
   },
   fiba: {
@@ -61,12 +77,12 @@ export const basketballSources = {
     href: "https://lenzanasional.com/kota-surabaya-kawinkan-gelar-basket-5-x-5-porprov-viii-jatim-2023/",
   },
   basketyuk: {
-    label: "Basketyuk · Kejurnas KU17 event statistics",
-    href: "https://basketyuk.com",
+    label: "Basketyuk · Kualifikasi Kejurnas KU-17 Wilayah 5",
+    href: "https://basketyuk.co.id/event/atlet-detail/kualifikasi-kejurnas-ku-17-wilayah-5?d=Y2M4OTNhZTAwOGE3YzAxMTIzNTEyNTE3YWQ1Y2NjMTcyMTY4YmIxZjk0ZmJhYTMwZTE0NjJjYTcyNDM2YzViNzZjODZjMDlkY2M1NmMzNTdhMTg1OTNlNDBlZDU4NWE4YmNlMDkzMDQ1MDViYjVjZTk4YzA0ZmYwYjgwMDYzNGZDdFY2WU5Ca0FjYmxQbDZGRlRMcnVZV3BrSk9TYjU5bDZKeG5XMlVQWHlKK3NoSnVYaVc3d0N4QUVWTGxUb3VJYUtlTFVWdXFrSUVBUUZnZVAzZThUblZRTGIvNjRjSTkvSGJCL0xWRTdmVXlYUm1jWmxuQi93Tll4eFg5V1IybU9wc05xUHQ2VERCamlKb1NCRU84ekE9PQ==",
   },
   sofascore: {
-    label: "Sofascore · KL Hornbills player profile",
-    href: "https://www.sofascore.com",
+    label: "Sofascore · Richie Bertrand Linardi profile",
+    href: "https://www.sofascore.com/basketball/player/richie-bertrand-linardi/2271130",
   },
   instagramWbs: {
     label: "Western Basketball Surabaya Instagram",
@@ -240,20 +256,21 @@ export const porprovViiiFinalSnapshot = {
 } as const;
 
 export const kejurnasKu17Snapshot = {
-  competition: "Kejurnas KU17 2023",
-  context: "CLS SURABAYA · NATIONAL YOUTH TOURNAMENT",
-  title: "Kejurnas KU17 Tournament Performance",
+  competition: "Kualifikasi Kejurnas KU-17 Wilayah 5",
+  context: "CLS SURABAYA · INTER-CLUB QUALIFICATION",
+  title: "Kualifikasi Kejurnas KU-17 Wilayah 5 · CLS Surabaya",
   badge: "Official Tournament Statistics",
   team: "CLS Surabaya",
   games: 3,
+  minutes: "00:58:27",
+  efficiency: 31,
   points: 31,
   rebounds: 12,
   assists: 3,
   steals: 2,
   blocks: 2,
-  fieldGoalPct: "64.29 FG%",
   contextNote:
-    "Recorded 31 points, 12 rebounds, 3 assists, 2 steals, and 2 blocks across 3 games, ranking among tournament field-goal percentage leaders at 64.29%.",
+    "Recorded 31 points, 12 rebounds, 3 assists, 2 steals, and 2 blocks across 3 games representing CLS Surabaya in the Kejurnas KU-17 Wilayah 5 inter-club qualification pathway.",
   source: basketballSources.basketyuk,
 } as const;
 
@@ -299,7 +316,8 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     result: "Gold Medal · Champion",
     location: "Da Nang, Vietnam",
     statLine: "12 PTS · 4 REB in Final (56–54 vs Philippines)",
-    roleContext: "Starting contributor in boys' championship final victory",
+    roleContext:
+      "Contributed 12 PTS / 4 REB in boys' championship final victory",
     sources: [basketballSources.asgBox],
     verificationStatus: "verified",
     homepagePriority: true,
@@ -351,7 +369,7 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     result: "Champion · Gold Medal",
     location: "GOR Delta, Sidoarjo",
     statLine: "21 PTS · 7 REB in Final (93–57 vs Jember)",
-    roleContext: "Finals scoring co-leader in gold medal championship win",
+    roleContext: "Contributed 21 PTS / 7 REB in gold medal championship win",
     sources: [basketballSources.porprov2023],
     verificationStatus: "verified",
     homepagePriority: true,
@@ -386,7 +404,7 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     statLine:
       "10 GP · 121 PTS · 84 REB · 25 AST (58.5 FG% · 45.0 3PT% · 72.4 FT%)",
     roleContext:
-      "Led Gloria 1 to East Java championship final and earned First Team honors",
+      "Led Gloria 1 to East Java championship final and earned DBL East Java First Team honors",
     sources: [basketballSources.dblFirstTeam, basketballSources.dblProfile],
     verificationStatus: "verified",
     homepagePriority: true,
@@ -418,7 +436,7 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     location: "Surabaya, Indonesia",
     statLine: "5 GP · 60 PTS · 35 REB · 3 AST",
     roleContext:
-      "High-school varsity debut season reaching semifinal round with Second Team honors",
+      "High-school varsity debut season reaching semifinal round with DBL East Java Second Team honors",
     sources: [basketballSources.dblProfile],
     verificationStatus: "verified",
     tier: "major",
@@ -426,15 +444,15 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
   {
     id: "kejurnas-ku17-2023",
     year: "2023",
-    event: "Kejurnas KU17 2023",
+    event: "Kualifikasi Kejurnas KU-17 Wilayah 5 · CLS Surabaya",
     discipline: "5v5",
-    level: "national-pathway",
+    level: "club",
     team: "CLS Surabaya",
-    result: "National Youth Tournament",
-    location: "Indonesia",
-    statLine: "3 GP · 31 PTS · 12 REB · 3 AST · 2 STL · 2 BLK · 64.29 FG%",
+    result: "Inter-Club Qualification Pathway",
+    location: "Surabaya, Indonesia",
+    statLine: "3 GP · 31 PTS · 12 REB · 3 AST · 2 STL · 2 BLK",
     roleContext:
-      "Club representative in national youth championship with official Basketyuk tracking",
+      "Club qualification campaign with CLS Surabaya tracked by official Basketyuk event data",
     sources: [basketballSources.basketyuk],
     verificationStatus: "verified",
     tier: "major",
@@ -558,17 +576,63 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     tier: "continuing",
   },
   {
-    id: "kualifikasi-kejurnas-u17-2023",
-    year: "2023",
-    event: "Kualifikasi Klub Kejurnas U17 2023",
+    id: "dev-thailand-2018",
+    year: "2018",
+    event: "DBL Academy Selection Team · Thailand",
     discipline: "5v5",
     level: "club",
-    team: "CLS Surabaya",
-    result: "Champion",
-    location: "Surabaya, Indonesia",
-    roleContext: "Club championship qualification run with CLS Surabaya",
-    sources: [basketballSources.instagramCls],
-    verificationStatus: "owner-provided",
+    team: "DBL Academy Selection Team",
+    result: "International Tournament Campaign · Bangkok",
+    location: "Bangkok, Thailand",
+    roleContext:
+      "Selected to U13 international squad for tournament competition in Thailand",
+    sources: [basketballSources.dblThailand],
+    verificationStatus: "verified",
+    tier: "continuing",
+  },
+  {
+    id: "dev-malaysia-2019",
+    year: "2019",
+    event: "DBL Academy Selection Team · Malaysia",
+    discipline: "5v5",
+    level: "club",
+    team: "DBL Academy Selection Team",
+    result: "Global Elite Hoops 2019 · Runner-Up",
+    location: "Malaysia",
+    roleContext:
+      "Selected to U13 squad earning 1st Runner-Up in international tournament",
+    sources: [basketballSources.dblMalaysia],
+    verificationStatus: "verified",
+    tier: "continuing",
+  },
+  {
+    id: "dev-vegas-2022",
+    year: "2022",
+    event: "DBL Academy International Summer Camp · Las Vegas",
+    discipline: "5v5",
+    level: "club",
+    team: "DBL Academy",
+    result: "Impact Basketball Summer Camp",
+    location: "Las Vegas, United States",
+    roleContext:
+      "Selected for intensive international player development curriculum at Impact Basketball",
+    sources: [basketballSources.dblVegas],
+    verificationStatus: "verified",
+    tier: "continuing",
+  },
+  {
+    id: "dev-perth-2022",
+    year: "2022",
+    event: "DBL Academy Selection Team · Australia",
+    discipline: "5v5",
+    level: "club",
+    team: "DBL Academy Selection Team",
+    result: "World Basketball Academy Training & Tour",
+    location: "Perth, Australia",
+    roleContext:
+      "Selected to DBL Academy Selection Team for training and tournament play with World Basketball Academy",
+    sources: [basketballSources.dblPerth],
+    verificationStatus: "verified",
     tier: "continuing",
   },
   {
@@ -604,18 +668,22 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
   },
 ] as const;
 
-export type AthleteCompetitiveLadderTier = {
-  context: string;
-  headline: string;
-  levelBadge: string;
-  order: string;
-  signatureResults: readonly string[];
+export type CompetitiveLadderResult = {
+  label: string;
+  verificationStatus: AthleteVerificationStatus;
   source?: BasketballSource;
-  statCallout?: string;
-  summary: string;
+};
+
+export type AthleteCompetitiveLadderTier = {
+  order: string;
   tierKey: string;
   tierName: string;
-  verificationStatus: AthleteVerificationStatus;
+  levelBadge: string;
+  context: string;
+  headline: string;
+  statCallout?: string;
+  summary: string;
+  signatureResults: readonly CompetitiveLadderResult[];
 };
 
 export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
@@ -631,11 +699,17 @@ export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
       summary:
         "Led SMA Gloria 1 Surabaya to the DBL East Java championship final in 2023, earning Kopi Good Day First Team honors with 58.5 FG% and 45.0 3PT% shooting.",
       signatureResults: [
-        "2023 DBL East Java Runner-Up · First Team selection",
-        "2021 DBL East Java Fantastic Four · Second Team honors",
+        {
+          label: "2023 DBL East Java Runner-Up · First Team selection",
+          verificationStatus: "verified",
+          source: basketballSources.dblFirstTeam,
+        },
+        {
+          label: "2021 DBL East Java Fantastic Four · Second Team honors",
+          verificationStatus: "verified",
+          source: basketballSources.dblProfile,
+        },
       ],
-      source: basketballSources.dblFirstTeam,
-      verificationStatus: "verified",
     },
     {
       order: "02",
@@ -648,11 +722,17 @@ export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
       summary:
         "Represented Kota Surabaya in the East Java Provincial Games (PorProv VIII), posting 21 points and 7 rebounds in the 93–57 gold medal final victory over Kabupaten Jember.",
       signatureResults: [
-        "PorProv VIII Jatim 2023 5v5 Champion · 21 PTS / 7 REB in final",
-        "PorProv IX Jatim 2025 3x3 Champion · Kota Surabaya",
+        {
+          label:
+            "PorProv VIII Jatim 2023 5v5 Champion · 21 PTS / 7 REB in final",
+          verificationStatus: "verified",
+          source: basketballSources.porprov2023,
+        },
+        {
+          label: "PorProv IX Jatim 2025 3x3 Champion · Kota Surabaya",
+          verificationStatus: "owner-provided",
+        },
       ],
-      source: basketballSources.porprov2023,
-      verificationStatus: "verified",
     },
     {
       order: "03",
@@ -665,12 +745,23 @@ export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
       summary:
         "Advanced into the national developmental pathway: earned qualification for PON XXI 2024 with Jawa Timur and selected to the 2024 DBL Indonesia All-Star roster.",
       signatureResults: [
-        "Pra-PON XXI 2023 · Qualified for PON XXI 2024 with Jawa Timur",
-        "DBL Indonesia All-Star 2024 · National roster selection",
-        "Kejurnas KU17 2023 · 64.29% FG leaderboard with CLS Surabaya",
+        {
+          label: "DBL Indonesia All-Star 2024 · National roster selection",
+          verificationStatus: "verified",
+          source: basketballSources.dblAllStar,
+        },
+        {
+          label:
+            "Kualifikasi Kejurnas KU-17 Wilayah 5 · 31 PTS / 12 REB (CLS Surabaya)",
+          verificationStatus: "verified",
+          source: basketballSources.basketyuk,
+        },
+        {
+          label:
+            "Pra-PON XXI 2023 · Qualified for PON XXI 2024 with Jawa Timur",
+          verificationStatus: "owner-provided",
+        },
       ],
-      source: basketballSources.dblAllStar,
-      verificationStatus: "verified",
     },
     {
       order: "04",
@@ -683,11 +774,18 @@ export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
       summary:
         "Represented Indonesia in continental and regional competition: contributed 12 points and 4 rebounds in the 56–54 gold medal victory over the Philippines at ASG 2024, and contested 3 matches at the FIBA U18 Asia Cup.",
       signatureResults: [
-        "ASEAN Schools Games 2024 Gold · 56–54 vs Philippines in final",
-        "FIBA U18 Asia Cup 2024 · 3 GP for Indonesia in Amman, Jordan",
+        {
+          label:
+            "ASEAN Schools Games 2024 Gold · 56–54 vs Philippines (12 PTS / 4 REB in final)",
+          verificationStatus: "verified",
+          source: basketballSources.asgBox,
+        },
+        {
+          label: "FIBA U18 Asia Cup 2024 · 3 GP for Indonesia in Amman, Jordan",
+          verificationStatus: "verified",
+          source: basketballSources.fiba,
+        },
       ],
-      source: basketballSources.asgBox,
-      verificationStatus: "verified",
     },
     {
       order: "05",
@@ -700,12 +798,22 @@ export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
       summary:
         "Maintained competitive progression across university and club levels: Liga Mahasiswa Nasional 1st Runner-Up with Universitas Surabaya, Heat Challenge Cup 1st Runner-Up with KL Hornbills, and 2026 ESP Varsity 1st Runner-Up with Monash University.",
       signatureResults: [
-        "Liga Mahasiswa Nasional 2024 · 1st Runner-Up (Universitas Surabaya)",
-        "Heat Challenge Cup 2025 · 1st Runner-Up (KL Hornbills)",
-        "ESP Varsity Championship 2026 · 1st Runner-Up & Semifinal Player of the Game (Monash)",
+        {
+          label:
+            "Liga Mahasiswa Nasional 2024 · 1st Runner-Up (Universitas Surabaya)",
+          verificationStatus: "owner-provided",
+        },
+        {
+          label: "Heat Challenge Cup 2025 · 1st Runner-Up (KL Hornbills)",
+          verificationStatus: "owner-provided",
+          source: basketballSources.sofascore,
+        },
+        {
+          label:
+            "ESP Varsity Championship 2026 · 1st Runner-Up & Semifinal Player of the Game (Monash)",
+          verificationStatus: "owner-provided",
+        },
       ],
-      source: basketballSources.instagramHornbills,
-      verificationStatus: "owner-provided",
     },
   ];
 
@@ -740,7 +848,7 @@ export const athletePathwayTracks: {
       detail:
         "Initial club training began with Western Basketball Surabaya, establishing early competitive fundamentals.",
       source: basketballSources.instagramWbs,
-      verificationStatus: "verified",
+      verificationStatus: "owner-provided",
     },
     {
       id: "club-2019",
@@ -752,19 +860,19 @@ export const athletePathwayTracks: {
       detail:
         "Progressed into CLS Surabaya's development system, competing in local club leagues and tournament play.",
       source: basketballSources.instagramCls,
-      verificationStatus: "verified",
+      verificationStatus: "owner-provided",
     },
     {
       id: "club-2023",
       year: "2023",
       pathway: "club",
       entity: "CLS Surabaya",
-      title: "Kualifikasi Klub Kejurnas U17 Champion",
-      context: "Club Championship Qualification",
+      title: "Kualifikasi Kejurnas KU-17 Wilayah 5",
+      context: "Inter-Club Qualification Pathway",
       detail:
-        "Competed in club championship qualification tournament with CLS Surabaya, securing national tournament placement.",
-      source: basketballSources.instagramCls,
-      verificationStatus: "owner-provided",
+        "Competed in the Kejurnas KU-17 Wilayah 5 inter-club qualification pathway with CLS Surabaya, recording 31 PTS, 12 REB, 3 AST, 2 STL, and 2 BLK in 3 games.",
+      source: basketballSources.basketyuk,
+      verificationStatus: "verified",
     },
     {
       id: "club-2024",
@@ -776,7 +884,7 @@ export const athletePathwayTracks: {
       detail:
         "Joined Aces Basketball for regional club competition following high-school graduation.",
       source: basketballSources.instagramAces,
-      verificationStatus: "verified",
+      verificationStatus: "owner-provided",
     },
     {
       id: "club-2025",
@@ -787,7 +895,7 @@ export const athletePathwayTracks: {
       context: "Regional Club Competition · Malaysia",
       detail:
         "Represented KL Hornbills in regional invitational tournament play, finishing as 1st Runner-Up.",
-      source: basketballSources.instagramHornbills,
+      source: basketballSources.sofascore,
       verificationStatus: "owner-provided",
     },
   ],
@@ -809,11 +917,11 @@ export const athletePathwayTracks: {
       year: "2018",
       pathway: "development",
       entity: "DBL Academy Selection Team",
-      title: "Selection Team Thailand Campaign",
-      context: "International Academy Tour",
+      title: "Selection Team · Thailand Campaign",
+      context: "International Academy Tour · Bangkok",
       detail:
-        "Selected to the DBL Academy Selection Team for international competitive experience in Thailand.",
-      source: basketballSources.dblAcademy,
+        "Selected to the DBL Academy Selection Team U13 roster for international tournament competition in Bangkok, Thailand.",
+      source: basketballSources.dblThailand,
       verificationStatus: "verified",
     },
     {
@@ -821,23 +929,35 @@ export const athletePathwayTracks: {
       year: "2019",
       pathway: "development",
       entity: "DBL Academy Selection Team",
-      title: "Second Selection Team Tour",
-      context: "Advanced Academy Selection",
+      title: "Selection Team · Malaysia Campaign",
+      context: "Global Elite Hoops 2019 · Runner-Up",
       detail:
-        "Earned consecutive selection to the DBL Academy Selection Team program.",
-      source: basketballSources.dblAcademy,
+        "Earned consecutive selection to the DBL Academy Selection Team U13 roster, finishing as runner-up in Malaysia.",
+      source: basketballSources.dblMalaysia,
       verificationStatus: "verified",
     },
     {
-      id: "dev-2022",
+      id: "dev-2022-vegas",
       year: "2022",
       pathway: "development",
       entity: "DBL Academy International",
-      title: "Las Vegas Development Program",
-      context: "Overseas Training Experience",
+      title: "International Summer Camp · Las Vegas",
+      context: "Impact Basketball · Overseas Training",
       detail:
-        "Participated in the separately organized 2022 Las Vegas international basketball development curriculum.",
-      source: basketballSources.dblAcademy,
+        "Participated in the separately organized 2022 Las Vegas international basketball development curriculum at Impact Basketball.",
+      source: basketballSources.dblVegas,
+      verificationStatus: "verified",
+    },
+    {
+      id: "dev-2022-perth",
+      year: "2022",
+      pathway: "development",
+      entity: "DBL Academy Selection Team",
+      title: "Selection Team · Australia",
+      context: "World Basketball Academy · Perth",
+      detail:
+        "Selected to the DBL Academy Selection Team for international training and tournament competition with the World Basketball Academy in Perth, Australia.",
+      source: basketballSources.dblPerth,
       verificationStatus: "verified",
     },
     {

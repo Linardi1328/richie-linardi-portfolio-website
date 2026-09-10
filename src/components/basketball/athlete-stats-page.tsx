@@ -295,9 +295,9 @@ export function AthleteStatsPage() {
                 </p>
                 <p className="athlete-spotlight-card__summary">
                   Kota Surabaya secured the PorProv VIII 5x5 basketball gold
-                  medal in a decisive 93–57 final. Richie Linardi contributed 21
-                  points and 7 rebounds as the team&apos;s primary scoring
-                  presence.
+                  medal in a 93–57 final victory over Kabupaten Jember. Richie
+                  Linardi contributed 21 points and 7 rebounds in the title
+                  match.
                 </p>
 
                 {porprovViiiFinalSnapshot.source ? (
@@ -334,7 +334,7 @@ export function AthleteStatsPage() {
       </section>
 
       {/* ----------------------------------------------------------------------
-          BLOCK 03: PROVINCIAL NATIONAL TOURNAMENT (KEJURNAS KU17 2023)
+          BLOCK 03: CLUB QUALIFICATION (KUALIFIKASI KEJURNAS KU-17 WILAYAH 5)
           ---------------------------------------------------------------------- */}
       <section
         aria-labelledby="kejurnas-stats-heading"
@@ -345,16 +345,15 @@ export function AthleteStatsPage() {
           <div className="athlete-section-heading" data-reveal>
             <div>
               <p className="athlete-kicker">
-                Partition 03 · National youth championship
+                Partition 03 · Inter-club qualification
               </p>
               <h2 className="athlete-title-display" id="kejurnas-stats-heading">
-                Kejurnas KU17 2023 event data.
+                Kualifikasi Kejurnas KU-17 Wilayah 5.
               </h2>
             </div>
             <p>
-              Official tournament statistics from the national under-17
-              championship representing Jawa Timur (via CLS Surabaya
-              qualification).
+              Official tournament statistics from the Kejurnas KU-17 Wilayah 5
+              inter-club qualification pathway with CLS Surabaya in East Java.
             </p>
           </div>
 
@@ -369,17 +368,23 @@ export function AthleteStatsPage() {
               <div className="athlete-stat-overview-box__header">
                 <div>
                   <span className="athlete-stat-card__tag">
-                    KEJURNAS ANTARKLUB U17 · JAWA TIMUR
+                    KUALIFIKASI KEJURNAS KU-17 WILAYAH 5 · CLS SURABAYA
                   </span>
-                  <h3>Tournament Efficiency & Shooting Accuracy</h3>
+                  <h3>Tournament Match Statistics & Efficiency</h3>
                 </div>
-                <span className="athlete-stat-card__stage-badge">64.3 FG%</span>
+                <span className="athlete-stat-card__stage-badge">
+                  EF {kejurnasKu17Snapshot.efficiency}
+                </span>
               </div>
 
               <div className="athlete-metrics-row">
                 <div className="athlete-stat-metric">
                   <strong>{kejurnasKu17Snapshot.games}</strong>
                   <span>GAMES</span>
+                </div>
+                <div className="athlete-stat-metric">
+                  <strong>{kejurnasKu17Snapshot.minutes}</strong>
+                  <span>MINUTES</span>
                 </div>
                 <div className="athlete-stat-metric">
                   <strong>{kejurnasKu17Snapshot.points}</strong>
@@ -402,15 +407,15 @@ export function AthleteStatsPage() {
                   <span>BLOCKS</span>
                 </div>
                 <div className="athlete-stat-metric athlete-stat-metric--highlight">
-                  <strong>{kejurnasKu17Snapshot.fieldGoalPct}</strong>
-                  <span>FG ACCURACY</span>
+                  <strong>{kejurnasKu17Snapshot.efficiency}</strong>
+                  <span>EFFICIENCY</span>
                 </div>
               </div>
 
               <p className="athlete-stat-overview-box__notes">
-                Shot 64.29% from the field (9-for-14 2PT) with a 9-for-14 free
-                throw line return across 3 contested national games, totaling 31
-                points and 12 rebounds.
+                Recorded 31 points, 12 rebounds, 3 assists, 2 steals, and 2
+                blocks across 3 qualification games with CLS Surabaya in East
+                Java.
               </p>
 
               <div className="athlete-stat-overview-box__footer">
@@ -420,15 +425,7 @@ export function AthleteStatsPage() {
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Basketyuk official database ↗
-                </a>
-                <a
-                  className="athlete-source-link"
-                  href={basketballSources.instagramCls.href}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  CLS club record ↗
+                  Basketyuk official event database ↗
                 </a>
               </div>
             </div>

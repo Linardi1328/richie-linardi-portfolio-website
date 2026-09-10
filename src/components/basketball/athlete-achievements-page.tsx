@@ -57,6 +57,9 @@ const levels: AthleteCompetitionLevel[] = [
 ];
 
 export function AthleteAchievementsPage() {
+  const totalEntries = athleteCareerRecords.length;
+  const totalLevels = levels.length;
+
   return (
     <article className="athlete-home athlete-subpage">
       {/* ----------------------------------------------------------------------
@@ -77,7 +80,8 @@ export function AthleteAchievementsPage() {
                 A structured archive partitioning career milestones across
                 international competition, national development pathways, city
                 and provincial games, high school varsity, and university play.
-                Every result stays anchored to verified context.
+                Verified records link directly to published sources; additional
+                portfolio records remain clearly distinguished.
               </p>
               <div className="athlete-hero__actions">
                 <Link className="athlete-btn-primary" href="#international">
@@ -127,18 +131,18 @@ export function AthleteAchievementsPage() {
                 </svg>
 
                 <div aria-hidden="true" className="athlete-hero__number">
-                  20
+                  {totalEntries}
                 </div>
               </div>
 
               <div className="athlete-hero__identity-meta">
                 <div>
                   <span>Ledger total</span>
-                  <strong>20 Career Entries</strong>
+                  <strong>{totalEntries} Career Entries</strong>
                 </div>
                 <div>
                   <span>Levels</span>
-                  <strong>6 Tiers of Play</strong>
+                  <strong>{totalLevels} Tiers of Play</strong>
                 </div>
                 <div>
                   <span>Peak honors</span>

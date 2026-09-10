@@ -214,6 +214,35 @@ try {
   hasError = true;
 }
 
+// 4. Athlete-side content-truth and hype guardrails
+const athleteForbiddenPhrases = [
+  "Starting contributor",
+  "Finals scoring co-leader",
+  "primary scoring presence",
+  "historic international gold",
+  "Sophomore Debut",
+  "Senior Final Run",
+  "conference First Team",
+  "64.29 FG%",
+  "64.29%",
+  "9-for-14",
+  "ten competitive seasons",
+  'href: "https://basketyuk.com"',
+  'href: "https://www.sofascore.com"',
+];
+
+for (const file of srcFiles) {
+  const content = readFileSync(file, "utf8");
+  for (const phrase of athleteForbiddenPhrases) {
+    if (content.includes(phrase)) {
+      console.error(
+        `❌ Athlete-side unverified phrase or generic URL "${phrase}" found in ${file}`,
+      );
+      hasError = true;
+    }
+  }
+}
+
 if (hasError) {
   console.error(
     "\n💥 Content truth audit failed. Please address errors above.",

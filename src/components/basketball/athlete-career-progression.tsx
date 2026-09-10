@@ -106,20 +106,39 @@ export function AthleteCareerProgression() {
               </div>
 
               <div className="athlete-foundation-item">
-                <div className="athlete-foundation-item__year">2018–19</div>
+                <div className="athlete-foundation-item__year">2018</div>
                 <div>
-                  <h4>DBL Academy Selection Teams</h4>
+                  <h4>DBL Academy Selection Team · Thailand</h4>
                   <p>
-                    Consecutive international tournament selections, including
-                    2018 Thailand campaign.
+                    Selected to U13 international tournament roster in Bangkok,
+                    Thailand.
                   </p>
                   <a
                     className="athlete-source-link"
-                    href={basketballSources.dblAcademy.href}
+                    href={basketballSources.dblThailand.href}
                     rel="noreferrer"
                     target="_blank"
                   >
-                    Selection record ↗
+                    Detik report ↗
+                  </a>
+                </div>
+              </div>
+
+              <div className="athlete-foundation-item">
+                <div className="athlete-foundation-item__year">2019</div>
+                <div>
+                  <h4>DBL Academy Selection Team · Malaysia</h4>
+                  <p>
+                    Global Elite Hoops 2019 U13 tournament runner-up in
+                    Malaysia.
+                  </p>
+                  <a
+                    className="athlete-source-link"
+                    href={basketballSources.dblMalaysia.href}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    DBL report ↗
                   </a>
                 </div>
               </div>
@@ -162,11 +181,12 @@ export function AthleteCareerProgression() {
             </div>
 
             <div className="athlete-chapter-card__headline">
-              <h3>SMA Gloria 1 Surabaya Varsity Chapter</h3>
+              <h3>SMA Gloria 1 Surabaya · 2021 | 2022 | 2023</h3>
               <p className="athlete-chapter-card__lead">
                 Three consecutive DBL East Java varsity campaigns, progressing
-                from a sophomore semifinal debut to leading Gloria 1 to the 2023
-                Championship Series Final with conference First Team honors.
+                from a 2021 semifinal run to leading Gloria 1 to the 2023 East
+                Java Championship Series Final with DBL East Java First Team
+                honors.
               </p>
             </div>
 
@@ -181,7 +201,7 @@ export function AthleteCareerProgression() {
                 <div className="athlete-centerpiece-col__header">
                   <span className="athlete-centerpiece-col__year">2021</span>
                   <span className="athlete-centerpiece-col__stage">
-                    SOPHOMORE DEBUT
+                    FANTASTIC FOUR · SECOND TEAM
                   </span>
                 </div>
                 <div className="athlete-centerpiece-col__tournament">
@@ -191,7 +211,7 @@ export function AthleteCareerProgression() {
                   Fantastic Four (Semifinal)
                 </div>
                 <div className="athlete-centerpiece-col__honors">
-                  Second Team DBL East Java 2021
+                  DBL East Java Second Team 2021
                 </div>
                 {dbl2021 ? (
                   <div className="athlete-centerpiece-col__stats">
@@ -215,7 +235,8 @@ export function AthleteCareerProgression() {
                 ) : null}
                 <p className="athlete-centerpiece-col__notes">
                   Varsity debut season establishing rotation presence and
-                  earning conference Second Team honors during sophomore year.
+                  earning DBL East Java Second Team honors during the 2021
+                  campaign.
                 </p>
                 <div className="athlete-centerpiece-col__footer">
                   <a
@@ -234,7 +255,7 @@ export function AthleteCareerProgression() {
                 <div className="athlete-centerpiece-col__header">
                   <span className="athlete-centerpiece-col__year">2022</span>
                   <span className="athlete-centerpiece-col__stage">
-                    JUNIOR CAMPAIGN
+                    SWEET SIXTEEN
                   </span>
                 </div>
                 <div className="athlete-centerpiece-col__tournament">
@@ -265,7 +286,8 @@ export function AthleteCareerProgression() {
                 ) : null}
                 <p className="athlete-centerpiece-col__notes">
                   Key offensive and playmaking contributor across regional
-                  playoff bracket, averaging 13.0 PPG, 5.3 RPG, and 3.3 APG.
+                  playoff bracket, averaging 13.0 PPG, 5.3 RPG, and 3.3 APG
+                  during the 2022 campaign.
                 </p>
                 <div className="athlete-centerpiece-col__footer">
                   <a
@@ -284,7 +306,7 @@ export function AthleteCareerProgression() {
                 <div className="athlete-centerpiece-col__header">
                   <span className="athlete-centerpiece-col__year">2023</span>
                   <span className="athlete-centerpiece-col__stage athlete-centerpiece-col__stage--gold">
-                    SENIOR FINAL RUN
+                    RUNNER-UP · FIRST TEAM
                   </span>
                 </div>
                 <div className="athlete-centerpiece-col__tournament">
@@ -412,15 +434,15 @@ export function AthleteCareerProgression() {
                 ) : null}
               </div>
 
-              {/* Result 2: Kejurnas KU17 2023 */}
+              {/* Result 2: Kualifikasi Kejurnas KU-17 Wilayah 5 */}
               <div className="athlete-pinnacle-card">
                 <div className="athlete-pinnacle-card__scope">
-                  <span>PROVINCIAL SELECTION</span>
+                  <span>CLUB QUALIFICATION</span>
                   <span>2023</span>
                 </div>
-                <h4>Kejurnas KU17 2023 · Jawa Timur</h4>
+                <h4>Kualifikasi Kejurnas KU-17 Wilayah 5</h4>
                 <p className="athlete-pinnacle-card__team">
-                  Jawa Timur Representative · CLS Surabaya Qualification
+                  CLS Surabaya · Inter-Club Qualification Pathway
                 </p>
                 {kejurnasKu17Snapshot ? (
                   <div className="athlete-pinnacle-card__stat-callout">
@@ -428,20 +450,23 @@ export function AthleteCareerProgression() {
                       {kejurnasKu17Snapshot.points} PTS ·{" "}
                       {kejurnasKu17Snapshot.rebounds} REB
                     </strong>
-                    <span>3 GP · {kejurnasKu17Snapshot.fieldGoalPct}</span>
+                    <span>
+                      3 GP · {kejurnasKu17Snapshot.minutes} MIN · EF{" "}
+                      {kejurnasKu17Snapshot.efficiency}
+                    </span>
                   </div>
                 ) : null}
                 <p className="athlete-pinnacle-card__desc">
-                  National youth championship tournament play representing Jawa
-                  Timur.
+                  National club championship qualification pathway with CLS
+                  Surabaya in East Java.
                 </p>
                 <a
                   className="athlete-source-link"
-                  href={basketballSources.instagramCls.href}
+                  href={basketballSources.basketyuk.href}
                   rel="noreferrer"
                   target="_blank"
                 >
-                  CLS club record ↗
+                  Basketyuk event record ↗
                 </a>
               </div>
 
@@ -467,8 +492,8 @@ export function AthleteCareerProgression() {
                   </div>
                 ) : null}
                 <p className="athlete-pinnacle-card__desc">
-                  Historic international gold medal victory in the championship
-                  final against the Philippines.
+                  Contributed 12 points and 4 rebounds in the 56–54 gold medal
+                  victory against the Philippines in the title match.
                 </p>
                 {asg2024FinalSnapshot?.source ? (
                   <a
