@@ -223,8 +223,8 @@ const athleteForbiddenPhrases = [
   "Sophomore Debut",
   "Senior Final Run",
   "conference First Team",
-  "64.29 FG%",
-  "64.29%",
+  "National Top 12 All-Star Roster",
+  "Led Gloria 1 to",
   "9-for-14",
   "ten competitive seasons",
   'href: "https://basketyuk.com"',
@@ -237,6 +237,19 @@ for (const file of srcFiles) {
     if (content.includes(phrase)) {
       console.error(
         `❌ Athlete-side unverified phrase or generic URL "${phrase}" found in ${file}`,
+      );
+      hasError = true;
+    }
+  }
+}
+
+// 4b. Content-truth assertion: If 64.29 appears in athlete content/data, it must remain attached to the canonical Basketyuk FG leaderboard
+for (const file of srcFiles) {
+  const content = readFileSync(file, "utf8");
+  if (content.includes("64.29")) {
+    if (!content.includes("basketyukFgLeaderboard")) {
+      console.error(
+        `❌ 64.29% FG shooting claim in ${file} must remain attached to canonical Basketyuk FG leaderboard (basketyukFgLeaderboard)`,
       );
       hasError = true;
     }

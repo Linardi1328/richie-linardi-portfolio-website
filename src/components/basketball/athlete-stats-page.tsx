@@ -370,11 +370,16 @@ export function AthleteStatsPage() {
                   <span className="athlete-stat-card__tag">
                     KUALIFIKASI KEJURNAS KU-17 WILAYAH 5 · CLS SURABAYA
                   </span>
-                  <h3>Tournament Match Statistics & Efficiency</h3>
+                  <h3>Tournament Match Statistics & Shooting Efficiency</h3>
                 </div>
-                <span className="athlete-stat-card__stage-badge">
-                  EF {kejurnasKu17Snapshot.efficiency}
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="athlete-stat-card__stage-badge text-amber-300 border-amber-500/40">
+                    64.29% FG · RANK #1
+                  </span>
+                  <span className="athlete-stat-card__stage-badge">
+                    EF {kejurnasKu17Snapshot.efficiency}
+                  </span>
+                </div>
               </div>
 
               <div className="athlete-metrics-row">
@@ -407,6 +412,10 @@ export function AthleteStatsPage() {
                   <span>BLOCKS</span>
                 </div>
                 <div className="athlete-stat-metric athlete-stat-metric--highlight">
+                  <strong>{kejurnasKu17Snapshot.fieldGoalPct}</strong>
+                  <span>FG% (RANK #1)</span>
+                </div>
+                <div className="athlete-stat-metric athlete-stat-metric--highlight">
                   <strong>{kejurnasKu17Snapshot.efficiency}</strong>
                   <span>EFFICIENCY</span>
                 </div>
@@ -414,8 +423,9 @@ export function AthleteStatsPage() {
 
               <p className="athlete-stat-overview-box__notes">
                 Recorded 31 points, 12 rebounds, 3 assists, 2 steals, and 2
-                blocks across 3 qualification games with CLS Surabaya in East
-                Java.
+                blocks across 58:27 minutes in 3 qualification games with CLS
+                Surabaya in East Java, leading the tournament with 64.29%
+                field-goal shooting.
               </p>
 
               <div className="athlete-stat-overview-box__footer">
@@ -425,7 +435,15 @@ export function AthleteStatsPage() {
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Basketyuk official event database ↗
+                  Basketyuk player event totals ↗
+                </a>
+                <a
+                  className="athlete-source-link"
+                  href={basketballSources.basketyukFgLeaderboard.href}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Basketyuk FG% leaderboard (Rank #1) ↗
                 </a>
               </div>
             </div>

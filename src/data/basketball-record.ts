@@ -30,7 +30,7 @@ export const basketballSources = {
   },
   dblTag: {
     label: "DBL Indonesia · Richie coverage archive",
-    href: "https://www.dbl.id/t/20340/richie-bertrand-linardi",
+    href: "https://www.dbl.id/tag/5037/richie-bertrand-linardi",
   },
   dblAllStar: {
     label: "DBL Indonesia · All-Star 2024 roster",
@@ -70,7 +70,7 @@ export const basketballSources = {
   },
   fiba3x3: {
     label: "FIBA 3x3 player profile",
-    href: "https://play.fiba3x3.com/players/58e2bfb7-a379-4d6f-bf3d-187aa75fe92a",
+    href: "https://play.fiba3x3.com/players/6d9184cf-ffc7-42c9-ad68-82d735b1a245",
   },
   porprov2023: {
     label: "Lenza Nasional · PorProv VIII 2023 final report",
@@ -78,7 +78,11 @@ export const basketballSources = {
   },
   basketyuk: {
     label: "Basketyuk · Kualifikasi Kejurnas KU-17 Wilayah 5",
-    href: "https://basketyuk.co.id/event/atlet-detail/kualifikasi-kejurnas-ku-17-wilayah-5?d=Y2M4OTNhZTAwOGE3YzAxMTIzNTEyNTE3YWQ1Y2NjMTcyMTY4YmIxZjk0ZmJhYTMwZTE0NjJjYTcyNDM2YzViNzZjODZjMDlkY2M1NmMzNTdhMTg1OTNlNDBlZDU4NWE4YmNlMDkzMDQ1MDViYjVjZTk4YzA0ZmYwYjgwMDYzNGZDdFY2WU5Ca0FjYmxQbDZGRlRMcnVZV3BrSk9TYjU5bDZKeG5XMlVQWHlKK3NoSnVYaVc3d0N4QUVWTGxUb3VJYUtlTFVWdXFrSUVBUUZnZVAzZThUblZRTGIvNjRjSTkvSGJCL0xWRTdmVXlYUm1jWmxuQi93Tll4eFg5V1IybU9wc05xUHQ2VERCamlKb1NCRU84ekE9PQ==",
+    href: "https://basketyuk.id/event/atlet-detail/kualifikasi-kejurnas-ku-17-wilayah-5?d=Y2M4OTNhZTAwOGE3YzAxMTIzNTEyNTE3YWQ1Y2NjMTcyMTY4YmIxZjk0ZmJhYTMwZTE0NjJjYTcyNDM2YzViNzZjODZjMDlkY2M1NmMzNTdhMTg1OTNlNDBlZDU4NWE4YmNlMDkzMDQ1MDViYjVjZTk4YzA0ZmYwYjgwMDYzNGZDdFY2WU5Ca0FjYmxQbDZGRlRMcnVZV3BrSk9TYjU5bDZKeG5XMlVQWHlKK3NoSnVYaVc3d0N4QUVWTGxUb3VJYUtlTFVWdXFrSUVBUUZnZVAzZThUblZRTGIvNjRjSTkvSGJCL0xWRTdmVXlYUm1jWmxuQi93Tll4eFg5V1IybU9wc05xUHQ2VERCamlKb1NCRU84ekE9PQ==",
+  },
+  basketyukFgLeaderboard: {
+    label: "Basketyuk · KU-17 Top Player Average Field Goal Leaderboard",
+    href: "https://basketyuk.id/top-player/kualifikasi-kejurnas-ku-17-wilayah-5/avg-goal/24",
   },
   sofascore: {
     label: "Sofascore · Richie Bertrand Linardi profile",
@@ -86,19 +90,19 @@ export const basketballSources = {
   },
   instagramWbs: {
     label: "Western Basketball Surabaya Instagram",
-    href: "https://www.instagram.com/westernbasketballclub/",
+    href: "https://www.instagram.com/westernbasketballsurabaya/",
   },
   instagramCls: {
     label: "Cahaya Lestari Surabaya Instagram",
-    href: "https://www.instagram.com/clsbasketball/",
+    href: "https://www.instagram.com/cahayalesterisurabaya/",
   },
   instagramAces: {
     label: "Aces Basketball Surabaya Instagram",
-    href: "https://www.instagram.com/acesbasketball_sby/",
+    href: "https://www.instagram.com/ace.basketball__/",
   },
   instagramHornbills: {
     label: "KL Hornbills Instagram",
-    href: "https://www.instagram.com/klhornbills/",
+    href: "https://www.instagram.com/kl_hornbills/",
   },
 } as const satisfies Record<string, BasketballSource>;
 
@@ -257,7 +261,7 @@ export const porprovViiiFinalSnapshot = {
 
 export const kejurnasKu17Snapshot = {
   competition: "Kualifikasi Kejurnas KU-17 Wilayah 5",
-  context: "CLS SURABAYA · INTER-CLUB QUALIFICATION",
+  context: "CLS / CAHAYA LESTARI SURABAYA · INTER-CLUB QUALIFICATION",
   title: "Kualifikasi Kejurnas KU-17 Wilayah 5 · CLS Surabaya",
   badge: "Official Tournament Statistics",
   team: "CLS Surabaya",
@@ -269,9 +273,12 @@ export const kejurnasKu17Snapshot = {
   assists: 3,
   steals: 2,
   blocks: 2,
+  fieldGoalPct: "64.29%",
+  fgRank: "Rank #1",
   contextNote:
-    "Recorded 31 points, 12 rebounds, 3 assists, 2 steals, and 2 blocks across 3 games representing CLS Surabaya in the Kejurnas KU-17 Wilayah 5 inter-club qualification pathway.",
+    "Recorded 31 points, 12 rebounds, 3 assists, 2 steals, and 2 blocks across 58:27 minutes in 3 games representing CLS / Cahaya Lestari Surabaya in the Kejurnas KU-17 Wilayah 5 inter-club qualification pathway, leading the tournament with 64.29% field-goal shooting.",
   source: basketballSources.basketyuk,
+  leaderboardSource: basketballSources.basketyukFgLeaderboard,
 } as const;
 
 export type AthleteVerificationStatus =
@@ -350,14 +357,29 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     team: "Kopi Good Day DBL Indonesia All-Star",
     result: "All-Star Roster Selection",
     location: "Jakarta, Indonesia",
-    statLine: "Selected to National Top 12 All-Star Roster",
+    statLine: "Selected to the 2024 DBL Indonesia All-Star boys roster",
     roleContext:
-      "Selected to the national All-Star roster following third DBL Camp appearance",
+      "Selected to the 2024 DBL Indonesia All-Star boys roster following third DBL Camp appearance",
     sources: [basketballSources.dblAllStar],
     verificationStatus: "verified",
     homepagePriority: true,
     featured: true,
     tier: "signature",
+  },
+  {
+    id: "dbl-academy-graduation-2024",
+    year: "2024",
+    event: "DBL Academy Graduation",
+    discipline: "5v5",
+    level: "club",
+    team: "DBL Academy",
+    result: "Graduated from DBL Academy (2016–2024)",
+    location: "Surabaya, Indonesia",
+    roleContext:
+      "Concluded eight-year player development curriculum from foundational training through Selection Team tours",
+    sources: [basketballSources.dblAcademy],
+    verificationStatus: "owner-provided",
+    tier: "continuing",
   },
   {
     id: "porprov-viii-2023",
@@ -404,7 +426,7 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     statLine:
       "10 GP · 121 PTS · 84 REB · 25 AST (58.5 FG% · 45.0 3PT% · 72.4 FT%)",
     roleContext:
-      "Led Gloria 1 to East Java championship final and earned DBL East Java First Team honors",
+      "Gloria 1 reached the East Java final; Richie earned DBL East Java First Team honors",
     sources: [basketballSources.dblFirstTeam, basketballSources.dblProfile],
     verificationStatus: "verified",
     homepagePriority: true,
@@ -444,17 +466,21 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
   {
     id: "kejurnas-ku17-2023",
     year: "2023",
-    event: "Kualifikasi Kejurnas KU-17 Wilayah 5 · CLS Surabaya",
+    event: "Kualifikasi Klub Kejurnas U-17 · 2023",
     discipline: "5v5",
     level: "club",
     team: "CLS Surabaya",
-    result: "Inter-Club Qualification Pathway",
+    result: "Champion · CLS Surabaya",
     location: "Surabaya, Indonesia",
-    statLine: "3 GP · 31 PTS · 12 REB · 3 AST · 2 STL · 2 BLK",
+    statLine:
+      "3 GP · 58:27 MIN · 31 PTS · 12 REB · 3 AST · 2 STL · 2 BLK · EF 31 · 64.29 FG% (Rank #1)",
     roleContext:
-      "Club qualification campaign with CLS Surabaya tracked by official Basketyuk event data",
-    sources: [basketballSources.basketyuk],
-    verificationStatus: "verified",
+      "Inter-club qualification tournament with CLS Surabaya; official tournament totals and 64.29 FG% / rank #1 leaderboard verified via Basketyuk; Champion result owner-provided pending published classification report",
+    sources: [
+      basketballSources.basketyuk,
+      basketballSources.basketyukFgLeaderboard,
+    ],
+    verificationStatus: "owner-provided",
     tier: "major",
   },
   {
@@ -697,7 +723,7 @@ export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
       headline: "East Java Final Run & First Team",
       statCallout: "10 GP · 121 PTS · 84 REB · 25 AST",
       summary:
-        "Led SMA Gloria 1 Surabaya to the DBL East Java championship final in 2023, earning Kopi Good Day First Team honors with 58.5 FG% and 45.0 3PT% shooting.",
+        "Gloria 1 reached the DBL East Java championship final in 2023; Richie earned Kopi Good Day First Team honors with 58.5 FG% and 45.0 3PT% shooting across 10 games.",
       signatureResults: [
         {
           label: "2023 DBL East Java Runner-Up · First Team selection",
@@ -741,20 +767,31 @@ export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
       levelBadge: "National Qualification & Camps",
       context: "Jawa Timur & National Selection",
       headline: "Pra-PON XXI Qualification & All-Star Roster",
-      statCallout: "Qualified for PON XXI · Top 12 Boys Roster",
+      statCallout: "Qualified for PON XXI · All-Star Boys Roster",
       summary:
-        "Advanced into the national developmental pathway: earned qualification for PON XXI 2024 with Jawa Timur and selected to the 2024 DBL Indonesia All-Star roster.",
+        "Advanced into the national developmental pathway: earned qualification for PON XXI 2024 with Jawa Timur and selected to the 2024 DBL Indonesia All-Star boys roster.",
       signatureResults: [
         {
-          label: "DBL Indonesia All-Star 2024 · National roster selection",
+          label: "Selected to the 2024 DBL Indonesia All-Star boys roster",
           verificationStatus: "verified",
           source: basketballSources.dblAllStar,
         },
         {
           label:
-            "Kualifikasi Kejurnas KU-17 Wilayah 5 · 31 PTS / 12 REB (CLS Surabaya)",
+            "Kualifikasi Kejurnas KU-17 Wilayah 5 · 64.29 FG% Leader (Rank #1)",
+          verificationStatus: "verified",
+          source: basketballSources.basketyukFgLeaderboard,
+        },
+        {
+          label:
+            "Kualifikasi Kejurnas KU-17 Wilayah 5 · 31 PTS / 12 REB / EF 31 in 3 GP (CLS Surabaya)",
           verificationStatus: "verified",
           source: basketballSources.basketyuk,
+        },
+        {
+          label:
+            "Kualifikasi Klub Kejurnas U-17 2023 · Champion (CLS Surabaya)",
+          verificationStatus: "owner-provided",
         },
         {
           label:
@@ -867,12 +904,12 @@ export const athletePathwayTracks: {
       year: "2023",
       pathway: "club",
       entity: "CLS Surabaya",
-      title: "Kualifikasi Kejurnas KU-17 Wilayah 5",
-      context: "Inter-Club Qualification Pathway",
+      title: "Kualifikasi Klub Kejurnas U-17 Champion",
+      context: "Kualifikasi Kejurnas KU-17 Wilayah 5",
       detail:
-        "Competed in the Kejurnas KU-17 Wilayah 5 inter-club qualification pathway with CLS Surabaya, recording 31 PTS, 12 REB, 3 AST, 2 STL, and 2 BLK in 3 games.",
+        "Represented CLS Surabaya in the Kejurnas KU-17 Wilayah 5 inter-club qualification tournament (Champion record). Recorded 31 PTS, 12 REB, 3 AST, 2 STL, 2 BLK across 58:27 minutes in 3 games, leading the tournament with 64.29% field-goal shooting.",
       source: basketballSources.basketyuk,
-      verificationStatus: "verified",
+      verificationStatus: "owner-provided",
     },
     {
       id: "club-2024",
@@ -961,16 +998,28 @@ export const athletePathwayTracks: {
       verificationStatus: "verified",
     },
     {
-      id: "dev-2024",
+      id: "dev-2024-allstar",
       year: "2024",
       pathway: "development",
-      entity: "DBL Academy & All-Star",
-      title: "DBL All-Star & Academy Graduation",
-      context: "Pinnacle Development Honors",
+      entity: "DBL Indonesia All-Star",
+      title: "DBL Indonesia All-Star Boys Roster",
+      context: "National Development Honors",
       detail:
-        "Selected to the 2024 Kopi Good Day DBL Indonesia All-Star boys' roster following third DBL Camp appearance, concluding the 2016–2024 academy chapter.",
+        "Selected to the 2024 Kopi Good Day DBL Indonesia All-Star boys roster following a third DBL Camp appearance.",
       source: basketballSources.dblAllStar,
       verificationStatus: "verified",
+    },
+    {
+      id: "dev-2024-grad",
+      year: "2024",
+      pathway: "development",
+      entity: "DBL Academy",
+      title: "DBL Academy Curriculum Completion",
+      context: "Academy Chapter Graduation",
+      detail:
+        "Completed the eight-year player development curriculum at DBL Academy in Surabaya (2016–2024).",
+      source: basketballSources.dblAcademy,
+      verificationStatus: "owner-provided",
     },
   ],
   schoolUniversity: [
@@ -1018,7 +1067,7 @@ export const athletePathwayTracks: {
       title: "DBL East Java Runner-Up & First Team",
       context: "Championship Series Final Run",
       detail:
-        "Led Gloria 1 to the East Java final, recording 121 PTS, 84 REB, and 25 AST with Kopi Good Day First Team selection.",
+        "Gloria 1 reached the East Java final; Richie earned DBL East Java First Team honors, recording 121 PTS, 84 REB, and 25 AST with Kopi Good Day First Team selection.",
       source: basketballSources.dblFirstTeam,
       verificationStatus: "verified",
     },

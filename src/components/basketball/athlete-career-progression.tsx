@@ -344,8 +344,9 @@ export function AthleteCareerProgression() {
                   </div>
                 ) : null}
                 <p className="athlete-centerpiece-col__notes">
-                  Led Gloria 1 to the East Java provincial final across 10 games
-                  with First Team honors; third consecutive DBL Camp selection.
+                  Gloria 1 reached the East Java final; Richie earned DBL East
+                  Java First Team honors across 10 games with a third
+                  consecutive DBL Camp selection.
                 </p>
                 <div className="athlete-centerpiece-col__footer">
                   <a
@@ -448,26 +449,38 @@ export function AthleteCareerProgression() {
                   <div className="athlete-pinnacle-card__stat-callout">
                     <strong>
                       {kejurnasKu17Snapshot.points} PTS ·{" "}
-                      {kejurnasKu17Snapshot.rebounds} REB
+                      {kejurnasKu17Snapshot.rebounds} REB ·{" "}
+                      {kejurnasKu17Snapshot.fieldGoalPct} FG%
                     </strong>
                     <span>
                       3 GP · {kejurnasKu17Snapshot.minutes} MIN · EF{" "}
-                      {kejurnasKu17Snapshot.efficiency}
+                      {kejurnasKu17Snapshot.efficiency} · Top Player FG Leader
+                      (Rank #1)
                     </span>
                   </div>
                 ) : null}
                 <p className="athlete-pinnacle-card__desc">
-                  National club championship qualification pathway with CLS
-                  Surabaya in East Java.
+                  Inter-club championship qualification with CLS Surabaya in
+                  East Java; led tournament in shooting efficiency (64.29 FG%).
                 </p>
-                <a
-                  className="athlete-source-link"
-                  href={basketballSources.basketyuk.href}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Basketyuk event record ↗
-                </a>
+                <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  <a
+                    className="athlete-source-link"
+                    href={basketballSources.basketyuk.href}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Basketyuk event totals ↗
+                  </a>
+                  <a
+                    className="athlete-source-link"
+                    href={basketballSources.basketyukFgLeaderboard.href}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    FG% leaderboard (Rank #1) ↗
+                  </a>
+                </div>
               </div>
 
               {/* Result 3: ASEAN Schools Games 2024 */}
