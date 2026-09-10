@@ -8,7 +8,9 @@ export function AthleteHero() {
           <div className="athlete-hero__copy" data-reveal>
             <p className="athlete-kicker">Basketball · Athlete archive</p>
             <h1 className="athlete-title-display athlete-hero__title">
-              Competitive record. Verified progression.
+              Competitive record.
+              <br className="hidden sm:inline" />
+              Verified progression.
             </h1>
             <p className="athlete-lead athlete-hero__description">
               From junior academy development to national and continental
