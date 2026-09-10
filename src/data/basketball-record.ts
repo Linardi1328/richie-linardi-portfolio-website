@@ -132,11 +132,14 @@ export const dblSeasonStats: readonly BasketballSeasonStat[] = [
 
 export const fibaU18Snapshot = {
   competition: "FIBA U18 Asia Cup 2024",
+  location: "Amman, Jordan",
   games: 3,
   ppg: 5.3,
   rpg: 3.0,
   apg: 0.7,
   efficiency: 2.3,
+  contextNote:
+    "Continental tournament play with Indonesia at the FIBA U18 Asia Cup in Amman, Jordan.",
   source: basketballSources.fiba,
 } as const;
 

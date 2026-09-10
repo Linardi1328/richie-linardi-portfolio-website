@@ -183,7 +183,8 @@ export function AthletePerformanceRecord() {
                     {fibaU18Snapshot.ppg} PPG
                   </div>
                   <span className="athlete-sheet-card__num-label">
-                    {fibaU18Snapshot.games} Tournament Appearances · Jordan
+                    {fibaU18Snapshot.games} Tournament Appearances ·{" "}
+                    {fibaU18Snapshot.location}
                   </span>
                 </div>
 
@@ -203,8 +204,7 @@ export function AthletePerformanceRecord() {
                 </div>
 
                 <p className="athlete-sheet-card__context-note">
-                  Continental tournament play representing Indonesia against
-                  Asia&apos;s top national youth programs in Amman, Jordan.
+                  {fibaU18Snapshot.contextNote}
                 </p>
               </div>
 

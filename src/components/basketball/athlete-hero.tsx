@@ -67,8 +67,8 @@ export function AthleteHero() {
 
             <div className="athlete-hero__identity-meta">
               <div>
-                <span>Location</span>
-                <strong>Surabaya · Indonesia</strong>
+                <span>School chapter</span>
+                <strong>SMA Gloria 1 · Surabaya</strong>
               </div>
               <div>
                 <span>Standard</span>
