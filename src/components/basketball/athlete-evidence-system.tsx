@@ -42,10 +42,10 @@ export function AthleteEvidenceSystem() {
         <div className="athlete-evidence__grid">
           <div data-reveal>
             <p className="athlete-kicker">Evidence standard</p>
-            <h2 className="athlete-title-display mt-3" id="evidence-heading">
+            <h2 className="athlete-title-display" id="evidence-heading">
               Proof stays attached to the record.
             </h2>
-            <p className="athlete-lead mt-5 max-w-xl">
+            <p className="athlete-lead max-w-xl">
               A viewer can move from a championship result to its source, from a
               game photograph to its event context, and from a stat line back to
               the competition where it happened.

@@ -20,7 +20,7 @@ export const basketballCareerMoments = [
   },
   {
     context: "East Java",
-    detail: "52 points · 21 rebounds · 13 assists · Second Team.",
+    detail: "52 points · 21 rebounds · 13 assists in North Region play.",
     label: "DBL season",
     year: "2022",
   },
@@ -54,21 +54,21 @@ export const basketballCareerMoments = [
 export const basketballArchiveModules = [
   {
     description:
-      "Development chapters, teams, and verified milestones across the 2016–2024 pathway.",
+      "Parallel development pathways across club, academy, and school competition spanning a decade of progression.",
     href: "/basketball/journey",
     index: "01",
     title: "Journey timeline",
   },
   {
     description:
-      "Verified tournament honors, championship medals, and All-Star selections with source records.",
+      "Competition-aware ledger grouped from school and provincial games to continental representation.",
     href: "/basketball/achievements",
     index: "02",
     title: "Achievement ledger",
   },
   {
     description:
-      "Competition-aware metrics, season totals, and tournament splits from DBL and FIBA records.",
+      "Partitioned tournament figures, DBL 4-season progression, and signature championship performances.",
     href: "/basketball/stats",
     index: "03",
     title: "Verified statistics",

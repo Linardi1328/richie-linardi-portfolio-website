@@ -24,6 +24,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  margin-bottom: clamp(0.9rem, 1.4vw, 1.15rem);
   color: var(--stage-accent);
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -129,15 +130,20 @@
   display: flex;
   flex-direction: column;
   max-width: 44rem;
+  min-width: 0;
 }
 
 .athlete-hero__title {
-  margin-top: 1.25rem;
-  font-size: clamp(3rem, 9vw, 6.8rem);
+  margin-top: 0;
+  font-size: clamp(2.4rem, 4.4vw, 4.25rem);
+  line-height: 0.98;
+  max-width: 15ch;
+  text-wrap: balance;
+  min-width: 0;
 }
 
 .athlete-hero__description {
-  margin-top: 1.6rem;
+  margin-top: clamp(1.25rem, 2vw, 1.6rem);
   max-width: 40rem;
 }
 
@@ -174,7 +180,7 @@
 .athlete-btn-primary:focus-visible {
   opacity: 0.92;
   transform: translateY(-1px);
-  outline: 2px solid var(--stage-ink);
+  outline: 2px solid var(--stage-accent);
   outline-offset: 3px;
 }
 
@@ -314,131 +320,264 @@
 
 .athlete-section-heading {
   display: grid;
-  gap: 1.25rem;
-  margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+  gap: 0;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.athlete-section-heading .athlete-kicker {
+  margin-bottom: clamp(0.9rem, 1.4vw, 1.15rem);
 }
 
 .athlete-section-heading h2 {
-  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1;
 }
 
 .athlete-section-heading p:last-child {
+  margin-top: clamp(1.25rem, 2vw, 1.6rem);
   max-width: 44rem;
   color: var(--stage-muted);
   line-height: 1.72;
 }
 
-/* Progression Stepped Track */
-.athlete-progression__track {
-  display: grid;
-  gap: 1.25rem;
+/* --------------------------------------------------------------------------
+   PROGRESSION CHAPTERS (3 AUTHORED CARDS)
+   -------------------------------------------------------------------------- */
+
+.athlete-progression__chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
 }
 
-.athlete-progression__card {
+.athlete-chapter-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 1.5rem;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
   border: 1px solid var(--stage-line);
   background: var(--stage-paper-elevated);
-  transition:
-    border-color 200ms ease,
-    transform 200ms ease;
+  transition: border-color 200ms ease;
 }
 
-.athlete-progression__card:hover {
-  border-color: color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+.athlete-chapter-card:hover {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
 }
 
-.athlete-progression__card-header {
+.athlete-chapter-card__header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--stage-line);
 }
 
-.athlete-progression__year {
-  color: var(--stage-accent);
-  font-family: var(--font-mono);
-  font-size: 1.35rem;
-  font-weight: 850;
-  letter-spacing: -0.02em;
+.athlete-chapter-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
 }
 
-.athlete-progression__step {
+.athlete-chapter-card__tag {
   color: var(--stage-muted);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
-}
-
-.athlete-progression__context {
-  margin-top: 0.65rem;
-  color: var(--stage-muted);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 750;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.athlete-progression__card h3 {
-  margin-top: 0.4rem;
+.athlete-chapter-card__tag--gold {
+  color: var(--stage-accent);
+}
+
+.athlete-chapter-card__tag--red {
+  color: #ff9b9b;
+}
+
+.athlete-chapter-card__years {
   color: var(--stage-ink);
-  font-size: 1.28rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
+
+.athlete-chapter-card__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.athlete-chapter-card__badge--gold {
+  border-color: color-mix(in srgb, var(--stage-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 10%, transparent);
+  color: var(--stage-accent);
+}
+
+.athlete-chapter-card__badge--red {
+  border-color: #b11620;
+  background: rgb(177 22 32 / 18%);
+  color: #ff9b9b;
+}
+
+.athlete-chapter-card__headline {
+  margin-top: 1.5rem;
+}
+
+.athlete-chapter-card__headline h3 {
+  color: var(--stage-ink);
+  font-size: clamp(1.4rem, 2.5vw, 1.95rem);
+  font-weight: 850;
+  letter-spacing: -0.03em;
   line-height: 1.15;
 }
 
-.athlete-progression__detail {
-  margin-top: 0.75rem;
+.athlete-chapter-card__lead {
+  margin-top: 0.65rem;
+  max-width: 48rem;
   color: var(--stage-muted);
-  font-size: 0.88rem;
-  line-height: 1.65;
+  font-size: 0.94rem;
+  line-height: 1.68;
 }
 
-.athlete-progression__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-top: 1.1rem;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid color-mix(in srgb, var(--stage-accent) 40%, transparent);
-  background: color-mix(in srgb, var(--stage-accent) 8%, transparent);
+/* Chapter 01 Foundation Grid */
+.athlete-chapter-card__foundation-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+@media (min-width: 640px) {
+  .athlete-chapter-card__foundation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .athlete-chapter-card__foundation-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.athlete-foundation-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--stage-line) 80%, transparent);
+  background: color-mix(in srgb, var(--stage-paper) 40%, transparent);
+}
+
+.athlete-foundation-item__year {
   color: var(--stage-accent);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 750;
-  letter-spacing: 0.05em;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
-/* Pinnacle 2024 Card Emphasis */
-.athlete-progression__card--pinnacle {
-  border-color: color-mix(in srgb, var(--stage-accent) 65%, #b11620);
+.athlete-foundation-item h4 {
+  color: var(--stage-ink);
+  font-size: 0.96rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.athlete-foundation-item p {
+  color: var(--stage-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+/* Chapter 02 Centerpiece Feature Card */
+.athlete-chapter-card--centerpiece {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
   background:
     radial-gradient(
-      circle at 90% 10%,
-      rgb(200 164 92 / 16%),
-      transparent 14rem
+      circle at 85% 15%,
+      rgb(200 164 92 / 10%),
+      transparent 22rem
     ),
-    linear-gradient(145deg, rgb(177 22 32 / 12%), transparent 60%),
     var(--stage-paper-elevated);
-  box-shadow:
-    0 10px 30px rgb(0 0 0 / 40%),
-    inset 0 0 0 1px rgb(200 164 92 / 20%);
+  box-shadow: 0 10px 32px rgb(0 0 0 / 35%);
 }
 
-.athlete-progression__pinnacle-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.3rem 0.65rem;
-  border: 1px solid #b11620;
-  background: rgb(177 22 32 / 20%);
-  color: #ff9b9b;
+.athlete-chapter-card--centerpiece:hover {
+  border-color: var(--stage-accent);
+}
+
+.athlete-centerpiece-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 2rem;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 50%, transparent);
+}
+
+@media (min-width: 900px) {
+  .athlete-centerpiece-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.athlete-centerpiece-col {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  border-bottom: 1px solid var(--stage-line);
+}
+
+@media (min-width: 900px) {
+  .athlete-centerpiece-col {
+    border-bottom: none;
+    border-left: 1px solid var(--stage-line);
+  }
+
+  .athlete-centerpiece-col:first-child {
+    border-left: none;
+  }
+}
+
+.athlete-centerpiece-col--featured {
+  background: color-mix(in srgb, var(--stage-accent) 4%, transparent);
+}
+
+.athlete-centerpiece-col__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.athlete-centerpiece-col__year {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.athlete-centerpiece-col__stage {
+  color: var(--stage-muted);
   font-family: var(--font-mono);
   font-size: 0.62rem;
   font-weight: 800;
@@ -446,14 +585,221 @@
   text-transform: uppercase;
 }
 
-.athlete-progression__sources {
+.athlete-centerpiece-col__stage--gold {
+  color: var(--stage-accent);
+}
+
+.athlete-centerpiece-col__tournament {
+  margin-top: 0.75rem;
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.athlete-centerpiece-col__result {
+  margin-top: 0.35rem;
+  color: var(--stage-ink);
+  font-size: 1.18rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.athlete-centerpiece-col__result--gold {
+  color: #fff;
+}
+
+.athlete-centerpiece-col__honors {
+  margin-top: 0.35rem;
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 750;
+}
+
+.athlete-centerpiece-col__honors--gold {
+  color: var(--stage-accent);
+}
+
+.athlete-centerpiece-col__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+  margin-top: 1.1rem;
+  padding: 0.65rem 0.5rem;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 70%, transparent);
+}
+
+.athlete-stat-mini {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.2rem;
-  margin-top: 0.85rem;
+  align-items: center;
+  text-align: center;
+}
+
+.athlete-stat-mini strong {
+  color: var(--stage-ink);
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 850;
+  line-height: 1.1;
+}
+
+.athlete-stat-mini span {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.athlete-centerpiece-col__splits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.athlete-centerpiece-col__notes {
+  margin-top: 0.9rem;
+  color: var(--stage-muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.athlete-centerpiece-col__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+}
+
+/* Chapter 03 Pinnacle Escalation Card */
+.athlete-chapter-card--pinnacle {
+  border-color: color-mix(in srgb, var(--stage-accent) 55%, #b11620);
+  background:
+    radial-gradient(circle at 90% 12%, rgb(177 22 32 / 14%), transparent 24rem),
+    radial-gradient(
+      circle at 10% 85%,
+      rgb(200 164 92 / 10%),
+      transparent 22rem
+    ),
+    var(--stage-paper-elevated);
+  box-shadow:
+    0 12px 36px rgb(0 0 0 / 45%),
+    inset 0 0 0 1px rgb(200 164 92 / 15%);
+}
+
+.athlete-chapter-card__pinnacle-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .athlete-chapter-card__pinnacle-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.athlete-pinnacle-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
+}
+
+.athlete-pinnacle-card--featured {
+  border-color: color-mix(in srgb, var(--stage-accent) 40%, var(--stage-line));
+  background:
+    radial-gradient(circle at 90% 10%, rgb(200 164 92 / 8%), transparent 12rem),
+    color-mix(in srgb, var(--stage-paper) 70%, transparent);
+}
+
+.athlete-pinnacle-card__scope {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.athlete-scope-highlight {
+  color: #ff9b9b;
+}
+
+.athlete-pinnacle-card h4 {
+  margin-top: 0.65rem;
+  color: var(--stage-ink);
+  font-size: 1.12rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.athlete-pinnacle-card__team {
+  margin-top: 0.25rem;
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.athlete-pinnacle-card__stat-callout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.9rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 30%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 8%, transparent);
+}
+
+.athlete-pinnacle-card__stat-callout strong {
+  color: var(--stage-ink);
+  font-family: var(--font-mono);
+  font-size: 0.94rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+}
+
+.athlete-pinnacle-card__stat-callout span {
+  color: var(--stage-muted);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.athlete-pinnacle-card__desc {
+  margin-top: 0.75rem;
+  color: var(--stage-muted);
+  font-size: 0.84rem;
+  line-height: 1.58;
+}
+
+.athlete-pinnacle-card__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: auto;
   padding-top: 0.75rem;
-  border-top: 1px solid var(--stage-line);
 }
 
 .athlete-progression__cta-row {
@@ -468,6 +814,301 @@
 }
 
 .athlete-progression__cta-row span {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* --------------------------------------------------------------------------
+   COMPETITIVE LADDER (5 ESCALATING TIERS)
+   -------------------------------------------------------------------------- */
+
+.athlete-ladder {
+  background:
+    radial-gradient(circle at 80% 25%, rgb(200 164 92 / 7%), transparent 28rem),
+    var(--stage-paper);
+}
+
+.athlete-ladder__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.athlete-ladder-tier {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  transition:
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+@media (min-width: 768px) {
+  .athlete-ladder-tier {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
+
+.athlete-ladder-tier:hover {
+  border-color: color-mix(in srgb, var(--stage-accent) 50%, var(--stage-line));
+}
+
+.athlete-ladder-tier--international {
+  border-color: color-mix(in srgb, #b11620 50%, var(--stage-line));
+  background:
+    radial-gradient(circle at 95% 15%, rgb(177 22 32 / 12%), transparent 18rem),
+    var(--stage-paper-elevated);
+}
+
+.athlete-ladder-tier--national {
+  border-color: color-mix(in srgb, var(--stage-accent) 40%, var(--stage-line));
+}
+
+.athlete-ladder-tier__indicator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .athlete-ladder-tier__indicator {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+.athlete-ladder-tier__num {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.athlete-ladder-tier__line {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .athlete-ladder-tier__line {
+    display: block;
+    width: 2rem;
+    height: 1px;
+    margin-top: 0.85rem;
+    background: var(--stage-line);
+  }
+}
+
+.athlete-ladder-tier__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.athlete-ladder-tier__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.athlete-ladder-tier__level {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.athlete-ladder-tier__entity {
+  margin-top: 0.25rem;
+  color: var(--stage-ink);
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.athlete-ladder-tier__context {
+  margin: 0.125rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(254, 240, 138, 0.85);
+}
+
+.athlete-ladder-tier__badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.athlete-ladder-tier__status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--stage-line);
+}
+
+.athlete-ladder-tier__status--verified {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 10%, transparent);
+  color: var(--stage-accent);
+}
+
+.athlete-ladder-tier__status--record {
+  border-color: var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
+  color: var(--stage-muted);
+}
+
+.athlete-ladder-tier__desc {
+  color: var(--stage-muted);
+  font-size: 0.88rem;
+  line-height: 1.62;
+  max-width: 52rem;
+}
+
+.athlete-ladder-tier__results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.9rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--stage-line) 80%, transparent);
+  background: color-mix(in srgb, var(--stage-paper) 50%, transparent);
+}
+
+.athlete-ladder-tier__results-label {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.athlete-ladder-tier__results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.athlete-ladder-tier__results-list li,
+.athlete-ladder-tier__result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  color: var(--stage-ink);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed
+    color-mix(in srgb, var(--stage-line) 50%, transparent);
+}
+
+.athlete-ladder-tier__results-list li:last-child,
+.athlete-ladder-tier__result-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.athlete-ladder-tier__result-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+
+.athlete-ladder-tier__result-text {
+  word-break: break-word;
+}
+
+.athlete-ladder-tier__pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.athlete-ladder-tier__pill--verified {
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 12%, transparent);
+  color: var(--stage-accent);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.athlete-ladder-tier__pill--verified:hover {
+  background: color-mix(in srgb, var(--stage-accent) 24%, transparent);
+  border-color: var(--stage-accent);
+}
+
+.athlete-ladder-tier__pill--verified:focus-visible {
+  outline: 2px solid var(--stage-accent);
+  outline-offset: 2px;
+  background: color-mix(in srgb, var(--stage-accent) 24%, transparent);
+}
+
+.athlete-ladder-tier__pill--pending {
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 80%, transparent);
+  color: var(--stage-muted);
+}
+
+.athlete-bullet {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--stage-accent);
+  flex-shrink: 0;
+  transform: translateY(-2px);
+}
+
+.athlete-ladder__cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+.athlete-ladder__cta-row span {
   color: var(--stage-muted);
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -734,6 +1375,16 @@
   gap: 2.5rem;
 }
 
+.athlete-evidence__grid h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1;
+}
+
+.athlete-evidence__grid p.athlete-lead {
+  margin-top: clamp(1.25rem, 2vw, 1.6rem);
+}
+
 .athlete-evidence__list {
   display: grid;
   gap: 0;
@@ -796,7 +1447,13 @@
 }
 
 .athlete-closing h2 {
+  margin: 0;
   font-size: clamp(2.4rem, 7vw, 5rem);
+  line-height: 1;
+}
+
+.athlete-closing p.athlete-lead {
+  margin-top: clamp(1.25rem, 2vw, 1.6rem);
 }
 
 .athlete-closing__links {
@@ -823,6 +1480,14 @@
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+}
+
+.athlete-closing__bridge-heading {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--stage-ink);
 }
 
 .athlete-closing__bridge-text {
@@ -854,6 +1519,18 @@
   text-underline-offset: 0.25rem;
 }
 
+.athlete-closing__meta {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  border-top: 1px solid var(--stage-line);
+  padding-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--stage-muted);
+}
+
 /* --------------------------------------------------------------------------
    RESPONSIVE BREAKPOINTS
    -------------------------------------------------------------------------- */
@@ -872,17 +1549,17 @@
   .athlete-sheet-card--featured {
     grid-column: span 2;
   }
-
-  .athlete-progression__track {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
 }
 
 @media (min-width: 900px) {
   .athlete-section-heading {
     grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+    gap: clamp(2rem, 4vw, 4rem);
     align-items: end;
+  }
+
+  .athlete-section-heading p:last-child {
+    margin-top: 0;
   }
 
   .athlete-modules__grid {
@@ -919,18 +1596,910 @@
   .athlete-sheet-card--featured {
     grid-column: auto;
   }
+}
 
-  .athlete-progression__track {
+/* --------------------------------------------------------------------------
+   JOURNEY SUBPAGE: THREE PARALLEL TRACKS
+   -------------------------------------------------------------------------- */
+
+.athlete-tracks__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .athlete-tracks__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
   }
 }
 
-@media (min-width: 1280px) {
-  .athlete-progression__track {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 1rem;
+.athlete-track-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+}
+
+.athlete-track-card--featured {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgb(200 164 92 / 10%),
+      transparent 14rem
+    ),
+    var(--stage-paper-elevated);
+}
+
+.athlete-track-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.athlete-track-card__num {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.athlete-track-card__num--gold {
+  color: var(--stage-accent);
+}
+
+.athlete-track-card__span {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.athlete-track-card__title {
+  margin-top: 1.1rem;
+  color: var(--stage-ink);
+  font-size: 1.28rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.athlete-track-card__desc {
+  margin-top: 0.5rem;
+  color: var(--stage-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.athlete-track-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+.athlete-track-item {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: baseline;
+}
+
+.athlete-track-item__year {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.athlete-track-item__year--gold {
+  color: var(--stage-accent);
+}
+
+.athlete-track-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.athlete-track-item strong {
+  color: var(--stage-ink);
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.athlete-track-item span {
+  color: var(--stage-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   JOURNEY SUBPAGE: CHRONOLOGICAL TIMELINE
+   -------------------------------------------------------------------------- */
+
+.athlete-timeline-section {
+  background:
+    radial-gradient(circle at 20% 40%, rgb(177 22 32 / 7%), transparent 28rem),
+    var(--stage-paper);
+}
+
+.athlete-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.athlete-timeline-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  transition: border-color 200ms ease;
+}
+
+@media (min-width: 768px) {
+  .athlete-timeline-entry {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 2rem;
   }
+}
+
+.athlete-timeline-entry:hover {
+  border-color: color-mix(in srgb, var(--stage-accent) 40%, var(--stage-line));
+}
+
+.athlete-timeline-entry__year-rail {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .athlete-timeline-entry__year-rail {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+}
+
+.athlete-timeline-entry__year {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.athlete-timeline-entry__track-badge {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.athlete-timeline-entry__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.athlete-timeline-entry__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.athlete-timeline-entry__context {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.athlete-timeline-entry__title {
+  margin-top: 0.2rem;
+  color: var(--stage-ink);
+  font-size: 1.15rem;
+  font-weight: 850;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.athlete-timeline-entry__status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--stage-line);
+}
+
+.athlete-timeline-entry__status--verified {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 10%, transparent);
+  color: var(--stage-accent);
+}
+
+.athlete-timeline-entry__status--record {
+  border-color: var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
+  color: var(--stage-muted);
+}
+
+.athlete-timeline-entry__detail {
+  color: var(--stage-muted);
+  font-size: 0.86rem;
+  line-height: 1.62;
+  max-width: 52rem;
+}
+
+.athlete-timeline-entry__footer {
+  display: flex;
+  align-items: center;
+  margin-top: 0.35rem;
+}
+
+/* --------------------------------------------------------------------------
+   ACHIEVEMENTS SUBPAGE: GROUPED LEDGER GRID
+   -------------------------------------------------------------------------- */
+
+.athlete-ledger__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .athlete-ledger__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .athlete-ledger__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.athlete-ledger-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  transition:
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.athlete-ledger-card:hover {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
+}
+
+.athlete-ledger-card--featured {
+  border-color: color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgb(200 164 92 / 12%),
+      transparent 14rem
+    ),
+    var(--stage-paper-elevated);
+}
+
+.athlete-ledger-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.athlete-ledger-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.athlete-ledger-card__year {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
+
+.athlete-ledger-card__entity {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.athlete-ledger-card__status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--stage-line);
+}
+
+.athlete-ledger-card__status--verified {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 10%, transparent);
+  color: var(--stage-accent);
+}
+
+.athlete-ledger-card__status--record {
+  border-color: var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
+  color: var(--stage-muted);
+}
+
+.athlete-ledger-card__status--mixed {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 8%, transparent);
+  color: var(--stage-accent);
+}
+
+.athlete-ledger-card__title {
+  margin-top: 1rem;
+  color: var(--stage-ink);
+  font-size: 1.15rem;
+  font-weight: 850;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.athlete-ledger-card__context {
+  margin-top: 0.35rem;
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.athlete-ledger-card__statline {
+  margin-top: 0.25rem;
+  color: rgba(254, 240, 138, 0.9);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.athlete-ledger-card__detail {
+  margin-top: 0.65rem;
+  color: var(--stage-muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.athlete-ledger-card__footer {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   STATS SUBPAGE: PARTITIONED METRICS
+   -------------------------------------------------------------------------- */
+
+.athlete-stats__dual-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .athlete-stats__dual-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.athlete-stat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.4rem, 3vw, 2.25rem);
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+}
+
+.athlete-stat-card--featured {
+  border-color: color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+  background:
+    radial-gradient(
+      circle at 90% 12%,
+      rgb(200 164 92 / 12%),
+      transparent 16rem
+    ),
+    var(--stage-paper-elevated);
+}
+
+.athlete-stat-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.athlete-stat-card__tag {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.athlete-stat-card__title {
+  margin-top: 0.35rem;
+  color: var(--stage-ink);
+  font-size: 1.35rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.athlete-stat-card__gold-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--stage-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 12%, transparent);
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.athlete-stat-card__stage-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.athlete-stat-card__matchup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 1.15rem;
+}
+
+.athlete-stat-card__matchup strong {
+  color: var(--stage-ink);
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.athlete-stat-card__matchup span {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.athlete-stat-card__big-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.4rem;
+  padding: 1.1rem 1.4rem;
+  border: 1px solid color-mix(in srgb, var(--stage-line) 80%, transparent);
+  background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
+}
+
+.athlete-stat-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.athlete-stat-metric strong {
+  color: var(--stage-ink);
+  font-family: var(--font-mono);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.athlete-stat-metric span {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.athlete-stat-metric--highlight strong {
+  color: var(--stage-accent);
+}
+
+.athlete-stat-card__notes {
+  margin-top: 1.25rem;
+  color: var(--stage-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.athlete-stat-card__footer {
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+/* Spotlight Card (PorProv VIII) */
+.athlete-spotlight-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  border: 1px solid
+    color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgb(200 164 92 / 10%),
+      transparent 22rem
+    ),
+    var(--stage-paper-elevated);
+}
+
+@media (min-width: 900px) {
+  .athlete-spotlight-card {
+    grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.8fr);
+    align-items: center;
+  }
+}
+
+.athlete-spotlight-card__title {
+  margin-top: 0.4rem;
+  color: var(--stage-ink);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 850;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.athlete-spotlight-card__venue {
+  margin-top: 0.4rem;
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.athlete-spotlight-card__summary {
+  margin-top: 0.85rem;
+  color: var(--stage-muted);
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.athlete-spotlight-card__footer {
+  margin-top: 1rem;
+}
+
+.athlete-spotlight-card__right {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 70%, transparent);
+}
+
+@media (min-width: 900px) {
+  .athlete-spotlight-card__right {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.athlete-spotlight-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .athlete-spotlight-metric {
+    text-align: left;
+  }
+}
+
+.athlete-spotlight-metric strong {
+  color: var(--stage-ink);
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.athlete-spotlight-metric span {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.athlete-spotlight-metric--gold strong {
+  color: var(--stage-accent);
+}
+
+/* Stat Overview Box (Kejurnas KU17) */
+.athlete-stat-overview-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.4rem, 3vw, 2.25rem);
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+}
+
+.athlete-stat-overview-box__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.athlete-stat-overview-box__header h3 {
+  margin-top: 0.35rem;
+  color: var(--stage-ink);
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.athlete-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--stage-line) 80%, transparent);
+  background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
+}
+
+@media (min-width: 640px) {
+  .athlete-metrics-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .athlete-metrics-row {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.athlete-stat-overview-box__notes {
+  color: var(--stage-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.athlete-stat-overview-box__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--stage-line);
+}
+
+/* DBL Four-Season Scorecards */
+.athlete-dbl-seasons__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .athlete-dbl-seasons__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .athlete-dbl-seasons__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.athlete-dbl-season-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 2vw, 1.65rem);
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+  transition: border-color 200ms ease;
+}
+
+.athlete-dbl-season-card:hover {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
+}
+
+.athlete-dbl-season-card--featured {
+  border-color: color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgb(200 164 92 / 10%),
+      transparent 12rem
+    ),
+    var(--stage-paper-elevated);
+}
+
+.athlete-dbl-season-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--stage-line);
+}
+
+.athlete-dbl-season-card__year {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.athlete-dbl-season-card__team {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.athlete-dbl-season-card__stage {
+  margin-top: 0.85rem;
+  color: var(--stage-ink);
+  font-size: 1.08rem;
+  font-weight: 850;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.athlete-dbl-season-card__honors {
+  margin-top: 0.35rem;
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.athlete-dbl-season-card__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+  margin-top: 1.1rem;
+  padding: 0.65rem 0.4rem;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 70%, transparent);
+}
+
+.athlete-dbl-season-card__shooting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+.athlete-dbl-season-card__footer {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* Principles Grid */
+.athlete-principles-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .athlete-principles-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.athlete-principle-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  border: 1px solid var(--stage-line);
+  background: var(--stage-paper-elevated);
+}
+
+.athlete-principle-card__num {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.athlete-principle-card h4 {
+  color: var(--stage-ink);
+  font-size: 1.05rem;
+  font-weight: 850;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.athlete-principle-card p {
+  color: var(--stage-muted);
+  font-size: 0.84rem;
+  line-height: 1.62;
 }
 
 /* --------------------------------------------------------------------------
@@ -941,7 +2510,16 @@
   .athlete-btn-primary,
   .athlete-btn-secondary,
   .athlete-source-link,
-  .athlete-progression__card,
+  .athlete-chapter-card,
+  .athlete-ladder-tier,
+  .athlete-track-card,
+  .athlete-timeline-entry,
+  .athlete-ledger-card,
+  .athlete-stat-card,
+  .athlete-spotlight-card,
+  .athlete-stat-overview-box,
+  .athlete-dbl-season-card,
+  .athlete-principle-card,
   .athlete-sheet-card,
   .athlete-module-card,
   .athlete-closing__return-action {
@@ -953,7 +2531,14 @@
   .athlete-btn-primary:focus-visible,
   .athlete-module-card:hover,
   .athlete-module-card:focus-visible,
-  .athlete-progression__card:hover,
+  .athlete-chapter-card:hover,
+  .athlete-ladder-tier:hover,
+  .athlete-track-card:hover,
+  .athlete-timeline-entry:hover,
+  .athlete-ledger-card:hover,
+  .athlete-stat-card:hover,
+  .athlete-spotlight-card:hover,
+  .athlete-dbl-season-card:hover,
   .athlete-sheet-card:hover,
   .athlete-closing__return-action:hover,
   .athlete-closing__return-action:focus-visible {

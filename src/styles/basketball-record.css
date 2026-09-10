@@ -22,6 +22,10 @@
 }
 
 .basketball-record__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(0.9rem, 1.4vw, 1.15rem);
   color: var(--stage-accent);
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -33,10 +37,10 @@
 .basketball-record__hero h1,
 .basketball-record__section h2 {
   max-width: 11ch;
-  margin-top: 0.8rem;
+  margin-top: 0;
   font-weight: 860;
   letter-spacing: -0.055em;
-  line-height: 0.9;
+  line-height: 0.96;
   text-transform: uppercase;
 }
 
@@ -50,7 +54,7 @@
 
 .basketball-record__lede {
   max-width: 42rem;
-  margin-top: 1.4rem;
+  margin-top: clamp(1.25rem, 2vw, 1.6rem);
   color: var(--stage-muted);
   font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.75;
@@ -96,11 +100,18 @@
 
 .basketball-record__section-heading {
   display: grid;
-  gap: 1.5rem;
-  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  gap: 0;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.basketball-record__section-heading h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1;
 }
 
 .basketball-record__section-heading > p:last-child {
+  margin-top: clamp(1.25rem, 2vw, 1.6rem);
   max-width: 38rem;
   color: var(--stage-muted);
   line-height: 1.7;

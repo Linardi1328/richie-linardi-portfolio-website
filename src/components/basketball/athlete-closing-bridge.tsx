@@ -8,10 +8,10 @@ export function AthleteClosingBridge() {
         <div className="athlete-closing__inner">
           <div data-reveal>
             <p className="athlete-kicker">Two arenas · One discipline</p>
-            <h2 className="athlete-title-display mt-3">
+            <h2 className="athlete-title-display">
               Built on work. Backed by proof.
             </h2>
-            <p className="athlete-lead mt-5 max-w-2xl">
+            <p className="athlete-lead max-w-2xl">
               The standard that governs the basketball record—rigorous
               preparation, objective measurement, and review based on
               evidence—is the same discipline that shapes the software, data,
@@ -44,7 +44,7 @@ export function AthleteClosingBridge() {
               <span className="athlete-closing__bridge-title">
                 World Bridge · 01 / 02
               </span>
-              <h3 className="athlete-title-display mt-3 text-xl font-bold">
+              <h3 className="athlete-closing__bridge-heading">
                 Professional Systems &amp; Data
               </h3>
               <p className="athlete-closing__bridge-text">
@@ -57,7 +57,7 @@ export function AthleteClosingBridge() {
               <Link className="athlete-closing__return-action" href="/">
                 Turn to Professional side →
               </Link>
-              <div className="mt-4 flex flex-wrap gap-3 border-t border-[var(--stage-line)] pt-3 text-xs text-[var(--stage-muted)]">
+              <div className="athlete-closing__meta">
                 <a
                   className="athlete-source-link"
                   href={basketballSources.dblProfile.href}
