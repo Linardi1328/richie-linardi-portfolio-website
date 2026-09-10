@@ -132,13 +132,53 @@ export const dblSeasonStats: readonly BasketballSeasonStat[] = [
 
 export const fibaU18Snapshot = {
   competition: "FIBA U18 Asia Cup 2024",
+  location: "Amman, Jordan",
   games: 3,
   ppg: 5.3,
   rpg: 3.0,
   apg: 0.7,
   efficiency: 2.3,
+  contextNote:
+    "Continental tournament play with Indonesia at the FIBA U18 Asia Cup in Amman, Jordan.",
   source: basketballSources.fiba,
 } as const;
+
+export type AsgFinalSnapshot = {
+  competition: string;
+  context: string;
+  title: string;
+  badge: string;
+  team: string;
+  opponent: string;
+  score: string;
+  scoreAriaLabel: string;
+  resultSummary: string;
+  stage: string;
+  points: number;
+  rebounds: number;
+  location?: string;
+  contextNote: string;
+  source: BasketballSource;
+};
+
+export const asg2024FinalSnapshot = {
+  competition: "ASEAN Schools Games 2024",
+  context: "INDONESIA · ASG 2024",
+  title: "ASEAN Schools Games Title Game",
+  badge: "Gold Medal Final",
+  team: "Indonesia",
+  opponent: "Philippines",
+  score: "56 — 54",
+  scoreAriaLabel: "Final score: Indonesia 56, Philippines 54",
+  resultSummary: "Final Score · Indonesia defeated Philippines",
+  stage: "Title Game",
+  points: 12,
+  rebounds: 4,
+  location: "Da Nang, Vietnam",
+  contextNote:
+    "Contributed 12 points and 4 rebounds in the boys' basketball gold medal final against the Philippines in Da Nang, Vietnam.",
+  source: basketballSources.asgBox,
+} as const satisfies AsgFinalSnapshot;
 
 export const basketballIdentityFacts = [
   "DBL Academy development pathway since 2016",

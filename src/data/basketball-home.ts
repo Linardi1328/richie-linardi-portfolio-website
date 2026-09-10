@@ -37,7 +37,7 @@ export const basketballCareerMoments = [
     year: "2024",
   },
   {
-    context: "National team",
+    context: "Indonesia",
     detail:
       "ASEAN Schools Games Gold · Indonesia beat the Philippines 56–54 in the final.",
     label: "ASEAN Schools Games",
@@ -54,24 +54,38 @@ export const basketballCareerMoments = [
 export const basketballArchiveModules = [
   {
     description:
-      "Development chapters, teams, tournaments, and verified milestones in one timeline.",
+      "Development chapters, teams, and verified milestones across the 2016–2024 pathway.",
     href: "/basketball/journey",
     index: "01",
     title: "Journey timeline",
   },
   {
     description:
-      "Results shown with event context, role, supporting media, and source records.",
+      "Verified tournament honors, championship medals, and All-Star selections with source records.",
     href: "/basketball/achievements",
     index: "02",
     title: "Achievement ledger",
   },
   {
     description:
-      "Photography connected to the event, result, and career chapter behind each moment.",
-    href: "/basketball/gallery",
+      "Competition-aware metrics, season totals, and tournament splits from DBL and FIBA records.",
+    href: "/basketball/stats",
     index: "03",
+    title: "Verified statistics",
+  },
+  {
+    description:
+      "Photography and event-connected visual proof archive structured for verified game media.",
+    href: "/basketball/gallery",
+    index: "04",
     title: "Proof gallery",
+  },
+  {
+    description:
+      "Published tournament reporting, press features, and first-party profile records.",
+    href: "/basketball/media",
+    index: "05",
+    title: "Media archive",
   },
 ] as const;
 

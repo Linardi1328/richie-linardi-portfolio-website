@@ -7,6 +7,7 @@ import "../styles/foundation-routes.css";
 import "../styles/portfolio-depth.css";
 import "../styles/motion-effects.css";
 import "../styles/basketball-record.css";
+import "../styles/athlete-home.css";
 import "../styles/production-hardening.css";
 import "../styles/signature-flipbook.css";
 import "../styles/supporting-identity-routes.css";
