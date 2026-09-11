@@ -30,7 +30,10 @@ export function LegalPage({
   effectiveDate = "11 September 2026",
 }: LegalPageProps) {
   return (
-    <PortfolioWorldShell navigation={professionalWorldNavigation} world="professional">
+    <PortfolioWorldShell
+      navigation={professionalWorldNavigation}
+      world="professional"
+    >
       <main className="portfolio-legal">
         <header className="portfolio-legal__header">
           <p className="portfolio-legal__eyebrow">Site policy · Malaysia</p>
@@ -62,8 +65,13 @@ export function LegalPage({
           ))}
         </div>
 
-        <aside className="portfolio-legal__note" aria-label="Policy scope note">
-          These policies describe the current deployed portfolio. They must be reviewed before adding a contact form, analytics, advertising, paid services, user accounts, or new third-party embeds.
+        <aside
+          className="portfolio-legal__note"
+          aria-label="Policy scope note"
+        >
+          These policies describe the current deployed portfolio. They must be
+          reviewed before adding a contact form, analytics, advertising, paid
+          services, user accounts, or new third-party embeds.
         </aside>
       </main>
     </PortfolioWorldShell>
