@@ -291,7 +291,7 @@ export function AthleteCareerProgression() {
                     DBL East Java 2023 Championship Series
                   </div>
                   <div className="athlete-centerpiece-col__result athlete-centerpiece-col__result--gold">
-                    1st Runner-Up (Finalist)
+                    Runner-Up (Finalist)
                   </div>
                   <div className="athlete-centerpiece-col__honors athlete-centerpiece-col__honors--gold">
                     Kopi Good Day First Team DBL East Java 2023

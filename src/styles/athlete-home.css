@@ -532,7 +532,7 @@
   background: color-mix(in srgb, var(--stage-paper) 50%, transparent);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 960px) {
   .athlete-centerpiece-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -541,11 +541,11 @@
 .athlete-centerpiece-col {
   display: flex;
   flex-direction: column;
-  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  padding: clamp(1.25rem, 2vw, 1.85rem);
   border-bottom: 1px solid var(--stage-line);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 960px) {
   .athlete-centerpiece-col {
     border-bottom: none;
     border-left: 1px solid var(--stage-line);
