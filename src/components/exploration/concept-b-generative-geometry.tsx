@@ -1,6 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { projectRegistry } from "@/data/project-registry";
+import {
+  dblSeasonStats,
+  asg2024FinalSnapshot,
+  porprovViiiFinalSnapshot,
+} from "@/data/basketball-record";
 
 type Mode = "professional" | "athlete";
 
@@ -17,50 +23,51 @@ interface NodePoint {
 }
 
 // 12 shared coordinate points that map to both topologies
+// Uses strictly neutral geometric labels for basketball court
 const SHARED_COORDINATES: NodePoint[] = [
   {
     id: "n0",
     labelPro: "RBL.INGEST_01",
-    labelAth: "13.SLOT // PG",
+    labelAth: "13.HALF_COURT",
     proX: 12,
     proY: 28,
     athX: 50,
     athY: 74,
-    rolePro: "Market Data Feed",
-    roleAth: "Floor General / Read",
+    rolePro: "Market Data Ingestion",
+    roleAth: "Half-Court Spatial Alignment",
   },
   {
     id: "n1",
     labelPro: "RBL.GATE_SAFETY",
-    labelAth: "13.WING_LEFT",
+    labelAth: "13.LEFT_WING",
     proX: 36,
     proY: 20,
     athX: 20,
     athY: 58,
     rolePro: "Fail-Closed Boundary",
-    roleAth: "Perimeter Spacing",
+    roleAth: "Left Wing Perimeter Spacing",
   },
   {
     id: "n2",
     labelPro: "RBL.GATE_DETERMINISTIC",
-    labelAth: "13.WING_RIGHT",
+    labelAth: "13.RIGHT_WING",
     proX: 36,
     proY: 42,
     athX: 80,
     athY: 58,
     rolePro: "Deterministic Rules",
-    roleAth: "Shooting Pocket",
+    roleAth: "Right Wing Perimeter Spacing",
   },
   {
     id: "n3",
     labelPro: "RBL.CORE_DAG",
-    labelAth: "13.HIGH_POST",
+    labelAth: "13.LEFT_ELBOW",
     proX: 60,
     proY: 24,
     athX: 38,
     athY: 42,
     rolePro: "Execution Pipeline",
-    roleAth: "Elbow Decision Node",
+    roleAth: "Left Elbow Spatial Coordinate",
   },
   {
     id: "n4",
@@ -71,102 +78,140 @@ const SHARED_COORDINATES: NodePoint[] = [
     athX: 50,
     athY: 42,
     rolePro: "Audit Telemetry",
-    roleAth: "Charity Stripe / 89.5%",
+    roleAth: "Free Throw Line Center",
   },
   {
     id: "n5",
     labelPro: "RBL.HUMAN_REVIEW",
-    labelAth: "13.HIGH_POST_R",
+    labelAth: "13.RIGHT_ELBOW",
     proX: 60,
     proY: 72,
     athX: 62,
     athY: 42,
     rolePro: "Reviewer Authority",
-    roleAth: "Screen & Roll Pivot",
+    roleAth: "Right Elbow Spatial Coordinate",
   },
   {
     id: "n6",
     labelPro: "RBL.LOW_LATENCY",
-    labelAth: "13.LOW_BLOCK_L",
+    labelAth: "13.LEFT_BLOCK",
     proX: 82,
     proY: 22,
     athX: 34,
     athY: 25,
     rolePro: "Real-time Dispatch",
-    roleAth: "Post Control",
+    roleAth: "Left Block Interior Geometry",
   },
   {
     id: "n7",
     labelPro: "RBL.FAIL_CLOSED",
-    labelAth: "13.RIM_TARGET",
+    labelAth: "13.RIM",
     proX: 82,
     proY: 46,
     athX: 50,
     athY: 18,
     rolePro: "Safety Circuit Breaker",
-    roleAth: "Finish at Rim",
+    roleAth: "Rim Target Center",
   },
   {
     id: "n8",
     labelPro: "RBL.VERIFIED_OUT",
-    labelAth: "13.LOW_BLOCK_R",
+    labelAth: "13.RIGHT_BLOCK",
     proX: 82,
     proY: 70,
     athX: 66,
     athY: 25,
     rolePro: "Proof Artifacts",
-    roleAth: "Drop Step Seal",
+    roleAth: "Right Block Interior Geometry",
   },
   {
     id: "n9",
     labelPro: "RBL.AUDIT_LOG",
-    labelAth: "13.CORNER_3_L",
+    labelAth: "13.LEFT_CORNER",
     proX: 20,
     proY: 75,
     athX: 8,
     athY: 22,
     rolePro: "Cryptographic Trace",
-    roleAth: "Corner 3PT / 45%",
+    roleAth: "Left Corner Spatial Coordinate",
   },
   {
     id: "n10",
     labelPro: "RBL.RECOVERY_RUN",
-    labelAth: "13.CORNER_3_R",
+    labelAth: "13.RIGHT_CORNER",
     proX: 42,
     proY: 75,
     athX: 92,
     athY: 22,
     rolePro: "Automated Reconcile",
-    roleAth: "Weak-side Flare",
+    roleAth: "Right Corner Spatial Coordinate",
   },
   {
     id: "n11",
     labelPro: "RBL.METRIC_GATE",
-    labelAth: "13.BACKCOURT_CTR",
+    labelAth: "13.TOP_OF_KEY",
     proX: 50,
     proY: 90,
     athX: 50,
     athY: 92,
-    rolePro: "Pass Gate 100%",
-    roleAth: "Transition Initiation",
+    rolePro: "Automated Pass Gate",
+    roleAth: "Top of Key Apex Anchor",
   },
 ];
 
 export function ConceptBGenerativeGeometry({
   initialMode = "professional",
+  initialMorphT,
 }: {
   initialMode?: Mode;
+  initialMorphT?: number;
 }) {
   const [mode, setMode] = useState<Mode>(initialMode);
-  const [activeNode, setActiveNode] = useState<string | null>("n0");
+  const [activeNode, setActiveNode] = useState<string>("n0");
   const [morphT, setMorphT] = useState<number>(
-    initialMode === "professional" ? 0 : 1,
+    initialMorphT !== undefined
+      ? initialMorphT
+      : initialMode === "professional"
+        ? 0
+        : 1,
   );
-  function handleToggleMode() {
-    const nextMode = mode === "professional" ? "athlete" : "professional";
-    setMode(nextMode);
 
-    const targetT = nextMode === "professional" ? 0 : 1;
+  const animFrameRef = useRef<number | null>(null);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (animFrameRef.current !== null) {
+        cancelAnimationFrame(animFrameRef.current);
+      }
+    };
+  }, []);
+
+  // Canonical DBL 2023 season data
+  const dbl2023 = dblSeasonStats.find(
+    (s) => s.season === "2023" && s.context.includes("Gloria 1"),
+  );
+
+  function handleSetMorph(targetT: number, targetMode?: Mode) {
+    if (animFrameRef.current !== null) {
+      cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = null;
+    }
+
+    if (targetMode) {
+      setMode(targetMode);
+    }
+
+    // Check prefers-reduced-motion
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      setMorphT(targetT);
+      return;
+    }
+
     const startT = morphT;
     const startTime = performance.now();
     const duration = 850;
@@ -178,11 +223,18 @@ export function ConceptBGenerativeGeometry({
       setMorphT(startT + (targetT - startT) * eased);
 
       if (progress < 1) {
-        requestAnimationFrame(step);
+        animFrameRef.current = requestAnimationFrame(step);
+      } else {
+        animFrameRef.current = null;
       }
     }
 
-    requestAnimationFrame(step);
+    animFrameRef.current = requestAnimationFrame(step);
+  }
+
+  function handleToggleMode() {
+    const nextMode = mode === "professional" ? "athlete" : "professional";
+    handleSetMorph(nextMode === "professional" ? 0 : 1, nextMode);
   }
 
   const currentNodes = SHARED_COORDINATES.map((node) => ({
@@ -206,11 +258,12 @@ export function ConceptBGenerativeGeometry({
           <span className="concept-b-folio__coords">
             {mode === "professional"
               ? "NODE_MAP: DAG_TOPOLOGY [2026]"
-              : "COURT_GRID: 28M × 15M [FIBA]"}
+              : "COURT_GRID: ABSTRACTED SPATIAL COORDINATES"}
           </span>
         </div>
         <div className="concept-b-folio__center">
           <button
+            type="button"
             onClick={handleToggleMode}
             className="concept-b-morph-toggle"
             aria-label="Toggle mathematical projection between Systems and Court"
@@ -218,7 +271,9 @@ export function ConceptBGenerativeGeometry({
             <span className={mode === "professional" ? "active" : ""}>
               SYSTEMS DAG
             </span>
-            <span className="morph-switch-icon">⇄</span>
+            <span className="morph-switch-icon" aria-hidden="true">
+              ⇄
+            </span>
             <span className={mode === "athlete" ? "active" : ""}>
               COURT VISION
             </span>
@@ -228,7 +283,7 @@ export function ConceptBGenerativeGeometry({
           <span className="concept-b-folio__status">
             {mode === "professional"
               ? "DETERMINISTIC ARCHITECTURE"
-              : "EAST JAVA RUNNER-UP · 2024 NAT’L"}
+              : "DBL EAST JAVA RUNNER-UP · 2024 INDONESIA REP"}
           </span>
         </div>
       </header>
@@ -263,7 +318,7 @@ export function ConceptBGenerativeGeometry({
           <p className="concept-b-lead">
             {mode === "professional"
               ? "Building verifiable software where data integrity, deterministic control gates, and automated test proof define every architecture."
-              : "Competitive high-performance basketball across DBL East Java, East Java Provincial Championship (Gold), and Indonesia national competition in 2024."}
+              : "Competitive basketball spanning DBL East Java (Runner-Up & First Team), East Java Provincial Championship (PorProv VIII Gold), and representing Indonesia in international competition in 2024."}
           </p>
 
           {/* Coordinate Telemetry Card */}
@@ -291,30 +346,38 @@ export function ConceptBGenerativeGeometry({
             {mode === "professional" ? (
               <>
                 <div className="concept-b-metric-item">
-                  <span className="metric-val">06</span>
+                  <span className="metric-val">
+                    {String(projectRegistry.length).padStart(2, "0")}
+                  </span>
                   <span className="metric-lbl">Public Systems</span>
                 </div>
                 <div className="concept-b-metric-item">
-                  <span className="metric-val">100%</span>
-                  <span className="metric-lbl">Fail-Closed Tests</span>
+                  <span className="metric-val">CS / DS</span>
+                  <span className="metric-lbl">Monash University</span>
                 </div>
                 <div className="concept-b-metric-item">
-                  <span className="metric-val">CS/DS</span>
-                  <span className="metric-lbl">Monash University</span>
+                  <span className="metric-val">Audited</span>
+                  <span className="metric-lbl">Execution Gates</span>
                 </div>
               </>
             ) : (
               <>
                 <div className="concept-b-metric-item">
-                  <span className="metric-val">12 PTS</span>
+                  <span className="metric-val">
+                    {asg2024FinalSnapshot.points} PTS
+                  </span>
                   <span className="metric-lbl">ASG 2024 Final</span>
                 </div>
                 <div className="concept-b-metric-item">
-                  <span className="metric-val">21 PTS</span>
+                  <span className="metric-val">
+                    {porprovViiiFinalSnapshot.points} PTS
+                  </span>
                   <span className="metric-lbl">PorProv VIII Gold</span>
                 </div>
                 <div className="concept-b-metric-item">
-                  <span className="metric-val">1st Team</span>
+                  <span className="metric-val">
+                    {dbl2023?.points ?? 121} PTS
+                  </span>
                   <span className="metric-lbl">DBL East Java 2023</span>
                 </div>
               </>
@@ -325,12 +388,12 @@ export function ConceptBGenerativeGeometry({
         {/* Right Generative Vector Field */}
         <div
           className="concept-b-canvas-wrapper"
-          aria-label="Interactive generative geometry coordinate field"
+          aria-label="Abstracted interactive geometric coordinate field"
         >
           <svg
             className="concept-b-svg"
             viewBox="0 0 100 100"
-            preserveAspectRatio="none"
+            preserveAspectRatio="xMidYMid meet"
           >
             {/* Background Grid Rules */}
             <defs>
@@ -351,12 +414,12 @@ export function ConceptBGenerativeGeometry({
             </defs>
             <rect width="100" height="100" fill="url(#coordGrid)" />
 
-            {/* Basketball Court Markings (Opacity increases as morphT -> 1) */}
+            {/* Abstracted Half-Court Markings (Opacity increases as morphT -> 1) */}
             <g
               style={{ opacity: morphT, transition: "opacity 300ms ease" }}
               className="court-elements"
             >
-              {/* Half-court perimeter */}
+              {/* Perimeter */}
               <rect
                 x="5"
                 y="8"
@@ -378,7 +441,7 @@ export function ConceptBGenerativeGeometry({
                 strokeWidth="0.5"
                 opacity="0.6"
               />
-              {/* Free-throw circle top */}
+              {/* Free-throw circle */}
               <path
                 d="M 36 46 A 14 14 0 0 0 64 46"
                 fill="none"
@@ -571,14 +634,26 @@ export function ConceptBGenerativeGeometry({
               />
             </g>
 
-            {/* Interactive Coordinate Nodes */}
+            {/* Accessible Interactive Coordinate Nodes */}
             {currentNodes.map((node) => {
               const isSelected = activeNode === node.id;
+              const nodeTitle =
+                mode === "professional" ? node.labelPro : node.labelAth;
               return (
                 <g
                   key={node.id}
-                  className="coord-node"
+                  className={`coord-node ${isSelected ? "coord-node--selected" : ""}`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Node ${node.id.toUpperCase()}: ${nodeTitle}`}
+                  aria-pressed={isSelected}
                   onClick={() => setActiveNode(node.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveNode(node.id);
+                    }
+                  }}
                   style={{ cursor: "pointer" }}
                 >
                   {isSelected && (
@@ -615,10 +690,10 @@ export function ConceptBGenerativeGeometry({
           </svg>
 
           <div className="concept-b-canvas-legend">
-            <span>AXIS: X/Y SPATIAL</span>
+            <span>AXIS: ABSTRACTED SPATIAL</span>
             <span>
-              SYSTEM STATE:{" "}
-              {mode === "professional" ? "DAG PIPELINE" : "HALF-COURT TACTICAL"}
+              PROJECTION:{" "}
+              {mode === "professional" ? "SYSTEMS DAG" : "COURT COORDINATES"}
             </span>
             <span>NODES: 12 CONVERGED</span>
           </div>

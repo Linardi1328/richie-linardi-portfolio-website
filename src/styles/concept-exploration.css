@@ -80,6 +80,11 @@
   border-color: var(--coord-accent);
 }
 
+.concept-b-morph-toggle:focus-visible {
+  outline: 2px solid var(--coord-accent);
+  outline-offset: 2px;
+}
+
 .concept-b-morph-toggle span.active {
   color: var(--coord-accent);
   text-shadow: 0 0 12px var(--coord-accent);
@@ -226,12 +231,23 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   border-radius: 6px;
   overflow: hidden;
+  margin: auto;
 }
 
 .concept-b-svg {
   width: 100%;
   height: 100%;
   color: var(--coord-accent);
+}
+
+.coord-node:focus-visible {
+  outline: none;
+}
+
+.coord-node:focus-visible circle:last-of-type {
+  stroke: var(--coord-accent);
+  stroke-width: 0.8;
+  filter: drop-shadow(0 0 5px var(--coord-accent));
 }
 
 .concept-b-canvas-legend {
@@ -310,6 +326,11 @@
   cursor: pointer;
   color: inherit;
   opacity: 0.5;
+}
+
+.concept-a-folio__mode-switch button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 .concept-a-folio__mode-switch button.active {
@@ -398,16 +419,40 @@
 }
 
 .blueprint-card {
+  appearance: none;
   border: 1px solid currentColor;
   padding: 1.25rem;
   background: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: all 180ms ease;
+  text-align: left;
+  width: 100%;
+  color: inherit;
+  font-family: inherit;
+}
+
+.blueprint-card:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 3px;
 }
 
 .concept-a--professional .blueprint-card:hover {
   background: #ffffff;
   box-shadow: 4px 4px 0 #0f172a;
+}
+
+.concept-a--athlete .blueprint-card {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.concept-a--athlete .blueprint-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 0 #c8a45c;
+}
+
+.concept-a--athlete .blueprint-card:focus-visible {
+  outline: 2px solid #c8a45c;
+  outline-offset: 3px;
 }
 
 .matchlog-table {
@@ -514,6 +559,11 @@
   cursor: pointer;
 }
 
+.concept-c-mode-toggle button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
 .concept-c-mode-toggle button.active {
   opacity: 1;
   border-bottom: 2px solid currentColor;
@@ -578,13 +628,21 @@
   border-bottom-color: rgba(255, 255, 255, 0.12);
 }
 
-.work-row:hover {
+.work-row:hover,
+.work-row.hovered {
   padding-inline: 1rem;
   background: rgba(0, 0, 0, 0.04);
 }
 
-.concept-c--athlete .work-row:hover {
+.concept-c--athlete .work-row:hover,
+.concept-c--athlete .work-row.hovered {
   background: rgba(255, 255, 255, 0.05);
+}
+
+.work-row:focus-visible {
+  outline: 2px solid #c8a45c;
+  outline-offset: 2px;
+  background: rgba(200, 164, 92, 0.1);
 }
 
 .work-row .row-num {
@@ -650,5 +708,22 @@
   }
   .matchlog-row span:nth-child(n + 4):nth-child(-n + 6) {
     display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION OVERRIDES (DIRECTIVE 8)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .node-pulse {
+    animation: none !important;
+  }
+  .concept-b-root,
+  .court-elements,
+  .dag-elements,
+  .work-row,
+  .blueprint-card,
+  .concept-b-morph-toggle {
+    transition: none !important;
   }
 }

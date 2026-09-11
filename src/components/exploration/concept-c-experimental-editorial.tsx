@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { projectRegistry } from "@/data/project-registry";
 
 type Mode = "professional" | "athlete";
 
@@ -12,36 +13,14 @@ export function ConceptCExperimentalEditorial({
   const [mode, setMode] = useState<Mode>(initialMode);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const projects = [
-    {
-      num: "01",
-      name: "SPY Market Agent",
-      cat: "Quantitative / ML Pipeline",
-      year: "2026",
-      status: "Phase 5 Beta",
-    },
-    {
-      num: "02",
-      name: "Personal Project Operator",
-      cat: "Mobile Command Plane",
-      year: "2026",
-      status: "Phase 6 User Acceptance",
-    },
-    {
-      num: "03",
-      name: "LedgerPilot AI",
-      cat: "Human-Supervised Accounting",
-      year: "2026",
-      status: "Phase 6 Active",
-    },
-    {
-      num: "04",
-      name: "KHLIM Sports Ecosystem",
-      cat: "Distributed Event Infrastructure",
-      year: "2026",
-      status: "Pre-Alpha Integrated",
-    },
-  ];
+  const displayedProjects = projectRegistry.slice(0, 4).map((p, idx) => ({
+    num: String(idx + 1).padStart(2, "0"),
+    name: p.title,
+    cat: p.tags.slice(0, 2).join(" / "),
+    year: "2026",
+    status: p.phase,
+    slug: p.slug,
+  }));
 
   return (
     <div className={`concept-c-root concept-c--${mode}`}>
@@ -62,13 +41,17 @@ export function ConceptCExperimentalEditorial({
         </div>
         <nav className="concept-c-mode-toggle">
           <button
+            type="button"
             onClick={() => setMode("professional")}
             className={mode === "professional" ? "active" : ""}
           >
             I. SYSTEMS MONOGRAPH
           </button>
-          <span className="divider">—</span>
+          <span className="divider" aria-hidden="true">
+            —
+          </span>
           <button
+            type="button"
             onClick={() => setMode("athlete")}
             className={mode === "athlete" ? "active" : ""}
           >
@@ -78,7 +61,7 @@ export function ConceptCExperimentalEditorial({
         <div className="concept-c-index-tag">
           {mode === "professional"
             ? "EDITION: MONASH CS · ML"
-            : "EDITION: EAST JAVA · NAT'L 2024"}
+            : "EDITION: EAST JAVA · INDONESIA 2024"}
         </div>
       </header>
 
@@ -109,24 +92,45 @@ export function ConceptCExperimentalEditorial({
             <section className="concept-c-work-index">
               <div className="work-index-topline">
                 <span>INDEXED REPOSITORY DOSSIER</span>
-                <span>[04 SELECTED SYSTEMS]</span>
+                <span>
+                  [{String(displayedProjects.length).padStart(2, "0")} SELECTED
+                  SYSTEMS]
+                </span>
               </div>
               <div className="work-index-rows">
-                {projects.map((p, idx) => (
-                  <div
-                    key={p.num}
-                    className={`work-row ${hoveredIndex === idx ? "hovered" : ""}`}
-                    onMouseEnter={() => setHoveredIndex(idx)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                  >
-                    <span className="row-num">{p.num}</span>
-                    <h3 className="row-name">{p.name}</h3>
-                    <span className="row-cat">{p.cat}</span>
-                    <span className="row-status">{p.status}</span>
-                    <span className="row-year">{p.year}</span>
-                    <span className="row-arrow">↗</span>
-                  </div>
-                ))}
+                {displayedProjects.map((p, idx) => {
+                  const isHovered = hoveredIndex === idx;
+                  return (
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      key={p.num}
+                      className={`work-row ${isHovered ? "hovered" : ""}`}
+                      onMouseEnter={() => setHoveredIndex(idx)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      onFocus={() => setHoveredIndex(idx)}
+                      onBlur={() => setHoveredIndex(null)}
+                      onClick={() => setHoveredIndex(isHovered ? null : idx)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setHoveredIndex(isHovered ? null : idx);
+                        }
+                      }}
+                      aria-pressed={isHovered}
+                      aria-label={`Project ${p.num}: ${p.name}, ${p.status}`}
+                    >
+                      <span className="row-num">{p.num}</span>
+                      <h3 className="row-name">{p.name}</h3>
+                      <span className="row-cat">{p.cat}</span>
+                      <span className="row-status">{p.status}</span>
+                      <span className="row-year">{p.year}</span>
+                      <span className="row-arrow" aria-hidden="true">
+                        ↗
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </section>
           </div>
@@ -140,7 +144,7 @@ export function ConceptCExperimentalEditorial({
 
             <div className="concept-c-ath-content">
               <span className="eyebrow-tag eyebrow-tag--gold">
-                02 / HIGH PERFORMANCE BASKETBALL
+                02 / COMPETITIVE BASKETBALL RECORD
               </span>
               <h1 className="huge-display-title huge-display-title--athlete">
                 THE COURT
@@ -150,10 +154,12 @@ export function ConceptCExperimentalEditorial({
 
               <div className="ath-editorial-intro">
                 <p>
-                  Three DBL East Java campaigns with SMA Gloria 1 Surabaya,
-                  moving from the 2021 Fantastic Four to the 2023 East Java
-                  final, culminating in First Team All-Star honors and 2024
-                  national tournament representation.
+                  Official DBL East Java progression across three seasons with
+                  SMA Gloria 1 Surabaya, moving from the 2021 Fantastic Four and
+                  2022 Sweet Sixteen to the 2023 East Java final (Runner-Up)
+                  with First Team honors, followed by 2024 DBL Indonesia
+                  All-Star selection and representing Indonesia in international
+                  competition.
                 </p>
               </div>
 
@@ -163,7 +169,7 @@ export function ConceptCExperimentalEditorial({
                   <span className="k-year">2024</span>
                   <span className="k-val">INDONESIA</span>
                   <span className="k-desc">
-                    FIBA U18 Asia Cup & ASEAN Schools Games Final
+                    FIBA U18 Asia Cup & ASEAN Schools Games Final (Gold)
                   </span>
                 </div>
                 <div className="kinetic-cell">
@@ -177,7 +183,7 @@ export function ConceptCExperimentalEditorial({
                   <span className="k-year">2021–23</span>
                   <span className="k-val">FIRST TEAM</span>
                   <span className="k-desc">
-                    DBL East Java Finalist · SMA Gloria 1 Surabaya
+                    DBL East Java Finalist (Runner-Up) · SMA Gloria 1 Surabaya
                   </span>
                 </div>
               </div>
