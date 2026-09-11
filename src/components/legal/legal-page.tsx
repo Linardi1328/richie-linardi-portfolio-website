@@ -65,10 +65,7 @@ export function LegalPage({
           ))}
         </div>
 
-        <aside
-          className="portfolio-legal__note"
-          aria-label="Policy scope note"
-        >
+        <aside className="portfolio-legal__note" aria-label="Policy scope note">
           These policies describe the current deployed portfolio. They must be
           reviewed before adding a contact form, analytics, advertising, paid
           services, user accounts, or new third-party embeds.
