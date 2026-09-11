@@ -267,9 +267,40 @@ export function DualTraceEngine({ world }: DualTraceEngineProps) {
     top: h - 100,
   };
 
+  // Content and corridor coordinates for Athlete Hero
+  const athContentLeft =
+    anchors["ath-lead"]?.left ??
+    anchors["num-1"]?.left ??
+    (isMobile ? 20 : 120);
+  const athLeadTop =
+    anchors["ath-lead"]?.top ??
+    (anchors["ath-tags"]?.bottom ? anchors["ath-tags"].bottom + 20 : 400);
+  const athLeadBottom =
+    anchors["ath-lead"]?.bottom ??
+    (anchors["hero-telemetry"]?.top ? anchors["hero-telemetry"].top - 30 : 510);
+  const athTelemTop =
+    anchors["hero-telemetry"]?.top ??
+    (anchors["telem-0"]?.top ? anchors["telem-0"].top - 18 : 550);
+  const athTelem0X = anchors["telem-0"]?.x ?? athContentLeft + 80;
+
+  // Clear whitespace corridor X (routed cleanly to the left of ordinary body copy)
+  const athCorridorX = isMobile
+    ? Math.max(8, Math.min(12, athContentLeft - 10))
+    : w >= 1200
+      ? Math.max(40, Math.round(athContentLeft - 45))
+      : Math.max(14, Math.round(athContentLeft - 18));
+
   const athPathSeg1 = isMobile
-    ? `M 0 ${spineOriginY} C ${w * 0.25} ${spineOriginY}, ${anchors["num-1"]?.left || 20} ${anchors["num-1"]?.top || 160}, ${anchors["num-1"]?.left || 20} ${anchors["num-1"]?.bottom || 260} C ${anchors["num-1"]?.left || 20} ${anchors["hero-telemetry"]?.top || 380}, ${athHeroExit.x} ${athHeroExit.y - 40}, ${athHeroExit.x} ${athHeroExit.y}`
-    : `M 0 ${spineOriginY} C ${w * 0.18} ${spineOriginY}, ${anchors["num-1"]?.left != null ? anchors["num-1"].left - 20 : 180} ${anchors["num-1"]?.top || 180}, ${anchors["num-1"]?.left || 220} ${anchors["num-1"]?.y || 280} L ${anchors["num-1"]?.left || 220} ${anchors["num-1"]?.bottom != null ? anchors["num-1"].bottom - 15 : 360} C ${anchors["num-3"]?.left || 320} ${anchors["num-3"]?.top != null ? anchors["num-3"].top + 20 : 220}, ${anchors["num-3"]?.right != null ? anchors["num-3"].right + 35 : 460} ${anchors["num-3"]?.y || 280}, ${anchors["num-3"]?.right || 420} ${anchors["num-3"]?.bottom || 380} C ${anchors["num-3"]?.right || 420} ${anchors["hero-telemetry"]?.top != null ? anchors["hero-telemetry"].top - 25 : 460}, ${anchors["telem-2"]?.right || 620} ${anchors["telem-0"]?.top != null ? anchors["telem-0"].top - 15 : 510}, ${anchors["telem-0"]?.x || 140} ${anchors["telem-0"]?.top != null ? anchors["telem-0"].top - 15 : 510} C ${anchors["telem-0"]?.left || 70} ${athHeroExit.y - 40}, ${athHeroExit.x + 60} ${athHeroExit.y}, ${athHeroExit.x} ${athHeroExit.y}`;
+    ? `M 0 ${spineOriginY} C ${w * 0.2} ${spineOriginY}, ${athCorridorX} ${anchors["num-1"]?.top || 160}, ${athCorridorX} ${anchors["num-1"]?.bottom || 240} L ${athCorridorX} ${athLeadBottom} C ${athCorridorX} ${athTelemTop}, ${anchors["telem-0"]?.left || athContentLeft} ${athTelemTop}, ${athHeroExit.x} ${athHeroExit.y}`
+    : `M 0 ${spineOriginY} ` +
+      `C ${w * 0.16} ${spineOriginY}, ${anchors["num-1"]?.left != null ? anchors["num-1"].left - 25 : 100} ${anchors["num-1"]?.top || 130}, ${anchors["num-1"]?.left || 120} ${anchors["num-1"]?.y || 240} ` +
+      `L ${anchors["num-1"]?.left || 120} ${anchors["num-1"]?.bottom != null ? anchors["num-1"].bottom - 15 : 340} ` +
+      `C ${anchors["num-3"]?.left || 220} ${anchors["num-3"]?.top != null ? anchors["num-3"].top + 15 : 140}, ${anchors["num-3"]?.right != null ? anchors["num-3"].right + 35 : 360} ${anchors["num-3"]?.y != null ? anchors["num-3"].y - 15 : 230}, ${anchors["num-3"]?.right || 325} ${anchors["num-3"]?.y || 240} ` +
+      `C ${anchors["num-3"]?.right != null ? anchors["num-3"].right + 10 : 335} ${anchors["num-3"]?.bottom != null ? anchors["num-3"].bottom - 5 : 345}, ${anchors["num-3"]?.x || 270} ${anchors["num-3"]?.bottom != null ? anchors["num-3"].bottom + 12 : 360}, ${anchors["num-1"]?.x || 170} ${anchors["num-3"]?.bottom != null ? anchors["num-3"].bottom + 12 : 360} ` +
+      `C ${athCorridorX + 15} ${anchors["num-3"]?.bottom != null ? anchors["num-3"].bottom + 12 : 360}, ${athCorridorX} ${athLeadTop - 15}, ${athCorridorX} ${athLeadTop} ` +
+      `L ${athCorridorX} ${athLeadBottom} ` +
+      `C ${athCorridorX} ${athTelemTop - 15}, ${anchors["telem-0"]?.left || athContentLeft} ${athTelemTop}, ${athTelem0X} ${athTelemTop} ` +
+      `C ${athTelem0X + 40} ${athTelemTop}, ${athHeroExit.x + 40} ${athHeroExit.y - 25}, ${athHeroExit.x} ${athHeroExit.y}`;
 
   const athPathSeg2 = isMobile
     ? `M ${athHeroExit.x} ${athHeroExit.y} C ${athHeroExit.x} ${athLandmarksEntry.top}, ${anchors["score-asg"]?.left || 20} ${anchors["score-asg"]?.top || 900}, ${anchors["score-asg"]?.left || 20} ${anchors["score-asg"]?.bottom || 1200} C ${anchors["score-porprov"]?.left || 20} ${anchors["score-porprov"]?.top || 1250}, ${athLandmarksExit.x} ${athLandmarksExit.y - 40}, ${athLandmarksExit.x} ${athLandmarksExit.y}`

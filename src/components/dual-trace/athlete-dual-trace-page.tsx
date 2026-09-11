@@ -86,7 +86,7 @@ export function AthleteDualTracePage() {
 
           {/* Author Positioning Statement */}
           <div className="dt-hero-statement">
-            <p className="dt-lead-statement">
+            <p className="dt-lead-statement" data-trace-node="ath-lead">
               Competitive basketball spanning DBL East Java (Runner-Up & First
               Team), East Java Provincial Championship (PorProv VIII Gold), and
               representing Indonesia in international competition in 2024.
@@ -160,8 +160,8 @@ export function AthleteDualTracePage() {
               Final Moments & Gold Medals
             </h2>
             <p className="dt-section-desc">
-              Verified championship games and medal-round box scores from
-              provincial and international competition.
+              Published final-score and player-stat records from provincial and
+              international competition.
             </p>
           </div>
 
@@ -355,7 +355,7 @@ export function AthleteDualTracePage() {
               data-trace-node="stat-ku17"
             >
               <span className="dt-landmark-label">
-                KEJURNAS KU-17 WILAYAH 5 // TOURNAMENT LEADER
+                KEJURNAS KU-17 WILAYAH 5 // FG% LEADER
               </span>
               <div className="dt-landmark-big-num">
                 <span>64.29%</span>
