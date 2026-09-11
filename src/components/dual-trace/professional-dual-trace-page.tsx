@@ -107,7 +107,7 @@ export function ProfessionalDualTracePage() {
                 <span className="dt-telem-num">CS / DS</span>
                 <span className="dt-telem-lbl">Monash University</span>
                 {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--published">
+                  <span className="dt-proof-chip dt-proof-chip--owner">
                     <span className="dt-proof-id">[P02]</span>
                     <span>MONASH · EXPECTED 2027</span>
                   </span>
@@ -211,7 +211,9 @@ export function ProfessionalDualTracePage() {
                     </span>
                     <span>EXPLICIT SAFETY & OPERATION BOUNDARIES</span>
                     {isProofMode && (
-                      <span className="dt-proof-indicator">AUDITED</span>
+                      <span className="dt-proof-indicator">
+                        BOUNDARY DOCUMENTED
+                      </span>
                     )}
                   </div>
                   <ul className="dt-boundary-list">

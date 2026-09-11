@@ -5,6 +5,7 @@ import { ProfessionalDualTracePage } from "@/components/dual-trace/professional-
 export default function Home() {
   return (
     <PortfolioWorldShell
+      dualTraceHome={true}
       navigation={professionalWorldNavigation}
       world="professional"
     >

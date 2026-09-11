@@ -45,30 +45,46 @@ function getServerSnapshot(): boolean {
   return false;
 }
 
-export function ProofModeProvider({ children }: { children: ReactNode }) {
+export function ProofModeProvider({
+  children,
+  enabled = true,
+}: {
+  children: ReactNode;
+  enabled?: boolean;
+}) {
   const isProofMode = useSyncExternalStore(
     subscribe,
     getSnapshot,
     getServerSnapshot,
   );
 
-  const setProofMode = useCallback((active: boolean) => {
-    if (typeof window === "undefined") return;
-    try {
-      sessionStorage.setItem(STORAGE_KEY, String(active));
-      window.dispatchEvent(new Event("rbl_proof_mode_change"));
-    } catch {
-      // Ignore
-    }
-  }, []);
+  const effectiveProofMode = enabled ? isProofMode : false;
+
+  const setProofMode = useCallback(
+    (active: boolean) => {
+      if (!enabled || typeof window === "undefined") return;
+      try {
+        sessionStorage.setItem(STORAGE_KEY, String(active));
+        window.dispatchEvent(new Event("rbl_proof_mode_change"));
+      } catch {
+        // Ignore
+      }
+    },
+    [enabled],
+  );
 
   const toggleProofMode = useCallback(() => {
-    setProofMode(!getSnapshot());
-  }, [setProofMode]);
+    if (!enabled) return;
+    setProofMode(!effectiveProofMode);
+  }, [enabled, effectiveProofMode, setProofMode]);
 
   return (
     <ProofModeContext.Provider
-      value={{ isProofMode, toggleProofMode, setProofMode }}
+      value={{
+        isProofMode: effectiveProofMode,
+        toggleProofMode,
+        setProofMode,
+      }}
     >
       {children}
     </ProofModeContext.Provider>

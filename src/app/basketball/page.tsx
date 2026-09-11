@@ -5,6 +5,7 @@ import { AthleteDualTracePage } from "@/components/dual-trace/athlete-dual-trace
 export default function BasketballPage() {
   return (
     <PortfolioWorldShell
+      dualTraceHome={true}
       navigation={basketballWorldNavigation}
       world="basketball"
     >

@@ -299,7 +299,7 @@ export function AthleteDualTracePage() {
               SECTION 03 // COMPETITIVE LADDER
             </span>
             <h2 id="progression-heading" className="dt-section-title">
-              SMA Gloria 1 & Elite Milestones
+              SMA Gloria 1 & Tournament Milestones
             </h2>
             <p className="dt-section-desc">
               Three DBL East Java campaigns moving from Fantastic Four to the

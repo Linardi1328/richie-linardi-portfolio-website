@@ -13,6 +13,7 @@ import { cn } from "@/lib/cn";
 type PortfolioWorldShellProps = {
   children: ReactNode;
   className?: string;
+  dualTraceHome?: boolean;
   navigation: readonly WorldNavigationItem[];
   world: PortfolioWorld;
 };
@@ -20,15 +21,17 @@ type PortfolioWorldShellProps = {
 export function PortfolioWorldShell({
   children,
   className,
+  dualTraceHome = false,
   navigation,
   world,
 }: PortfolioWorldShellProps) {
   return (
-    <ProofModeProvider>
+    <ProofModeProvider enabled={dualTraceHome}>
       <div
         className={cn(
           "portfolio-stage",
           `portfolio-stage--${world}`,
+          dualTraceHome && "portfolio-stage--dual-trace",
           className,
         )}
         data-context={world}
@@ -39,13 +42,22 @@ export function PortfolioWorldShell({
         </a>
         <PortfolioEffects />
         <div aria-hidden="true" className="portfolio-atmosphere" />
-        <div className="portfolio-book">
-          <PortfolioSpine world={world} />
+        <div
+          className={cn(
+            "portfolio-book",
+            dualTraceHome && "portfolio-book--dual-trace",
+          )}
+        >
+          {dualTraceHome && <PortfolioSpine world={world} />}
 
           <SignatureFlipbook world={world}>
             <div className="portfolio-page">
               <div className="portfolio-page__chrome">
-                <WorldNavigation items={navigation} world={world} />
+                <WorldNavigation
+                  dualTraceHome={dualTraceHome}
+                  items={navigation}
+                  world={world}
+                />
               </div>
 
               <div
