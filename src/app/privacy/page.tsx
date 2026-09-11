@@ -27,7 +27,7 @@ export default function PrivacyPage() {
           title: "Analytics and advertising",
           body: (
             <p>
-              No Google Analytics, Meta Pixel, Hotjar, Mixpanel, PostHog, or similar behavioural analytics/advertising tracker is included in the audited build. If non-essential tracking is added later, this policy and the site's consent controls must be reviewed before it is enabled.
+              No Google Analytics, Meta Pixel, Hotjar, Mixpanel, PostHog, or similar behavioural analytics/advertising tracker is included in the audited build. If non-essential tracking is added later, this policy and the site&apos;s consent controls must be reviewed before it is enabled.
             </p>
           ),
         },
