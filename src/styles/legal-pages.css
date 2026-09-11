@@ -1,0 +1,120 @@
+.portfolio-legal {
+  width: min(100%, 58rem);
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 5rem) var(--gutter) clamp(3rem, 7vw, 6rem);
+}
+
+.portfolio-legal__header {
+  max-width: 48rem;
+}
+
+.portfolio-legal__eyebrow,
+.portfolio-legal__date {
+  color: var(--stage-muted);
+  font-size: 0.82rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.portfolio-legal h1 {
+  margin-top: 0.75rem;
+  color: var(--stage-ink);
+  font-size: clamp(2.2rem, 7vw, 4.75rem);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.portfolio-legal__summary {
+  max-width: 44rem;
+  margin-top: 1.25rem;
+  color: var(--stage-ink-soft);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.75;
+}
+
+.portfolio-legal__date {
+  margin-top: 1rem;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.portfolio-legal__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  margin-top: 1.5rem;
+}
+
+.portfolio-legal__nav a,
+.portfolio-page__legal-links a {
+  color: var(--stage-ink);
+  font-weight: 750;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+.portfolio-legal__sections {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+
+.portfolio-legal__sections section {
+  border-top: 1px solid var(--stage-rule);
+  padding-block: 1.5rem;
+}
+
+.portfolio-legal__sections h2 {
+  margin: 0;
+  color: var(--stage-ink);
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  line-height: 1.25;
+}
+
+.portfolio-legal__sections p,
+.portfolio-legal__sections li,
+.portfolio-legal__note {
+  color: var(--stage-ink-soft);
+  line-height: 1.75;
+}
+
+.portfolio-legal__sections p {
+  margin-top: 0.75rem;
+}
+
+.portfolio-legal__sections ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0.9rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.portfolio-legal__note {
+  margin-top: 2rem;
+  border: 1px solid var(--stage-rule);
+  padding: 1rem 1.1rem;
+  background: color-mix(in srgb, var(--stage-accent) 6%, transparent);
+}
+
+.portfolio-page__footer {
+  gap: 0.75rem;
+}
+
+.portfolio-page__legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.85rem;
+  font-size: 0.75rem;
+}
+
+:where(a[href], button, input, textarea, select, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid var(--stage-accent);
+  outline-offset: 3px;
+}
+
+@media (forced-colors: active) {
+  :where(a[href], button, input, textarea, select, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline-color: CanvasText;
+  }
+}
