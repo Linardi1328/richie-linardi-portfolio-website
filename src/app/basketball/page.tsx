@@ -1,6 +1,6 @@
-import { AthleteHomePage } from "@/components/basketball/athlete-home-page";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { basketballWorldNavigation } from "@/data/world-navigation";
+import { AthleteDualTracePage } from "@/components/dual-trace/athlete-dual-trace-page";
 
 export default function BasketballPage() {
   return (
@@ -9,7 +9,7 @@ export default function BasketballPage() {
       world="basketball"
     >
       <main className="theme-basketball">
-        <AthleteHomePage />
+        <AthleteDualTracePage />
       </main>
     </PortfolioWorldShell>
   );
