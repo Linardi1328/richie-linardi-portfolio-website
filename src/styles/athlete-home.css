@@ -2310,25 +2310,143 @@
   line-height: 1.25;
 }
 
+.athlete-scoresheet-strip,
 .athlete-metrics-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  padding: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  padding: clamp(0.85rem, 2vw, 1.25rem);
   border: 1px solid color-mix(in srgb, var(--stage-line) 80%, transparent);
   background: color-mix(in srgb, var(--stage-paper) 60%, transparent);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 440px) {
+  .athlete-scoresheet-strip,
   .athlete-metrics-row {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
+  .athlete-scoresheet-strip,
   .athlete-metrics-row {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+}
+
+@media (min-width: 768px) {
+  .athlete-scoresheet-strip,
+  .athlete-metrics-row {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+/* 1024px - 1279px: Deliberate 5 + 4 compact grid for 9 metrics without crowding */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .athlete-scoresheet-strip,
+  .athlete-metrics-row {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+}
+
+/* 1280px+: Exactly one clean line of 9 metrics on wide desktop */
+@media (min-width: 1280px) {
+  .athlete-scoresheet-strip,
+  .athlete-metrics-row {
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+}
+
+.athlete-scoresheet-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.75rem 0.35rem;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--stage-line) 60%, transparent);
+  background: color-mix(in srgb, var(--stage-paper) 40%, transparent);
+}
+
+.athlete-scoresheet-cell--highlight {
+  border-color: color-mix(in srgb, var(--stage-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--stage-accent) 6%, transparent);
+}
+
+.athlete-scoresheet-cell strong {
+  color: var(--stage-ink);
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 1.3vw, 1.45rem);
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  white-space: nowrap; /* Ensures values such as "58:27" or "29:51" never break */
+}
+
+.athlete-scoresheet-cell--highlight strong {
+  color: var(--stage-accent);
+}
+
+.athlete-scoresheet-cell span {
+  margin-top: 0.35rem;
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap; /* Ensures unit labels such as "MIN" or "EFF" stay on one line */
+}
+
+.athlete-scoresheet-cell--highlight span {
+  color: var(--stage-accent);
+}
+
+/* Single Game Standout Strip */
+.athlete-stat-highlight-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 1.15rem;
+  border: 1px solid
+    color-mix(in srgb, var(--stage-accent) 30%, var(--stage-line));
+  border-left: 3px solid var(--stage-accent);
+  background: color-mix(in srgb, var(--stage-accent) 4%, var(--stage-paper));
+}
+
+@media (min-width: 640px) {
+  .athlete-stat-highlight-strip {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.athlete-stat-highlight-strip__label {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.athlete-stat-highlight-strip p {
+  margin: 0;
+  color: var(--stage-ink);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.athlete-stat-highlight-strip strong {
+  color: var(--stage-ink);
+  font-family: var(--font-mono);
+  font-weight: 750;
 }
 
 .athlete-stat-overview-box__notes {
@@ -2345,7 +2463,7 @@
   border-top: 1px solid var(--stage-line);
 }
 
-/* DBL Four-Season Scorecards */
+/* DBL High School Progression (Three seasons at SMA Gloria 1) */
 .athlete-dbl-seasons__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -2358,9 +2476,9 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
   .athlete-dbl-seasons__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -2441,6 +2559,44 @@
   background: color-mix(in srgb, var(--stage-paper) 70%, transparent);
 }
 
+/* DBL Shooting Splits Structured Display */
+.athlete-dbl-season-card__splits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.35rem;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 50%, transparent);
+}
+
+.athlete-split-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.15rem;
+}
+
+.athlete-split-item__val {
+  color: var(--stage-accent);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.athlete-split-item__lbl {
+  color: var(--stage-muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .athlete-dbl-season-card__shooting {
   display: flex;
   align-items: center;
@@ -2456,6 +2612,16 @@
 .athlete-dbl-season-card__footer {
   margin-top: auto;
   padding-top: 1rem;
+}
+
+/* Shared Section Source Footer */
+.athlete-section-source-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--stage-line);
 }
 
 /* Principles Grid */

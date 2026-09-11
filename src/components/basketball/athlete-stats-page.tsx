@@ -4,11 +4,16 @@ import {
   basketballSources,
   dblSeasonStats,
   fibaU18Snapshot,
+  heatChallenge2025Snapshot,
   kejurnasKu17Snapshot,
   porprovViiiFinalSnapshot,
 } from "@/data/basketball-record";
 
 export function AthleteStatsPage() {
+  const highSchoolDblStats = dblSeasonStats.filter(
+    (season) => season.season !== "2019",
+  );
+
   return (
     <article className="athlete-home athlete-subpage">
       {/* ----------------------------------------------------------------------
@@ -32,8 +37,11 @@ export function AthleteStatsPage() {
                 <Link className="athlete-btn-primary" href="#international">
                   International & FIBA
                 </Link>
+                <Link className="athlete-btn-secondary" href="#heat-challenge">
+                  Heat Challenge 2025
+                </Link>
                 <Link className="athlete-btn-secondary" href="#dbl-progression">
-                  DBL 4-season record
+                  SMA Gloria 1 record
                 </Link>
               </div>
             </div>
@@ -74,14 +82,14 @@ export function AthleteStatsPage() {
                 </svg>
 
                 <div aria-hidden="true" className="athlete-hero__number">
-                  05
+                  06
                 </div>
               </div>
 
               <div className="athlete-hero__identity-meta">
                 <div>
                   <span>Partitions</span>
-                  <strong>5 Distinct Blocks</strong>
+                  <strong>6 Distinct Blocks</strong>
                 </div>
                 <div>
                   <span>Integrity</span>
@@ -93,7 +101,7 @@ export function AthleteStatsPage() {
                 </div>
                 <div>
                   <span>Sources</span>
-                  <strong>FIBA · DBL · Press</strong>
+                  <strong>FIBA · DBL · Major League · Press</strong>
                 </div>
               </div>
             </div>
@@ -373,51 +381,51 @@ export function AthleteStatsPage() {
                   <h3>Tournament Match Statistics & Shooting Efficiency</h3>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="athlete-stat-card__stage-badge text-amber-300 border-amber-500/40">
-                    64.29% FG · RANK #1
-                  </span>
                   <span className="athlete-stat-card__stage-badge">
-                    EF {kejurnasKu17Snapshot.efficiency}
+                    OFFICIAL TOURNAMENT STATS
                   </span>
                 </div>
               </div>
 
-              <div className="athlete-metrics-row">
-                <div className="athlete-stat-metric">
+              <div
+                aria-label="Kejurnas KU17 score sheet"
+                className="athlete-scoresheet-strip athlete-scoresheet-strip--9col"
+              >
+                <div className="athlete-scoresheet-cell">
                   <strong>{kejurnasKu17Snapshot.games}</strong>
-                  <span>GAMES</span>
+                  <span>GP</span>
                 </div>
-                <div className="athlete-stat-metric">
+                <div className="athlete-scoresheet-cell">
                   <strong>{kejurnasKu17Snapshot.minutes}</strong>
-                  <span>MINUTES</span>
+                  <span>MIN</span>
                 </div>
-                <div className="athlete-stat-metric">
+                <div className="athlete-scoresheet-cell">
                   <strong>{kejurnasKu17Snapshot.points}</strong>
-                  <span>POINTS</span>
+                  <span>PTS</span>
                 </div>
-                <div className="athlete-stat-metric">
+                <div className="athlete-scoresheet-cell">
                   <strong>{kejurnasKu17Snapshot.rebounds}</strong>
-                  <span>REBOUNDS</span>
+                  <span>REB</span>
                 </div>
-                <div className="athlete-stat-metric">
+                <div className="athlete-scoresheet-cell">
                   <strong>{kejurnasKu17Snapshot.assists}</strong>
-                  <span>ASSISTS</span>
+                  <span>AST</span>
                 </div>
-                <div className="athlete-stat-metric">
+                <div className="athlete-scoresheet-cell">
                   <strong>{kejurnasKu17Snapshot.steals}</strong>
-                  <span>STEALS</span>
+                  <span>STL</span>
                 </div>
-                <div className="athlete-stat-metric">
+                <div className="athlete-scoresheet-cell">
                   <strong>{kejurnasKu17Snapshot.blocks}</strong>
-                  <span>BLOCKS</span>
+                  <span>BLK</span>
                 </div>
-                <div className="athlete-stat-metric athlete-stat-metric--highlight">
+                <div className="athlete-scoresheet-cell athlete-scoresheet-cell--highlight">
                   <strong>{kejurnasKu17Snapshot.fieldGoalPct}</strong>
                   <span>FG% (RANK #1)</span>
                 </div>
-                <div className="athlete-stat-metric athlete-stat-metric--highlight">
+                <div className="athlete-scoresheet-cell athlete-scoresheet-cell--highlight">
                   <strong>{kejurnasKu17Snapshot.efficiency}</strong>
-                  <span>EFFICIENCY</span>
+                  <span>EFF</span>
                 </div>
               </div>
 
@@ -452,7 +460,161 @@ export function AthleteStatsPage() {
       </section>
 
       {/* ----------------------------------------------------------------------
-          BLOCK 04: DBL FOUR-SEASON PROGRESSION (2019–2023)
+          BLOCK 04: INVITATIONAL CLUB COMPETITION (HEAT CHALLENGE CUP 2025)
+          ---------------------------------------------------------------------- */}
+      <section
+        aria-labelledby="heat-challenge-stats-heading"
+        className="athlete-section"
+        id="heat-challenge"
+      >
+        <div className="athlete-container">
+          <div className="athlete-section-heading" data-reveal>
+            <div>
+              <p className="athlete-kicker">
+                Partition 04 · Invitational club competition
+              </p>
+              <h2
+                className="athlete-title-display"
+                id="heat-challenge-stats-heading"
+              >
+                Heat Challenge Cup 2025 · KL Hornbills.
+              </h2>
+            </div>
+            <p>
+              Official tournament statistics from the Heat Challenge Cup 2025 in
+              Puchong, Selangor, Malaysia, published by Major League Malaysia.
+              Team placement preserved under verified claim boundaries.
+            </p>
+          </div>
+
+          {heatChallenge2025Snapshot ? (
+            <div
+              aria-label="Heat Challenge Cup 2025 statistics grid"
+              className="athlete-stat-overview-box"
+              data-reveal
+              data-reveal-delay="1"
+              role="region"
+            >
+              <div className="athlete-stat-overview-box__header">
+                <div>
+                  <span className="athlete-stat-card__tag">
+                    HEAT CHALLENGE CUP 2025 · KL HORNBILLS
+                  </span>
+                  <h3>Official Tournament Statistics · Puchong, Selangor</h3>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="athlete-stat-card__stage-badge text-amber-300 border-amber-500/40">
+                    1ST RUNNER-UP (OWNER-PROVIDED)
+                  </span>
+                  <span className="athlete-stat-card__stage-badge">
+                    OFFICIAL STATS
+                  </span>
+                </div>
+              </div>
+
+              <div
+                aria-label="Heat Challenge Cup 2025 tournament aggregates"
+                className="athlete-scoresheet-strip athlete-scoresheet-strip--9col"
+              >
+                <div className="athlete-scoresheet-cell">
+                  <strong>{heatChallenge2025Snapshot.games}</strong>
+                  <span>GP</span>
+                </div>
+                <div className="athlete-scoresheet-cell">
+                  <strong>{heatChallenge2025Snapshot.minutes}</strong>
+                  <span>MIN ({heatChallenge2025Snapshot.mpg} MPG)</span>
+                </div>
+                <div className="athlete-scoresheet-cell">
+                  <strong>{heatChallenge2025Snapshot.points}</strong>
+                  <span>PTS ({heatChallenge2025Snapshot.ppg} PPG)</span>
+                </div>
+                <div className="athlete-scoresheet-cell">
+                  <strong>{heatChallenge2025Snapshot.rebounds}</strong>
+                  <span>REB ({heatChallenge2025Snapshot.rpg} RPG)</span>
+                </div>
+                <div className="athlete-scoresheet-cell">
+                  <strong>{heatChallenge2025Snapshot.steals}</strong>
+                  <span>STL ({heatChallenge2025Snapshot.stpg} STPG)</span>
+                </div>
+                <div className="athlete-scoresheet-cell athlete-scoresheet-cell--highlight">
+                  <strong>{heatChallenge2025Snapshot.fieldGoalPct}</strong>
+                  <span>
+                    FG% ({heatChallenge2025Snapshot.fieldGoalsMade}/
+                    {heatChallenge2025Snapshot.fieldGoalsAttempted})
+                  </span>
+                </div>
+                <div className="athlete-scoresheet-cell">
+                  <strong>{heatChallenge2025Snapshot.threePointPct}</strong>
+                  <span>
+                    3PT% ({heatChallenge2025Snapshot.threePointsMade}/
+                    {heatChallenge2025Snapshot.threePointsAttempted})
+                  </span>
+                </div>
+                <div className="athlete-scoresheet-cell">
+                  <strong>{heatChallenge2025Snapshot.freeThrowPct}</strong>
+                  <span>
+                    FT% ({heatChallenge2025Snapshot.freeThrowsMade}/
+                    {heatChallenge2025Snapshot.freeThrowsAttempted})
+                  </span>
+                </div>
+                <div className="athlete-scoresheet-cell athlete-scoresheet-cell--highlight">
+                  <strong>
+                    {heatChallenge2025Snapshot.efficiency.toFixed(1)}
+                  </strong>
+                  <span>EFF</span>
+                </div>
+              </div>
+
+              <div className="athlete-stat-highlight-strip">
+                <span className="athlete-stat-highlight-strip__label">
+                  Single-game standout
+                </span>
+                <p>
+                  <strong>
+                    {heatChallenge2025Snapshot.singleGameHigh.date} vs{" "}
+                    {heatChallenge2025Snapshot.singleGameHigh.opponent}:
+                  </strong>{" "}
+                  {heatChallenge2025Snapshot.singleGameHigh.minutes} MIN ·{" "}
+                  {heatChallenge2025Snapshot.singleGameHigh.points} PTS (
+                  {heatChallenge2025Snapshot.singleGameHigh.shooting}) ·{" "}
+                  {heatChallenge2025Snapshot.singleGameHigh.rebounds} REB ·{" "}
+                  {heatChallenge2025Snapshot.singleGameHigh.steals} STL ·{" "}
+                  {heatChallenge2025Snapshot.singleGameHigh.efficiency.toFixed(
+                    1,
+                  )}{" "}
+                  EFF
+                </p>
+              </div>
+
+              <p className="athlete-stat-overview-box__notes">
+                {heatChallenge2025Snapshot.contextNote}
+              </p>
+
+              <div className="athlete-stat-overview-box__footer">
+                <a
+                  className="athlete-source-link"
+                  href={heatChallenge2025Snapshot.source.href}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Major League Malaysia · Player statistics ↗
+                </a>
+                <a
+                  className="athlete-source-link"
+                  href={heatChallenge2025Snapshot.gameLogSource.href}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  View game log ↗
+                </a>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------------------------
+          BLOCK 05: HIGH SCHOOL VARSITY PROGRESSION (SMA GLORIA 1)
           ---------------------------------------------------------------------- */}
       <section
         aria-labelledby="dbl-progression-heading"
@@ -462,29 +624,32 @@ export function AthleteStatsPage() {
         <div className="athlete-container">
           <div className="athlete-section-heading" data-reveal>
             <div>
-              <p className="athlete-kicker">Partition 04 · DBL league play</p>
+              <p className="athlete-kicker">
+                Partition 05 · High school varsity progression
+              </p>
               <h2
                 className="athlete-title-display"
                 id="dbl-progression-heading"
               >
-                DBL four-season progression.
+                Three seasons at SMA Gloria 1.
               </h2>
             </div>
             <p>
-              Every season tracked in official DBL profiles from middle school
-              (SMP IPH West) through three varsity seasons at SMA Gloria 1
-              Surabaya.
+              Official DBL East Java progression across three seasons with SMA
+              Gloria 1 Surabaya, moving from the 2021 Fantastic Four and 2022
+              Sweet Sixteen to the 2023 East Java final, where Gloria 1 finished
+              runner-up and Richie earned First Team honors.
             </p>
           </div>
 
           <div
-            aria-label="DBL 4-season career progression scorecard"
+            aria-label="DBL high school career progression scorecard"
             className="athlete-dbl-seasons__grid"
             data-reveal
             data-reveal-delay="1"
             role="region"
           >
-            {dblSeasonStats.map((season) => {
+            {highSchoolDblStats.map((season) => {
               const is2023 = season.season === "2023";
               return (
                 <article
@@ -498,9 +663,7 @@ export function AthleteStatsPage() {
                       {season.season}
                     </span>
                     <span className="athlete-dbl-season-card__team">
-                      {season.season === "2019"
-                        ? "SMP IPH West"
-                        : "SMA Gloria 1"}
+                      SMA Gloria 1
                     </span>
                   </div>
 
@@ -527,31 +690,48 @@ export function AthleteStatsPage() {
                     </div>
                   </div>
 
-                  {season.shooting ? (
-                    <div className="athlete-dbl-season-card__shooting">
-                      <span>{season.shooting}</span>
+                  {season.fgPct ? (
+                    <div className="athlete-dbl-season-card__splits">
+                      <div className="athlete-split-item">
+                        <span className="athlete-split-item__val">
+                          {season.fgPct}
+                        </span>
+                        <span className="athlete-split-item__lbl">FG%</span>
+                      </div>
+                      <div className="athlete-split-item">
+                        <span className="athlete-split-item__val">
+                          {season.threePtPct}
+                        </span>
+                        <span className="athlete-split-item__lbl">3PT%</span>
+                      </div>
+                      <div className="athlete-split-item">
+                        <span className="athlete-split-item__val">
+                          {season.ftPct}
+                        </span>
+                        <span className="athlete-split-item__lbl">FT%</span>
+                      </div>
                     </div>
                   ) : null}
-
-                  <div className="athlete-dbl-season-card__footer">
-                    <a
-                      className="athlete-source-link"
-                      href={season.source.href}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      {season.source.label} ↗
-                    </a>
-                  </div>
                 </article>
               );
             })}
+          </div>
+
+          <div className="athlete-section-source-footer" data-reveal>
+            <a
+              className="athlete-source-link"
+              href={basketballSources.dblProfile.href}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Source · DBL Indonesia player profile ↗
+            </a>
           </div>
         </div>
       </section>
 
       {/* ----------------------------------------------------------------------
-          BLOCK 05: MEASUREMENT INTEGRITY STANDARDS
+          BLOCK 06: MEASUREMENT INTEGRITY STANDARDS
           ---------------------------------------------------------------------- */}
       <section
         aria-labelledby="audit-standards-heading"
@@ -562,7 +742,7 @@ export function AthleteStatsPage() {
           <div className="athlete-section-heading" data-reveal>
             <div>
               <p className="athlete-kicker">
-                Partition 05 · Measurement integrity
+                Partition 06 · Measurement integrity
               </p>
               <h2
                 className="athlete-title-display"
@@ -667,7 +847,8 @@ export function AthleteStatsPage() {
                 </span>
                 <p className="athlete-closing__bridge-text">
                   Competition-partitioned metrics tracing DBL, PorProv,
-                  Kejurnas, and Indonesia national team performances.
+                  Kejurnas, Heat Challenge Cup, and Indonesia national team
+                  performances.
                 </p>
               </div>
               <Link className="athlete-source-link" href="/basketball">
