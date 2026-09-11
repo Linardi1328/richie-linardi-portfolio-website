@@ -39,7 +39,7 @@ export function AthleteDualTracePage() {
         className="dt-section dt-section--hero dt-section--hero-ath"
         aria-labelledby="ath-hero-title"
       >
-        <div className="dt-hero-container">
+        <div className="dt-hero-container" data-trace-in="hero-spine-entry">
           {/* Folio registration stamp */}
           <div className="dt-folio-stamp dt-folio-stamp--gold">
             <span className="dt-stamp-box dt-stamp-box--gold">
@@ -50,15 +50,32 @@ export function AthleteDualTracePage() {
             </span>
           </div>
 
-          {/* Monumental Typography: 13 */}
-          <div className="dt-monument-wrap">
+          {/* Monumental Typography: 13 as trajectory coordinate object */}
+          <div className="dt-monument-wrap" data-trace-node="ath-monument">
+            <div className="dt-monument-axis-overlay" aria-hidden="true">
+              <span className="dt-axis-tick dt-axis-tick--1">[AXIS: 1.V]</span>
+              <span className="dt-axis-tick dt-axis-tick--3">
+                [ARC: 3.WAIST]
+              </span>
+            </div>
             <h1
               id="ath-hero-title"
               className="dt-monument-title dt-monument-title--ath"
+              aria-label="13 — Richie Linardi Athlete Archive"
             >
-              <span className="dt-monument-num">13</span>
+              <span className="dt-monument-num">
+                <span className="dt-monument-digit" data-trace-node="num-1">
+                  1
+                </span>
+                <span className="dt-monument-digit" data-trace-node="num-3">
+                  3
+                </span>
+              </span>
             </h1>
-            <div className="dt-monument-secondary dt-monument-secondary--ath">
+            <div
+              className="dt-monument-secondary dt-monument-secondary--ath"
+              data-trace-node="ath-tags"
+            >
               <span className="dt-monument-tag">EAST JAVA</span>
               <span className="dt-monument-sep">/</span>
               <span className="dt-monument-tag">SURABAYA</span>
@@ -75,42 +92,53 @@ export function AthleteDualTracePage() {
               representing Indonesia in international competition in 2024.
             </p>
 
-            <div className="dt-hero-telemetry dt-hero-telemetry--ath">
-              <div className="dt-telem-cell">
+            <div
+              className="dt-hero-telemetry dt-hero-telemetry--ath"
+              data-trace-node="hero-telemetry"
+            >
+              <div className="dt-telem-cell" data-trace-node="telem-0">
                 <span className="dt-telem-num dt-telem-num--gold">
                   {asg2024FinalSnapshot.points} PTS
                 </span>
                 <span className="dt-telem-lbl">ASG 2024 Final</span>
                 {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--gold">
-                    IBL Official Box
+                  <span className="dt-proof-chip dt-proof-chip--published">
+                    <span className="dt-proof-id">[A01]</span>
+                    <span>IBL INDONESIA</span>
                   </span>
                 )}
               </div>
-              <div className="dt-telem-cell">
+              <div className="dt-telem-cell" data-trace-node="telem-1">
                 <span className="dt-telem-num dt-telem-num--gold">
                   {porprovViiiFinalSnapshot.points} PTS
                 </span>
                 <span className="dt-telem-lbl">PorProv VIII Gold</span>
                 {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--gold">
-                    GOR Delta Final
+                  <span className="dt-proof-chip dt-proof-chip--published">
+                    <span className="dt-proof-id">[A02]</span>
+                    <span>LENZA NASIONAL</span>
                   </span>
                 )}
               </div>
-              <div className="dt-telem-cell">
+              <div className="dt-telem-cell" data-trace-node="telem-2">
                 <span className="dt-telem-num dt-telem-num--gold">
                   {dbl2023?.points ?? 121} PTS
                 </span>
                 <span className="dt-telem-lbl">DBL East Java 2023</span>
                 {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--gold">
-                    First Team
+                  <span className="dt-proof-chip dt-proof-chip--published">
+                    <span className="dt-proof-id">[A03]</span>
+                    <span>DBL INDONESIA PROFILE</span>
                   </span>
                 )}
               </div>
             </div>
           </div>
+          <div
+            className="dt-section-exit-anchor"
+            data-trace-out="hero-exit"
+            aria-hidden="true"
+          />
         </div>
       </section>
 
@@ -121,6 +149,7 @@ export function AthleteDualTracePage() {
         id="chapter-systems"
         className="dt-section dt-section--landmarks"
         aria-labelledby="landmarks-heading"
+        data-trace-in="landmarks-entry"
       >
         <div className="dt-container">
           <div className="dt-section-header">
@@ -131,15 +160,15 @@ export function AthleteDualTracePage() {
               Final Moments & Gold Medals
             </h2>
             <p className="dt-section-desc">
-              Verified championship games where competitive preparation produced
-              decisive fourth-quarter outcomes.
+              Verified championship games and medal-round box scores from
+              provincial and international competition.
             </p>
           </div>
 
           {/* MONUMENTAL SCOREBOARD GRIDS */}
-          <div className="dt-scoreboard-strip">
+          <div className="dt-scoreboard-strip" data-trace-node="scoreboards">
             {/* SCOREBOARD 01: ASEAN SCHOOLS GAMES 2024 */}
-            <article className="dt-scoreboard-card">
+            <article className="dt-scoreboard-card" data-trace-node="score-asg">
               <div className="dt-sc-meta">
                 <span className="dt-sc-context">
                   {asg2024FinalSnapshot.context}
@@ -176,23 +205,25 @@ export function AthleteDualTracePage() {
 
               {isProofMode && (
                 <div className="dt-sc-proof-drawer">
-                  <span className="dt-proof-src-label">
-                    SOURCE VERIFICATION:
-                  </span>
+                  <span className="dt-proof-id">[A04]</span>
+                  <span className="dt-provenance-tag">PUBLISHED SOURCE</span>
                   <a
                     href={asg2024FinalSnapshot.source.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="dt-proof-link"
                   >
-                    {asg2024FinalSnapshot.source.label} ↗
+                    IBL Official Box Score ↗
                   </a>
                 </div>
               )}
             </article>
 
             {/* SCOREBOARD 02: PORPROV JATIM VIII 2023 */}
-            <article className="dt-scoreboard-card">
+            <article
+              className="dt-scoreboard-card"
+              data-trace-node="score-porprov"
+            >
               <div className="dt-sc-meta">
                 <span className="dt-sc-context">
                   {porprovViiiFinalSnapshot.context}
@@ -231,21 +262,25 @@ export function AthleteDualTracePage() {
 
               {isProofMode && (
                 <div className="dt-sc-proof-drawer">
-                  <span className="dt-proof-src-label">
-                    SOURCE VERIFICATION:
-                  </span>
+                  <span className="dt-proof-id">[A05]</span>
+                  <span className="dt-provenance-tag">PUBLISHED SOURCE</span>
                   <a
                     href={porprovViiiFinalSnapshot.source.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="dt-proof-link"
                   >
-                    {porprovViiiFinalSnapshot.source.label} ↗
+                    Lenza Nasional Press Report ↗
                   </a>
                 </div>
               )}
             </article>
           </div>
+          <div
+            className="dt-section-exit-anchor"
+            data-trace-out="landmarks-exit"
+            aria-hidden="true"
+          />
         </div>
       </section>
 
@@ -256,6 +291,7 @@ export function AthleteDualTracePage() {
         id="chapter-experience"
         className="dt-section dt-section--progression"
         aria-labelledby="progression-heading"
+        data-trace-in="progression-entry"
       >
         <div className="dt-container">
           <div className="dt-section-header">
@@ -273,31 +309,35 @@ export function AthleteDualTracePage() {
           </div>
 
           {/* DBL 3-Season Progression Row */}
-          <div className="dt-progression-row">
-            <div className="dt-prog-card">
+          <div className="dt-progression-row" data-trace-node="progression-row">
+            <div className="dt-prog-card" data-trace-node="prog-2021">
               <span className="dt-prog-year">2021</span>
-              <h4>Fantastic Four</h4>
+              <h3>Fantastic Four</h3>
               <p>
-                Named to the DBL East Java Second Team in breakthrough campaign.
+                Named to the DBL East Java Second Team as Gloria 1 reached the
+                Fantastic Four.
               </p>
               <span className="dt-prog-tag">East Java Second Team</span>
             </div>
 
-            <div className="dt-prog-card">
+            <div className="dt-prog-card" data-trace-node="prog-2022">
               <span className="dt-prog-year">2022</span>
-              <h4>Sweet Sixteen</h4>
+              <h3>Sweet Sixteen</h3>
               <p>
                 52 points, 21 rebounds, 13 assists across North Region play.
               </p>
               <span className="dt-prog-tag">SMA Gloria 1</span>
             </div>
 
-            <div className="dt-prog-card dt-prog-card--highlight">
+            <div
+              className="dt-prog-card dt-prog-card--highlight"
+              data-trace-node="prog-2023"
+            >
               <span className="dt-prog-year">2023</span>
-              <h4>Runner-Up (Finalist)</h4>
+              <h3>Runner-Up (Finalist)</h3>
               <p>
-                121 points and 84 rebounds leading Gloria 1 to the East Java
-                final.
+                121 points and 84 rebounds across 10 games as Gloria 1 finished
+                runner-up in East Java.
               </p>
               <span className="dt-prog-tag dt-prog-tag--gold">
                 East Java First Team
@@ -306,35 +346,46 @@ export function AthleteDualTracePage() {
           </div>
 
           {/* Landmark Stat Cards (64.29% FG & FIBA U18) */}
-          <div className="dt-stat-landmarks-grid">
-            <article className="dt-stat-landmark-card">
+          <div
+            className="dt-stat-landmarks-grid"
+            data-trace-node="stat-landmarks"
+          >
+            <article
+              className="dt-stat-landmark-card"
+              data-trace-node="stat-ku17"
+            >
               <span className="dt-landmark-label">
                 KEJURNAS KU-17 WILAYAH 5 // TOURNAMENT LEADER
               </span>
               <div className="dt-landmark-big-num">
                 <span>64.29%</span>
-                <span className="dt-landmark-sub">FIELD GOAL EFFICIENCY</span>
+                <span className="dt-landmark-sub">FIELD GOAL PERCENTAGE</span>
               </div>
               <p className="dt-landmark-desc">
                 Shot 18-for-28 from the field across 3 games representing CLS
                 Surabaya, finishing Rank #1 on the official tournament
-                field-goal leaderboard (basketyukFgLeaderboard).
+                field-goal leaderboard.
               </p>
               {isProofMode && (
                 <div className="dt-sc-proof-drawer">
+                  <span className="dt-proof-id">[A06]</span>
+                  <span className="dt-provenance-tag">PUBLISHED SOURCE</span>
                   <a
-                    href={basketballSources.basketyuk.href}
+                    href={basketballSources.basketyukFgLeaderboard.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="dt-proof-link"
                   >
-                    Basketyuk Official Event Record ↗
+                    Basketyuk Leaderboard Record ↗
                   </a>
                 </div>
               )}
             </article>
 
-            <article className="dt-stat-landmark-card">
+            <article
+              className="dt-stat-landmark-card"
+              data-trace-node="stat-fiba"
+            >
               <span className="dt-landmark-label">
                 FIBA U18 ASIA CUP 2024 // AMMAN, JORDAN
               </span>
@@ -348,6 +399,8 @@ export function AthleteDualTracePage() {
               </p>
               {isProofMode && (
                 <div className="dt-sc-proof-drawer">
+                  <span className="dt-proof-id">[A07]</span>
+                  <span className="dt-provenance-tag">PUBLISHED SOURCE</span>
                   <a
                     href={fibaU18Snapshot.source.href}
                     target="_blank"
@@ -360,6 +413,11 @@ export function AthleteDualTracePage() {
               )}
             </article>
           </div>
+          <div
+            className="dt-section-exit-anchor"
+            data-trace-out="progression-exit"
+            aria-hidden="true"
+          />
         </div>
       </section>
 
@@ -370,9 +428,13 @@ export function AthleteDualTracePage() {
         id="chapter-evidence"
         className="dt-section dt-section--evidence"
         aria-labelledby="ath-evidence-heading"
+        data-trace-in="terminal-entry"
       >
         <div className="dt-container dt-evidence-terminal">
-          <div className="dt-terminal-box dt-terminal-box--gold">
+          <div
+            className="dt-terminal-box dt-terminal-box--gold"
+            data-trace-node="terminal-box"
+          >
             <span className="dt-terminal-code dt-terminal-code--gold">
               RECORD.ARCHIVE // VERIFIED COMPETITION DOSSIER
             </span>
@@ -381,9 +443,9 @@ export function AthleteDualTracePage() {
             </h2>
             <p className="dt-terminal-desc">
               Inspect match logs, tournament box scores, and career progression
-              records verified through federation and press archives.
+              records. Published sources and clearly labeled portfolio records.
             </p>
-            <div className="dt-terminal-actions">
+            <div className="dt-terminal-actions" data-trace-node="terminal-cta">
               <Link
                 href="/basketball/achievements"
                 className="dt-primary-cta dt-primary-cta--gold"
@@ -402,6 +464,11 @@ export function AthleteDualTracePage() {
               </Link>
             </div>
           </div>
+          <div
+            className="dt-section-exit-anchor"
+            data-trace-out="terminal-exit"
+            aria-hidden="true"
+          />
         </div>
       </section>
     </div>

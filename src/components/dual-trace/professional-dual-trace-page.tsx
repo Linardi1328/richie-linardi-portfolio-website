@@ -37,7 +37,7 @@ export function ProfessionalDualTracePage() {
         className="dt-section dt-section--hero"
         aria-labelledby="pro-hero-title"
       >
-        <div className="dt-hero-container">
+        <div className="dt-hero-container" data-trace-in="hero-spine-entry">
           {/* Folio registration stamp */}
           <div className="dt-folio-stamp">
             <span className="dt-stamp-box">RBL.SYS.2026 // MONOGRAPH</span>
@@ -46,14 +46,35 @@ export function ProfessionalDualTracePage() {
             </span>
           </div>
 
-          {/* Monumental Typography: RBL */}
-          <div className="dt-monument-wrap">
-            <h1 id="pro-hero-title" className="dt-monument-title">
-              <span className="dt-monument-letter">R</span>
-              <span className="dt-monument-letter">B</span>
-              <span className="dt-monument-letter">L</span>
+          {/* Monumental Typography: RBL as circuit object */}
+          <div className="dt-monument-wrap" data-trace-node="rbl-monument">
+            <div className="dt-monument-circuit-overlay" aria-hidden="true">
+              <span className="dt-circuit-tick dt-circuit-tick--r">
+                [X: 01.R]
+              </span>
+              <span className="dt-circuit-tick dt-circuit-tick--b">
+                [GATE: 02.B]
+              </span>
+              <span className="dt-circuit-tick dt-circuit-tick--l">
+                [TERM: 03.L]
+              </span>
+            </div>
+            <h1
+              id="pro-hero-title"
+              className="dt-monument-title"
+              aria-label="RBL — Richie Linardi Professional"
+            >
+              <span className="dt-monument-letter" data-trace-node="rbl-r">
+                R
+              </span>
+              <span className="dt-monument-letter" data-trace-node="rbl-b">
+                B
+              </span>
+              <span className="dt-monument-letter" data-trace-node="rbl-l">
+                L
+              </span>
             </h1>
-            <div className="dt-monument-secondary">
+            <div className="dt-monument-secondary" data-trace-node="pro-tags">
               <span className="dt-monument-tag">SYSTEMS</span>
               <span className="dt-monument-sep">/</span>
               <span className="dt-monument-tag">DATA</span>
@@ -65,37 +86,50 @@ export function ProfessionalDualTracePage() {
           {/* Author Positioning Statement */}
           <div className="dt-hero-statement">
             <p className="dt-lead-statement">
-              Engineering verifiable software where every consequential action
-              remains behind explicit human control gates, audit artifacts, and
-              fail-closed execution boundaries.
+              I build software around explicit boundaries, inspectable evidence,
+              and controlled execution.
             </p>
 
-            <div className="dt-hero-telemetry">
-              <div className="dt-telem-cell">
+            <div className="dt-hero-telemetry" data-trace-node="hero-telemetry">
+              <div className="dt-telem-cell" data-trace-node="telem-0">
                 <span className="dt-telem-num">
                   {String(publicProjectCatalogue.length).padStart(2, "0")}
                 </span>
                 <span className="dt-telem-lbl">Public Systems</span>
                 {isProofMode && (
-                  <span className="dt-proof-chip">Registry Verified</span>
+                  <span className="dt-proof-chip dt-proof-chip--registry">
+                    <span className="dt-proof-id">[P01]</span>
+                    <span>PUBLIC PROJECT REGISTRY</span>
+                  </span>
                 )}
               </div>
-              <div className="dt-telem-cell">
+              <div className="dt-telem-cell" data-trace-node="telem-1">
                 <span className="dt-telem-num">CS / DS</span>
                 <span className="dt-telem-lbl">Monash University</span>
                 {isProofMode && (
-                  <span className="dt-proof-chip">Bachelor Candidate</span>
+                  <span className="dt-proof-chip dt-proof-chip--published">
+                    <span className="dt-proof-id">[P02]</span>
+                    <span>MONASH · EXPECTED 2027</span>
+                  </span>
                 )}
               </div>
-              <div className="dt-telem-cell">
+              <div className="dt-telem-cell" data-trace-node="telem-2">
                 <span className="dt-telem-num">Controlled</span>
                 <span className="dt-telem-lbl">Execution Gates</span>
                 {isProofMode && (
-                  <span className="dt-proof-chip">Fail-Closed Spec</span>
+                  <span className="dt-proof-chip dt-proof-chip--registry">
+                    <span className="dt-proof-id">[P03]</span>
+                    <span>PROJECT BOUNDARY DOCUMENTATION</span>
+                  </span>
                 )}
               </div>
             </div>
           </div>
+          <div
+            className="dt-section-exit-anchor"
+            data-trace-out="hero-exit"
+            aria-hidden="true"
+          />
         </div>
       </section>
 
@@ -106,6 +140,7 @@ export function ProfessionalDualTracePage() {
         id="chapter-systems"
         className="dt-section dt-section--systems"
         aria-labelledby="systems-heading"
+        data-trace-in="systems-entry"
       >
         <div className="dt-container">
           <div className="dt-section-header">
@@ -124,6 +159,7 @@ export function ProfessionalDualTracePage() {
             <article
               className="dt-plate-featured"
               aria-labelledby={`featured-${featured.slug}`}
+              data-trace-node="featured-plate"
             >
               <div className="dt-plate-featured__header">
                 <div className="dt-plate-id">
@@ -133,11 +169,17 @@ export function ProfessionalDualTracePage() {
                   <span className="dt-phase-badge">{featured.phase}</span>
                   {isProofMode && (
                     <span className="dt-proof-badge dt-proof-badge--active">
-                      RELEASE:{" "}
-                      {"release" in featured &&
-                      typeof featured.release === "string"
-                        ? featured.release
-                        : "Verified"}
+                      <span className="dt-proof-id">[P04]</span>
+                      <span>
+                        RELEASE:{" "}
+                        {"release" in featured &&
+                        typeof featured.release === "string"
+                          ? featured.release
+                          : "Verified"}
+                      </span>
+                      <span className="dt-provenance-tag">
+                        PROJECT REGISTRY
+                      </span>
                     </span>
                   )}
                 </div>
@@ -211,7 +253,10 @@ export function ProfessionalDualTracePage() {
           )}
 
           {/* SUPPORTING SYSTEMS CATALOGUE */}
-          <div className="dt-supporting-grid">
+          <div
+            className="dt-supporting-grid"
+            data-trace-node="supporting-catalogue"
+          >
             <div className="dt-supporting-header">
               <span className="dt-sub-heading">
                 SUPPORTING SYSTEMS CATALOGUE
@@ -219,6 +264,12 @@ export function ProfessionalDualTracePage() {
               <span className="dt-sub-meta">
                 [{supportingProjects.length} REPOSITORIES]
               </span>
+              {isProofMode && (
+                <span className="dt-proof-chip dt-proof-chip--registry">
+                  <span className="dt-proof-id">[P05]</span>
+                  <span>PUBLIC PROJECT REGISTRY</span>
+                </span>
+              )}
             </div>
 
             <div className="dt-plate-grid">
@@ -251,6 +302,9 @@ export function ProfessionalDualTracePage() {
 
                   {isProofMode && (
                     <div className="dt-card-proof-strip">
+                      <span className="dt-provenance-tag">
+                        PROJECT REGISTRY
+                      </span>
                       <span className="dt-proof-status">
                         STATUS: {project.currentStatus}
                       </span>
@@ -272,6 +326,11 @@ export function ProfessionalDualTracePage() {
               ))}
             </div>
           </div>
+          <div
+            className="dt-section-exit-anchor"
+            data-trace-out="systems-exit"
+            aria-hidden="true"
+          />
         </div>
       </section>
 
@@ -282,6 +341,7 @@ export function ProfessionalDualTracePage() {
         id="chapter-experience"
         className="dt-section dt-section--experience"
         aria-labelledby="experience-heading"
+        data-trace-in="bridge-entry"
       >
         <div className="dt-container">
           <div className="dt-section-header">
@@ -295,8 +355,14 @@ export function ProfessionalDualTracePage() {
             </p>
           </div>
 
-          <div className="dt-discipline-bridge">
-            <div className="dt-bridge-col dt-bridge-col--systems">
+          <div
+            className="dt-discipline-bridge"
+            data-trace-node="discipline-bridge"
+          >
+            <div
+              className="dt-bridge-col dt-bridge-col--systems"
+              data-trace-node="bridge-systems"
+            >
               <span className="dt-bridge-badge">01 // SOFTWARE & DATA</span>
               <h3>Deterministic Systems</h3>
               <p>
@@ -313,11 +379,18 @@ export function ProfessionalDualTracePage() {
               </Link>
             </div>
 
-            <div className="dt-bridge-spine-break" aria-hidden="true">
+            <div
+              className="dt-bridge-spine-break"
+              data-trace-node="bridge-spine"
+              aria-hidden="true"
+            >
               <span className="dt-spine-symbol">RBL // 13</span>
             </div>
 
-            <div className="dt-bridge-col dt-bridge-col--court">
+            <div
+              className="dt-bridge-col dt-bridge-col--court"
+              data-trace-node="bridge-court"
+            >
               <span className="dt-bridge-badge dt-bridge-badge--gold">
                 02 // COMPETITIVE ATHLETICS
               </span>
@@ -339,6 +412,11 @@ export function ProfessionalDualTracePage() {
               </Link>
             </div>
           </div>
+          <div
+            className="dt-section-exit-anchor"
+            data-trace-out="bridge-exit"
+            aria-hidden="true"
+          />
         </div>
       </section>
 
@@ -349,9 +427,10 @@ export function ProfessionalDualTracePage() {
         id="chapter-evidence"
         className="dt-section dt-section--evidence"
         aria-labelledby="evidence-heading"
+        data-trace-in="terminal-entry"
       >
         <div className="dt-container dt-evidence-terminal">
-          <div className="dt-terminal-box">
+          <div className="dt-terminal-box" data-trace-node="terminal-box">
             <span className="dt-terminal-code">EVIDENCE.TERMINAL // 2026</span>
             <h2 id="evidence-heading" className="dt-terminal-title">
               Code, Tests, and Documentation
@@ -360,7 +439,7 @@ export function ProfessionalDualTracePage() {
               Explore public repositories, specification runbooks, and
               verification artifacts directly on GitHub.
             </p>
-            <div className="dt-terminal-actions">
+            <div className="dt-terminal-actions" data-trace-node="terminal-cta">
               <a
                 href="https://github.com/Linardi1328"
                 target="_blank"
@@ -375,6 +454,11 @@ export function ProfessionalDualTracePage() {
               </Link>
             </div>
           </div>
+          <div
+            className="dt-section-exit-anchor"
+            data-trace-out="terminal-exit"
+            aria-hidden="true"
+          />
         </div>
       </section>
     </div>

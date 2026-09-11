@@ -24,7 +24,8 @@ export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
   const pathname = usePathname();
   const targetWorld = getOppositeWorld(world);
   const targetLabel =
-    targetWorld === "basketball" ? "Basketball side" : "Professional side";
+    targetWorld === "basketball" ? "Athlete side" : "Professional side";
+  const hingeSymbol = world === "professional" ? "13 ↔" : "↔ RBL";
 
   useEffect(() => {
     rememberWorldRoute(world, pathname || defaultWorldRoutes[world]);
@@ -58,20 +59,15 @@ export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
 
   return (
     <Link
-      aria-label={`Turn to ${targetLabel.toLowerCase()}`}
+      aria-label={`Turn to ${targetLabel}`}
+      aria-keyshortcuts={world === "professional" ? "ArrowLeft" : "ArrowRight"}
       className={cn("world-switcher", className)}
       data-target-world={targetWorld}
       href={defaultWorldRoutes[targetWorld]}
       onClick={handleWorldSwitch}
     >
       <span aria-hidden="true" className="world-switcher__edge" />
-      <span className="world-switcher__copy">
-        <span className="world-switcher__eyebrow">Turn page</span>
-        <span className="world-switcher__label">{targetLabel}</span>
-      </span>
-      <span aria-hidden="true" className="world-switcher__arrow">
-        {world === "professional" ? "←" : "→"}
-      </span>
+      <span className="world-switcher__hinge-symbol">{hingeSymbol}</span>
     </Link>
   );
 }

@@ -275,17 +275,22 @@
 }
 
 .world-switcher {
-  display: inline-grid;
+  display: inline-flex;
   min-height: 44px;
-  grid-template-columns: auto auto;
+  min-width: 44px;
   align-items: center;
-  gap: 0.55rem;
+  justify-content: center;
+  gap: 0.5rem;
   border: 1px solid
     color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
   border-radius: 999px;
-  padding: 0.38rem 0.65rem 0.38rem 0.4rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.5rem;
   color: var(--stage-ink);
   text-decoration: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   transition:
     transform var(--motion-fast) var(--ease-standard),
     border-color var(--motion-fast) var(--ease-standard),
@@ -299,38 +304,19 @@
 }
 
 .world-switcher__edge {
-  width: 0.35rem;
-  height: 1.85rem;
+  width: 0.28rem;
+  height: 1.35rem;
   border-radius: 999px;
   background: linear-gradient(180deg, #765a2a, #e3c77e, #84672f);
-  box-shadow: 0 0 14px rgb(184 148 77 / 25%);
+  box-shadow: 0 0 10px rgb(184 148 77 / 25%);
 }
 
-.world-switcher__copy {
-  display: none;
-}
-
-.world-switcher__eyebrow {
-  color: var(--stage-muted);
-  font-size: 0.55rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  line-height: 1.1;
-  text-transform: uppercase;
-}
-
-.world-switcher__label {
+.world-switcher__hinge-symbol {
   color: var(--stage-ink);
-  font-size: 0.72rem;
-  font-weight: 800;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.world-switcher__arrow {
-  color: var(--stage-accent);
-  font-size: 1rem;
+  font-size: 0.78rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .professional-shell-hero,
@@ -533,11 +519,6 @@
 @media (min-width: 600px) {
   .portfolio-page__chrome {
     padding: 0.85rem 1.25rem;
-  }
-
-  .world-switcher__copy {
-    display: grid;
-    gap: 0.08rem;
   }
 
   .basketball-shell-section__grid {

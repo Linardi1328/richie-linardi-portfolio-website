@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PortfolioWorld } from "@/data/world-navigation";
 import { useProofMode } from "./proof-mode-context";
 
@@ -8,12 +8,135 @@ interface DualTraceEngineProps {
   world: PortfolioWorld;
 }
 
+interface AnchorPoint {
+  x: number;
+  y: number;
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+  width: number;
+  height: number;
+}
+
 export function DualTraceEngine({ world }: DualTraceEngineProps) {
   const { isProofMode } = useProofMode();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const [dimensions, setDimensions] = useState<{
+    width: number;
+    height: number;
+  }>({
+    width: 1440,
+    height: 3200,
+  });
+
+  const [anchors, setAnchors] = useState<Record<string, AnchorPoint>>({});
+  const [activeChapterId, setActiveChapterId] =
+    useState<string>("chapter-origin");
   const [activeSegments, setActiveSegments] = useState<Set<string>>(
     new Set(["origin"]),
   );
 
+  const isPro = world === "professional";
+  const isMobile = dimensions.width < 768;
+
+  // Batch anchor measurements and handle ResizeObserver / font readiness
+  useEffect(() => {
+    let rafId: number | null = null;
+
+    const measureAnchors = () => {
+      const pageEl = containerRef.current?.closest(
+        ".dual-trace-page",
+      ) as HTMLElement | null;
+      if (!pageEl) return;
+
+      const pageRect = pageEl.getBoundingClientRect();
+      const w = Math.round(pageRect.width);
+      const h = Math.round(pageRect.height);
+      if (w === 0 || h === 0) return;
+
+      const elements = pageEl.querySelectorAll<HTMLElement>(
+        "[data-trace-in], [data-trace-node], [data-trace-out]",
+      );
+
+      const map: Record<string, AnchorPoint> = {};
+
+      elements.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const name =
+          el.getAttribute("data-trace-node") ||
+          el.getAttribute("data-trace-in") ||
+          el.getAttribute("data-trace-out");
+        if (!name) return;
+
+        const left = Math.round(r.left - pageRect.left);
+        const top = Math.round(r.top - pageRect.top);
+        const width = Math.round(r.width);
+        const height = Math.round(r.height);
+
+        map[name] = {
+          x: left + Math.round(width / 2),
+          y: top + Math.round(height / 2),
+          left,
+          top,
+          right: left + width,
+          bottom: top + height,
+          width,
+          height,
+        };
+      });
+
+      setDimensions({ width: w, height: h });
+      setAnchors(map);
+    };
+
+    const scheduleMeasure = () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        measureAnchors();
+      });
+    };
+
+    // Initial measurement
+    scheduleMeasure();
+
+    // ResizeObserver on the page container
+    const pageEl = containerRef.current?.closest(".dual-trace-page");
+    let resizeObs: ResizeObserver | null = null;
+    if (pageEl && typeof ResizeObserver !== "undefined") {
+      resizeObs = new ResizeObserver(() => {
+        scheduleMeasure();
+      });
+      resizeObs.observe(pageEl);
+    }
+
+    // Viewport resize
+    window.addEventListener("resize", scheduleMeasure);
+
+    // Font readiness
+    if (typeof document !== "undefined" && document.fonts?.ready) {
+      document.fonts.ready.then(scheduleMeasure);
+    }
+
+    // Spine carriage synchronization event
+    const handleChapterChange = (e: Event) => {
+      const ce = e as CustomEvent<{ chapterIndex: number; chapterId: string }>;
+      if (ce.detail?.chapterId) {
+        setActiveChapterId(ce.detail.chapterId);
+      }
+    };
+    window.addEventListener("rbl-spine-chapter", handleChapterChange);
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      if (resizeObs) resizeObs.disconnect();
+      window.removeEventListener("resize", scheduleMeasure);
+      window.removeEventListener("rbl-spine-chapter", handleChapterChange);
+    };
+  }, []);
+
+  // IntersectionObserver for active chapters (resilient threshold: 0)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -29,8 +152,8 @@ export function DualTraceEngine({ world }: DualTraceEngineProps) {
         });
       },
       {
-        rootMargin: "0px 0px -15% 0px",
-        threshold: 0.15,
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0,
       },
     );
 
@@ -43,10 +166,126 @@ export function DualTraceEngine({ world }: DualTraceEngineProps) {
     return () => observer.disconnect();
   }, []);
 
-  const isPro = world === "professional";
+  const w = dimensions.width;
+  const h = dimensions.height;
+
+  // Build responsive paths honoring the Trace Composition Law: CONNECT, FRAME, UNDERLINE, PROVE
+  const spineOriginY =
+    anchors["hero-spine-entry"]?.top != null
+      ? anchors["hero-spine-entry"].top + 40
+      : 120;
+
+  // PROFESSIONAL PATHS
+  const proHeroExit = anchors["hero-exit"] || {
+    x: 70,
+    y: 750,
+    left: 70,
+    top: 750,
+  };
+  const proSystemsEntry = anchors["systems-entry"] || {
+    x: 70,
+    y: 850,
+    left: 70,
+    top: 850,
+  };
+  const proSystemsExit = anchors["systems-exit"] || {
+    x: 70,
+    y: 1800,
+    left: 70,
+    top: 1800,
+  };
+  const proBridgeEntry = anchors["bridge-entry"] || {
+    x: 70,
+    y: 1900,
+    left: 70,
+    top: 1900,
+  };
+  const proBridgeExit = anchors["bridge-exit"] || {
+    x: 70,
+    y: 2400,
+    left: 70,
+    top: 2400,
+  };
+  const proTerminalExit = anchors["terminal-exit"] || {
+    x: w,
+    y: h - 100,
+    left: w,
+    top: h - 100,
+  };
+
+  const proPathSeg1 = isMobile
+    ? `M ${w} ${spineOriginY} L ${anchors["rbl-monument"]?.right || w - 24} ${spineOriginY} L ${anchors["rbl-monument"]?.right || w - 24} ${anchors["pro-tags"]?.bottom || 240} L ${anchors["rbl-monument"]?.left || 20} ${anchors["pro-tags"]?.bottom || 240} L ${anchors["rbl-monument"]?.left || 20} ${proHeroExit.y}`
+    : `M ${w} ${spineOriginY} L ${anchors["rbl-l"]?.right != null ? anchors["rbl-l"].right + 40 : 680} ${spineOriginY} L ${anchors["rbl-l"]?.right != null ? anchors["rbl-l"].right + 40 : 680} ${anchors["rbl-l"]?.y || 320} L ${anchors["rbl-l"]?.x || 540} ${anchors["rbl-l"]?.y || 320} L ${anchors["rbl-b"]?.x || 380} ${anchors["rbl-b"]?.y || 320} L ${anchors["rbl-r"]?.x || 200} ${anchors["rbl-r"]?.top != null ? anchors["rbl-r"].top + 25 : 240} L ${anchors["rbl-r"]?.left || 70} ${anchors["pro-tags"]?.bottom != null ? anchors["pro-tags"].bottom + 20 : 440} L ${anchors["pro-tags"]?.right != null ? anchors["pro-tags"].right + 30 : 500} ${anchors["pro-tags"]?.bottom != null ? anchors["pro-tags"].bottom + 20 : 440} L ${anchors["telem-0"]?.x || 120} ${anchors["telem-0"]?.top != null ? anchors["telem-0"].top - 18 : 550} L ${anchors["telem-2"]?.right || 680} ${anchors["telem-0"]?.top != null ? anchors["telem-0"].top - 18 : 550} L ${proHeroExit.x} ${proHeroExit.y}`;
+
+  const proPathSeg2 = isMobile
+    ? `M ${proHeroExit.x} ${proHeroExit.y} L ${proSystemsEntry.left} ${proSystemsEntry.top} L ${anchors["featured-plate"]?.left || 20} ${anchors["featured-plate"]?.top || 900} L ${anchors["featured-plate"]?.left || 20} ${anchors["featured-plate"]?.bottom || 1400} L ${proSystemsExit.x} ${proSystemsExit.y}`
+    : `M ${proHeroExit.x} ${proHeroExit.y} L ${proSystemsEntry.left} ${proSystemsEntry.top + 40} L ${anchors["featured-plate"]?.left || 70} ${anchors["featured-plate"]?.top != null ? anchors["featured-plate"].top + 35 : 950} L ${anchors["featured-plate"]?.right || w - 70} ${anchors["featured-plate"]?.top != null ? anchors["featured-plate"].top + 35 : 950} L ${anchors["featured-plate"]?.right || w - 70} ${anchors["featured-plate"]?.bottom || 1550} L ${anchors["supporting-catalogue"]?.left || 70} ${anchors["featured-plate"]?.bottom || 1550} L ${proSystemsExit.x} ${proSystemsExit.y}`;
+
+  const proPathSeg3 = isMobile
+    ? `M ${proSystemsExit.x} ${proSystemsExit.y} L ${proBridgeEntry.left} ${proBridgeEntry.top} L ${anchors["bridge-systems"]?.left || 20} ${anchors["bridge-systems"]?.y || 2000} L ${anchors["bridge-court"]?.left || 20} ${anchors["bridge-court"]?.y || 2250} L ${proBridgeExit.x} ${proBridgeExit.y}`
+    : `M ${proSystemsExit.x} ${proSystemsExit.y} L ${proBridgeEntry.left} ${proBridgeEntry.top + 40} L ${anchors["bridge-systems"]?.left || 70} ${anchors["bridge-spine"]?.y || 2150} L ${anchors["bridge-spine"]?.x || w / 2} ${anchors["bridge-spine"]?.y || 2150} L ${anchors["bridge-court"]?.right || w - 70} ${anchors["bridge-spine"]?.y || 2150} L ${proBridgeExit.x} ${proBridgeExit.y}`;
+
+  const proPathSeg4 = isMobile
+    ? `M ${proBridgeExit.x} ${proBridgeExit.y} L ${anchors["terminal-box"]?.left || 20} ${anchors["terminal-box"]?.top || 2500} L ${anchors["terminal-cta"]?.left || 20} ${anchors["terminal-cta"]?.y || 2700} L ${w} ${proTerminalExit.y}`
+    : `M ${proBridgeExit.x} ${proBridgeExit.y} L ${anchors["terminal-box"]?.left || 70} ${anchors["terminal-box"]?.top != null ? anchors["terminal-box"].top + 35 : 2600} L ${anchors["terminal-box"]?.right || w - 70} ${anchors["terminal-box"]?.top != null ? anchors["terminal-box"].top + 35 : 2600} L ${anchors["terminal-cta"]?.right || w - 70} ${anchors["terminal-cta"]?.y || 2800} L ${w} ${proTerminalExit.y}`;
+
+  // ATHLETE PATHS
+  const athHeroExit = anchors["hero-exit"] || {
+    x: 70,
+    y: 750,
+    left: 70,
+    top: 750,
+  };
+  const athLandmarksEntry = anchors["landmarks-entry"] || {
+    x: 70,
+    y: 850,
+    left: 70,
+    top: 850,
+  };
+  const athLandmarksExit = anchors["landmarks-exit"] || {
+    x: 70,
+    y: 1800,
+    left: 70,
+    top: 1800,
+  };
+  const athProgEntry = anchors["progression-entry"] || {
+    x: 70,
+    y: 1900,
+    left: 70,
+    top: 1900,
+  };
+  const athProgExit = anchors["progression-exit"] || {
+    x: 70,
+    y: 2600,
+    left: 70,
+    top: 2600,
+  };
+  const athTerminalExit = anchors["terminal-exit"] || {
+    x: 0,
+    y: h - 100,
+    left: 0,
+    top: h - 100,
+  };
+
+  const athPathSeg1 = isMobile
+    ? `M 0 ${spineOriginY} C ${w * 0.25} ${spineOriginY}, ${anchors["num-1"]?.left || 20} ${anchors["num-1"]?.top || 160}, ${anchors["num-1"]?.left || 20} ${anchors["num-1"]?.bottom || 260} C ${anchors["num-1"]?.left || 20} ${anchors["hero-telemetry"]?.top || 380}, ${athHeroExit.x} ${athHeroExit.y - 40}, ${athHeroExit.x} ${athHeroExit.y}`
+    : `M 0 ${spineOriginY} C ${w * 0.18} ${spineOriginY}, ${anchors["num-1"]?.left != null ? anchors["num-1"].left - 20 : 180} ${anchors["num-1"]?.top || 180}, ${anchors["num-1"]?.left || 220} ${anchors["num-1"]?.y || 280} L ${anchors["num-1"]?.left || 220} ${anchors["num-1"]?.bottom != null ? anchors["num-1"].bottom - 15 : 360} C ${anchors["num-3"]?.left || 320} ${anchors["num-3"]?.top != null ? anchors["num-3"].top + 20 : 220}, ${anchors["num-3"]?.right != null ? anchors["num-3"].right + 35 : 460} ${anchors["num-3"]?.y || 280}, ${anchors["num-3"]?.right || 420} ${anchors["num-3"]?.bottom || 380} C ${anchors["num-3"]?.right || 420} ${anchors["hero-telemetry"]?.top != null ? anchors["hero-telemetry"].top - 25 : 460}, ${anchors["telem-2"]?.right || 620} ${anchors["telem-0"]?.top != null ? anchors["telem-0"].top - 15 : 510}, ${anchors["telem-0"]?.x || 140} ${anchors["telem-0"]?.top != null ? anchors["telem-0"].top - 15 : 510} C ${anchors["telem-0"]?.left || 70} ${athHeroExit.y - 40}, ${athHeroExit.x + 60} ${athHeroExit.y}, ${athHeroExit.x} ${athHeroExit.y}`;
+
+  const athPathSeg2 = isMobile
+    ? `M ${athHeroExit.x} ${athHeroExit.y} C ${athHeroExit.x} ${athLandmarksEntry.top}, ${anchors["score-asg"]?.left || 20} ${anchors["score-asg"]?.top || 900}, ${anchors["score-asg"]?.left || 20} ${anchors["score-asg"]?.bottom || 1200} C ${anchors["score-porprov"]?.left || 20} ${anchors["score-porprov"]?.top || 1250}, ${athLandmarksExit.x} ${athLandmarksExit.y - 40}, ${athLandmarksExit.x} ${athLandmarksExit.y}`
+    : `M ${athHeroExit.x} ${athHeroExit.y} C ${athHeroExit.x} ${athLandmarksEntry.top + 40}, ${anchors["score-asg"]?.x || 280} ${anchors["score-asg"]?.top || 950}, ${anchors["score-asg"]?.x || 280} ${anchors["score-asg"]?.bottom || 1250} C ${anchors["score-asg"]?.x || 280} ${anchors["score-porprov"]?.top || 1300}, ${anchors["score-porprov"]?.x || 720} ${anchors["score-porprov"]?.top || 1300}, ${anchors["score-porprov"]?.x || 720} ${anchors["score-porprov"]?.bottom || 1600} C ${anchors["score-porprov"]?.left || 500} ${athLandmarksExit.y - 40}, ${athLandmarksExit.x + 50} ${athLandmarksExit.y}, ${athLandmarksExit.x} ${athLandmarksExit.y}`;
+
+  const athPathSeg3 = isMobile
+    ? `M ${athLandmarksExit.x} ${athLandmarksExit.y} C ${athLandmarksExit.x} ${athProgEntry.top}, ${anchors["prog-2021"]?.left || 20} ${anchors["prog-2021"]?.top || 1900}, ${anchors["stat-ku17"]?.left || 20} ${anchors["stat-ku17"]?.y || 2300} C ${anchors["stat-fiba"]?.left || 20} ${anchors["stat-fiba"]?.y || 2500}, ${athProgExit.x} ${athProgExit.y - 40}, ${athProgExit.x} ${athProgExit.y}`
+    : `M ${athLandmarksExit.x} ${athLandmarksExit.y} C ${anchors["prog-2021"]?.left || 100} ${athProgEntry.top + 40}, ${anchors["prog-2022"]?.x || 500} ${anchors["prog-2022"]?.top || 1950}, ${anchors["prog-2023"]?.x || 920} ${anchors["prog-2023"]?.bottom || 2200} C ${anchors["prog-2023"]?.left || 700} ${anchors["stat-landmarks"]?.top || 2300}, ${anchors["stat-ku17"]?.x || 300} ${anchors["stat-ku17"]?.top || 2350}, ${anchors["stat-ku17"]?.x || 300} ${anchors["stat-ku17"]?.bottom || 2600} L ${athProgExit.x} ${athProgExit.y}`;
+
+  const athPathSeg4 = isMobile
+    ? `M ${athProgExit.x} ${athProgExit.y} C ${athProgExit.x} ${anchors["terminal-box"]?.top || 2700}, ${anchors["terminal-cta"]?.left || 20} ${anchors["terminal-cta"]?.y || 2850}, 0 ${athTerminalExit.y}`
+    : `M ${athProgExit.x} ${athProgExit.y} C ${anchors["terminal-box"]?.left || 70} ${anchors["terminal-box"]?.top || 2800}, ${anchors["terminal-cta"]?.x || 450} ${anchors["terminal-cta"]?.y || 2950}, ${anchors["terminal-box"]?.right || w - 70} ${anchors["terminal-cta"]?.y || 2950} C ${w * 0.45} ${athTerminalExit.y}, ${w * 0.15} ${athTerminalExit.y}, 0 ${athTerminalExit.y}`;
 
   return (
     <div
+      ref={containerRef}
       className={`dual-trace-engine dual-trace-engine--${world} ${
         isProofMode ? "dual-trace-engine--proof" : ""
       }`}
@@ -54,15 +293,17 @@ export function DualTraceEngine({ world }: DualTraceEngineProps) {
     >
       <svg
         className="dual-trace-svg"
-        viewBox="0 0 1440 3200"
+        viewBox={`0 0 ${w} ${h}`}
+        width="100%"
+        height="100%"
         fill="none"
-        preserveAspectRatio="xMidYMin slice"
+        preserveAspectRatio="none"
       >
         <defs>
           <linearGradient id="proTraceGrad" x1="1" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#c8a45c" stopOpacity="0.9" />
-            <stop offset="25%" stopColor="#38bdf8" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#0284c7" stopOpacity="0.7" />
+            <stop offset="30%" stopColor="#38bdf8" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#0284c7" stopOpacity="0.75" />
           </linearGradient>
 
           <linearGradient id="athTraceGrad" x1="0" y1="0" x2="1" y2="1">
@@ -79,135 +320,208 @@ export function DualTraceEngine({ world }: DualTraceEngineProps) {
 
         {isPro ? (
           /* =================================================================
-             PROFESSIONAL TRACE: Orthogonal / 90° Routing / System Junctions
+             PROFESSIONAL TRACE: Orthogonal / 90° Routing / Control Gates
              ================================================================= */
           <g className="pro-trace-group">
             {/* SEGMENT 01: Spine Origin -> Hero Monument -> Title */}
             <path
-              d="M 1440 120 L 1120 120 L 1120 600 L 70 600 L 70 780"
+              d={proPathSeg1}
               className={`trace-path trace-path--pro ${
                 activeSegments.has("origin") ? "is-drawn" : ""
               }`}
               stroke="url(#proTraceGrad)"
-              strokeWidth="2.5"
+              strokeWidth={isMobile ? "2" : "2.5"}
             />
+
             {/* Junction Nodes in Hero */}
             <circle
-              cx="1120"
-              cy="120"
-              r="4.5"
-              className="trace-node trace-node--gold"
+              cx={w - (isMobile ? 12 : 24)}
+              cy={spineOriginY}
+              r={isMobile ? 3.5 : 4.5}
+              className={`trace-node trace-node--gold ${
+                activeChapterId === "chapter-origin"
+                  ? "trace-node--active-chapter"
+                  : ""
+              }`}
             />
-            <circle cx="1120" cy="600" r="4" className="trace-node" />
-            <circle cx="70" cy="600" r="4" className="trace-node" />
-            <circle cx="70" cy="780" r="3.5" className="trace-node" />
+            {anchors["rbl-r"] && (
+              <circle
+                cx={anchors["rbl-r"].x}
+                cy={anchors["rbl-r"].y}
+                r="3.5"
+                className="trace-node"
+              />
+            )}
+            {anchors["rbl-b"] && (
+              <circle
+                cx={anchors["rbl-b"].x}
+                cy={anchors["rbl-b"].y}
+                r="3.5"
+                className="trace-node"
+              />
+            )}
+            {anchors["rbl-l"] && (
+              <circle
+                cx={anchors["rbl-l"].x}
+                cy={anchors["rbl-l"].y}
+                r="3.5"
+                className="trace-node"
+              />
+            )}
+            {anchors["telem-0"] && (
+              <circle
+                cx={anchors["telem-0"].x}
+                cy={anchors["telem-0"].top - 18}
+                r="3.5"
+                className="trace-node"
+              />
+            )}
 
-            {/* Junction telemetry labels */}
-            <text x="1130" y="115" className="trace-tag">
-              SPINE.ORIGIN // RBL.00
-            </text>
-            <text x="960" y="595" className="trace-tag">
-              GATE.CONTROL // FAIL-CLOSED
-            </text>
-            <text x="85" y="595" className="trace-tag">
-              BUS.MAIN // DETERMINISTIC
-            </text>
+            {!isMobile && (
+              <>
+                <text x={w - 180} y={spineOriginY - 8} className="trace-tag">
+                  SPINE.ORIGIN // RBL.00
+                </text>
+                {anchors["pro-tags"] && (
+                  <text
+                    x={anchors["pro-tags"].left}
+                    y={anchors["pro-tags"].bottom + 35}
+                    className="trace-tag"
+                  >
+                    BUS.MAIN // DETERMINISTIC
+                  </text>
+                )}
+              </>
+            )}
 
             {/* SEGMENT 02: Hero -> Featured Project (SPY Market Agent) */}
             <path
-              d="M 70 780 L 70 1020 L 1260 1020 L 1260 1620 L 70 1620"
+              d={proPathSeg2}
               className={`trace-path trace-path--pro ${
                 activeSegments.has("systems") ? "is-drawn" : ""
               }`}
               stroke="url(#proTraceGrad)"
               strokeWidth="2"
             />
-            <circle cx="70" cy="1020" r="4" className="trace-node" />
-            <circle
-              cx="1260"
-              cy="1020"
-              r="4.5"
-              className="trace-node trace-node--gold"
-            />
-            <circle cx="1260" cy="1620" r="4" className="trace-node" />
-            <circle cx="70" cy="1620" r="3.5" className="trace-node" />
-            <text x="85" y="1015" className="trace-tag">
-              SYS.01 // SPY_MARKET_AGENT
-            </text>
+            {anchors["featured-plate"] && (
+              <circle
+                cx={anchors["featured-plate"].left}
+                cy={anchors["featured-plate"].top + (isMobile ? 15 : 35)}
+                r="4.5"
+                className={`trace-node trace-node--gold ${
+                  activeChapterId === "chapter-systems"
+                    ? "trace-node--active-chapter"
+                    : ""
+                }`}
+              />
+            )}
+            {!isMobile && anchors["featured-plate"] && (
+              <text
+                x={anchors["featured-plate"].left + 15}
+                y={anchors["featured-plate"].top + 28}
+                className="trace-tag"
+              >
+                SYS.01 // SPY_MARKET_AGENT
+              </text>
+            )}
 
             {/* SEGMENT 03: Supporting Systems -> Experience */}
             <path
-              d="M 70 1620 L 70 1880 L 1260 1880 L 1260 2360 L 70 2360"
+              d={proPathSeg3}
               className={`trace-path trace-path--pro ${
                 activeSegments.has("experience") ? "is-drawn" : ""
               }`}
               stroke="url(#proTraceGrad)"
               strokeWidth="2"
             />
-            <circle cx="70" cy="1880" r="4" className="trace-node" />
-            <circle
-              cx="1260"
-              cy="1880"
-              r="4"
-              className="trace-node trace-node--gold"
-            />
-            <circle cx="1260" cy="2360" r="3.5" className="trace-node" />
-            <circle cx="70" cy="2360" r="4" className="trace-node" />
-            <text x="1080" y="1875" className="trace-tag">
-              SYS.CATALOGUE // 06 PUBLIC
-            </text>
+            {anchors["bridge-spine"] && (
+              <circle
+                cx={anchors["bridge-spine"].x}
+                cy={anchors["bridge-spine"].y}
+                r="4"
+                className={`trace-node trace-node--gold ${
+                  activeChapterId === "chapter-experience"
+                    ? "trace-node--active-chapter"
+                    : ""
+                }`}
+              />
+            )}
+            {!isMobile && anchors["bridge-spine"] && (
+              <text
+                x={anchors["bridge-spine"].x - 45}
+                y={anchors["bridge-spine"].y - 12}
+                className="trace-tag"
+              >
+                RBL // 13 HINGE
+              </text>
+            )}
 
             {/* SEGMENT 04: Experience -> Evidence / Page Flip Terminal */}
             <path
-              d="M 70 2360 L 70 2780 L 1120 2780 L 1120 3060 L 1440 3060"
+              d={proPathSeg4}
               className={`trace-path trace-path--pro ${
                 activeSegments.has("evidence") ? "is-drawn" : ""
               }`}
               stroke="url(#proTraceGrad)"
               strokeWidth="2.5"
             />
-            <circle cx="70" cy="2780" r="4" className="trace-node" />
-            <circle cx="1120" cy="2780" r="4" className="trace-node" />
             <circle
-              cx="1120"
-              cy="3060"
-              r="5"
-              className="trace-node trace-node--gold"
+              cx={w - (isMobile ? 12 : 24)}
+              cy={proTerminalExit.y}
+              r={isMobile ? 3.5 : 5}
+              className={`trace-node trace-node--gold ${
+                activeChapterId === "chapter-evidence"
+                  ? "trace-node--active-chapter"
+                  : ""
+              }`}
             />
-            <text x="960" y="3055" className="trace-tag">
-              EVIDENCE.TERMINAL // FLIP_HINGE
-            </text>
+            {!isMobile && (
+              <text x={w - 190} y={proTerminalExit.y - 8} className="trace-tag">
+                EVIDENCE.TERMINAL // FLIP_HINGE
+              </text>
+            )}
 
             {/* PROOF MODE BRANCHES: Revealed when Proof Mode is active */}
             {isProofMode && (
               <g className="proof-branches">
-                <line
-                  x1="1260"
-                  y1="1020"
-                  x2="980"
-                  y2="1020"
-                  stroke="#38bdf8"
-                  strokeWidth="1.5"
-                  strokeDasharray="3 3"
-                />
-                <circle cx="980" cy="1020" r="3" fill="#38bdf8" />
-                <text x="730" y="1016" className="trace-proof-tag">
-                  PROOF: v2.0.0-beta.1 / Alpaca Paper / Fail-Closed
-                </text>
-
-                <line
-                  x1="1260"
-                  y1="1880"
-                  x2="1020"
-                  y2="1880"
-                  stroke="#38bdf8"
-                  strokeWidth="1.5"
-                  strokeDasharray="3 3"
-                />
-                <circle cx="1020" cy="1880" r="3" fill="#38bdf8" />
-                <text x="760" y="1876" className="trace-proof-tag">
-                  PROOF: 6 Public Systems / Monash CS / Telegram Command
-                </text>
+                {anchors["telem-0"] && (
+                  <>
+                    <line
+                      x1={anchors["telem-0"].x}
+                      y1={anchors["telem-0"].top - 18}
+                      x2={anchors["telem-0"].x}
+                      y2={anchors["telem-0"].bottom + 12}
+                      stroke="#38bdf8"
+                      strokeWidth="1.5"
+                      strokeDasharray="3 3"
+                    />
+                    <circle
+                      cx={anchors["telem-0"].x}
+                      cy={anchors["telem-0"].bottom + 12}
+                      r="3"
+                      fill="#38bdf8"
+                    />
+                  </>
+                )}
+                {anchors["featured-plate"] && (
+                  <>
+                    <line
+                      x1={anchors["featured-plate"].left}
+                      y1={anchors["featured-plate"].top + (isMobile ? 15 : 35)}
+                      x2={anchors["featured-plate"].left + 60}
+                      y2={anchors["featured-plate"].top + (isMobile ? 15 : 35)}
+                      stroke="#38bdf8"
+                      strokeWidth="1.5"
+                      strokeDasharray="3 3"
+                    />
+                    <circle
+                      cx={anchors["featured-plate"].left + 60}
+                      cy={anchors["featured-plate"].top + (isMobile ? 15 : 35)}
+                      r="3"
+                      fill="#38bdf8"
+                    />
+                  </>
+                )}
               </g>
             )}
           </g>
@@ -218,115 +532,127 @@ export function DualTraceEngine({ world }: DualTraceEngineProps) {
           <g className="ath-trace-group">
             {/* SEGMENT 01: Spine Origin -> Monumental 13 -> Hero Arc */}
             <path
-              d="M 0 140 C 220 140, 360 180, 520 180 C 860 180, 1160 220, 1260 340 C 1380 480, 1340 640, 1200 740 C 1040 840, 380 840, 90 880"
+              d={athPathSeg1}
               className={`trace-path trace-path--ath ${
                 activeSegments.has("origin") ? "is-drawn" : ""
               }`}
               stroke="url(#athTraceGrad)"
-              strokeWidth="2.8"
-            />
-            {/* Kinetic Event Anchors */}
-            <circle
-              cx="0"
-              cy="140"
-              r="4.5"
-              className="trace-node trace-node--gold"
-            />
-            <circle
-              cx="520"
-              cy="180"
-              r="4"
-              className="trace-node trace-node--gold"
-            />
-            <circle
-              cx="1260"
-              cy="340"
-              r="4"
-              className="trace-node trace-node--gold"
-            />
-            <circle
-              cx="1200"
-              cy="740"
-              r="4"
-              className="trace-node trace-node--gold"
-            />
-            <circle
-              cx="90"
-              cy="880"
-              r="4.5"
-              className="trace-node trace-node--gold"
+              strokeWidth={isMobile ? "2" : "2.8"}
             />
 
-            <text x="535" y="175" className="trace-tag trace-tag--ath">
-              13.HIGH_POST // APEX_CUT
-            </text>
-            <text x="1080" y="735" className="trace-tag trace-tag--ath">
-              13.PERIMETER // SPATIAL_READ
-            </text>
+            {/* Kinetic Event Anchors */}
+            <circle
+              cx={isMobile ? 12 : 24}
+              cy={spineOriginY}
+              r={isMobile ? 3.5 : 4.5}
+              className={`trace-node trace-node--gold ${
+                activeChapterId === "chapter-origin"
+                  ? "trace-node--active-chapter"
+                  : ""
+              }`}
+            />
+            {anchors["num-1"] && (
+              <circle
+                cx={anchors["num-1"].left}
+                cy={anchors["num-1"].y}
+                r="3.5"
+                className="trace-node trace-node--gold"
+              />
+            )}
+            {anchors["num-3"] && (
+              <circle
+                cx={anchors["num-3"].right}
+                cy={anchors["num-3"].y}
+                r="3.5"
+                className="trace-node trace-node--gold"
+              />
+            )}
+
+            {/* Neutral Athlete Trace Labels */}
+            {!isMobile && anchors["num-1"] && (
+              <text
+                x={anchors["num-1"].left - 40}
+                y={anchors["num-1"].top + 15}
+                className="trace-tag trace-tag--ath"
+              >
+                13.TRACE.01 // COURT ARC
+              </text>
+            )}
+            {!isMobile && anchors["num-3"] && (
+              <text
+                x={anchors["num-3"].right + 12}
+                y={anchors["num-3"].y - 8}
+                className="trace-tag trace-tag--ath"
+              >
+                13.TRACE.02 // PERIMETER COORDINATE
+              </text>
+            )}
 
             {/* SEGMENT 02: Hero -> Landmarks (56–54 ASG & 93–57 PorProv) */}
             <path
-              d="M 90 880 C 220 940, 480 1020, 680 1060 C 700 1160, 700 1460, 680 1560 C 640 1660, 240 1820, 120 2040"
+              d={athPathSeg2}
               className={`trace-path trace-path--ath ${
                 activeSegments.has("systems") ? "is-drawn" : ""
               }`}
               stroke="url(#athTraceGrad)"
               strokeWidth="2.4"
             />
-            <circle
-              cx="680"
-              cy="1060"
-              r="4.5"
-              className="trace-node trace-node--gold"
-            />
-            <circle
-              cx="680"
-              cy="1340"
-              r="5"
-              className="trace-node trace-node--gold"
-            />
-            <circle
-              cx="120"
-              cy="2040"
-              r="4"
-              className="trace-node trace-node--gold"
-            />
-
-            <text x="695" y="1055" className="trace-tag trace-tag--ath">
-              LANDMARKS // CHAMPIONSHIP
-            </text>
-            <text x="695" y="1335" className="trace-tag trace-tag--ath">
-              FINAL: SURABAYA 93–57 JEMBER [GOLD]
-            </text>
+            {anchors["score-asg"] && (
+              <circle
+                cx={anchors["score-asg"].x}
+                cy={anchors["score-asg"].bottom}
+                r="4.5"
+                className={`trace-node trace-node--gold ${
+                  activeChapterId === "chapter-systems"
+                    ? "trace-node--active-chapter"
+                    : ""
+                }`}
+              />
+            )}
+            {!isMobile && anchors["score-asg"] && (
+              <text
+                x={anchors["score-asg"].x - 60}
+                y={anchors["score-asg"].bottom + 20}
+                className="trace-tag trace-tag--ath"
+              >
+                LANDMARKS // 56–54 ASG FINAL [GOLD]
+              </text>
+            )}
 
             {/* SEGMENT 03: Gloria 1 Progression (2021 -> 2022 -> 2023) */}
             <path
-              d="M 120 2040 C 280 2160, 520 2260, 360 2420 C 200 2580, 480 2740, 780 2780"
+              d={athPathSeg3}
               className={`trace-path trace-path--ath ${
                 activeSegments.has("experience") ? "is-drawn" : ""
               }`}
               stroke="url(#athTraceGrad)"
               strokeWidth="2.4"
             />
-            <circle
-              cx="360"
-              cy="2420"
-              r="4.5"
-              className="trace-node trace-node--gold"
-            />
-            <circle
-              cx="780"
-              cy="2780"
-              r="4.5"
-              className="trace-node trace-node--gold"
-            />
-            <text x="375" y="2415" className="trace-tag trace-tag--ath">
-              DBL PROGRESSION: 2021 → 2022 → 2023 FIRST TEAM
-            </text>
+            {anchors["stat-ku17"] && (
+              <circle
+                cx={anchors["stat-ku17"].x}
+                cy={anchors["stat-ku17"].bottom}
+                r="4.5"
+                className={`trace-node trace-node--gold ${
+                  activeChapterId === "chapter-experience"
+                    ? "trace-node--active-chapter"
+                    : ""
+                }`}
+              />
+            )}
+            {!isMobile && anchors["stat-ku17"] && (
+              <text
+                x={anchors["stat-ku17"].x - 80}
+                y={anchors["stat-ku17"].bottom + 20}
+                className="trace-tag trace-tag--ath"
+              >
+                13.TRACE.03 // KU-17 WILAYAH 5
+              </text>
+            )}
 
             {/* SEGMENT 04: Pathway -> Evidence Hinge */}
             <path
-              d="M 780 2780 C 1020 2820, 1260 2920, 1180 3060 L 0 3060"
+              d={athPathSeg4}
               className={`trace-path trace-path--ath ${
                 activeSegments.has("evidence") ? "is-drawn" : ""
               }`}
@@ -334,67 +660,66 @@ export function DualTraceEngine({ world }: DualTraceEngineProps) {
               strokeWidth="2.8"
             />
             <circle
-              cx="1180"
-              cy="3060"
-              r="5"
-              className="trace-node trace-node--gold"
+              cx={isMobile ? 12 : 24}
+              cy={athTerminalExit.y}
+              r={isMobile ? 3.5 : 5}
+              className={`trace-node trace-node--gold ${
+                activeChapterId === "chapter-evidence"
+                  ? "trace-node--active-chapter"
+                  : ""
+              }`}
             />
-            <text x="980" y="3050" className="trace-tag trace-tag--ath">
-              RECORD.ARCHIVE // FLIP_HINGE
-            </text>
+            {!isMobile && (
+              <text
+                x={35}
+                y={athTerminalExit.y - 8}
+                className="trace-tag trace-tag--ath"
+              >
+                RECORD.ARCHIVE // FLIP_HINGE
+              </text>
+            )}
 
             {/* PROOF MODE BRANCHES (Athlete) */}
             {isProofMode && (
               <g className="proof-branches">
-                <line
-                  x1="680"
-                  y1="1340"
-                  x2="440"
-                  y2="1340"
-                  stroke="#c8a45c"
-                  strokeWidth="1.5"
-                  strokeDasharray="3 3"
-                />
-                <circle cx="440" cy="1340" r="3" fill="#c8a45c" />
-                <text x="180" y="1336" className="trace-proof-tag">
-                  PROOF: IBL Official Box / 12 PTS · 4 REB / Da Nang
-                </text>
-
-                <line
-                  x1="780"
-                  y1="2780"
-                  x2="520"
-                  y2="2780"
-                  stroke="#c8a45c"
-                  strokeWidth="1.5"
-                  strokeDasharray="3 3"
-                />
-                <circle cx="520" cy="2780" r="3" fill="#c8a45c" />
-                <text
-                  x="240"
-                  y="2776"
-                  className="trace-proof-tag trace-proof-tag--ath"
-                >
-                  PROOF: DBL Official Profile / 121 PTS · 84 REB
-                </text>
-
-                <line
-                  x1="960"
-                  y1="1620"
-                  x2="680"
-                  y2="1620"
-                  stroke="#c8a45c"
-                  strokeWidth="1.5"
-                  strokeDasharray="3 3"
-                />
-                <circle cx="680" cy="1620" r="3" fill="#c8a45c" />
-                <text
-                  x="440"
-                  y="1616"
-                  className="trace-proof-tag trace-proof-tag--ath"
-                >
-                  PROOF: Lenza Nasional / 21 PTS · 7 REB / GOR Delta
-                </text>
+                {anchors["score-asg"] && (
+                  <>
+                    <line
+                      x1={anchors["score-asg"].x}
+                      y1={anchors["score-asg"].bottom}
+                      x2={anchors["score-asg"].x}
+                      y2={anchors["score-asg"].bottom + 30}
+                      stroke="#c8a45c"
+                      strokeWidth="1.5"
+                      strokeDasharray="3 3"
+                    />
+                    <circle
+                      cx={anchors["score-asg"].x}
+                      cy={anchors["score-asg"].bottom + 30}
+                      r="3"
+                      fill="#c8a45c"
+                    />
+                  </>
+                )}
+                {anchors["stat-ku17"] && (
+                  <>
+                    <line
+                      x1={anchors["stat-ku17"].x}
+                      y1={anchors["stat-ku17"].bottom}
+                      x2={anchors["stat-ku17"].x}
+                      y2={anchors["stat-ku17"].bottom + 30}
+                      stroke="#c8a45c"
+                      strokeWidth="1.5"
+                      strokeDasharray="3 3"
+                    />
+                    <circle
+                      cx={anchors["stat-ku17"].x}
+                      cy={anchors["stat-ku17"].bottom + 30}
+                      r="3"
+                      fill="#c8a45c"
+                    />
+                  </>
+                )}
               </g>
             )}
           </g>

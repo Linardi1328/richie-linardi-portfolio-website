@@ -270,11 +270,31 @@
 .trace-node {
   fill: #38bdf8;
   filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.7));
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
 }
 
 .trace-node--gold {
   fill: #c8a45c;
   filter: drop-shadow(0 0 7px rgba(200, 164, 92, 0.85));
+}
+
+.trace-node--active-chapter {
+  filter: drop-shadow(0 0 10px rgba(200, 164, 92, 0.95));
+  animation: traceNodePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes traceNodePulse {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 7px rgba(200, 164, 92, 0.85));
+  }
+  50% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 14px rgba(200, 164, 92, 1));
+  }
 }
 
 .trace-tag {
@@ -283,6 +303,11 @@
   fill: #64748b;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  user-select: none;
+}
+
+.trace-tag--ath {
+  fill: #a38d60;
 }
 
 .trace-proof-tag {
@@ -305,6 +330,14 @@
 @media (prefers-reduced-motion: reduce) {
   .trace-path {
     stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+
+  .trace-node--active-chapter {
+    animation: none !important;
+  }
+
+  .spine-carriage {
     transition: none !important;
   }
 }
@@ -381,7 +414,33 @@
 }
 
 .dt-monument-wrap {
+  position: relative;
   margin-bottom: 2.25rem;
+}
+
+.dt-monument-circuit-overlay,
+.dt-monument-axis-overlay {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2.5vw, 2rem);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  color: var(--stage-muted);
+}
+
+.dt-circuit-tick,
+.dt-axis-tick {
+  padding: 1px 6px;
+  border: 1px solid var(--stage-line);
+  background: color-mix(in srgb, var(--stage-paper) 80%, transparent);
+  border-radius: 2px;
+}
+
+.dt-axis-tick {
+  border-color: rgba(200, 164, 92, 0.35);
+  color: #c8a45c;
 }
 
 .dt-monument-title {
@@ -409,8 +468,9 @@
 
 .dt-monument-secondary {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 8px 10px;
   margin-top: 1rem;
   font-family: var(--font-mono);
   font-size: clamp(0.75rem, 1.4vw, 1rem);
@@ -421,6 +481,18 @@
 
 .dt-monument-secondary--ath {
   color: #c8a45c;
+}
+
+@media (max-width: 480px) {
+  .dt-monument-secondary {
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    gap: 6px 8px;
+  }
+}
+
+.dt-monument-tag {
+  white-space: nowrap;
 }
 
 .dt-monument-sep {
@@ -471,7 +543,9 @@
 }
 
 .dt-proof-chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   width: fit-content;
   margin-top: 4px;
   font-family: var(--font-mono);
@@ -481,15 +555,60 @@
   text-transform: uppercase;
   padding: 2px 6px;
   border-radius: 2px;
-  background: rgba(2, 132, 199, 0.12);
-  color: #0284c7;
-  border: 1px solid rgba(2, 132, 199, 0.3);
 }
 
-.dt-proof-chip--gold {
+.dt-proof-id {
+  font-weight: 800;
+  font-size: 0.5625rem;
+  padding: 0 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  display: inline-block;
+}
+
+.dt-proof-chip--registry,
+.dt-provenance-tag--registry {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0284c7;
+  border: 1px solid rgba(2, 132, 199, 0.35);
+}
+
+.dt-proof-chip--published,
+.dt-provenance-tag--published,
+.dt-provenance-tag {
   background: rgba(200, 164, 92, 0.14);
   color: #d4b56e;
-  border-color: rgba(200, 164, 92, 0.35);
+  border: 1px solid rgba(200, 164, 92, 0.4);
+}
+
+.dt-proof-chip--owner,
+.dt-provenance-tag--owner {
+  background: rgba(245, 158, 11, 0.14);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.dt-proof-chip--derived,
+.dt-provenance-tag--derived {
+  background: rgba(168, 85, 247, 0.14);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.dt-section-exit-anchor {
+  position: absolute;
+  bottom: 0;
+  left: 70px;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+@media (max-width: 767px) {
+  .dt-section-exit-anchor {
+    left: 20px;
+  }
 }
 
 /* -----------------------------------------------------------------------------
@@ -741,7 +860,7 @@
 
 .dt-plate-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1.5rem;
 }
 
@@ -843,7 +962,7 @@
    ----------------------------------------------------------------------------- */
 .dt-scoreboard-strip {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 1.75rem;
 }
 
@@ -991,6 +1110,7 @@
   color: var(--stage-muted);
 }
 
+.dt-prog-card h3,
 .dt-prog-card h4 {
   font-size: 1.125rem;
   font-weight: 800;
@@ -1025,7 +1145,7 @@
 
 .dt-stat-landmarks-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 1.5rem;
 }
 
@@ -1272,18 +1392,62 @@
 }
 
 /* -----------------------------------------------------------------------------
-   12. Proof Mode Global Active State Visual Shifts
+   12. Proof Mode Global Active State Visual Shifts (X-Ray Mode)
    ----------------------------------------------------------------------------- */
+.dual-trace-page--proof .reverse-bleed__svg {
+  opacity: 0.02 !important;
+}
+
+.dual-trace-page--proof .dt-stamp-box,
+.dual-trace-page--proof .dt-circuit-tick,
+.dual-trace-page--proof .dt-axis-tick {
+  opacity: 0.35;
+}
+
+.dual-trace-page--proof .trace-path {
+  opacity: 0.35;
+}
+
+.dual-trace-page--proof .proof-branches line {
+  opacity: 1;
+}
+
+.dual-trace-page--proof .proof-branches circle {
+  opacity: 1;
+}
+
 .dual-trace-page--proof .dt-plate-featured {
   border-color: #0284c7;
-  box-shadow: 0 0 24px rgba(2, 132, 199, 0.12);
+  box-shadow: 0 0 24px rgba(2, 132, 199, 0.16);
 }
 
 .dual-trace-page--proof.dual-trace-page--athlete .dt-scoreboard-card {
   border-color: #c8a45c;
-  box-shadow: 0 0 24px rgba(200, 164, 92, 0.14);
+  box-shadow: 0 0 24px rgba(200, 164, 92, 0.18);
 }
 
 .dual-trace-page--proof.dual-trace-page--athlete .dt-stat-landmark-card {
   border-color: #c8a45c;
+  box-shadow: 0 0 18px rgba(200, 164, 92, 0.14);
+}
+
+.dual-trace-page--proof .dt-proof-chip,
+.dual-trace-page--proof .dt-provenance-tag,
+.dual-trace-page--proof .dt-proof-badge {
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.25);
+}
+
+.dual-trace-page--proof.dual-trace-page--athlete .dt-proof-chip,
+.dual-trace-page--proof.dual-trace-page--athlete .dt-provenance-tag,
+.dual-trace-page--proof.dual-trace-page--athlete .dt-proof-badge {
+  box-shadow: 0 0 10px rgba(200, 164, 92, 0.3);
+}
+
+/* Accessible focus indicators for interactive buttons & links */
+.dt-primary-cta:focus-visible,
+.dt-inspect-btn:focus-visible,
+.dt-card-link:focus-visible,
+.dt-spine-link:focus-visible {
+  outline: 2px solid var(--stage-accent);
+  outline-offset: 3px;
 }
