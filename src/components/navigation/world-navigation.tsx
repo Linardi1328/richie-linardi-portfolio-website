@@ -8,9 +8,11 @@ import type {
 } from "@/data/world-navigation";
 import { cn } from "@/lib/cn";
 import { WorldSwitcher } from "./world-switcher";
+import { ProofModeToggle } from "@/components/dual-trace/proof-mode-toggle";
 
 type WorldNavigationProps = {
   className?: string;
+  dualTraceHome?: boolean;
   items: readonly WorldNavigationItem[];
   world: PortfolioWorld;
 };
@@ -26,6 +28,7 @@ function isActiveRoute(pathname: string, href: string) {
 
 export function WorldNavigation({
   className,
+  dualTraceHome = false,
   items,
   world,
 }: WorldNavigationProps) {
@@ -74,6 +77,7 @@ export function WorldNavigation({
         </nav>
 
         <div className="world-navigation__actions">
+          {dualTraceHome && <ProofModeToggle />}
           <WorldSwitcher world={world} />
 
           <details className="world-navigation__menu">

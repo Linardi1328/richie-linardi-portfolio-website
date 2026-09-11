@@ -129,9 +129,9 @@
   color: #07111f;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .world-navigation__identity {
-    max-width: 8.5rem;
+    display: none;
   }
 }
 

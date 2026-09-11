@@ -141,9 +141,6 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
 
   const targetLabel =
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
-  const targetShortLabel =
-    targetWorld === "basketball" ? "Basketball" : "Professional";
-  const swipeDirection = world === "professional" ? "left" : "right";
   const keyboardKey = world === "professional" ? "ArrowLeft" : "ArrowRight";
   const reverseEyebrow =
     targetWorld === "basketball" ? "ATHLETE ARCHIVE" : "SOFTWARE · DATA · AI";
@@ -523,30 +520,22 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         </div>
       </div>
 
-      {/* [FLIP HINT] Purely visual swipe guidance */}
+      {/* [FLIP HINT / WORLD TAB] Authored book-edge marker tab */}
       <div aria-hidden="true" className="signature-flipbook__hint">
         {world === "professional" ? (
-          <>
-            <span className="signature-flipbook__hint-arrow">←</span>
-            <span className="signature-flipbook__hint-text">
-              Swipe {swipeDirection}{" "}
-              <span className="signature-flipbook__hint-sep">·</span>{" "}
-              <span className="signature-flipbook__hint-target">
-                {targetShortLabel}
-              </span>
-            </span>
-          </>
+          <div className="signature-flipbook__tab-inner">
+            <span className="signature-flipbook__tab-arrow">←</span>
+            <span className="signature-flipbook__tab-action">SWIPE LEFT</span>
+            <span className="signature-flipbook__tab-identity">13</span>
+            <span className="signature-flipbook__tab-target">ATHLETE</span>
+          </div>
         ) : (
-          <>
-            <span className="signature-flipbook__hint-text">
-              <span className="signature-flipbook__hint-target">
-                {targetShortLabel}
-              </span>{" "}
-              <span className="signature-flipbook__hint-sep">·</span> Swipe{" "}
-              {swipeDirection}
-            </span>
-            <span className="signature-flipbook__hint-arrow">→</span>
-          </>
+          <div className="signature-flipbook__tab-inner">
+            <span className="signature-flipbook__tab-identity">RBL</span>
+            <span className="signature-flipbook__tab-target">PROFESSIONAL</span>
+            <span className="signature-flipbook__tab-action">SWIPE RIGHT</span>
+            <span className="signature-flipbook__tab-arrow">→</span>
+          </div>
         )}
       </div>
 

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import type { MouseEvent } from "react";
+import type { KeyboardEvent, MouseEvent } from "react";
 import type { PortfolioWorld } from "@/data/world-navigation";
 import { cn } from "@/lib/cn";
 import {
@@ -24,25 +24,14 @@ export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
   const pathname = usePathname();
   const targetWorld = getOppositeWorld(world);
   const targetLabel =
-    targetWorld === "basketball" ? "Basketball side" : "Professional side";
+    targetWorld === "basketball" ? "Athlete side" : "Professional side";
+  const hingeSymbol = world === "professional" ? "13 ↔" : "↔ RBL";
 
   useEffect(() => {
     rememberWorldRoute(world, pathname || defaultWorldRoutes[world]);
   }, [pathname, world]);
 
-  function handleWorldSwitch(event: MouseEvent<HTMLAnchorElement>) {
-    if (
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey ||
-      event.button !== 0
-    ) {
-      return;
-    }
-
-    event.preventDefault();
-
+  function triggerWorldSwitch() {
     const detail: WorldFlipRequestDetail = {
       destination: resolveWorldDestination(targetWorld),
       sourceWorld: world,
@@ -56,22 +45,41 @@ export function WorldSwitcher({ className, world }: WorldSwitcherProps) {
     );
   }
 
+  function handleWorldSwitch(event: MouseEvent<HTMLAnchorElement>) {
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    triggerWorldSwitch();
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLAnchorElement>) {
+    const expectedKey = world === "professional" ? "ArrowLeft" : "ArrowRight";
+    if (event.key === expectedKey) {
+      event.preventDefault();
+      triggerWorldSwitch();
+    }
+  }
+
   return (
     <Link
-      aria-label={`Turn to ${targetLabel.toLowerCase()}`}
+      aria-label={`Turn to ${targetLabel}`}
+      aria-keyshortcuts={world === "professional" ? "ArrowLeft" : "ArrowRight"}
       className={cn("world-switcher", className)}
       data-target-world={targetWorld}
       href={defaultWorldRoutes[targetWorld]}
       onClick={handleWorldSwitch}
+      onKeyDown={handleKeyDown}
     >
       <span aria-hidden="true" className="world-switcher__edge" />
-      <span className="world-switcher__copy">
-        <span className="world-switcher__eyebrow">Turn page</span>
-        <span className="world-switcher__label">{targetLabel}</span>
-      </span>
-      <span aria-hidden="true" className="world-switcher__arrow">
-        {world === "professional" ? "←" : "→"}
-      </span>
+      <span className="world-switcher__hinge-symbol">{hingeSymbol}</span>
     </Link>
   );
 }
