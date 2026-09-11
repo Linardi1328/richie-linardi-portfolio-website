@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { PortfolioEffects } from "@/components/effects/portfolio-effects";
 import { SignatureFlipbook } from "@/components/interaction/signature-flipbook";
 import { WorldNavigation } from "@/components/navigation/world-navigation";
@@ -51,6 +52,15 @@ export function PortfolioWorldShell({
 
             <footer className="portfolio-page__footer">
               <p>One journey. Two sides. The same discipline.</p>
+              <nav
+                className="portfolio-page__legal-links"
+                aria-label="Site policies"
+              >
+                <Link href="/privacy">Privacy</Link>
+                <Link href="/terms">Terms</Link>
+                <Link href="/cookies">Cookies</Link>
+                <Link href="/refunds">Payments & refunds</Link>
+              </nav>
               <span aria-hidden="true">RBL · 2026</span>
             </footer>
           </div>
