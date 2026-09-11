@@ -11,7 +11,10 @@ export default function PrivacyPage() {
           title: "What the site collects",
           body: (
             <p>
-              The current application does not ask visitors to submit names, email addresses, payment details, account credentials, or other profile information. Contact is handled through public profile links rather than a website form.
+              The current application does not ask visitors to submit names, email
+              addresses, payment details, account credentials, or other profile
+              information. Contact is handled through public profile links rather
+              than a website form.
             </p>
           ),
         },
@@ -19,7 +22,11 @@ export default function PrivacyPage() {
           title: "Technical data",
           body: (
             <p>
-              The hosting provider may process ordinary request data needed to deliver and secure the website, such as IP address, user agent, request time, and diagnostic/security logs. This portfolio does not intentionally use that information to build advertising profiles or track people across sites.
+              The hosting provider may process ordinary request data needed to
+              deliver and secure the website, such as IP address, user agent,
+              request time, and diagnostic/security logs. This portfolio does not
+              intentionally use that information to build advertising profiles or
+              track people across sites.
             </p>
           ),
         },
@@ -27,7 +34,11 @@ export default function PrivacyPage() {
           title: "Analytics and advertising",
           body: (
             <p>
-              No Google Analytics, Meta Pixel, Hotjar, Mixpanel, PostHog, or similar behavioural analytics/advertising tracker is included in the audited build. If non-essential tracking is added later, this policy and the site&apos;s consent controls must be reviewed before it is enabled.
+              No Google Analytics, Meta Pixel, Hotjar, Mixpanel, PostHog, or
+              similar behavioural analytics/advertising tracker is included in the
+              audited build. If non-essential tracking is added later, this policy
+              and the site&apos;s consent controls must be reviewed before it is
+              enabled.
             </p>
           ),
         },
@@ -35,7 +46,9 @@ export default function PrivacyPage() {
           title: "Third-party destinations",
           body: (
             <p>
-              Project, source, GitHub, social-media, competition, university, and other external links take you to services controlled by third parties. Their privacy practices apply once you leave this portfolio.
+              Project, source, GitHub, social-media, competition, university, and
+              other external links take you to services controlled by third
+              parties. Their privacy practices apply once you leave this portfolio.
             </p>
           ),
         },
@@ -43,7 +56,11 @@ export default function PrivacyPage() {
           title: "Media and public records",
           body: (
             <p>
-              Portfolio claims and media are intended to use first-party material, public professional/competition records, or assets for which publication rights have been checked. If you believe personal information or media has been published incorrectly, use the verified channels on the <Link href="/contact">contact page</Link>.
+              Portfolio claims and media are intended to use first-party material,
+              public professional/competition records, or assets for which
+              publication rights have been checked. If you believe personal
+              information or media has been published incorrectly, use the
+              verified channels on the <Link href="/contact">contact page</Link>.
             </p>
           ),
         },
@@ -51,7 +68,11 @@ export default function PrivacyPage() {
           title: "Malaysia and privacy requests",
           body: (
             <p>
-              The site is operated from Malaysia. It is a personal portfolio rather than an online shop or customer account service, but it follows data-minimisation, transparency, security, and correction principles as a baseline. Requests concerning information published on the site can be raised through the verified public contact channels.
+              The site is operated from Malaysia. It is a personal portfolio rather
+              than an online shop or customer account service, but it follows
+              data-minimisation, transparency, security, and correction principles
+              as a baseline. Requests concerning information published on the site
+              can be raised through the verified public contact channels.
             </p>
           ),
         },
