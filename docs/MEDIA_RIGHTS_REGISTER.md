@@ -4,9 +4,10 @@ This register is a release-control checklist. A file being present in the reposi
 
 ## Current public media
 
-| Asset | Use | Status | Release requirement |
-| --- | --- | --- | --- |
-| `public/portraits/richie-professional.jpg` | Personal portrait on About / Resume | REVIEW_REQUIRED | Keep evidence identifying the photographer/source and the ownership, assignment, licence, or permission that covers public portfolio use. |
+- **Asset:** `public/portraits/richie-professional.jpg`
+- **Use:** Personal portrait on About / Resume
+- **Status:** REVIEW_REQUIRED
+- **Release requirement:** Keep evidence identifying the photographer/source and the ownership, assignment, licence, or permission that covers public portfolio use.
 
 ## Rules for future media
 
