@@ -8,7 +8,7 @@ export type BasketballAchievement = {
   category: string;
   title: string;
   detail: string;
-  source: BasketballSource;
+  source?: BasketballSource;
   featured?: boolean;
 };
 
@@ -20,6 +20,9 @@ export type BasketballSeasonStat = {
   rebounds: number;
   assists: number;
   shooting?: string;
+  fgPct?: string;
+  threePtPct?: string;
+  ftPct?: string;
   source: BasketballSource;
 };
 
@@ -104,6 +107,14 @@ export const basketballSources = {
     label: "KL Hornbills Instagram",
     href: "https://www.instagram.com/kl_hornbills/",
   },
+  majorLeagueHeat2025Stats: {
+    label: "Major League Malaysia · Heat Challenge Cup 2025 statistics",
+    href: "https://www.majorleague.com.my/Home/Matches?&WHurl=%2Fcompetition%2F42425%2Fperson%2F2501959%2Fstatistics%3F",
+  },
+  majorLeagueHeat2025GameLog: {
+    label: "Major League Malaysia · Heat Challenge Cup 2025 game log",
+    href: "https://www.majorleague.com.my/Home/Matches?&WHurl=%2Fcompetition%2F42425%2Fperson%2F2501959%2Fgamelog%3F",
+  },
 } as const satisfies Record<string, BasketballSource>;
 
 export const basketballAchievements: readonly BasketballAchievement[] = [
@@ -146,7 +157,6 @@ export const basketballAchievements: readonly BasketballAchievement[] = [
     title: "Joined DBL Academy",
     detail:
       "The long-term development chapter began at DBL Academy in 2016, before later Selection Team and All-Star appearances.",
-    source: basketballSources.dblAcademy,
   },
 ] as const;
 
@@ -167,6 +177,10 @@ export const dblSeasonStats: readonly BasketballSeasonStat[] = [
     points: 60,
     rebounds: 35,
     assists: 3,
+    fgPct: "58.2%",
+    threePtPct: "20.0%",
+    ftPct: "89.5%",
+    shooting: "58.2 FG% · 20.0 3PT% · 89.5 FT%",
     source: basketballSources.dblProfile,
   },
   {
@@ -176,6 +190,10 @@ export const dblSeasonStats: readonly BasketballSeasonStat[] = [
     points: 52,
     rebounds: 21,
     assists: 13,
+    fgPct: "61.6%",
+    threePtPct: "0.0%",
+    ftPct: "66.7%",
+    shooting: "61.6 FG% · 0.0 3PT% · 66.7 FT%",
     source: basketballSources.dblProfile,
   },
   {
@@ -185,6 +203,9 @@ export const dblSeasonStats: readonly BasketballSeasonStat[] = [
     points: 121,
     rebounds: 84,
     assists: 25,
+    fgPct: "58.5%",
+    threePtPct: "45.0%",
+    ftPct: "72.4%",
     shooting: "58.5 FG% · 45.0 3PT% · 72.4 FT%",
     source: basketballSources.dblProfile,
   },
@@ -266,7 +287,7 @@ export const kejurnasKu17Snapshot = {
   badge: "Official Tournament Statistics",
   team: "CLS Surabaya",
   games: 3,
-  minutes: "00:58:27",
+  minutes: "58:27",
   efficiency: 31,
   points: 31,
   rebounds: 12,
@@ -279,6 +300,55 @@ export const kejurnasKu17Snapshot = {
     "Recorded 31 points, 12 rebounds, 3 assists, 2 steals, and 2 blocks across 58:27 minutes in 3 games representing CLS / Cahaya Lestari Surabaya in the Kejurnas KU-17 Wilayah 5 inter-club qualification pathway, leading the tournament with 64.29% field-goal shooting.",
   source: basketballSources.basketyuk,
   leaderboardSource: basketballSources.basketyukFgLeaderboard,
+} as const;
+
+export const heatChallenge2025Snapshot = {
+  competition: "Heat Challenge Cup 2025",
+  context: "KL HORNBILLS · INVITATIONAL CLUB COMPETITION",
+  title: "Heat Challenge Cup 2025 · KL Hornbills",
+  badge: "Official Tournament Statistics",
+  team: "KL Hornbills",
+  location: "Kuala Lumpur, Malaysia",
+  games: 6,
+  minutes: "29:51",
+  mpg: "5.0", // Published by Major League Malaysia
+  points: 16,
+  ppg: "2.7", // Published by Major League Malaysia
+  rebounds: 5,
+  rpg: "0.8", // Published by Major League Malaysia (all 5 offensive)
+  assists: 0,
+  apg: "0.0", // Published by Major League Malaysia
+  steals: 1,
+  stpg: "0.2", // Published by Major League Malaysia
+  blocks: 0,
+  blkpg: "0.0", // Published by Major League Malaysia
+  fieldGoalPct: "43.8%", // Published by Major League Malaysia (7/16)
+  fieldGoalsMade: 7,
+  fieldGoalsAttempted: 16,
+  twoPointPct: "54.5%", // Published by Major League Malaysia (6/11)
+  twoPointsMade: 6,
+  twoPointsAttempted: 11,
+  threePointPct: "20.0%", // Published by Major League Malaysia (1/5)
+  threePointsMade: 1,
+  threePointsAttempted: 5,
+  freeThrowPct: "16.7%", // Published by Major League Malaysia (1/6)
+  freeThrowsMade: 1,
+  freeThrowsAttempted: 6,
+  efficiency: 7.0, // Published by Major League Malaysia
+  singleGameHigh: {
+    date: "Sep 19, 2025",
+    opponent: "Selangor BA",
+    minutes: "15:41",
+    points: 14,
+    rebounds: 3,
+    steals: 1,
+    shooting: "6/9 FG (66.7%) · 1/2 3PT",
+    efficiency: 11.0,
+  },
+  contextNote:
+    "Contested 6 games for KL Hornbills in the Heat Challenge Cup 2025 in Malaysia, recording 16 points (2.7 PPG), 5 rebounds, 1 steal, and 43.8% field-goal shooting in 29:51 minutes, highlighted by a 14-point performance against Selangor BA. All statistics officially published by Major League Malaysia.",
+  source: basketballSources.majorLeagueHeat2025Stats,
+  gameLogSource: basketballSources.majorLeagueHeat2025GameLog,
 } as const;
 
 export type AthleteVerificationStatus =
@@ -386,7 +456,7 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     location: "Surabaya, Indonesia",
     roleContext:
       "Concluded eight-year player development curriculum from foundational training through Selection Team tours",
-    sources: [basketballSources.dblAcademy],
+    sources: [],
     verificationStatus: "owner-provided",
     tier: "continuing",
   },
@@ -602,12 +672,32 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     discipline: "5v5",
     level: "club",
     team: "KL Hornbills",
-    result: "1st Runner-Up",
+    result: "1st Runner-Up · KL Hornbills",
+    resultVerificationStatus: "owner-provided",
     location: "Kuala Lumpur, Malaysia",
-    roleContext: "Club campaign with KL Hornbills",
+    statLine: "6 GP · 29:51 MIN · 16 PTS · 5 REB · 1 STL · 43.8 FG%",
+    statVerificationStatus: "verified",
+    claims: [
+      {
+        label: "1st Runner-Up · KL Hornbills",
+        verificationStatus: "owner-provided",
+      },
+      {
+        label: "6 GP · 29:51 MIN · 16 PTS (2.7 PPG) · 5 REB · 1 STL · 43.8 FG%",
+        verificationStatus: "verified",
+        source: basketballSources.majorLeagueHeat2025Stats,
+      },
+      {
+        label: "Single-game high: 14 PTS (6/9 FG) vs Selangor BA",
+        verificationStatus: "verified",
+        source: basketballSources.majorLeagueHeat2025GameLog,
+      },
+    ],
+    roleContext:
+      "Invitational club campaign with KL Hornbills in Malaysia; official tournament statistics verified via Major League Malaysia; 1st Runner-Up team result owner-provided pending published playoff finals report",
     sources: [
-      basketballSources.instagramHornbills,
-      basketballSources.sofascore,
+      basketballSources.majorLeagueHeat2025Stats,
+      basketballSources.majorLeagueHeat2025GameLog,
     ],
     verificationStatus: "owner-provided",
     homepagePriority: true,
@@ -714,8 +804,8 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     location: "Surabaya, Indonesia",
     roleContext:
       "Commenced competitive basketball fundamentals pathway in 2016",
-    sources: [basketballSources.dblAcademy],
-    verificationStatus: "verified",
+    sources: [],
+    verificationStatus: "owner-provided",
     homepagePriority: true,
     tier: "continuing",
   },
@@ -868,9 +958,14 @@ export const athleteCompetitiveLadder: readonly AthleteCompetitiveLadderTier[] =
           verificationStatus: "owner-provided",
         },
         {
+          label:
+            "Heat Challenge Cup 2025 · 6 GP / 16 PTS / 43.8 FG% (KL Hornbills)",
+          verificationStatus: "verified",
+          source: basketballSources.majorLeagueHeat2025Stats,
+        },
+        {
           label: "Heat Challenge Cup 2025 · 1st Runner-Up (KL Hornbills)",
           verificationStatus: "owner-provided",
-          source: basketballSources.sofascore,
         },
         {
           label:
@@ -958,8 +1053,8 @@ export const athletePathwayTracks: {
       title: "Heat Challenge Cup 1st Runner-Up",
       context: "Regional Club Competition · Malaysia",
       detail:
-        "Represented KL Hornbills in regional invitational tournament play, finishing as 1st Runner-Up.",
-      source: basketballSources.sofascore,
+        "Represented KL Hornbills in regional invitational tournament play in Malaysia (6 GP, 16 PTS, 43.8 FG%, 1st Runner-Up).",
+      source: basketballSources.majorLeagueHeat2025Stats,
       verificationStatus: "owner-provided",
     },
   ],
@@ -973,8 +1068,7 @@ export const athletePathwayTracks: {
       context: "Academy Fundamentals",
       detail:
         "Joined DBL Academy in Surabaya in 2016, embarking on an 8-year intentional player development curriculum.",
-      source: basketballSources.dblAcademy,
-      verificationStatus: "verified",
+      verificationStatus: "owner-provided",
     },
     {
       id: "dev-2018",
@@ -1045,7 +1139,6 @@ export const athletePathwayTracks: {
       context: "Academy Chapter Graduation",
       detail:
         "Completed the eight-year player development curriculum at DBL Academy in Surabaya (2016–2024).",
-      source: basketballSources.dblAcademy,
       verificationStatus: "owner-provided",
     },
   ],
