@@ -1,0 +1,654 @@
+/* ==========================================================================
+   RBL // 13 CREATIVE EXPLORATION STYLES
+   Concepts A, B, and C
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CONCEPT B: RBL/13 GENERATIVE GEOMETRY (THE LIVING COORDINATE SYSTEM)
+   -------------------------------------------------------------------------- */
+.concept-b-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #070d17;
+  color: #e2e8f0;
+  font-family: var(--font-sans);
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 600ms cubic-bezier(0.2, 0, 0, 1),
+    color 600ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.concept-b-root.concept-b--professional {
+  --coord-accent: #38bdf8;
+  --coord-line: rgba(56, 189, 248, 0.25);
+  background: #050b14;
+  color: #f1f5f9;
+}
+
+.concept-b-root.concept-b--athlete {
+  --coord-accent: #f59e0b;
+  --coord-line: rgba(245, 158, 11, 0.25);
+  background: #090807;
+  color: #fef3c7;
+}
+
+.concept-b-folio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem clamp(1rem, 3vw, 2.5rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+.concept-b-folio__mark {
+  font-weight: 800;
+  color: var(--coord-accent);
+  margin-right: 1rem;
+}
+
+.concept-b-folio__coords {
+  opacity: 0.6;
+}
+
+.concept-b-morph-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  color: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.concept-b-morph-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--coord-accent);
+}
+
+.concept-b-morph-toggle span.active {
+  color: var(--coord-accent);
+  text-shadow: 0 0 12px var(--coord-accent);
+}
+
+.morph-switch-icon {
+  opacity: 0.5;
+}
+
+.concept-b-hero {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(320px, 1.15fr) minmax(300px, 1fr);
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.concept-b-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.concept-b-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+}
+
+.concept-b-stamp__sub {
+  opacity: 0.5;
+}
+
+.concept-b-stamp__id {
+  padding: 0.15rem 0.45rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 2px solid var(--coord-accent);
+  color: var(--coord-accent);
+  font-weight: 800;
+}
+
+.concept-b-title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(2.4rem, 4.8vw, 4.2rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.concept-b-title__dim {
+  font-size: 0.42em;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  opacity: 0.55;
+  margin-bottom: 0.35rem;
+}
+
+.concept-b-title__accent {
+  color: var(--coord-accent);
+  text-shadow: 0 0 35px rgba(56, 189, 248, 0.25);
+}
+
+.concept-b-lead {
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  line-height: 1.6;
+  opacity: 0.85;
+  max-width: 36rem;
+  margin: 0;
+}
+
+.concept-b-telemetry-card {
+  padding: 0.95rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--coord-accent);
+  border-radius: 4px;
+  max-width: 32rem;
+}
+
+.concept-b-telemetry-card__header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  opacity: 0.55;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.35rem;
+}
+
+.concept-b-telemetry-card__body strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: var(--coord-accent);
+}
+
+.concept-b-telemetry-card__body p {
+  margin: 0.15rem 0 0 0;
+  font-size: 0.82rem;
+  opacity: 0.75;
+}
+
+.concept-b-metrics {
+  display: flex;
+  gap: 1.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.concept-b-metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.concept-b-metric-item .metric-val {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--coord-accent);
+}
+
+.concept-b-metric-item .metric-lbl {
+  font-size: 0.72rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.concept-b-canvas-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 580px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.concept-b-svg {
+  width: 100%;
+  height: 100%;
+  color: var(--coord-accent);
+}
+
+.concept-b-canvas-legend {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+@keyframes nodeGlowPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.node-pulse {
+  animation: nodeGlowPulse 2.4s infinite ease-in-out;
+  transform-origin: center;
+}
+
+/* --------------------------------------------------------------------------
+   CONCEPT A: TECHNICAL ARCHIVE × GAME BOOK
+   -------------------------------------------------------------------------- */
+.concept-a-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f4efe6;
+  color: #1a1714;
+  font-family: var(--font-sans);
+}
+
+.concept-a-root.concept-a--professional {
+  background: #eef2f6;
+  color: #0f172a;
+}
+
+.concept-a-root.concept-a--athlete {
+  background: #12100d;
+  color: #f7f1e4;
+}
+
+.concept-a-folio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem clamp(1rem, 3vw, 2.5rem);
+  border-bottom: 2px solid currentColor;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.concept-a-folio__mode-switch button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.5;
+}
+
+.concept-a-folio__mode-switch button.active {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.concept-a-folio__mode-switch .sep {
+  margin-inline: 0.5rem;
+  opacity: 0.3;
+}
+
+.concept-a-main {
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.concept-a-pro-title,
+.concept-a-ath-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin-block: 0.5rem 1rem;
+}
+
+.concept-a-pro-title .sub,
+.concept-a-ath-title .sub {
+  display: block;
+  font-size: 0.32em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.16em;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+.concept-a-tech-ledger,
+.concept-a-boxscore-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  border: 1px solid currentColor;
+  padding: 0.75rem;
+}
+
+.ledger-cell,
+.boxscore-cell {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-right: 1px solid currentColor;
+}
+
+.ledger-cell:last-child,
+.boxscore-cell:last-child {
+  border-right: none;
+}
+
+.cell-label,
+.bx-event {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.cell-value,
+.bx-match {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-top: 0.25rem;
+}
+
+.bx-stat {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #c8a45c;
+  margin-top: 0.2rem;
+}
+
+.blueprint-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.blueprint-card {
+  border: 1px solid currentColor;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.concept-a--professional .blueprint-card:hover {
+  background: #ffffff;
+  box-shadow: 4px 4px 0 #0f172a;
+}
+
+.matchlog-table {
+  width: 100%;
+  margin-top: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.matchlog-row {
+  display: grid;
+  grid-template-columns:
+    80px minmax(180px, 1.5fr)
+    60px 100px 100px 140px minmax(120px, 1fr);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: center;
+}
+
+.matchlog-row--head {
+  font-weight: 800;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.ml-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid currentColor;
+  font-size: 0.7rem;
+  border-radius: 2px;
+}
+
+.ml-badge--gold {
+  border-color: #c8a45c;
+  color: #c8a45c;
+}
+
+/* --------------------------------------------------------------------------
+   CONCEPT C: EXPERIMENTAL EDITORIAL / IDENTITY SYSTEM
+   -------------------------------------------------------------------------- */
+.concept-c-root {
+  min-height: 100vh;
+  display: flex;
+  background: #f9f9f9;
+  color: #111;
+  font-family: var(--font-sans);
+  position: relative;
+}
+
+.concept-c-root.concept-c--professional {
+  background: #f6f7f9;
+  color: #08111e;
+}
+
+.concept-c-root.concept-c--athlete {
+  background: #0d0c0a;
+  color: #f7f3ea;
+}
+
+.concept-c-vertical-rail {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0.85rem;
+  border-right: 1px solid currentColor;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  opacity: 0.6;
+}
+
+.concept-c-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.concept-c--athlete .concept-c-topbar {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.concept-c-monogram {
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.concept-c-mode-toggle button {
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: inherit;
+  opacity: 0.45;
+  cursor: pointer;
+}
+
+.concept-c-mode-toggle button.active {
+  opacity: 1;
+  border-bottom: 2px solid currentColor;
+}
+
+.concept-c-main {
+  flex: 1;
+  padding: clamp(2rem, 5vw, 4.5rem);
+  position: relative;
+}
+
+.huge-display-title {
+  font-size: clamp(3rem, 7.5vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+.huge-display-title .outline-text {
+  display: block;
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
+.huge-display-title .gold-text {
+  color: #c8a45c;
+  display: block;
+}
+
+.ath-monument-watermark {
+  position: absolute;
+  right: 2vw;
+  top: 5vh;
+  font-size: clamp(14rem, 30vw, 26rem);
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.05;
+  user-select: none;
+  pointer-events: none;
+  font-family: var(--font-mono);
+}
+
+.work-index-rows {
+  margin-top: 2rem;
+  border-top: 1px solid currentColor;
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns:
+    50px minmax(180px, 2fr) minmax(140px, 1.5fr)
+    140px 60px 40px;
+  padding: 1.25rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  align-items: center;
+  transition: all 180ms ease;
+  cursor: pointer;
+}
+
+.concept-c--athlete .work-row {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.work-row:hover {
+  padding-inline: 1rem;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.concept-c--athlete .work-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.work-row .row-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.work-row .row-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.concept-c-kinetic-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+}
+
+.kinetic-cell .k-year {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #c8a45c;
+}
+
+.kinetic-cell .k-val {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-block: 0.25rem;
+}
+
+.kinetic-cell .k-desc {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE ADJUSTMENTS ACROSS CONCEPTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .concept-b-hero {
+    grid-template-columns: 1fr;
+  }
+  .concept-b-canvas-wrapper {
+    max-height: 420px;
+  }
+  .work-row {
+    grid-template-columns: 40px 1fr auto;
+  }
+  .work-row .row-cat,
+  .work-row .row-status,
+  .work-row .row-year {
+    display: none;
+  }
+  .matchlog-row {
+    grid-template-columns: 60px 1fr 80px;
+  }
+  .matchlog-row span:nth-child(n + 4):nth-child(-n + 6) {
+    display: none;
+  }
+}

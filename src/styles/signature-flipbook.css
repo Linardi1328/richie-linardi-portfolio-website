@@ -248,68 +248,99 @@
   left: max(0.2rem, env(safe-area-inset-left));
 }
 
-/* [FLIP HINT] Purely visual swipe guidance */
+/* [FLIP HINT / WORLD TAB] Authored book-edge marker tab */
 .signature-flipbook__hint {
   position: fixed;
-  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 55;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0;
-  border: none;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  justify-content: center;
+  padding: clamp(0.6rem, 1.2vh, 0.85rem) clamp(0.35rem, 0.7vw, 0.55rem);
+  background: color-mix(in srgb, var(--stage-paper-elevated) 88%, transparent);
+  border: 1px solid var(--stage-line);
+  box-shadow: 0 8px 26px rgb(0 0 0 / 22%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
-  opacity: 0.52;
-  transform: none;
-  transition: opacity 220ms var(--ease-standard);
+  opacity: 0.58;
+  transition:
+    opacity 240ms var(--ease-standard),
+    transform 240ms var(--ease-standard);
 }
 
 .signature-flipbook[data-world="professional"] .signature-flipbook__hint {
-  right: max(1.75rem, env(safe-area-inset-right));
+  left: max(0.4rem, env(safe-area-inset-left));
+  border-left: 2.5px solid var(--stage-accent);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .signature-flipbook[data-world="basketball"] .signature-flipbook__hint {
-  left: max(1.75rem, env(safe-area-inset-left));
+  right: max(0.4rem, env(safe-area-inset-right));
+  border-right: 2.5px solid var(--stage-accent);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__hint,
 .signature-flipbook[data-phase="turning"] .signature-flipbook__hint,
 .signature-flipbook[data-phase="arriving"] .signature-flipbook__hint {
   opacity: 0;
+  transform: translateY(-50%) scale(0.94);
 }
 
-.signature-flipbook__hint-arrow {
+.signature-flipbook__tab-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.18rem;
+}
+
+.signature-flipbook__tab-arrow {
   color: var(--stage-accent);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 800;
   line-height: 1;
   flex: 0 0 auto;
 }
 
-.signature-flipbook__hint-text {
+.signature-flipbook__tab-action {
   color: var(--stage-muted);
-  font-size: 0.58rem;
+  font-size: clamp(0.46rem, 0.75vw, 0.52rem);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
-  line-height: 1;
+  line-height: 1.1;
 }
 
-.signature-flipbook__hint-sep {
-  opacity: 0.45;
-  margin-inline: 0.15rem;
-}
-
-.signature-flipbook__hint-target {
+.signature-flipbook__tab-identity {
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 1.2vw, 0.88rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
   color: var(--stage-ink);
+  line-height: 1;
+  margin-block: 0.1rem;
+}
+
+.signature-flipbook__tab-target {
+  color: var(--stage-accent);
+  font-size: clamp(0.48rem, 0.8vw, 0.55rem);
   font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
 }
 
 .signature-flipbook__status {
@@ -376,30 +407,41 @@
   }
 }
 
-/* [MOBILE FLIP] Explicit Side Switch */
+/* [MOBILE FLIP] Compact Book-Edge Tab */
 @media (max-width: 767px) {
   .signature-flipbook__hint {
-    top: auto;
-    bottom: max(0.85rem, env(safe-area-inset-bottom));
-    gap: 0.35rem;
-    transform: none;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    padding: 0.45rem 0.28rem;
   }
 
   .signature-flipbook[data-world="professional"] .signature-flipbook__hint {
-    right: max(0.85rem, env(safe-area-inset-right));
+    left: max(0.2rem, env(safe-area-inset-left));
+    right: auto;
   }
 
   .signature-flipbook[data-world="basketball"] .signature-flipbook__hint {
-    left: max(0.85rem, env(safe-area-inset-left));
+    right: max(0.2rem, env(safe-area-inset-right));
+    left: auto;
   }
 
-  .signature-flipbook__hint-arrow {
-    font-size: 0.78rem;
+  .signature-flipbook__tab-arrow {
+    font-size: 0.65rem;
   }
 
-  .signature-flipbook__hint-text {
-    font-size: 0.56rem;
+  .signature-flipbook__tab-action {
+    font-size: 0.42rem;
     letter-spacing: 0.1em;
+  }
+
+  .signature-flipbook__tab-identity {
+    font-size: 0.68rem;
+  }
+
+  .signature-flipbook__tab-target {
+    font-size: 0.44rem;
+    letter-spacing: 0.12em;
   }
 }
 
