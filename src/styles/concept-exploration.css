@@ -657,6 +657,23 @@
   margin: 0;
 }
 
+.work-row .row-indicator {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: right;
+  opacity: 0.55;
+  transition:
+    opacity 180ms ease,
+    color 180ms ease;
+}
+
+.work-row:hover .row-indicator,
+.work-row.hovered .row-indicator {
+  opacity: 1;
+  color: #c8a45c;
+}
+
 .concept-c-kinetic-strip {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

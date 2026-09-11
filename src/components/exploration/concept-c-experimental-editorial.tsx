@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { projectRegistry } from "@/data/project-registry";
+import { publicProjectCatalogue } from "@/data/project-registry";
 
 type Mode = "professional" | "athlete";
 
@@ -13,14 +13,16 @@ export function ConceptCExperimentalEditorial({
   const [mode, setMode] = useState<Mode>(initialMode);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const displayedProjects = projectRegistry.slice(0, 4).map((p, idx) => ({
-    num: String(idx + 1).padStart(2, "0"),
-    name: p.title,
-    cat: p.tags.slice(0, 2).join(" / "),
-    year: "2026",
-    status: p.phase,
-    slug: p.slug,
-  }));
+  const displayedProjects = publicProjectCatalogue
+    .slice(0, 4)
+    .map((p, idx) => ({
+      num: String(idx + 1).padStart(2, "0"),
+      name: p.title,
+      cat: p.tags.slice(0, 2).join(" / "),
+      year: "2026",
+      status: p.phase,
+      slug: p.slug,
+    }));
 
   return (
     <div className={`concept-c-root concept-c--${mode}`}>
@@ -125,8 +127,8 @@ export function ConceptCExperimentalEditorial({
                       <span className="row-cat">{p.cat}</span>
                       <span className="row-status">{p.status}</span>
                       <span className="row-year">{p.year}</span>
-                      <span className="row-arrow" aria-hidden="true">
-                        ↗
+                      <span className="row-indicator" aria-hidden="true">
+                        {isHovered ? "−" : "+"}
                       </span>
                     </div>
                   );

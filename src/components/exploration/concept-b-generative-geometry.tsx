@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { projectRegistry } from "@/data/project-registry";
+import { publicProjectCatalogue } from "@/data/project-registry";
 import {
   dblSeasonStats,
   asg2024FinalSnapshot,
@@ -93,13 +93,13 @@ const SHARED_COORDINATES: NodePoint[] = [
   },
   {
     id: "n6",
-    labelPro: "RBL.LOW_LATENCY",
+    labelPro: "RBL.OUTPUT_GATE",
     labelAth: "13.LEFT_BLOCK",
     proX: 82,
     proY: 22,
     athX: 34,
     athY: 25,
-    rolePro: "Real-time Dispatch",
+    rolePro: "Controlled Dispatch",
     roleAth: "Left Block Interior Geometry",
   },
   {
@@ -126,13 +126,13 @@ const SHARED_COORDINATES: NodePoint[] = [
   },
   {
     id: "n9",
-    labelPro: "RBL.AUDIT_LOG",
+    labelPro: "RBL.EVIDENCE_TRACE",
     labelAth: "13.LEFT_CORNER",
     proX: 20,
     proY: 75,
     athX: 8,
     athY: 22,
-    rolePro: "Cryptographic Trace",
+    rolePro: "Audit Evidence",
     roleAth: "Left Corner Spatial Coordinate",
   },
   {
@@ -257,7 +257,7 @@ export function ConceptBGenerativeGeometry({
           </span>
           <span className="concept-b-folio__coords">
             {mode === "professional"
-              ? "NODE_MAP: DAG_TOPOLOGY [2026]"
+              ? "NODE_MAP: ABSTRACTED SYSTEMS TOPOLOGY"
               : "COURT_GRID: ABSTRACTED SPATIAL COORDINATES"}
           </span>
         </div>
@@ -347,7 +347,7 @@ export function ConceptBGenerativeGeometry({
               <>
                 <div className="concept-b-metric-item">
                   <span className="metric-val">
-                    {String(projectRegistry.length).padStart(2, "0")}
+                    {String(publicProjectCatalogue.length).padStart(2, "0")}
                   </span>
                   <span className="metric-lbl">Public Systems</span>
                 </div>
@@ -356,7 +356,7 @@ export function ConceptBGenerativeGeometry({
                   <span className="metric-lbl">Monash University</span>
                 </div>
                 <div className="concept-b-metric-item">
-                  <span className="metric-val">Audited</span>
+                  <span className="metric-val">Controlled</span>
                   <span className="metric-lbl">Execution Gates</span>
                 </div>
               </>

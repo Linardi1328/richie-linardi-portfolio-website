@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { projectRegistry } from "@/data/project-registry";
+import { publicProjectCatalogue } from "@/data/project-registry";
 import {
   dblSeasonStats,
   fibaU18Snapshot,
@@ -19,7 +19,7 @@ export function ConceptATechnicalArchive({
 }) {
   const [mode, setMode] = useState<Mode>(initialMode);
   const [selectedRecord, setSelectedRecord] = useState<string>(
-    projectRegistry[0]?.slug ?? "spy-market-agent",
+    publicProjectCatalogue[0]?.slug ?? "spy-market-agent",
   );
 
   // Canonical DBL 2023 season stats from registry
@@ -94,9 +94,9 @@ export function ConceptATechnicalArchive({
               </div>
               <div className="concept-a-tech-ledger">
                 <div className="ledger-cell">
-                  <span className="cell-label">TOTAL SYSTEMS</span>
+                  <span className="cell-label">TOTAL PUBLIC SYSTEMS</span>
                   <span className="cell-value">
-                    {String(projectRegistry.length).padStart(2, "0")} VERIFIED
+                    {String(publicProjectCatalogue.length).padStart(2, "0")}
                   </span>
                 </div>
                 <div className="ledger-cell">
@@ -118,7 +118,7 @@ export function ConceptATechnicalArchive({
               </div>
 
               <div className="blueprint-grid">
-                {projectRegistry.slice(0, 3).map((sys) => {
+                {publicProjectCatalogue.slice(0, 3).map((sys) => {
                   const isSelected = selectedRecord === sys.slug;
                   return (
                     <button
@@ -140,7 +140,7 @@ export function ConceptATechnicalArchive({
                         <span className="bp-stack">
                           {sys.tags.slice(0, 4).join(" · ")}
                         </span>
-                        <span className="bp-action">VIEW SPEC ↗</span>
+                        <span className="bp-action">INSPECT +</span>
                       </div>
                     </button>
                   );
@@ -216,7 +216,7 @@ export function ConceptATechnicalArchive({
             <div className="concept-a-matchlog-section">
               <div className="matchlog-header">
                 <h3>
-                  {"// VERIFIED SCORE-SHEET LEDGER [FIBA · DBL · PERBASI]"}
+                  {"// VERIFIED SCORE-SHEET LEDGER [FIBA · DBL · BASKETYUK]"}
                 </h3>
                 <span className="ml-stamp">OFFICIAL TOURNAMENT DATA</span>
               </div>
