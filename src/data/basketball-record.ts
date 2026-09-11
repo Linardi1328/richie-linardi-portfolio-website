@@ -308,7 +308,8 @@ export const heatChallenge2025Snapshot = {
   title: "Heat Challenge Cup 2025 · KL Hornbills",
   badge: "Official Tournament Statistics",
   team: "KL Hornbills",
-  location: "Kuala Lumpur, Malaysia",
+  location: "Puchong, Selangor, Malaysia",
+  locationVerificationStatus: "owner-provided",
   games: 6,
   minutes: "29:51",
   mpg: "5.0", // Published by Major League Malaysia
@@ -674,7 +675,7 @@ export const athleteCareerRecords: readonly AthleteCareerRecord[] = [
     team: "KL Hornbills",
     result: "1st Runner-Up · KL Hornbills",
     resultVerificationStatus: "owner-provided",
-    location: "Kuala Lumpur, Malaysia",
+    location: "Puchong, Selangor, Malaysia",
     statLine: "6 GP · 29:51 MIN · 16 PTS · 5 REB · 1 STL · 43.8 FG%",
     statVerificationStatus: "verified",
     claims: [

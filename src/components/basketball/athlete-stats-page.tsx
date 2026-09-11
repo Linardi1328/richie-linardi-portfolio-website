@@ -482,8 +482,8 @@ export function AthleteStatsPage() {
             </div>
             <p>
               Official tournament statistics from the Heat Challenge Cup 2025 in
-              Kuala Lumpur, Malaysia, published by Major League Malaysia. Team
-              placement preserved under verified claim boundaries.
+              Puchong, Selangor, Malaysia, published by Major League Malaysia.
+              Team placement preserved under verified claim boundaries.
             </p>
           </div>
 
@@ -500,7 +500,7 @@ export function AthleteStatsPage() {
                   <span className="athlete-stat-card__tag">
                     HEAT CHALLENGE CUP 2025 · KL HORNBILLS
                   </span>
-                  <h3>Official Tournament Statistics · Kuala Lumpur</h3>
+                  <h3>Official Tournament Statistics · Puchong, Selangor</h3>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="athlete-stat-card__stage-badge text-amber-300 border-amber-500/40">
@@ -635,9 +635,10 @@ export function AthleteStatsPage() {
               </h2>
             </div>
             <p>
-              Official DBL East Java varsity progression across the 2021, 2022,
-              and 2023 seasons with SMA Gloria 1 Surabaya, culminating in
-              back-to-back East Java championships and All-Star honors.
+              Official DBL East Java progression across three seasons with SMA
+              Gloria 1 Surabaya, moving from the 2021 Fantastic Four and 2022
+              Sweet Sixteen to the 2023 East Java final, where Gloria 1 finished
+              runner-up and Richie earned First Team honors.
             </p>
           </div>
 
