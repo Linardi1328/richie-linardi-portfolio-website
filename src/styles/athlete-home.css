@@ -554,6 +554,27 @@
   .athlete-centerpiece-col:first-child {
     border-left: none;
   }
+
+  .athlete-centerpiece-col__overview {
+    min-height: clamp(5.6rem, 7.5vw, 6.6rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .athlete-centerpiece-grid {
+      grid-template-rows: auto auto auto auto 1fr;
+      row-gap: 0;
+    }
+
+    .athlete-centerpiece-col {
+      display: grid;
+      grid-row: span 5;
+      grid-template-rows: subgrid;
+      gap: 0;
+    }
+  }
 }
 
 .athlete-centerpiece-col--featured {
@@ -574,6 +595,8 @@
   font-weight: 850;
   letter-spacing: -0.03em;
   line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .athlete-centerpiece-col__stage {
@@ -583,10 +606,16 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-align: right;
 }
 
 .athlete-centerpiece-col__stage--gold {
   color: var(--stage-accent);
+}
+
+.athlete-centerpiece-col__overview {
+  display: flex;
+  flex-direction: column;
 }
 
 .athlete-centerpiece-col__tournament {
@@ -668,6 +697,7 @@
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 750;
+  white-space: nowrap;
 }
 
 .athlete-centerpiece-col__notes {
@@ -677,12 +707,14 @@
   line-height: 1.6;
 }
 
-.athlete-centerpiece-col__footer {
+.athlete-chapter-card__footer {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin-top: auto;
-  padding-top: 1.1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--stage-line);
 }
 
 /* Chapter 03 Pinnacle Escalation Card */
@@ -2480,6 +2512,24 @@
   .athlete-dbl-seasons__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .athlete-dbl-season-card__stage {
+    min-height: 3.25rem;
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .athlete-dbl-seasons__grid {
+      grid-template-rows: auto auto auto auto;
+      row-gap: 0;
+    }
+
+    .athlete-dbl-season-card {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      gap: 0;
+    }
+  }
 }
 
 .athlete-dbl-season-card {
@@ -2521,6 +2571,8 @@
   font-size: 1.4rem;
   font-weight: 850;
   letter-spacing: -0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .athlete-dbl-season-card__team {

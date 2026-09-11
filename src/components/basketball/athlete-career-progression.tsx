@@ -94,14 +94,6 @@ export function AthleteCareerProgression() {
                     Commenced structured 8-year player development program in
                     Surabaya.
                   </p>
-                  <a
-                    className="athlete-source-link"
-                    href={basketballSources.dblAcademy.href}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    Academy profile ↗
-                  </a>
                 </div>
               </div>
 
@@ -150,14 +142,6 @@ export function AthleteCareerProgression() {
                   <p>
                     Middle school league campaign: 3 GP, 21 PTS, 19 REB, 1 AST.
                   </p>
-                  <a
-                    className="athlete-source-link"
-                    href={basketballSources.dblProfile.href}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    Junior DBL profile ↗
-                  </a>
                 </div>
               </div>
             </div>
@@ -183,10 +167,10 @@ export function AthleteCareerProgression() {
             <div className="athlete-chapter-card__headline">
               <h3>SMA Gloria 1 Surabaya · 2021 | 2022 | 2023</h3>
               <p className="athlete-chapter-card__lead">
-                Three consecutive DBL East Java varsity campaigns, progressing
-                from a 2021 semifinal run to leading Gloria 1 to the 2023 East
-                Java Championship Series Final with DBL East Java First Team
-                honors.
+                Three consecutive DBL East Java campaigns, progressing from the
+                2021 Fantastic Four through the 2022 North Region campaign to
+                Gloria 1&apos;s 2023 East Java final and Richie&apos;s First
+                Team recognition.
               </p>
             </div>
 
@@ -204,14 +188,16 @@ export function AthleteCareerProgression() {
                     FANTASTIC FOUR · SECOND TEAM
                   </span>
                 </div>
-                <div className="athlete-centerpiece-col__tournament">
-                  DBL East Java 2021
-                </div>
-                <div className="athlete-centerpiece-col__result">
-                  Fantastic Four (Semifinal)
-                </div>
-                <div className="athlete-centerpiece-col__honors">
-                  DBL East Java Second Team 2021
+                <div className="athlete-centerpiece-col__overview">
+                  <div className="athlete-centerpiece-col__tournament">
+                    DBL East Java 2021
+                  </div>
+                  <div className="athlete-centerpiece-col__result">
+                    Fantastic Four (Semifinal)
+                  </div>
+                  <div className="athlete-centerpiece-col__honors">
+                    DBL East Java Second Team 2021
+                  </div>
                 </div>
                 {dbl2021 ? (
                   <div className="athlete-centerpiece-col__stats">
@@ -233,21 +219,16 @@ export function AthleteCareerProgression() {
                     </div>
                   </div>
                 ) : null}
+                {dbl2021?.shooting ? (
+                  <div className="athlete-centerpiece-col__splits">
+                    <span>{dbl2021.shooting}</span>
+                  </div>
+                ) : null}
                 <p className="athlete-centerpiece-col__notes">
-                  Varsity debut season establishing rotation presence and
-                  earning DBL East Java Second Team honors during the 2021
-                  campaign.
+                  Recorded 60 PTS, 35 REB, and 3 AST across 5 games in the 2021
+                  campaign, reaching the Fantastic Four and earning DBL East
+                  Java Second Team honors.
                 </p>
-                <div className="athlete-centerpiece-col__footer">
-                  <a
-                    className="athlete-source-link"
-                    href={basketballSources.dblProfile.href}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    DBL profile ↗
-                  </a>
-                </div>
               </div>
 
               {/* Year 2: 2022 */}
@@ -258,11 +239,13 @@ export function AthleteCareerProgression() {
                     SWEET SIXTEEN
                   </span>
                 </div>
-                <div className="athlete-centerpiece-col__tournament">
-                  DBL East Java 2022 North Region
-                </div>
-                <div className="athlete-centerpiece-col__result">
-                  Sweet Sixteen
+                <div className="athlete-centerpiece-col__overview">
+                  <div className="athlete-centerpiece-col__tournament">
+                    DBL East Java 2022 North Region
+                  </div>
+                  <div className="athlete-centerpiece-col__result">
+                    Sweet Sixteen
+                  </div>
                 </div>
                 {dbl2022 ? (
                   <div className="athlete-centerpiece-col__stats">
@@ -284,21 +267,15 @@ export function AthleteCareerProgression() {
                     </div>
                   </div>
                 ) : null}
+                {dbl2022?.shooting ? (
+                  <div className="athlete-centerpiece-col__splits">
+                    <span>{dbl2022.shooting}</span>
+                  </div>
+                ) : null}
                 <p className="athlete-centerpiece-col__notes">
-                  Key offensive and playmaking contributor across regional
-                  playoff bracket, averaging 13.0 PPG, 5.3 RPG, and 3.3 APG
-                  during the 2022 campaign.
+                  Recorded 52 PTS, 21 REB, and 13 AST across 4 games in the 2022
+                  North Region campaign, reaching the Sweet Sixteen.
                 </p>
-                <div className="athlete-centerpiece-col__footer">
-                  <a
-                    className="athlete-source-link"
-                    href={basketballSources.dblProfile.href}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    DBL match record ↗
-                  </a>
-                </div>
               </div>
 
               {/* Year 3: 2023 */}
@@ -309,14 +286,16 @@ export function AthleteCareerProgression() {
                     RUNNER-UP · FIRST TEAM
                   </span>
                 </div>
-                <div className="athlete-centerpiece-col__tournament">
-                  DBL East Java 2023 Championship Series
-                </div>
-                <div className="athlete-centerpiece-col__result athlete-centerpiece-col__result--gold">
-                  1st Runner-Up (Finalist)
-                </div>
-                <div className="athlete-centerpiece-col__honors athlete-centerpiece-col__honors--gold">
-                  Kopi Good Day First Team DBL East Java 2023
+                <div className="athlete-centerpiece-col__overview">
+                  <div className="athlete-centerpiece-col__tournament">
+                    DBL East Java 2023 Championship Series
+                  </div>
+                  <div className="athlete-centerpiece-col__result athlete-centerpiece-col__result--gold">
+                    1st Runner-Up (Finalist)
+                  </div>
+                  <div className="athlete-centerpiece-col__honors athlete-centerpiece-col__honors--gold">
+                    Kopi Good Day First Team DBL East Java 2023
+                  </div>
                 </div>
                 {dbl2023 ? (
                   <div className="athlete-centerpiece-col__stats">
@@ -348,25 +327,27 @@ export function AthleteCareerProgression() {
                   Java First Team honors across 10 games with a third
                   consecutive DBL Camp selection.
                 </p>
-                <div className="athlete-centerpiece-col__footer">
-                  <a
-                    className="athlete-source-link"
-                    href={basketballSources.dblFirstTeam.href}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    DBL final report ↗
-                  </a>
-                  <a
-                    className="athlete-source-link"
-                    href={basketballSources.dblProfile.href}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    DBL season profile ↗
-                  </a>
-                </div>
               </div>
+            </div>
+
+            {/* Consolidated Chapter 02 Source Footer */}
+            <div className="athlete-chapter-card__footer">
+              <a
+                className="athlete-source-link"
+                href={basketballSources.dblProfile.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Source · DBL Indonesia player profile ↗
+              </a>
+              <a
+                className="athlete-source-link"
+                href={basketballSources.dblFirstTeam.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                2023 final / First Team report ↗
+              </a>
             </div>
           </article>
 
