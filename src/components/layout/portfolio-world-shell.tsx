@@ -52,7 +52,10 @@ export function PortfolioWorldShell({
 
             <footer className="portfolio-page__footer">
               <p>One journey. Two sides. The same discipline.</p>
-              <nav className="portfolio-page__legal-links" aria-label="Site policies">
+              <nav
+                className="portfolio-page__legal-links"
+                aria-label="Site policies"
+              >
                 <Link href="/privacy">Privacy</Link>
                 <Link href="/terms">Terms</Link>
                 <Link href="/cookies">Cookies</Link>
