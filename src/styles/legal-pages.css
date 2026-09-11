@@ -108,13 +108,29 @@
   font-size: 0.75rem;
 }
 
-:where(a[href], button, input, textarea, select, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+:where(
+  a[href],
+  button,
+  input,
+  textarea,
+  select,
+  summary,
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
   outline: 3px solid var(--stage-accent);
   outline-offset: 3px;
 }
 
 @media (forced-colors: active) {
-  :where(a[href], button, input, textarea, select, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  :where(
+    a[href],
+    button,
+    input,
+    textarea,
+    select,
+    summary,
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
     outline-color: CanvasText;
   }
 }
