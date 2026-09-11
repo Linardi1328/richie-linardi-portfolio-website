@@ -12,6 +12,7 @@ import "../styles/production-hardening.css";
 import "../styles/signature-flipbook.css";
 import "../styles/supporting-identity-routes.css";
 import "../styles/dual-trace.css";
+import "../styles/legal-pages.css";
 
 const portfolioTitle = "Richie Linardi | Software, Data & Basketball";
 const portfolioDescription =
