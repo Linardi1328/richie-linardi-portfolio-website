@@ -2,6 +2,13 @@
   --flip-angle: 0deg;
   --flip-origin-y: 50vh;
   --flip-progress: 0;
+  --flip-light: 0;
+  --flip-edge-intensity: 0;
+  --flip-shadow-blur: 0px;
+  --flip-shadow-spread: 0px;
+  --flip-shadow-opacity: 0;
+  --flip-shadow-x: 0px;
+  --flip-crease-opacity: 0;
   --flip-scroll-y: 0px;
   --flip-viewport-height: 100vh;
   position: relative;
@@ -176,6 +183,7 @@
 }
 
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__stage,
+.signature-flipbook[data-phase="cancelling"] .signature-flipbook__stage,
 .signature-flipbook[data-phase="turning"] .signature-flipbook__stage,
 .signature-flipbook[data-phase="arriving"] .signature-flipbook__stage {
   perspective: clamp(760px, 100vw, 1500px);
@@ -183,46 +191,115 @@
 }
 
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__page,
+.signature-flipbook[data-phase="cancelling"] .signature-flipbook__page,
 .signature-flipbook[data-phase="turning"] .signature-flipbook__page,
 .signature-flipbook[data-phase="arriving"] .signature-flipbook__page {
   backface-visibility: hidden;
   transform-style: preserve-3d;
   transform: rotateY(var(--flip-angle));
+  box-shadow: var(--flip-shadow-x) 0 var(--flip-shadow-blur)
+    var(--flip-shadow-spread) rgb(0 0 0 / var(--flip-shadow-opacity));
+  transition: none;
 }
 
 .signature-flipbook[data-world="professional"][data-phase="dragging"]
+  .signature-flipbook__page,
+.signature-flipbook[data-world="professional"][data-phase="cancelling"]
   .signature-flipbook__page,
 .signature-flipbook[data-world="professional"][data-phase="turning"]
   .signature-flipbook__page,
 .signature-flipbook[data-world="professional"][data-phase="arriving"]
   .signature-flipbook__page {
   transform-origin: right var(--flip-origin-y);
-  box-shadow: 34px 0 70px rgb(0 0 0 / 28%);
 }
 
 .signature-flipbook[data-world="basketball"][data-phase="dragging"]
+  .signature-flipbook__page,
+.signature-flipbook[data-world="basketball"][data-phase="cancelling"]
   .signature-flipbook__page,
 .signature-flipbook[data-world="basketball"][data-phase="turning"]
   .signature-flipbook__page,
 .signature-flipbook[data-world="basketball"][data-phase="arriving"]
   .signature-flipbook__page {
   transform-origin: left var(--flip-origin-y);
-  box-shadow: -34px 0 70px rgb(0 0 0 / 36%);
 }
 
-.signature-flipbook[data-phase="dragging"] .signature-flipbook__page {
+/* Surface crease overlay (ambient occlusion at spine fold) */
+.signature-flipbook__crease-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: var(--flip-crease-opacity);
   transition: none;
 }
 
-.signature-flipbook[data-phase="turning"] .signature-flipbook__page {
-  transition: transform 660ms cubic-bezier(0.22, 0.72, 0.2, 1);
+.signature-flipbook[data-world="professional"]
+  .signature-flipbook__crease-overlay {
+  background: linear-gradient(
+    to left,
+    rgb(0 0 0 / 0.55) 0%,
+    rgb(0 0 0 / 0.22) 12%,
+    rgb(0 0 0 / 0.06) 35%,
+    transparent 65%
+  );
 }
 
-.signature-flipbook[data-phase="arriving"] .signature-flipbook__page {
-  transition: transform 720ms cubic-bezier(0.18, 0.74, 0.18, 1);
+.signature-flipbook[data-world="basketball"]
+  .signature-flipbook__crease-overlay {
+  background: linear-gradient(
+    to right,
+    rgb(0 0 0 / 0.65) 0%,
+    rgb(0 0 0 / 0.28) 12%,
+    rgb(0 0 0 / 0.08) 35%,
+    transparent 65%
+  );
+}
+
+/* Specular page-edge light highlight on turning rim */
+.signature-flipbook__edge-light {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 101;
+  pointer-events: none;
+  width: clamp(3px, 0.4vw, 6px);
+  opacity: var(--flip-edge-intensity);
+  transition: none;
+}
+
+.signature-flipbook[data-world="professional"] .signature-flipbook__edge-light {
+  left: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.15) 0%,
+    rgb(225 197 124 / 0.95) 28%,
+    rgb(255 248 220 / 1) 50%,
+    rgb(225 197 124 / 0.95) 72%,
+    rgb(255 255 255 / 0.15) 100%
+  );
+  box-shadow:
+    0 0 12px rgb(225 197 124 / 0.65),
+    -2px 0 6px rgb(255 255 255 / 0.5);
+}
+
+.signature-flipbook[data-world="basketball"] .signature-flipbook__edge-light {
+  right: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.12) 0%,
+    rgb(200 164 92 / 0.95) 28%,
+    rgb(247 241 228 / 1) 50%,
+    rgb(200 164 92 / 0.95) 72%,
+    rgb(255 255 255 / 0.12) 100%
+  );
+  box-shadow:
+    0 0 12px rgb(200 164 92 / 0.65),
+    2px 0 6px rgb(255 255 255 / 0.45);
 }
 
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__reverse,
+.signature-flipbook[data-phase="cancelling"] .signature-flipbook__reverse,
 .signature-flipbook[data-phase="turning"] .signature-flipbook__reverse,
 .signature-flipbook[data-phase="arriving"] .signature-flipbook__reverse {
   visibility: visible;
@@ -291,6 +368,7 @@
 }
 
 .signature-flipbook[data-phase="dragging"] .signature-flipbook__hint,
+.signature-flipbook[data-phase="cancelling"] .signature-flipbook__hint,
 .signature-flipbook[data-phase="turning"] .signature-flipbook__hint,
 .signature-flipbook[data-phase="arriving"] .signature-flipbook__hint {
   opacity: 0;
@@ -510,13 +588,20 @@
     display: none;
   }
 
+  .signature-flipbook__crease-overlay,
+  .signature-flipbook__edge-light {
+    display: none !important;
+  }
+
   .signature-flipbook[data-phase="dragging"] .signature-flipbook__stage,
+  .signature-flipbook[data-phase="cancelling"] .signature-flipbook__stage,
   .signature-flipbook[data-phase="turning"] .signature-flipbook__stage,
   .signature-flipbook[data-phase="arriving"] .signature-flipbook__stage {
     perspective: none;
   }
 
   .signature-flipbook[data-phase="dragging"] .signature-flipbook__page,
+  .signature-flipbook[data-phase="cancelling"] .signature-flipbook__page,
   .signature-flipbook[data-phase="turning"] .signature-flipbook__page,
   .signature-flipbook[data-phase="arriving"] .signature-flipbook__page {
     box-shadow: none;

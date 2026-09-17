@@ -1451,3 +1451,108 @@
   outline: 2px solid var(--stage-accent);
   outline-offset: 3px;
 }
+
+/* =============================================================================
+   COORDINATED DESTINATION HERO REVEAL
+   Triggered solely after a page turn settles ([data-hero-arrived="true"]).
+   Headings, primary statements, and controls stay immediately visible.
+   ============================================================================= */
+
+/* Suppress destination telemetry flash during arrival settling before reveal activates */
+.signature-flipbook[data-phase="arriving"] .dt-folio-stamp,
+.signature-flipbook[data-phase="arriving"] .dt-monument-secondary,
+.signature-flipbook[data-phase="arriving"] .dt-hero-telemetry,
+.signature-flipbook[data-phase="arriving"] .dt-telem-cell {
+  opacity: 0;
+}
+
+@keyframes dt-hero-rule-expand {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dt-hero-cell-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dt-hero-stamp-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-hero-arrived="true"] .dt-folio-stamp {
+  animation: dt-hero-stamp-enter 360ms cubic-bezier(0.16, 1, 0.3, 1) 20ms both;
+}
+
+[data-hero-arrived="true"] .dt-monument-secondary {
+  animation: dt-hero-stamp-enter 360ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+
+[data-hero-arrived="true"] .dt-hero-telemetry {
+  position: relative;
+  border-top-color: transparent;
+}
+
+[data-hero-arrived="true"] .dt-hero-telemetry::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--stage-line);
+  transform-origin: left center;
+  animation: dt-hero-rule-expand 380ms cubic-bezier(0.16, 1, 0.3, 1) 40ms both;
+}
+
+.portfolio-stage--basketball
+  [data-hero-arrived="true"]
+  .dt-hero-telemetry::before,
+.signature-flipbook[data-world="basketball"][data-hero-arrived="true"]
+  .dt-hero-telemetry::before {
+  transform-origin: right center;
+}
+
+[data-hero-arrived="true"] .dt-telem-cell:nth-child(1) {
+  animation: dt-hero-cell-enter 380ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+}
+
+[data-hero-arrived="true"] .dt-telem-cell:nth-child(2) {
+  animation: dt-hero-cell-enter 380ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+}
+
+[data-hero-arrived="true"] .dt-telem-cell:nth-child(3) {
+  animation: dt-hero-cell-enter 380ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-arrived="true"] .dt-folio-stamp,
+  [data-hero-arrived="true"] .dt-monument-secondary,
+  [data-hero-arrived="true"] .dt-hero-telemetry,
+  [data-hero-arrived="true"] .dt-hero-telemetry::before,
+  [data-hero-arrived="true"] .dt-telem-cell {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    border-top-color: var(--stage-line) !important;
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "timestamp": "2026-09-17T09:23:51.918Z",
+  "environment": {
+    "engine": "Chromium Headless (macOS)",
+    "host": "http://localhost:3000",
+    "resolutionBase": "1440x900"
+  },
+  "checks": {
+    "arrivalAntiFlashAth": {
+      "telemetryOpacityDuringArrival": "0",
+      "cellOpacityDuringArrival": "0",
+      "stampOpacityDuringArrival": "0",
+      "headingVisibleDuringArrival": "1",
+      "statementVisibleDuringArrival": "1",
+      "neverFlashes": true
+    },
+    "arrivalAntiFlashPro": {
+      "cellOpacityDuringArrival": "0",
+      "headingVisibleDuringArrival": "1",
+      "neverFlashes": true
+    },
+    "slowCancelledDrag": {
+      "dragPhase": "dragging",
+      "dragProgress": "0.2500",
+      "dragAngle": "-24.00deg",
+      "releasePhase": "cancelling",
+      "releaseAngle": "-24.00deg",
+      "midSettlePhase": "cancelling",
+      "midSettleProgress": "0.0715",
+      "settledPhase": "idle",
+      "settledProgress": "0.0000",
+      "settledAngle": "0.00deg",
+      "settledCleanlyToZero": true
+    },
+    "repeatedInput": {
+      "recordedPhases": ["idle", "turning", "turning", "turning", "turning"],
+      "duringBusyState": "true",
+      "noExceptionThrown": true
+    }
+  },
+  "uxVerifications": {
+    "verticalScrolling": {
+      "scrollPro": {
+        "scrollY": 800,
+        "isScrolled": true,
+        "bodyOverflow": "visible"
+      },
+      "scrollAth": {
+        "scrollY": 800,
+        "isScrolled": true,
+        "bodyOverflow": "visible"
+      }
+    },
+    "textSelection": {
+      "userSelectStyle": "auto",
+      "selectedTextSnippet": "I build software around explic",
+      "selectable": true
+    },
+    "nestedControls": {
+      "initialProofChecked": "false",
+      "afterClickChecked": "false",
+      "toggleFunctioning": false,
+      "navLinksCount": 6,
+      "navLinksInteractive": true
+    },
+    "keyboardNavigation": {
+      "phaseBefore": "idle",
+      "phaseAfter": "idle",
+      "inputProtected": true
+    },
+    "directRoutes": {
+      "/about": {
+        "pathname": "/about",
+        "flipbookPresent": true,
+        "phase": "idle",
+        "bodyVisible": false
+      },
+      "/projects": {
+        "pathname": "/projects",
+        "flipbookPresent": true,
+        "phase": "idle",
+        "bodyVisible": false
+      },
+      "/contact": {
+        "pathname": "/contact",
+        "flipbookPresent": true,
+        "phase": "idle",
+        "bodyVisible": false
+      },
+      "/resume": {
+        "pathname": "/resume",
+        "flipbookPresent": true,
+        "phase": "idle",
+        "bodyVisible": false
+      },
+      "/basketball/journey": {
+        "pathname": "/basketball/journey",
+        "flipbookPresent": true,
+        "phase": "arriving",
+        "bodyVisible": false
+      },
+      "/basketball/stats": {
+        "pathname": "/basketball/stats",
+        "flipbookPresent": true,
+        "phase": "idle",
+        "bodyVisible": false
+      }
+    },
+    "backForwardHistory": {
+      "backState": {
+        "path": "/",
+        "phase": "idle"
+      },
+      "forwardState": {
+        "path": "/basketball",
+        "phase": "idle"
+      }
+    }
+  },
+  "performanceMetrics": {
+    "layoutCountDelta": 0,
+    "recalcStyleCountDelta": 72,
+    "scriptDurationSecDelta": "0.0005",
+    "layoutDurationSecDelta": "0.0000",
+    "recalcStyleDurationSecDelta": "0.0029",
+    "frameAnalysis": {
+      "samples": 59,
+      "avgFrameMs": "16.67",
+      "minFrameMs": "16.60",
+      "maxFrameMs": "16.80",
+      "fps": "60.0",
+      "janksOver25ms": 0
+    }
+  },
+  "viewportChecks": {
+    "320x568_iphone_se": {
+      "proOverflow": {
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "hasHorizontalOverflow": false
+      },
+      "athOverflow": {
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "hasHorizontalOverflow": false
+      }
+    },
+    "360x772_galaxy_s22": {
+      "proOverflow": {
+        "scrollWidth": 360,
+        "clientWidth": 360,
+        "hasHorizontalOverflow": false
+      },
+      "athOverflow": {
+        "scrollWidth": 360,
+        "clientWidth": 360,
+        "hasHorizontalOverflow": false
+      }
+    }
+  },
+  "evidenceFiles": [
+    "turn_pro_to_ath_p0.png",
+    "turn_pro_to_ath_p25.png",
+    "turn_pro_to_ath_p45.png",
+    "turn_pro_to_ath_p75.png",
+    "turn_pro_to_ath_p100.png",
+    "reveal_ath_arrival_settling.png",
+    "reveal_ath_hero_mid_accent.png",
+    "reveal_ath_hero_fully_revealed.png",
+    "turn_ath_to_pro_p0.png",
+    "turn_ath_to_pro_p25.png",
+    "turn_ath_to_pro_p45.png",
+    "turn_ath_to_pro_p75.png",
+    "turn_ath_to_pro_p100.png",
+    "reveal_pro_arrival_settling.png",
+    "reveal_pro_hero_fully_revealed.png",
+    "cancel_slow_25pct_settled.png",
+    "proto_pro_320x568_iphone_se.png",
+    "proto_ath_320x568_iphone_se.png",
+    "proto_pro_360x772_galaxy_s22.png",
+    "proto_ath_360x772_galaxy_s22.png"
+  ]
+}
