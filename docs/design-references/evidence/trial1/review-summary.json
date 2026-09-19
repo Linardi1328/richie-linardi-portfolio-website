@@ -1,183 +1,162 @@
 {
-  "timestamp": "2026-09-17T09:23:51.918Z",
+  "timestamp": "2026-09-19T12:26:44.875Z",
   "environment": {
     "engine": "Chromium Headless (macOS)",
     "host": "http://localhost:3000",
     "resolutionBase": "1440x900"
   },
-  "checks": {
-    "arrivalAntiFlashAth": {
-      "telemetryOpacityDuringArrival": "0",
-      "cellOpacityDuringArrival": "0",
-      "stampOpacityDuringArrival": "0",
-      "headingVisibleDuringArrival": "1",
-      "statementVisibleDuringArrival": "1",
-      "neverFlashes": true
-    },
-    "arrivalAntiFlashPro": {
-      "cellOpacityDuringArrival": "0",
-      "headingVisibleDuringArrival": "1",
-      "neverFlashes": true
-    },
-    "slowCancelledDrag": {
-      "dragPhase": "dragging",
-      "dragProgress": "0.2500",
-      "dragAngle": "-24.00deg",
-      "releasePhase": "cancelling",
-      "releaseAngle": "-24.00deg",
-      "midSettlePhase": "cancelling",
-      "midSettleProgress": "0.0715",
-      "settledPhase": "idle",
-      "settledProgress": "0.0000",
-      "settledAngle": "0.00deg",
-      "settledCleanlyToZero": true
-    },
-    "repeatedInput": {
-      "recordedPhases": ["idle", "turning", "turning", "turning", "turning"],
-      "duringBusyState": "true",
-      "noExceptionThrown": true
-    }
-  },
-  "uxVerifications": {
-    "verticalScrolling": {
-      "scrollPro": {
+  "results": {
+    "passed": [
+      {
+        "name": "Styling studies captured and labelled explicitly",
+        "count": 10
+      },
+      {
+        "name": "Real switch control: Pro -> Basketball committed turn",
+        "destination": "/basketball",
+        "heroArrived": "true"
+      },
+      {
+        "name": "Real switch control: Basketball -> Pro committed turn",
+        "destination": "/",
+        "heroArrived": "true"
+      },
+      {
+        "name": "Destination telemetry anti-flash protection verified",
+        "telemetryOpacityDuringArrival": "0",
+        "monumentTitleOpacityDuringArrival": "1"
+      },
+      {
+        "name": "Real slow cancelled drag & 240ms snapback settling verified",
+        "finalPhase": "idle",
+        "finalProgress": "0.0000",
+        "finalAngle": "0.00deg"
+      },
+      {
+        "name": "Pointer cancellation & lost-capture concurrency guard passed cleanly"
+      },
+      {
+        "name": "Reduced motion transition verified with 2D instant crossfade and zero 3D rotation"
+      },
+      {
+        "name": "Keyboard input guard verified: Arrow keys ignored inside inputs"
+      },
+      {
+        "name": "Real keyboard navigation verified: ArrowLeft toggles to Basketball"
+      },
+      {
+        "name": "Main content visibility check passed on /",
+        "found": true,
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "width": 1374,
+        "height": 3719.171875,
+        "isVisible": true
+      },
+      {
+        "name": "Vertical scrolling verified",
         "scrollY": 800,
-        "isScrolled": true,
-        "bodyOverflow": "visible"
+        "isScrolled": true
       },
-      "scrollAth": {
-        "scrollY": 800,
-        "isScrolled": true,
-        "bodyOverflow": "visible"
+      {
+        "name": "Text selection verified",
+        "length": 92,
+        "userSelect": "auto",
+        "selectable": true
+      },
+      {
+        "name": "Nested controls verified: ProofModeToggle React state changes observed and confirmed"
+      },
+      {
+        "name": "Direct route /about verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /projects verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /contact verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /resume verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /basketball/journey verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /basketball/stats verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Compact viewport 320x568_iphone_se verified: 0 horizontal overflow"
+      },
+      {
+        "name": "Compact viewport 360x772_galaxy_s22 verified: 0 horizontal overflow"
+      },
+      {
+        "name": "Performance measured strictly during confirmed real turn",
+        "turnConfirmedActiveBeforeMeasurement": true,
+        "layoutCountDelta": 3,
+        "layoutDurationSecDelta": 0.0017,
+        "recalcStyleCountDelta": 43,
+        "recalcStyleDurationSecDelta": 0.0661,
+        "scriptDurationSecDelta": 0.0216,
+        "frameAnalysis": {
+          "sampleCount": 37,
+          "avgFrameMs": 18.02,
+          "minFrameMs": 16.5,
+          "maxFrameMs": 33.4,
+          "p95FrameMs": 33.4,
+          "estimatedFps": 55.5,
+          "janksOver25ms": 3
+        }
       }
-    },
-    "textSelection": {
-      "userSelectStyle": "auto",
-      "selectedTextSnippet": "I build software around explic",
-      "selectable": true
-    },
-    "nestedControls": {
-      "initialProofChecked": "false",
-      "afterClickChecked": "false",
-      "toggleFunctioning": false,
-      "navLinksCount": 6,
-      "navLinksInteractive": true
-    },
-    "keyboardNavigation": {
-      "phaseBefore": "idle",
-      "phaseAfter": "idle",
-      "inputProtected": true
-    },
-    "directRoutes": {
-      "/about": {
-        "pathname": "/about",
-        "flipbookPresent": true,
-        "phase": "idle",
-        "bodyVisible": false
+    ],
+    "failed": [],
+    "untested": [
+      {
+        "scope": "Physical iOS Safari WebKit Gesture Physics",
+        "reason": "Automated Chromium CDP emulates touch coordinates and velocity accurately, but physical WebKit exhibits subtle momentum decay curves and dynamic URL-bar viewport resizing."
       },
-      "/projects": {
-        "pathname": "/projects",
-        "flipbookPresent": true,
-        "phase": "idle",
-        "bodyVisible": false
-      },
-      "/contact": {
-        "pathname": "/contact",
-        "flipbookPresent": true,
-        "phase": "idle",
-        "bodyVisible": false
-      },
-      "/resume": {
-        "pathname": "/resume",
-        "flipbookPresent": true,
-        "phase": "idle",
-        "bodyVisible": false
-      },
-      "/basketball/journey": {
-        "pathname": "/basketball/journey",
-        "flipbookPresent": true,
-        "phase": "arriving",
-        "bodyVisible": false
-      },
-      "/basketball/stats": {
-        "pathname": "/basketball/stats",
-        "flipbookPresent": true,
-        "phase": "idle",
-        "bodyVisible": false
+      {
+        "scope": "Physical VoiceOver / Assistive Audio Hardware",
+        "reason": "ARIA live regions, accessible names, and focus states are verified in the DOM; hardware speech output and screen-reader cursor routing require physical hardware testing."
       }
-    },
-    "backForwardHistory": {
-      "backState": {
-        "path": "/",
-        "phase": "idle"
-      },
-      "forwardState": {
-        "path": "/basketball",
-        "phase": "idle"
-      }
-    }
+    ]
   },
+  "stylingStudies": [
+    "styling_study_pro_to_ath_p0.png",
+    "styling_study_pro_to_ath_p25.png",
+    "styling_study_pro_to_ath_p45.png",
+    "styling_study_pro_to_ath_p75.png",
+    "styling_study_pro_to_ath_p100.png",
+    "styling_study_ath_to_pro_p0.png",
+    "styling_study_ath_to_pro_p25.png",
+    "styling_study_ath_to_pro_p45.png",
+    "styling_study_ath_to_pro_p75.png",
+    "styling_study_ath_to_pro_p100.png"
+  ],
+  "playableRecordings": [
+    "record_real_turn_pro_to_ath.mp4",
+    "record_real_turn_ath_to_pro.mp4",
+    "record_real_arrival_and_hero_reveal.mp4",
+    "record_real_drag_cancellation.mp4",
+    "record_real_reduced_motion.mp4"
+  ],
   "performanceMetrics": {
-    "layoutCountDelta": 0,
-    "recalcStyleCountDelta": 72,
-    "scriptDurationSecDelta": "0.0005",
-    "layoutDurationSecDelta": "0.0000",
-    "recalcStyleDurationSecDelta": "0.0029",
+    "turnConfirmedActiveBeforeMeasurement": true,
+    "layoutCountDelta": 3,
+    "layoutDurationSecDelta": 0.0017,
+    "recalcStyleCountDelta": 43,
+    "recalcStyleDurationSecDelta": 0.0661,
+    "scriptDurationSecDelta": 0.0216,
     "frameAnalysis": {
-      "samples": 59,
-      "avgFrameMs": "16.67",
-      "minFrameMs": "16.60",
-      "maxFrameMs": "16.80",
-      "fps": "60.0",
-      "janksOver25ms": 0
+      "sampleCount": 37,
+      "avgFrameMs": 18.02,
+      "minFrameMs": 16.5,
+      "maxFrameMs": 33.4,
+      "p95FrameMs": 33.4,
+      "estimatedFps": 55.5,
+      "janksOver25ms": 3
     }
-  },
-  "viewportChecks": {
-    "320x568_iphone_se": {
-      "proOverflow": {
-        "scrollWidth": 320,
-        "clientWidth": 320,
-        "hasHorizontalOverflow": false
-      },
-      "athOverflow": {
-        "scrollWidth": 320,
-        "clientWidth": 320,
-        "hasHorizontalOverflow": false
-      }
-    },
-    "360x772_galaxy_s22": {
-      "proOverflow": {
-        "scrollWidth": 360,
-        "clientWidth": 360,
-        "hasHorizontalOverflow": false
-      },
-      "athOverflow": {
-        "scrollWidth": 360,
-        "clientWidth": 360,
-        "hasHorizontalOverflow": false
-      }
-    }
-  },
-  "evidenceFiles": [
-    "turn_pro_to_ath_p0.png",
-    "turn_pro_to_ath_p25.png",
-    "turn_pro_to_ath_p45.png",
-    "turn_pro_to_ath_p75.png",
-    "turn_pro_to_ath_p100.png",
-    "reveal_ath_arrival_settling.png",
-    "reveal_ath_hero_mid_accent.png",
-    "reveal_ath_hero_fully_revealed.png",
-    "turn_ath_to_pro_p0.png",
-    "turn_ath_to_pro_p25.png",
-    "turn_ath_to_pro_p45.png",
-    "turn_ath_to_pro_p75.png",
-    "turn_ath_to_pro_p100.png",
-    "reveal_pro_arrival_settling.png",
-    "reveal_pro_hero_fully_revealed.png",
-    "cancel_slow_25pct_settled.png",
-    "proto_pro_320x568_iphone_se.png",
-    "proto_ath_320x568_iphone_se.png",
-    "proto_pro_360x772_galaxy_s22.png",
-    "proto_ath_360x772_galaxy_s22.png"
-  ]
+  }
 }

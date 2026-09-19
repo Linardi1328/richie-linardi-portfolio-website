@@ -215,11 +215,12 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
 
   const startTurn = useCallback(
     (requestedDestination?: string, motion: TurnMotion = {}) => {
-      if (busyRef.current) {
+      if (phase === "turning" || phase === "arriving") {
         return;
       }
 
       busyRef.current = true;
+      pointerRef.current = null;
       clearAllAnimations();
       syncGeometry();
 
@@ -308,6 +309,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         event.metaKey ||
         event.shiftKey ||
         isInteractiveTarget(event.target) ||
+        isInteractiveTarget(document.activeElement) ||
         event.key !== keyboardKey
       ) {
         return;
@@ -505,7 +507,13 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
   }
 
   function startCancelSettling(fromProgress: number) {
-    if (fromProgress <= 0) {
+    if (phase === "turning" || phase === "arriving") {
+      return;
+    }
+
+    clearAllAnimations();
+
+    if (fromProgress <= 0.001) {
       setProgress(0);
       setPhase("idle");
       busyRef.current = false;
@@ -532,6 +540,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         setPhase("idle");
         busyRef.current = false;
         pointerRef.current = null;
+        cancelRafRef.current = null;
       }
     }
 
@@ -545,6 +554,15 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       return;
     }
 
+    if (phase === "turning" || phase === "arriving") {
+      pointerRef.current = null;
+      return;
+    }
+
+    // Immediately clear pointer reference before releasePointerCapture
+    // to prevent lostpointercapture or pointercancel from triggering concurrent cancellation.
+    pointerRef.current = null;
+
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       try {
         event.currentTarget.releasePointerCapture(event.pointerId);
@@ -554,7 +572,6 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     }
 
     if (!pointer.dragging) {
-      pointerRef.current = null;
       return;
     }
 
@@ -581,6 +598,13 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       return;
     }
 
+    if (phase === "turning" || phase === "arriving") {
+      pointerRef.current = null;
+      return;
+    }
+
+    pointerRef.current = null;
+
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       try {
         event.currentTarget.releasePointerCapture(event.pointerId);
@@ -592,9 +616,9 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     if (pointer.dragging) {
       startCancelSettling(pointer.progress);
     } else {
-      pointerRef.current = null;
       setProgress(0);
       setPhase("idle");
+      busyRef.current = false;
     }
   }
 
