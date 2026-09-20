@@ -20,12 +20,12 @@ Owner
 ## Required workflow for visual implementation
 
 1. Read the approved interface reference under `docs/design-references/current/`.
-2. Read `docs/FRONTEND_REFERENCE_RESEARCH.md` for secondary interaction/design references.
+2. Read `docs/FRONTEND_REFERENCE_RESEARCH.md` for secondary interaction/design references and `docs/VISUAL_EFFECTS_BRIEF.md` for the signature-motion trial and acceptance criteria.
 3. Read the typed content layer before rendering project or achievement claims.
 4. Produce or review an implementation plan before broad page changes.
 5. Implement one bounded interface or system slice at a time.
 6. Launch the local application and verify it in a real browser.
-7. Capture screenshots or visual artifacts at representative target sizes.
+7. Capture screenshots or visual artifacts at representative target sizes. For motion changes, also capture comparable before/after recordings, cancelled gestures and reduced-motion behavior; still images alone do not verify timing or continuity.
 8. Compare the implementation against the approved reference and document deliberate differences.
 9. Run repository validation.
 10. Submit through a PR for owner review; do not bypass CI or owner acceptance.

@@ -20,6 +20,20 @@ One journey. Two sides. The same discipline.
 - **Basketball face:** journey, achievements, statistics, photography/media proof, Indonesia representation, and athlete identity.
 - **Signature mechanic:** the visible page behaves as one physical digital object whose front and reverse faces can be flipped while normal routes remain shareable and accessible.
 
+## Visual Design Brief — Signature Motion
+
+The visual target is an authored, high-impact digital portfolio: oversized editorial typography, convincing page depth, deliberate lighting, and a clearly visible transition between professional and basketball identities. Motion should make the two-sided object tangible and the content memorable.
+
+- **Professional face:** deep navy, ivory typography, precise grids and restrained gold detailing; project imagery and evidence lead the composition.
+- **Basketball face:** black/gold, bold athletic typography, original photography and court geometry; the Proof Gallery remains the visual anchor.
+- **Signature effect:** swipe/drag-driven page turning with progressive shadow, page-edge highlight and a coherent destination reveal. Preserve normal links, keyboard controls, vertical scrolling and reduced-motion navigation.
+- **Supporting effects:** a short coordinated hero reveal, focused project-card depth and editorial media reveals. Give each viewport one dominant motion event.
+- **Implementation:** Antigravity owns frontend changes. Refine the existing flipbook and shared tokens before adding an animation dependency.
+
+The first trial is a **bounded refinement of the existing flipbook**, followed by one hero arrival treatment. This is a design target, not a claim that the new effects are implemented or visually accepted. Read [VISUAL_EFFECTS_BRIEF.md](./docs/VISUAL_EFFECTS_BRIEF.md) for timing targets, reference provenance, the experiment scope and acceptance criteria. The existing production roadmap remains the release sequence; an experimental branch does not establish completion of any production phase.
+
+Approved references retain their authority. Vacant reference slots `01` and `05` remain vacant until replacements receive owner visual approval. The motion trial can use the existing flipbook reference and current content without declaring a replacement homepage approved.
+
 ## Tech Stack
 
 - Next.js App Router
