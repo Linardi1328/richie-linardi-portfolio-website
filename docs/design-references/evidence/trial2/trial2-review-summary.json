@@ -1,0 +1,101 @@
+{
+  "trial": 2,
+  "timestamp": "2026-09-20T18:17:37.313Z",
+  "environment": {
+    "engine": "Chromium Headless (macOS)",
+    "host": "http://localhost:3000",
+    "resolutionBase": "1440x900"
+  },
+  "results": {
+    "passed": [
+      {
+        "name": "Professional environmental landscape contract verified",
+        "proLandscapeInfo": {
+          "exists": true,
+          "ariaHidden": "true",
+          "pointerEvents": "none",
+          "hasAtmosphere": true,
+          "hasGrid": true,
+          "hasContours": true,
+          "hasCalipers": true
+        }
+      },
+      {
+        "name": "Athlete environmental landscape contract verified",
+        "athLandscapeInfo": {
+          "exists": true,
+          "ariaHidden": "true",
+          "pointerEvents": "none",
+          "hasAtmosphere": true,
+          "hasRafters": true,
+          "hasCourt": true,
+          "hasScoreboard": true
+        }
+      },
+      {
+        "name": "Header HUD and UI hierarchy enhancements verified",
+        "hudInfo": {
+          "barExists": true,
+          "tagText": "ATH // 13",
+          "telemExists": true
+        }
+      },
+      {
+        "name": "Desktop and mobile screenshots captured successfully"
+      },
+      {
+        "name": "Desktop walkthrough recorded: trial2_desktop_walkthrough_1440.mp4"
+      },
+      {
+        "name": "Android walkthrough recorded: trial2_android_walkthrough_390.mp4"
+      },
+      {
+        "name": "Real switch control: Ath -> Pro committed turn"
+      },
+      {
+        "name": "Real slow cancelled drag & snapback verified"
+      },
+      {
+        "name": "Reduced motion transition verified with flat crossfade"
+      },
+      {
+        "name": "Real keyboard navigation verified: ArrowLeft toggles to Basketball"
+      },
+      {
+        "name": "Android touch swipe verified at 390x844"
+      },
+      {
+        "name": "Android touch swipe verified at 360x772"
+      },
+      {
+        "name": "Android touch swipe verified at 320x568"
+      },
+      {
+        "name": "Touches inside 22px browser edge exclusion zone are safely ignored"
+      },
+      {
+        "name": "Zero horizontal overflow verified across 320, 360, 390, 768, 1024, 1440"
+      },
+      {
+        "name": "Performance metrics confirmed under confirmed real turn"
+      }
+    ],
+    "failed": []
+  },
+  "screenshots": [
+    "trial2_professional_desktop_1440.png",
+    "trial2_athlete_desktop_1440.png",
+    "trial2_professional_mobile_390.png",
+    "trial2_athlete_mobile_390.png"
+  ],
+  "recordings": [
+    "trial2_desktop_walkthrough_1440.mp4",
+    "trial2_android_walkthrough_390.mp4"
+  ],
+  "performanceMetrics": {
+    "sampleCount": 34,
+    "avgFrameMs": 16.67,
+    "estimatedFps": 60,
+    "janksOver25ms": 0
+  }
+}

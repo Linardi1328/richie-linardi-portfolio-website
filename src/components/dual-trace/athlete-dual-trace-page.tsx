@@ -11,6 +11,7 @@ import {
 import { useProofMode } from "./proof-mode-context";
 import { DualTraceEngine } from "./dual-trace-engine";
 import { ReverseBleed } from "./reverse-bleed";
+import { EnvironmentalLandscape } from "@/components/effects/environmental-landscape";
 
 export function AthleteDualTracePage() {
   const { isProofMode } = useProofMode();
@@ -25,6 +26,9 @@ export function AthleteDualTracePage() {
         isProofMode ? "dual-trace-page--proof" : ""
       }`}
     >
+      {/* Environmental Landscape Backdrop */}
+      <EnvironmentalLandscape world="basketball" />
+
       {/* Visual Trace Engine */}
       <DualTraceEngine world="basketball" />
 

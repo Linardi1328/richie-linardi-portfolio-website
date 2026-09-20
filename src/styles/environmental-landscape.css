@@ -1,0 +1,279 @@
+/* =============================================================================
+   ENVIRONMENTAL LANDSCAPE STYLESHEET
+   Layered editorial/technical terrain for Professional world
+   Sports-performance arena/court environment for Athlete world
+   Scroll-linked parallax, mobile containment, zero touch interference
+   ============================================================================= */
+
+.environmental-landscape {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none !important;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+  contain: paint;
+}
+
+/* Parallax Layer Mechanics */
+.env-parallax--slow {
+  transform: translate3d(0, var(--env-parallax-slow, 0px), 0);
+  will-change: transform;
+}
+
+.env-parallax--mid {
+  transform: translate3d(0, var(--env-parallax-mid, 0px), 0);
+  will-change: transform;
+}
+
+.env-parallax--fore {
+  transform: translate3d(0, var(--env-parallax-fore, 0px), 0);
+  will-change: transform;
+}
+
+/* -----------------------------------------------------------------------------
+   PROFESSIONAL ENVIRONMENT
+   Ivory, Graphite, Cobalt, Cyan, Restrained Gold
+   ----------------------------------------------------------------------------- */
+.environmental-landscape--professional {
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(23, 76, 126, 0.06),
+      transparent 65%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(184, 148, 77, 0.04),
+      transparent 40%
+    ),
+    linear-gradient(180deg, #f7f8fa 0%, #edf1f7 35%, #f4f6fa 70%, #f7f8fa 100%);
+}
+
+.env-pro {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.env-pro__atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 18% 10%,
+      rgba(2, 132, 199, 0.05),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 82% 30%,
+      rgba(184, 148, 77, 0.04),
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(247, 248, 250, 0.2) 0%,
+      rgba(247, 248, 250, 0.85) 100%
+    );
+  pointer-events: none;
+}
+
+.env-pro__grid-layer,
+.env-pro__contour-layer,
+.env-pro__caliper-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.env-pro__svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.env-pro__datum-text {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.env-pro__contour-text {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* -----------------------------------------------------------------------------
+   ATHLETE ENVIRONMENT
+   Deep Navy, Cyan Court Geometry, Amber/Gold Highlights, Scoreboard Telemetry
+   ----------------------------------------------------------------------------- */
+.environmental-landscape--basketball {
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(6, 182, 212, 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 80% 25%,
+      rgba(200, 164, 92, 0.08),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(220, 38, 38, 0.05),
+      transparent 40%
+    ),
+    linear-gradient(180deg, #06080e 0%, #0a0e1a 30%, #080c16 70%, #05060a 100%);
+}
+
+.env-ath {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.env-ath__atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(6, 182, 212, 0.08),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 35%,
+      rgba(200, 164, 92, 0.07),
+      transparent 45%
+    ),
+    linear-gradient(180deg, transparent 0%, rgba(6, 8, 14, 0.75) 100%);
+  pointer-events: none;
+}
+
+.env-ath__rafter-layer,
+.env-ath__court-layer,
+.env-ath__scoreboard-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.env-ath__svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.env-ath__telemetry-text {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.env-ath__scoreboard-text {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.env-ath__scoreboard-subtext {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.env-ath__beacon {
+  animation: env-beacon-pulse 5s ease-in-out infinite alternate;
+}
+
+@keyframes env-beacon-pulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 0.95;
+    transform: scale(1.15);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   REDUCED MOTION MODE
+   Static backgrounds, zero parallax translation, flat transition
+   ----------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .env-parallax--slow,
+  .env-parallax--mid,
+  .env-parallax--fore {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  .env-ath__beacon {
+    animation: none !important;
+    opacity: 0.7 !important;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   MOBILE & COMPACT RESPONSIVENESS (<768px and <480px)
+   Simplified layers, static rendering, zero horizontal overflow
+   ----------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .env-parallax--slow,
+  .env-parallax--mid,
+  .env-parallax--fore {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Simplify blueprint and rafter complexity on small screens */
+  .env-pro__datum-text,
+  .env-pro__contour-text {
+    display: none;
+  }
+
+  .env-ath__telemetry-text,
+  .env-ath__scoreboard-subtext {
+    display: none;
+  }
+
+  .env-pro__caliper-layer,
+  .env-ath__scoreboard-layer {
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .env-pro__contour-layer {
+    opacity: 0.5;
+  }
+
+  .env-ath__court-layer {
+    opacity: 0.6;
+  }
+}
