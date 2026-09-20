@@ -1,0 +1,237 @@
+{
+  "timestamp": "2026-09-20T19:01:53.411Z",
+  "environment": {
+    "engine": "Chromium Headless (macOS)",
+    "host": "http://localhost:3000",
+    "targetBranch": "prototype/visual-effects-full-site"
+  },
+  "results": {
+    "passed": [
+      {
+        "name": "Route verified: / (Professional Home)"
+      },
+      {
+        "name": "Route verified: /about (About Identity)"
+      },
+      {
+        "name": "Route verified: /projects (Projects Overview)"
+      },
+      {
+        "name": "Route verified: /projects/spy-market-agent (SPY Market Agent Case Study)"
+      },
+      {
+        "name": "Route verified: /experience (Professional Experience)"
+      },
+      {
+        "name": "Route verified: /education (Monash Education)"
+      },
+      {
+        "name": "Route verified: /resume (Technical Resume)"
+      },
+      {
+        "name": "Route verified: /contact (Contact Opportunities)"
+      },
+      {
+        "name": "Route verified: /design-system (Design System Tokens)"
+      },
+      {
+        "name": "Route verified: /privacy (Privacy Policy)"
+      },
+      {
+        "name": "Route verified: /terms (Terms of Service)"
+      },
+      {
+        "name": "Route verified: /cookies (Cookie Policy)"
+      },
+      {
+        "name": "Route verified: /refunds (Payments & Refunds)"
+      },
+      {
+        "name": "Route verified: /basketball (Athlete Home)"
+      },
+      {
+        "name": "Route verified: /basketball/stats (Basketball Statistics)"
+      },
+      {
+        "name": "Route verified: /basketball/achievements (Basketball Achievements)"
+      },
+      {
+        "name": "Route verified: /basketball/journey (Basketball Journey)"
+      },
+      {
+        "name": "Route verified: /basketball/gallery (Basketball Gallery)"
+      },
+      {
+        "name": "Route verified: /basketball/media (Basketball Press & Media)"
+      },
+      {
+        "name": "Full visual evidence suite captured and archived"
+      },
+      {
+        "name": "Video walkthrough recorded and encoded as playable MP4"
+      },
+      {
+        "name": "Touch swipe gesture commits page turn to basketball world on mobile"
+      },
+      {
+        "name": "Prefers-reduced-motion disables parallax animations properly"
+      }
+    ],
+    "failed": []
+  },
+  "routesChecked": [
+    {
+      "path": "/",
+      "name": "Professional Home",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/about",
+      "name": "About Identity",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/projects",
+      "name": "Projects Overview",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/projects/spy-market-agent",
+      "name": "SPY Market Agent Case Study",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/experience",
+      "name": "Professional Experience",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/education",
+      "name": "Monash Education",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/resume",
+      "name": "Technical Resume",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/contact",
+      "name": "Contact Opportunities",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/design-system",
+      "name": "Design System Tokens",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/privacy",
+      "name": "Privacy Policy",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/terms",
+      "name": "Terms of Service",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/cookies",
+      "name": "Cookie Policy",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/refunds",
+      "name": "Payments & Refunds",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/basketball",
+      "name": "Athlete Home",
+      "world": "basketball",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/basketball/stats",
+      "name": "Basketball Statistics",
+      "world": "basketball",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/basketball/achievements",
+      "name": "Basketball Achievements",
+      "world": "basketball",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/basketball/journey",
+      "name": "Basketball Journey",
+      "world": "basketball",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/basketball/gallery",
+      "name": "Basketball Gallery",
+      "world": "basketball",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/basketball/media",
+      "name": "Basketball Press & Media",
+      "world": "basketball",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    }
+  ],
+  "overflowAudit": {}
+}

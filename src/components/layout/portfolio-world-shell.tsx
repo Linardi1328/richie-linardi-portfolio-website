@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { PortfolioEffects } from "@/components/effects/portfolio-effects";
+import { EnvironmentalLandscape } from "@/components/effects/environmental-landscape";
 import { SignatureFlipbook } from "@/components/interaction/signature-flipbook";
 import { WorldNavigation } from "@/components/navigation/world-navigation";
 import { ProofModeProvider } from "@/components/dual-trace/proof-mode-context";
@@ -53,6 +54,11 @@ export function PortfolioWorldShell({
 
           <SignatureFlipbook world={world}>
             <div className="portfolio-page">
+              <EnvironmentalLandscape
+                world={world}
+                variant={dualTraceHome ? "hero" : "interior"}
+              />
+
               <div className="portfolio-page__chrome">
                 <WorldNavigation
                   dualTraceHome={dualTraceHome}

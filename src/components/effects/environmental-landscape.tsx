@@ -6,11 +6,13 @@ import { cn } from "@/lib/cn";
 
 interface EnvironmentalLandscapeProps {
   className?: string;
+  variant?: "hero" | "interior";
   world: PortfolioWorld;
 }
 
 export function EnvironmentalLandscape({
   className,
+  variant = "hero",
   world,
 }: EnvironmentalLandscapeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -43,6 +45,7 @@ export function EnvironmentalLandscape({
   }, []);
 
   const isPro = world === "professional";
+  const isInterior = variant === "interior";
 
   // Parallax offsets (restrained to prevent content decoupling)
   const pSlow = (scrollY * 0.025).toFixed(1);
@@ -55,6 +58,7 @@ export function EnvironmentalLandscape({
       className={cn(
         "environmental-landscape",
         `environmental-landscape--${world}`,
+        `environmental-landscape--${variant}`,
         className,
       )}
       ref={containerRef}
@@ -93,16 +97,33 @@ export function EnvironmentalLandscape({
                   <path
                     d="M 120 0 L 0 0 0 120"
                     fill="none"
-                    stroke="rgba(23, 76, 126, 0.07)"
+                    stroke={
+                      isInterior
+                        ? "rgba(23, 76, 126, 0.04)"
+                        : "rgba(23, 76, 126, 0.07)"
+                    }
                     strokeWidth="1"
                   />
                   <path
                     d="M 24 0 L 24 120 M 48 0 L 48 120 M 72 0 L 72 120 M 96 0 L 96 120 M 0 24 L 120 24 M 0 48 L 120 48 M 0 72 L 120 72 M 0 96 L 120 96"
                     fill="none"
-                    stroke="rgba(23, 76, 126, 0.025)"
+                    stroke={
+                      isInterior
+                        ? "rgba(23, 76, 126, 0.015)"
+                        : "rgba(23, 76, 126, 0.025)"
+                    }
                     strokeWidth="0.5"
                   />
-                  <circle cx="0" cy="0" r="2" fill="rgba(184, 148, 77, 0.35)" />
+                  <circle
+                    cx="0"
+                    cy="0"
+                    r="2"
+                    fill={
+                      isInterior
+                        ? "rgba(184, 148, 77, 0.18)"
+                        : "rgba(184, 148, 77, 0.35)"
+                    }
+                  />
                 </pattern>
                 <linearGradient
                   id="pro-contour-grad-1"
@@ -254,52 +275,54 @@ export function EnvironmentalLandscape({
             </svg>
           </div>
 
-          {/* Layer 3: Horizon Radial Calipers & Alignment Marks (Fore Parallax) */}
-          <div className="env-pro__caliper-layer env-parallax--fore">
-            <svg
-              className="env-pro__svg env-pro__svg--calipers"
-              viewBox="0 0 1440 1000"
-              fill="none"
-              preserveAspectRatio="xMidYMin slice"
-            >
-              {/* Radial Caliper Arc anchoring behind Hero monumental RBL */}
-              <circle
-                cx="720"
-                cy="280"
-                r="360"
-                stroke="rgba(23, 76, 126, 0.05)"
-                strokeWidth="1"
-                strokeDasharray="3 9"
-              />
-              <circle
-                cx="720"
-                cy="280"
-                r="480"
-                stroke="rgba(184, 148, 77, 0.04)"
-                strokeWidth="0.75"
-              />
+          {/* Layer 3: Horizon Radial Calipers & Alignment Marks (Fore Parallax, Hero only) */}
+          {!isInterior && (
+            <div className="env-pro__caliper-layer env-parallax--fore">
+              <svg
+                className="env-pro__svg env-pro__svg--calipers"
+                viewBox="0 0 1440 1000"
+                fill="none"
+                preserveAspectRatio="xMidYMin slice"
+              >
+                {/* Radial Caliper Arc anchoring behind Hero monumental RBL */}
+                <circle
+                  cx="720"
+                  cy="280"
+                  r="360"
+                  stroke="rgba(23, 76, 126, 0.05)"
+                  strokeWidth="1"
+                  strokeDasharray="3 9"
+                />
+                <circle
+                  cx="720"
+                  cy="280"
+                  r="480"
+                  stroke="rgba(184, 148, 77, 0.04)"
+                  strokeWidth="0.75"
+                />
 
-              {/* Caliper Compass Degree Ticks */}
-              <g className="env-pro__caliper-ticks">
-                <line
-                  x1="720"
-                  y1="260"
-                  x2="720"
-                  y2="300"
-                  stroke="rgba(2, 132, 199, 0.25)"
-                  strokeWidth="1"
-                />
-                <line
-                  x1="700"
-                  y1="280"
-                  x2="740"
-                  y2="280"
-                  stroke="rgba(2, 132, 199, 0.25)"
-                  strokeWidth="1"
-                />
-              </g>
-            </svg>
-          </div>
+                {/* Caliper Compass Degree Ticks */}
+                <g className="env-pro__caliper-ticks">
+                  <line
+                    x1="720"
+                    y1="260"
+                    x2="720"
+                    y2="300"
+                    stroke="rgba(2, 132, 199, 0.25)"
+                    strokeWidth="1"
+                  />
+                  <line
+                    x1="700"
+                    y1="280"
+                    x2="740"
+                    y2="280"
+                    stroke="rgba(2, 132, 199, 0.25)"
+                    strokeWidth="1"
+                  />
+                </g>
+              </svg>
+            </div>
+          )}
         </div>
       ) : (
         /* ===================================================================

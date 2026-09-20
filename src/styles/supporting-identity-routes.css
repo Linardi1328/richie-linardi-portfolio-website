@@ -150,9 +150,13 @@
   aspect-ratio: 4 / 5;
   min-height: 20rem;
   overflow: hidden;
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
-  box-shadow: 0 20px 50px rgb(7 17 31 / 8%);
+  border: 1px solid rgba(23, 76, 126, 0.18);
+  border-left: 3px solid var(--stage-accent);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 16px 44px rgba(7, 17, 31, 0.08),
+    0 0 0 1px rgba(184, 148, 77, 0.12);
+  backdrop-filter: blur(8px);
 }
 
 .identity-portrait__frame img {
@@ -219,9 +223,12 @@
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
-  box-shadow: 0 10px 30px rgb(7 17 31 / 4%);
+  border: 1px solid rgba(23, 76, 126, 0.18);
+  border-top: 3px solid #174c7e;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 36px rgba(7, 17, 31, 0.05);
+  backdrop-filter: blur(8px);
 }
 
 .about-bridge__table {
@@ -597,19 +604,27 @@
 }
 
 .experience-dna__card {
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(23, 76, 126, 0.14);
+  border-left: 3px solid #174c7e;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.88);
   padding: 1.5rem;
   display: grid;
   gap: 0.75rem;
+  box-shadow: 0 4px 14px rgba(7, 17, 31, 0.04);
+  backdrop-filter: blur(8px);
   transition:
+    transform var(--motion-fast) ease,
     border-color var(--motion-fast) ease,
     box-shadow var(--motion-fast) ease;
 }
 
 .experience-dna__card:hover {
-  border-color: var(--stage-accent);
-  box-shadow: 0 8px 24px rgb(7 17 31 / 5%);
+  transform: translateY(-2px);
+  border-color: rgba(23, 76, 126, 0.3);
+  box-shadow:
+    0 8px 24px rgba(7, 17, 31, 0.08),
+    0 0 0 1px rgba(184, 148, 77, 0.2);
 }
 
 .experience-dna__index {
@@ -682,17 +697,22 @@
 }
 
 .experience-dossier-card {
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
-  box-shadow: 0 12px 36px rgb(7 17 31 / 4%);
+  border: 1px solid rgba(23, 76, 126, 0.16);
+  border-left: 4px solid #174c7e;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 14px 40px rgba(7, 17, 31, 0.05);
+  backdrop-filter: blur(8px);
   transition:
     border-color var(--motion-fast) ease,
     box-shadow var(--motion-fast) ease;
 }
 
 .experience-dossier-card:hover {
-  border-color: var(--stage-accent);
-  box-shadow: 0 16px 48px rgb(7 17 31 / 7%);
+  border-color: rgba(23, 76, 126, 0.35);
+  box-shadow:
+    0 18px 52px rgba(7, 17, 31, 0.09),
+    0 0 0 1px rgba(184, 148, 77, 0.25);
 }
 
 .experience-dossier-card__header {
@@ -905,12 +925,15 @@
 }
 
 .education-degree-card {
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(23, 76, 126, 0.16);
+  border-left: 4px solid #174c7e;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.92);
   padding: clamp(1.75rem, 4vw, 3rem);
   display: grid;
   gap: 1.5rem;
-  box-shadow: 0 14px 42px rgb(7 17 31 / 5%);
+  box-shadow: 0 14px 42px rgba(7, 17, 31, 0.05);
+  backdrop-filter: blur(8px);
 }
 
 .education-degree-card__badge {
@@ -979,12 +1002,16 @@
 }
 
 .education-glance-card {
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(23, 76, 126, 0.16);
+  border-top: 3px solid var(--stage-accent);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
   padding: clamp(1.5rem, 3vw, 2.25rem);
   display: grid;
   gap: 1.35rem;
   align-self: start;
+  box-shadow: 0 10px 30px rgba(7, 17, 31, 0.04);
+  backdrop-filter: blur(8px);
 }
 
 .education-glance-card__title {
@@ -1037,19 +1064,27 @@
 }
 
 .education-foundation-card {
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(23, 76, 126, 0.14);
+  border-left: 3px solid #174c7e;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.88);
   padding: clamp(1.5rem, 3vw, 2.25rem);
   display: grid;
   gap: 0.85rem;
+  box-shadow: 0 4px 16px rgba(7, 17, 31, 0.04);
+  backdrop-filter: blur(8px);
   transition:
+    transform var(--motion-fast) ease,
     border-color var(--motion-fast) ease,
     box-shadow var(--motion-fast) ease;
 }
 
 .education-foundation-card:hover {
-  border-color: var(--stage-accent);
-  box-shadow: 0 10px 30px rgb(7 17 31 / 5%);
+  transform: translateY(-2px);
+  border-color: rgba(23, 76, 126, 0.3);
+  box-shadow:
+    0 10px 30px rgba(7, 17, 31, 0.08),
+    0 0 0 1px rgba(184, 148, 77, 0.2);
 }
 
 .education-foundation-card__index {
@@ -1086,19 +1121,27 @@
 }
 
 .education-progression-step {
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(23, 76, 126, 0.14);
+  border-left: 3px solid #174c7e;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.88);
   padding: clamp(1.5rem, 3vw, 2.25rem);
   display: grid;
   gap: 0.75rem;
+  box-shadow: 0 4px 16px rgba(7, 17, 31, 0.04);
+  backdrop-filter: blur(8px);
   transition:
+    transform var(--motion-fast) ease,
     border-color var(--motion-fast) ease,
     box-shadow var(--motion-fast) ease;
 }
 
 .education-progression-step:hover {
-  border-color: var(--stage-accent);
-  box-shadow: 0 8px 24px rgb(7 17 31 / 5%);
+  transform: translateY(-2px);
+  border-color: rgba(23, 76, 126, 0.3);
+  box-shadow:
+    0 8px 24px rgba(7, 17, 31, 0.08),
+    0 0 0 1px rgba(184, 148, 77, 0.2);
 }
 
 .education-progression-step__phase {

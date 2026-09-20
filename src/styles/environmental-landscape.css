@@ -277,3 +277,37 @@
     opacity: 0.6;
   }
 }
+
+/* -----------------------------------------------------------------------------
+   INTERIOR ROUTE TUNING
+   Subdued backdrops optimized for content-heavy reading & data tables
+   ----------------------------------------------------------------------------- */
+.environmental-landscape--interior.environmental-landscape--professional
+  .env-pro__atmosphere {
+  opacity: 0.9;
+}
+
+.environmental-landscape--interior.environmental-landscape--professional
+  .env-pro__grid-layer {
+  opacity: 0.75;
+}
+
+.environmental-landscape--interior.environmental-landscape--professional
+  .env-pro__contour-layer {
+  opacity: 0.55;
+}
+
+.environmental-landscape--interior.environmental-landscape--basketball
+  .env-ath__rafter-layer {
+  opacity: 0.7;
+}
+
+.environmental-landscape--interior.environmental-landscape--basketball
+  .env-ath__court-layer {
+  opacity: 0.45;
+}
+
+.environmental-landscape--interior.environmental-landscape--basketball
+  .env-ath__scoreboard-layer {
+  opacity: 0.6;
+}

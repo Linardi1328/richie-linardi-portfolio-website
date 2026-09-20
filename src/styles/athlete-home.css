@@ -7,7 +7,7 @@
   position: relative;
   width: 100%;
   color: var(--stage-ink);
-  background: var(--stage-paper);
+  background: transparent;
 }
 
 .athlete-container {
@@ -1647,22 +1647,41 @@
 }
 
 .athlete-track-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: clamp(1.4rem, 2.5vw, 2rem);
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(200, 164, 92, 0.22);
+  border-left: 3px solid #c8a45c;
+  border-radius: 4px;
+  background: rgba(14, 19, 32, 0.88);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.athlete-track-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(200, 164, 92, 0.5);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(200, 164, 92, 0.25);
 }
 
 .athlete-track-card--featured {
-  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
+  border-color: rgba(200, 164, 92, 0.45);
+  border-left: 4px solid #c8a45c;
   background:
     radial-gradient(
       circle at 90% 10%,
-      rgb(200 164 92 / 10%),
+      rgb(200 164 92 / 16%),
       transparent 14rem
     ),
-    var(--stage-paper-elevated);
+    rgba(14, 19, 32, 0.92);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
 }
 
 .athlete-track-card__header {
@@ -1928,26 +1947,37 @@
   flex-direction: column;
   justify-content: space-between;
   padding: clamp(1.25rem, 2.5vw, 1.85rem);
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(200, 164, 92, 0.22);
+  border-left: 3px solid #c8a45c;
+  border-radius: 4px;
+  background: rgba(14, 19, 32, 0.88);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
   transition:
     border-color 200ms ease,
+    box-shadow 200ms ease,
     transform 200ms ease;
 }
 
 .athlete-ledger-card:hover {
-  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
+  transform: translateY(-2px);
+  border-color: rgba(200, 164, 92, 0.5);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(200, 164, 92, 0.25);
 }
 
 .athlete-ledger-card--featured {
-  border-color: color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+  border-color: rgba(200, 164, 92, 0.45);
+  border-left: 4px solid #c8a45c;
   background:
     radial-gradient(
       circle at 90% 10%,
-      rgb(200 164 92 / 12%),
+      rgb(200 164 92 / 16%),
       transparent 14rem
     ),
-    var(--stage-paper-elevated);
+    rgba(14, 19, 32, 0.92);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
 }
 
 .athlete-ledger-card__top {
@@ -2069,19 +2099,39 @@
   display: flex;
   flex-direction: column;
   padding: clamp(1.4rem, 3vw, 2.25rem);
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(200, 164, 92, 0.24);
+  border-left: 3px solid #c8a45c;
+  border-radius: 4px;
+  background: rgba(14, 19, 32, 0.88);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  transition:
+    transform var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.athlete-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(200, 164, 92, 0.5);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(200, 164, 92, 0.3);
 }
 
 .athlete-stat-card--featured {
-  border-color: color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+  border-color: rgba(200, 164, 92, 0.5);
+  border-left: 4px solid #c8a45c;
   background:
     radial-gradient(
       circle at 90% 12%,
-      rgb(200 164 92 / 12%),
+      rgb(200 164 92 / 16%),
       transparent 16rem
     ),
-    var(--stage-paper-elevated);
+    rgba(14, 19, 32, 0.92);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(200, 164, 92, 0.2);
 }
 
 .athlete-stat-card__header {

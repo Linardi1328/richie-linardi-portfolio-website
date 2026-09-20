@@ -5,7 +5,6 @@ import { publicProjectCatalogue } from "@/data/project-registry";
 import { useProofMode } from "./proof-mode-context";
 import { DualTraceEngine } from "./dual-trace-engine";
 import { ReverseBleed } from "./reverse-bleed";
-import { EnvironmentalLandscape } from "@/components/effects/environmental-landscape";
 
 export function ProfessionalDualTracePage() {
   const { isProofMode } = useProofMode();
@@ -24,9 +23,6 @@ export function ProfessionalDualTracePage() {
         isProofMode ? "dual-trace-page--proof" : ""
       }`}
     >
-      {/* Environmental Landscape Backdrop */}
-      <EnvironmentalLandscape world="professional" />
-
       {/* Visual Trace Engine */}
       <DualTraceEngine world="professional" />
 
