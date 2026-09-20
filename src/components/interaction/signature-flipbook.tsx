@@ -2,7 +2,9 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import {
+  createContext,
   useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -23,18 +25,33 @@ import {
   type WorldFlipRequestDetail,
 } from "@/lib/portfolio-world-transition";
 
+export type WorldArrivalContextValue = {
+  heroArrivalActive: boolean;
+};
+
+export const WorldArrivalContext = createContext<WorldArrivalContextValue>({
+  heroArrivalActive: false,
+});
+
+export function useWorldArrival() {
+  return useContext(WorldArrivalContext);
+}
+
 type SignatureFlipbookProps = {
   children: ReactNode;
   world: PortfolioWorld;
 };
 
-type FlipPhase = "idle" | "dragging" | "turning" | "arriving";
+type FlipPhase = "idle" | "dragging" | "turning" | "cancelling" | "arriving";
 
 type PointerState = {
   dragging: boolean;
+  isEdgeOrigin: boolean;
   lastTime: number;
   lastX: number;
+  lockedVertical: boolean;
   pointerId: number;
+  pointerType: string;
   progress: number;
   startX: number;
   startY: number;
@@ -60,12 +77,12 @@ type TurnMotion = {
 };
 
 const TURN_DURATION_MS = 660;
-const MIN_TURN_DURATION_MS = 220;
+const MIN_TURN_DURATION_MS = 240;
 const REDUCED_TURN_DURATION_MS = 150;
+const CANCEL_DURATION_MS = 240;
+const ARRIVAL_DURATION_MS = 360;
 const DRAG_COMMIT_THRESHOLD = 0.3;
 const FLICK_COMMIT_VELOCITY = 0.55;
-const SWIPE_START_DISTANCE = 12;
-const SWIPE_AXIS_BIAS = 1.2;
 const TRACKPAD_DRAG_DISTANCE = 260;
 const TRACKPAD_COMMIT_THRESHOLD = 0.24;
 const TRACKPAD_END_DELAY_MS = 90;
@@ -82,7 +99,10 @@ function clamp(value: number, minimum = 0, maximum = 1) {
 }
 
 function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 }
 
 function getAngleLimit(viewportWidth: number) {
@@ -111,6 +131,12 @@ function getTurnDuration(fromProgress: number, velocity: number) {
   );
 }
 
+// Ease-out cubic: starts fast and decelerates smoothly to rest
+function easeOutCubic(t: number): number {
+  const inv = 1 - t;
+  return 1 - inv * inv * inv;
+}
+
 function isInteractiveTarget(target: EventTarget | null) {
   if (!(target instanceof Element)) {
     return false;
@@ -129,8 +155,9 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
   const targetWorld = getOppositeWorld(world);
   const [phase, setPhase] = useState<FlipPhase>("idle");
   const [progress, setProgress] = useState(0);
-  const [turnDuration, setTurnDuration] = useState(TURN_DURATION_MS);
   const [geometry, setGeometry] = useState<FlipGeometry>(defaultGeometry);
+  const [heroArrivalActive, setHeroArrivalActive] = useState(false);
+
   const busyRef = useRef(false);
   const pointerRef = useRef<PointerState | null>(null);
   const trackpadRef = useRef<TrackpadState>({
@@ -139,12 +166,43 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     settleTimer: 0,
   });
 
+  // Animation frame and timer references for clean lifecycle cancellation
+  const turnRafRef = useRef<number | null>(null);
+  const cancelRafRef = useRef<number | null>(null);
+  const arrivalRafRef = useRef<number | null>(null);
+  const routeTimerRef = useRef<number | null>(null);
+  const heroTimerRef = useRef<number | null>(null);
+
   const targetLabel =
     targetWorld === "basketball" ? "Basketball side" : "Professional side";
   const keyboardKey = world === "professional" ? "ArrowLeft" : "ArrowRight";
   const reverseEyebrow =
     targetWorld === "basketball" ? "ATHLETE ARCHIVE" : "SOFTWARE · DATA · AI";
   const reverseTitle = targetWorld === "basketball" ? "13" : "RBL";
+
+  const clearAllAnimations = useCallback(() => {
+    if (turnRafRef.current) {
+      cancelAnimationFrame(turnRafRef.current);
+      turnRafRef.current = null;
+    }
+    if (cancelRafRef.current) {
+      cancelAnimationFrame(cancelRafRef.current);
+      cancelRafRef.current = null;
+    }
+    if (arrivalRafRef.current) {
+      cancelAnimationFrame(arrivalRafRef.current);
+      arrivalRafRef.current = null;
+    }
+    if (routeTimerRef.current) {
+      clearTimeout(routeTimerRef.current);
+      routeTimerRef.current = null;
+    }
+    if (heroTimerRef.current) {
+      clearTimeout(heroTimerRef.current);
+      heroTimerRef.current = null;
+    }
+    window.clearTimeout(trackpadRef.current.settleTimer);
+  }, []);
 
   const syncGeometry = useCallback(() => {
     setGeometry({
@@ -157,38 +215,71 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
 
   const startTurn = useCallback(
     (requestedDestination?: string, motion: TurnMotion = {}) => {
-      if (busyRef.current) {
+      if (phase === "turning" || phase === "arriving") {
         return;
       }
 
       busyRef.current = true;
-      window.clearTimeout(trackpadRef.current.settleTimer);
-      trackpadRef.current = { distance: 0, progress: 0, settleTimer: 0 };
+      pointerRef.current = null;
+      clearAllAnimations();
       syncGeometry();
 
-      const duration = prefersReducedMotion()
+      const reduced = prefersReducedMotion();
+      const duration = reduced
         ? REDUCED_TURN_DURATION_MS
         : getTurnDuration(motion.fromProgress ?? 0, motion.velocity ?? 0);
 
-      setTurnDuration(duration);
       setPhase("turning");
-      setProgress(1);
       markWorldFlipArrival(targetWorld);
 
       const destination =
         requestedDestination || resolveWorldDestination(targetWorld);
 
-      window.setTimeout(() => {
-        router.push(destination);
-      }, duration);
+      if (reduced) {
+        setProgress(1);
+        routeTimerRef.current = window.setTimeout(() => {
+          router.push(destination);
+        }, duration);
+        return;
+      }
+
+      // Frame-locked rAF interpolation: drives rotation, lighting, and shadow together
+      const startP = motion.fromProgress ?? progress;
+      const startTime = performance.now();
+
+      function stepTurn(now: number) {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const nextP = startP + (1 - startP) * easeOutCubic(t);
+        setProgress(nextP);
+
+        if (t < 1) {
+          turnRafRef.current = requestAnimationFrame(stepTurn);
+        } else {
+          setProgress(1);
+          router.push(destination);
+        }
+      }
+
+      turnRafRef.current = requestAnimationFrame(stepTurn);
     },
-    [router, syncGeometry, targetWorld],
+    [clearAllAnimations, phase, progress, router, syncGeometry, targetWorld],
   );
 
+  // Remember route for back-destination resolution
   useEffect(() => {
     rememberWorldRoute(world, pathname || defaultWorldRoutes[world]);
   }, [pathname, world]);
 
+  // Clean up if pathname changes unexpectedly during turn
+  useEffect(() => {
+    return () => {
+      clearAllAnimations();
+      busyRef.current = false;
+    };
+  }, [clearAllAnimations, pathname]);
+
+  // Handle external flip request events (from world-switcher / hinge button)
   useEffect(() => {
     function handleFlipRequest(event: Event) {
       const request = event as CustomEvent<WorldFlipRequestDetail>;
@@ -207,6 +298,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     };
   }, [startTurn, world]);
 
+  // Keyboard navigation: ArrowLeft / ArrowRight
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (
@@ -217,6 +309,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         event.metaKey ||
         event.shiftKey ||
         isInteractiveTarget(event.target) ||
+        isInteractiveTarget(document.activeElement) ||
         event.key !== keyboardKey
       ) {
         return;
@@ -233,47 +326,68 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     };
   }, [keyboardKey, startTurn]);
 
-  useEffect(() => {
-    return () => {
-      window.clearTimeout(trackpadRef.current.settleTimer);
-    };
-  }, []);
-
+  // Destination Arrival: single owner of the arrival signal
   useEffect(() => {
     if (!consumeWorldFlipArrival(world)) {
       return;
     }
 
-    const reducedMotion = prefersReducedMotion();
     busyRef.current = true;
-    let settleTimer = 0;
-    let resetTimer = 0;
+    clearAllAnimations();
 
-    const arrivalFrame = window.requestAnimationFrame(() => {
+    const arrivalRaf = requestAnimationFrame((timestamp) => {
       syncGeometry();
       setPhase("arriving");
       setProgress(1);
 
-      settleTimer = window.setTimeout(
-        () => setProgress(0),
-        reducedMotion ? 20 : 48,
-      );
-      resetTimer = window.setTimeout(
-        () => {
+      const reduced = prefersReducedMotion();
+      if (reduced) {
+        routeTimerRef.current = window.setTimeout(() => {
+          setProgress(0);
           setPhase("idle");
           busyRef.current = false;
-        },
-        reducedMotion ? 230 : 790,
-      );
+          setHeroArrivalActive(true);
+        }, 50);
+        return;
+      }
+
+      // Settling curve: frame-locked deceleration from 1.0 down to 0.0
+      const startTime = timestamp;
+      const duration = ARRIVAL_DURATION_MS;
+
+      function stepArrival(now: number) {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        // Ease out from 1 to 0
+        const nextP = 1 - easeOutCubic(t);
+        setProgress(nextP);
+
+        if (t < 1) {
+          arrivalRafRef.current = requestAnimationFrame(stepArrival);
+        } else {
+          setProgress(0);
+          setPhase("idle");
+          busyRef.current = false;
+          // Trigger coordinated destination hero reveal only after turn settles
+          setHeroArrivalActive(true);
+
+          heroTimerRef.current = window.setTimeout(() => {
+            // Keep hero in arrived state
+          }, 1200);
+        }
+      }
+
+      arrivalRafRef.current = requestAnimationFrame(stepArrival);
     });
 
-    return () => {
-      window.cancelAnimationFrame(arrivalFrame);
-      window.clearTimeout(settleTimer);
-      window.clearTimeout(resetTimer);
-    };
-  }, [syncGeometry, world]);
+    arrivalRafRef.current = arrivalRaf;
 
+    return () => {
+      clearAllAnimations();
+    };
+  }, [clearAllAnimations, syncGeometry, world]);
+
+  // Pointer Handlers with explicit edge-origin zone & cancellation settling
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
     if (
       busyRef.current ||
@@ -285,14 +399,42 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       return;
     }
 
-    window.clearTimeout(trackpadRef.current.settleTimer);
-    trackpadRef.current = { distance: 0, progress: 0, settleTimer: 0 };
+    // Exclude critical iOS edge gesture zone (leftmost 22px and rightmost 22px on touch devices)
+    if (
+      event.pointerType === "touch" &&
+      (event.clientX < 22 || event.clientX > window.innerWidth - 22)
+    ) {
+      return;
+    }
+
+    // Identify edge-origin vs content zone:
+    // Professional flips leftwards (originating from right edge)
+    // Basketball flips rightwards (originating from left edge)
+    const isEdgeOrigin =
+      world === "professional"
+        ? event.clientX >= window.innerWidth - 76 ||
+          Boolean(
+            (event.target as HTMLElement)?.closest(
+              ".signature-flipbook__hint, .signature-flipbook__drag-zone",
+            ),
+          )
+        : event.clientX <= 76 ||
+          Boolean(
+            (event.target as HTMLElement)?.closest(
+              ".signature-flipbook__hint, .signature-flipbook__drag-zone",
+            ),
+          );
+
+    clearAllAnimations();
     syncGeometry();
     pointerRef.current = {
       dragging: false,
+      isEdgeOrigin,
       lastTime: event.timeStamp,
       lastX: event.clientX,
+      lockedVertical: false,
       pointerId: event.pointerId,
+      pointerType: event.pointerType,
       progress: 0,
       startX: event.clientX,
       startY: event.clientY,
@@ -303,7 +445,12 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
   function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
     const pointer = pointerRef.current;
 
-    if (!pointer || pointer.pointerId !== event.pointerId || busyRef.current) {
+    if (
+      !pointer ||
+      pointer.pointerId !== event.pointerId ||
+      busyRef.current ||
+      pointer.lockedVertical
+    ) {
       return;
     }
 
@@ -313,14 +460,28 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         : event.clientX - pointer.startX;
     const verticalDistance = Math.abs(event.clientY - pointer.startY);
 
+    // If vertical movement clearly dominates before horizontal threshold, lock to vertical scrolling
+    if (!pointer.dragging && verticalDistance > 10 && horizontalDistance < 14) {
+      pointer.lockedVertical = true;
+      return;
+    }
+
+    // Thresholds: lower distance for edge origin, higher threshold for content swipe
+    const startThreshold = pointer.isEdgeOrigin ? 10 : 22;
+    const axisBias = pointer.isEdgeOrigin ? 1.2 : 1.7;
+
     if (
       !pointer.dragging &&
-      horizontalDistance > SWIPE_START_DISTANCE &&
-      horizontalDistance > verticalDistance * SWIPE_AXIS_BIAS
+      horizontalDistance > startThreshold &&
+      horizontalDistance > verticalDistance * axisBias
     ) {
       pointer.dragging = true;
       setPhase("dragging");
-      event.currentTarget.setPointerCapture(event.pointerId);
+      try {
+        event.currentTarget.setPointerCapture(event.pointerId);
+      } catch {
+        // Fallback if pointer capture is unavailable
+      }
     }
 
     const elapsed = Math.max(event.timeStamp - pointer.lastTime, 1);
@@ -345,6 +506,47 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     setProgress(nextProgress);
   }
 
+  function startCancelSettling(fromProgress: number) {
+    if (phase === "turning" || phase === "arriving") {
+      return;
+    }
+
+    clearAllAnimations();
+
+    if (fromProgress <= 0.001) {
+      setProgress(0);
+      setPhase("idle");
+      busyRef.current = false;
+      pointerRef.current = null;
+      return;
+    }
+
+    setPhase("cancelling");
+    busyRef.current = true;
+    const startTime = performance.now();
+    const duration = CANCEL_DURATION_MS;
+
+    function stepCancel(now: number) {
+      const elapsed = now - startTime;
+      const t = Math.min(1, elapsed / duration);
+      // Ease out to zero
+      const nextP = fromProgress * (1 - easeOutCubic(t));
+      setProgress(nextP);
+
+      if (t < 1) {
+        cancelRafRef.current = requestAnimationFrame(stepCancel);
+      } else {
+        setProgress(0);
+        setPhase("idle");
+        busyRef.current = false;
+        pointerRef.current = null;
+        cancelRafRef.current = null;
+      }
+    }
+
+    cancelRafRef.current = requestAnimationFrame(stepCancel);
+  }
+
   function finishPointerGesture(event: ReactPointerEvent<HTMLDivElement>) {
     const pointer = pointerRef.current;
 
@@ -352,16 +554,28 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       return;
     }
 
+    if (phase === "turning" || phase === "arriving") {
+      pointerRef.current = null;
+      return;
+    }
+
+    // Immediately clear pointer reference before releasePointerCapture
+    // to prevent lostpointercapture or pointercancel from triggering concurrent cancellation.
     pointerRef.current = null;
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      try {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      } catch {
+        // Ignore if already released
+      }
+    }
 
     if (!pointer.dragging) {
       return;
     }
 
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
-
+    // Verify commit threshold: must exceed progress threshold OR flick velocity
     if (
       pointer.progress >= DRAG_COMMIT_THRESHOLD ||
       pointer.velocity >= FLICK_COMMIT_VELOCITY
@@ -373,20 +587,58 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
       return;
     }
 
-    setProgress(0);
-    setPhase("idle");
+    // Cancelled gesture: give real settling state with smooth return to zero
+    startCancelSettling(pointer.progress);
+  }
+
+  function handleLostPointerCapture(event: ReactPointerEvent<HTMLDivElement>) {
+    // In React synthetic event delegation, lostpointercapture bubbles from child elements.
+    // When the flipbook captures the pointer mid-gesture, the child element (e.g. paragraph/div)
+    // loses capture. Ignore bubbled events where event.target !== event.currentTarget.
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+
+    cancelPointerGesture(event);
   }
 
   function cancelPointerGesture(event: ReactPointerEvent<HTMLDivElement>) {
+    // Prevent bubbled lostpointercapture from child elements from cancelling the gesture
+    if (
+      event.type === "lostpointercapture" &&
+      event.target !== event.currentTarget
+    ) {
+      return;
+    }
+
     const pointer = pointerRef.current;
 
     if (!pointer || pointer.pointerId !== event.pointerId) {
       return;
     }
 
+    if (phase === "turning" || phase === "arriving") {
+      pointerRef.current = null;
+      return;
+    }
+
     pointerRef.current = null;
-    setProgress(0);
-    setPhase("idle");
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      try {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      } catch {
+        // Ignore if already released
+      }
+    }
+
+    if (pointer.dragging) {
+      startCancelSettling(pointer.progress);
+    } else {
+      setProgress(0);
+      setPhase("idle");
+      busyRef.current = false;
+    }
   }
 
   function handleWheel(event: ReactWheelEvent<HTMLDivElement>) {
@@ -404,7 +656,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
 
     if (
       horizontalMagnitude < 2 ||
-      horizontalMagnitude <= verticalMagnitude * 1.05
+      horizontalMagnitude <= verticalMagnitude * 1.15
     ) {
       return;
     }
@@ -438,111 +690,146 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         return;
       }
 
-      setProgress(0);
-      setPhase("idle");
+      startCancelSettling(finalProgress);
     }, TRACKPAD_END_DELAY_MS);
   }
 
+  // Explicit lighting curve calculation:
+  // light curve = sin(pi * progress) -> 0 at start, 1.0 at mid-turn (p=0.5), 0 at completion
   const direction = world === "professional" ? -1 : 1;
   const angle = direction * progress * geometry.angleLimit;
+  const clampedP = clamp(progress);
+  const light = Math.sin(Math.PI * clampedP);
+  const edgeIntensity = Math.pow(light, 1.2);
+  const shadowX = (world === "professional" ? 1 : -1) * Math.round(light * 44);
+  const shadowBlur = Math.round(light * 72);
+  const shadowSpread = Math.round(light * 18);
+  const shadowOpacity = light * (world === "professional" ? 0.32 : 0.42);
+  const creaseOpacity = light * 0.28;
+
   const style = {
-    "--flip-angle": `${angle}deg`,
+    "--flip-angle": `${angle.toFixed(2)}deg`,
     "--flip-origin-y": geometry.originY,
-    "--flip-progress": `${progress}`,
+    "--flip-progress": `${progress.toFixed(4)}`,
+    "--flip-light": `${light.toFixed(4)}`,
+    "--flip-edge-intensity": `${edgeIntensity.toFixed(4)}`,
+    "--flip-shadow-blur": `${shadowBlur}px`,
+    "--flip-shadow-spread": `${shadowSpread}px`,
+    "--flip-shadow-opacity": `${shadowOpacity.toFixed(4)}`,
+    "--flip-shadow-x": `${shadowX}px`,
+    "--flip-crease-opacity": `${creaseOpacity.toFixed(4)}`,
     "--flip-scroll-y": geometry.scrollY,
     "--flip-viewport-height": geometry.viewportHeight,
     overscrollBehaviorX: "contain",
     touchAction: "pan-y pinch-zoom",
-    userSelect: phase === "dragging" ? "none" : undefined,
-    WebkitUserSelect: phase === "dragging" ? "none" : undefined,
+    userSelect:
+      phase === "dragging" || phase === "cancelling" ? "none" : undefined,
+    WebkitUserSelect:
+      phase === "dragging" || phase === "cancelling" ? "none" : undefined,
   } as CSSProperties;
-  const pageStyle =
-    phase === "turning"
-      ? ({
-          transitionDuration: `${turnDuration}ms`,
-          transitionTimingFunction: "cubic-bezier(0.16, 0.84, 0.24, 1)",
-        } as CSSProperties)
-      : undefined;
+
   const reverseTitleStyle =
     targetWorld === "professional"
       ? ({ justifySelf: "end", textAlign: "right" } as CSSProperties)
       : undefined;
 
   return (
-    <div
-      aria-busy={phase === "turning"}
-      className="signature-flipbook"
-      data-phase={phase}
-      data-world={world}
-      onPointerCancel={cancelPointerGesture}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={finishPointerGesture}
-      onWheel={handleWheel}
-      style={style}
-    >
-      {/* [TOUCH: full-page-swipe] [POINTER: edge-hover-peek] */}
-      <div aria-hidden="true" className="signature-flipbook__drag-zone" />
+    <WorldArrivalContext.Provider value={{ heroArrivalActive }}>
+      <div
+        aria-busy={phase === "turning"}
+        className="signature-flipbook"
+        data-hero-arrived={heroArrivalActive ? "true" : undefined}
+        data-phase={phase}
+        data-world={world}
+        onLostPointerCapture={handleLostPointerCapture}
+        onPointerCancel={cancelPointerGesture}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={finishPointerGesture}
+        onWheel={handleWheel}
+        style={style}
+      >
+        {/* [TOUCH: edge-swipe-zone] [POINTER: edge-hover-peek] */}
+        <div aria-hidden="true" className="signature-flipbook__drag-zone" />
 
-      <div className="signature-flipbook__stage">
-        {/* [FLIP STATE 03] Reverse Revealed */}
-        <div
-          aria-hidden="true"
-          className="signature-flipbook__reverse"
-          data-reverse-world={targetWorld}
-          inert
-        >
-          <div className="signature-flipbook__reverse-grid">
-            <strong
-              aria-hidden="true"
-              className="signature-flipbook__reverse-watermark"
-              style={reverseTitleStyle}
-            >
-              {reverseTitle}
-            </strong>
-            <div className="signature-flipbook__reverse-meta">
-              <span className="signature-flipbook__reverse-eyebrow">
-                {reverseEyebrow}
-              </span>
-              <p className="signature-flipbook__reverse-label">{targetLabel}</p>
+        <div className="signature-flipbook__stage">
+          {/* [FLIP STATE 03] Reverse Revealed with dynamic lighting */}
+          <div
+            aria-hidden="true"
+            className="signature-flipbook__reverse"
+            data-reverse-world={targetWorld}
+            inert
+          >
+            <div className="signature-flipbook__reverse-grid">
+              <strong
+                aria-hidden="true"
+                className="signature-flipbook__reverse-watermark"
+                style={reverseTitleStyle}
+              >
+                {reverseTitle}
+              </strong>
+              <div className="signature-flipbook__reverse-meta">
+                <span className="signature-flipbook__reverse-eyebrow">
+                  {reverseEyebrow}
+                </span>
+                <p className="signature-flipbook__reverse-label">
+                  {targetLabel}
+                </p>
+              </div>
             </div>
           </div>
+
+          {/* [FLIP STATE 02] Turning Page with progressive shadow & lighting */}
+          <div
+            aria-hidden={phase === "turning" ? true : undefined}
+            className="signature-flipbook__page"
+            data-hero-arrived={heroArrivalActive ? "true" : undefined}
+            inert={phase === "turning"}
+          >
+            {/* Non-interactive surface crease overlay (ambient occlusion) */}
+            <div
+              aria-hidden="true"
+              className="signature-flipbook__crease-overlay"
+            />
+
+            {/* Non-interactive specular page-edge lighting */}
+            <div
+              aria-hidden="true"
+              className="signature-flipbook__edge-light"
+            />
+
+            {children}
+          </div>
         </div>
 
-        {/* [FLIP STATE 02] Partial Turn */}
-        <div
-          aria-hidden={phase === "turning" ? true : undefined}
-          className="signature-flipbook__page"
-          inert={phase === "turning"}
-          style={pageStyle}
-        >
-          {children}
+        {/* [FLIP HINT / WORLD TAB] Authored book-edge marker tab */}
+        <div aria-hidden="true" className="signature-flipbook__hint">
+          {world === "professional" ? (
+            <div className="signature-flipbook__tab-inner">
+              <span className="signature-flipbook__tab-arrow">←</span>
+              <span className="signature-flipbook__tab-action">SWIPE LEFT</span>
+              <span className="signature-flipbook__tab-identity">13</span>
+              <span className="signature-flipbook__tab-target">ATHLETE</span>
+            </div>
+          ) : (
+            <div className="signature-flipbook__tab-inner">
+              <span className="signature-flipbook__tab-identity">RBL</span>
+              <span className="signature-flipbook__tab-target">
+                PROFESSIONAL
+              </span>
+              <span className="signature-flipbook__tab-action">
+                SWIPE RIGHT
+              </span>
+              <span className="signature-flipbook__tab-arrow">→</span>
+            </div>
+          )}
         </div>
-      </div>
 
-      {/* [FLIP HINT / WORLD TAB] Authored book-edge marker tab */}
-      <div aria-hidden="true" className="signature-flipbook__hint">
-        {world === "professional" ? (
-          <div className="signature-flipbook__tab-inner">
-            <span className="signature-flipbook__tab-arrow">←</span>
-            <span className="signature-flipbook__tab-action">SWIPE LEFT</span>
-            <span className="signature-flipbook__tab-identity">13</span>
-            <span className="signature-flipbook__tab-target">ATHLETE</span>
-          </div>
-        ) : (
-          <div className="signature-flipbook__tab-inner">
-            <span className="signature-flipbook__tab-identity">RBL</span>
-            <span className="signature-flipbook__tab-target">PROFESSIONAL</span>
-            <span className="signature-flipbook__tab-action">SWIPE RIGHT</span>
-            <span className="signature-flipbook__tab-arrow">→</span>
-          </div>
-        )}
+        {/* [REDUCED MOTION] Side Switch Fallback */}
+        <span aria-live="polite" className="signature-flipbook__status">
+          {phase === "turning" ? `Opening ${targetLabel.toLowerCase()}.` : ""}
+        </span>
       </div>
-
-      {/* [REDUCED MOTION] Side Switch Fallback */}
-      <span aria-live="polite" className="signature-flipbook__status">
-        {phase === "turning" ? `Opening ${targetLabel.toLowerCase()}.` : ""}
-      </span>
-    </div>
+    </WorldArrivalContext.Provider>
   );
 }

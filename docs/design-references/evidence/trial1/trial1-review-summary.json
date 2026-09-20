@@ -1,0 +1,195 @@
+{
+  "timestamp": "2026-09-20T16:34:30.169Z",
+  "environment": {
+    "engine": "Chromium Headless (macOS)",
+    "host": "http://localhost:3000",
+    "resolutionBase": "1440x900"
+  },
+  "results": {
+    "passed": [
+      {
+        "name": "Styling studies captured and labelled explicitly",
+        "count": 10
+      },
+      {
+        "name": "Real switch control: Pro -> Basketball committed turn",
+        "destination": "/basketball",
+        "heroArrived": "true"
+      },
+      {
+        "name": "Real switch control: Basketball -> Pro committed turn",
+        "destination": "/",
+        "heroArrived": "true"
+      },
+      {
+        "name": "Destination telemetry anti-flash protection verified",
+        "telemetryOpacityDuringArrival": "0",
+        "monumentTitleOpacityDuringArrival": "1"
+      },
+      {
+        "name": "Real slow cancelled drag & 240ms snapback settling verified",
+        "finalPhase": "idle",
+        "finalProgress": "0.0000",
+        "finalAngle": "0.00deg"
+      },
+      {
+        "name": "Pointer cancellation & lost-capture concurrency guard passed cleanly"
+      },
+      {
+        "name": "Reduced motion transition verified with 2D instant crossfade and zero 3D rotation"
+      },
+      {
+        "name": "Keyboard input guard verified: Arrow keys ignored inside inputs"
+      },
+      {
+        "name": "Real keyboard navigation verified: ArrowLeft toggles to Basketball"
+      },
+      {
+        "name": "Main content visibility check passed on /",
+        "found": true,
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "width": 1359,
+        "height": 3719.171875,
+        "isVisible": true
+      },
+      {
+        "name": "Vertical scrolling verified",
+        "scrollY": 800,
+        "isScrolled": true
+      },
+      {
+        "name": "Text selection verified",
+        "length": 92,
+        "userSelect": "auto",
+        "selectable": true
+      },
+      {
+        "name": "Nested controls verified: ProofModeToggle React state changes observed and confirmed"
+      },
+      {
+        "name": "Direct route /about verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /projects verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /contact verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /resume verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /basketball/journey verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Direct route /basketball/stats verified clean and isolated (phase: idle)"
+      },
+      {
+        "name": "Compact viewport 320x568_iphone_se verified: 0 horizontal overflow"
+      },
+      {
+        "name": "Compact viewport 360x772_galaxy_s22 verified: 0 horizontal overflow"
+      },
+      {
+        "name": "Performance measured strictly during confirmed real turn",
+        "turnConfirmedActiveBeforeMeasurement": true,
+        "layoutCountDelta": 9,
+        "layoutDurationSecDelta": 0.0022,
+        "recalcStyleCountDelta": 74,
+        "recalcStyleDurationSecDelta": 0.0556,
+        "scriptDurationSecDelta": 0.018,
+        "frameAnalysis": {
+          "sampleCount": 49,
+          "avgFrameMs": 16.67,
+          "minFrameMs": 16.5,
+          "maxFrameMs": 16.8,
+          "p95FrameMs": 16.8,
+          "estimatedFps": 60,
+          "janksOver25ms": 0
+        }
+      },
+      {
+        "name": "Android Chrome 390x844 swipe Pro -> Ath reaches /basketball"
+      },
+      {
+        "name": "Android Chrome 390x844 swipe Ath -> Pro returns to /"
+      },
+      {
+        "name": "Android Chrome 360x772 swipe Pro -> Ath reaches /basketball"
+      },
+      {
+        "name": "Android Chrome 360x772 swipe Ath -> Pro returns to /"
+      },
+      {
+        "name": "Android Chrome 320x568 swipe Pro -> Ath reaches /basketball"
+      },
+      {
+        "name": "Android Chrome 320x568 swipe Ath -> Pro returns to /"
+      },
+      {
+        "name": "Cancelled touch gesture below threshold settles to idle with progress 0"
+      },
+      {
+        "name": "Natural vertical scrolling via touch-action pan-y pinch-zoom preserved"
+      },
+      {
+        "name": "Touches inside 22px browser edge exclusion zone are safely ignored"
+      },
+      {
+        "name": "Reduced motion touch swipe completes via flat transition with transform: none"
+      },
+      {
+        "name": "Interactive controls (WorldSwitcher) respond to touch tap without gesture hijack"
+      }
+    ],
+    "failed": [],
+    "untested": [
+      {
+        "scope": "Physical iOS Safari WebKit Gesture Physics",
+        "reason": "Automated Chromium CDP emulates touch coordinates and velocity accurately, but physical WebKit exhibits subtle momentum decay curves and dynamic URL-bar viewport resizing."
+      },
+      {
+        "scope": "Physical VoiceOver / Assistive Audio Hardware",
+        "reason": "ARIA live regions, accessible names, and focus states are verified in the DOM; hardware speech output and screen-reader cursor routing require physical hardware testing."
+      }
+    ]
+  },
+  "stylingStudies": [
+    "styling_study_pro_to_ath_p0.png",
+    "styling_study_pro_to_ath_p25.png",
+    "styling_study_pro_to_ath_p45.png",
+    "styling_study_pro_to_ath_p75.png",
+    "styling_study_pro_to_ath_p100.png",
+    "styling_study_ath_to_pro_p0.png",
+    "styling_study_ath_to_pro_p25.png",
+    "styling_study_ath_to_pro_p45.png",
+    "styling_study_ath_to_pro_p75.png",
+    "styling_study_ath_to_pro_p100.png"
+  ],
+  "playableRecordings": [
+    "record_real_turn_pro_to_ath.mp4",
+    "record_real_turn_ath_to_pro.mp4",
+    "record_real_arrival_and_hero_reveal.mp4",
+    "record_real_drag_cancellation.mp4",
+    "record_real_reduced_motion.mp4"
+  ],
+  "performanceMetrics": {
+    "turnConfirmedActiveBeforeMeasurement": true,
+    "layoutCountDelta": 9,
+    "layoutDurationSecDelta": 0.0022,
+    "recalcStyleCountDelta": 74,
+    "recalcStyleDurationSecDelta": 0.0556,
+    "scriptDurationSecDelta": 0.018,
+    "frameAnalysis": {
+      "sampleCount": 49,
+      "avgFrameMs": 16.67,
+      "minFrameMs": 16.5,
+      "maxFrameMs": 16.8,
+      "p95FrameMs": 16.8,
+      "estimatedFps": 60,
+      "janksOver25ms": 0
+    }
+  }
+}
