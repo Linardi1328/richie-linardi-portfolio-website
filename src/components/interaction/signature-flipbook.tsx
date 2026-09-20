@@ -263,7 +263,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
 
       turnRafRef.current = requestAnimationFrame(stepTurn);
     },
-    [clearAllAnimations, progress, router, syncGeometry, targetWorld],
+    [clearAllAnimations, phase, progress, router, syncGeometry, targetWorld],
   );
 
   // Remember route for back-destination resolution
@@ -591,7 +591,26 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
     startCancelSettling(pointer.progress);
   }
 
+  function handleLostPointerCapture(event: ReactPointerEvent<HTMLDivElement>) {
+    // In React synthetic event delegation, lostpointercapture bubbles from child elements.
+    // When the flipbook captures the pointer mid-gesture, the child element (e.g. paragraph/div)
+    // loses capture. Ignore bubbled events where event.target !== event.currentTarget.
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+
+    cancelPointerGesture(event);
+  }
+
   function cancelPointerGesture(event: ReactPointerEvent<HTMLDivElement>) {
+    // Prevent bubbled lostpointercapture from child elements from cancelling the gesture
+    if (
+      event.type === "lostpointercapture" &&
+      event.target !== event.currentTarget
+    ) {
+      return;
+    }
+
     const pointer = pointerRef.current;
 
     if (!pointer || pointer.pointerId !== event.pointerId) {
@@ -722,7 +741,7 @@ export function SignatureFlipbook({ children, world }: SignatureFlipbookProps) {
         data-hero-arrived={heroArrivalActive ? "true" : undefined}
         data-phase={phase}
         data-world={world}
-        onLostPointerCapture={cancelPointerGesture}
+        onLostPointerCapture={handleLostPointerCapture}
         onPointerCancel={cancelPointerGesture}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}

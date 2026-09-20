@@ -13,17 +13,31 @@
   --flip-viewport-height: 100vh;
   position: relative;
   min-height: 100vh;
+  touch-action: pan-y pinch-zoom;
 }
 
 .signature-flipbook__stage {
   position: relative;
   min-height: 100vh;
+  touch-action: pan-y pinch-zoom;
 }
 
 .signature-flipbook__page {
   position: relative;
   z-index: 2;
   min-height: 100vh;
+  touch-action: pan-y pinch-zoom;
+}
+
+.signature-flipbook a,
+.signature-flipbook button,
+.signature-flipbook input,
+.signature-flipbook textarea,
+.signature-flipbook select,
+.signature-flipbook [role="button"],
+.signature-flipbook [role="link"],
+.signature-flipbook [role="slider"] {
+  touch-action: manipulation;
 }
 
 .signature-flipbook__reverse {
@@ -312,7 +326,7 @@
   bottom: 0;
   z-index: 56;
   width: 1.75rem;
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
   user-select: none;
   -webkit-user-select: none;
 }

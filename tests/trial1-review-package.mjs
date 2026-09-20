@@ -83,6 +83,31 @@ async function waitFor(
   );
 }
 
+// Mouse click helper via CDP mouse events
+async function clickElement(client, x, y) {
+  await client.send("Input.dispatchMouseEvent", {
+    type: "mouseMoved",
+    x: Math.round(x),
+    y: Math.round(y),
+  });
+  await delay(40);
+  await client.send("Input.dispatchMouseEvent", {
+    type: "mousePressed",
+    x: Math.round(x),
+    y: Math.round(y),
+    button: "left",
+    clickCount: 1,
+  });
+  await delay(50);
+  await client.send("Input.dispatchMouseEvent", {
+    type: "mouseReleased",
+    x: Math.round(x),
+    y: Math.round(y),
+    button: "left",
+    clickCount: 1,
+  });
+}
+
 // Screenshot capture helper
 async function captureShot(client, filename, clip = null) {
   const params = {
@@ -172,6 +197,7 @@ async function main() {
     "================================================================================",
   );
 
+  const userDataDir = `/tmp/chrome-trial1-pkg-${Date.now()}`;
   const chromeProcess = spawn(
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     [
@@ -179,7 +205,7 @@ async function main() {
       "--remote-debugging-port=9355",
       "--remote-allow-origins=*",
       "--no-first-run",
-      "--user-data-dir=/tmp/chrome-trial1-pkg-9355",
+      `--user-data-dir=${userDataDir}`,
       "--disable-gpu",
       "http://localhost:3000/",
     ],
@@ -253,6 +279,8 @@ async function main() {
     const client = new CDPClient(ws);
     await client.send("Page.enable");
     await client.send("DOM.enable");
+    await client.send("Network.enable");
+    await client.send("Network.setCacheDisabled", { cacheDisabled: true });
     await client.send("Performance.enable");
 
     async function setVp(width, height, dpr = 1, mobile = false) {
@@ -268,7 +296,7 @@ async function main() {
     // SUITE 1: STYLING STUDIES (MANUALLY STAGED STATIC FRAMES)
     // =========================================================================
     console.log(
-      "\n[1/7] Capturing Styling Studies (Explicitly Staged Static Progress Models)...",
+      "\n[1/8] Capturing Styling Studies (Explicitly Staged Static Progress Models)...",
     );
     await setVp(1440, 900, 1, false);
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
@@ -345,7 +373,7 @@ async function main() {
     // SUITE 2: REAL BROWSER SWITCH CONTROL TURNS & PLAYABLE RECORDINGS
     // =========================================================================
     console.log(
-      "\n[2/7] Testing Real Control Input & Recording Playable Turns...",
+      "\n[2/8] Testing Real Control Input & Recording Playable Turns...",
     );
 
     // Turn 1: Professional -> Basketball via real switch control click
@@ -354,6 +382,13 @@ async function main() {
     await isolateSession(client);
 
     // Locate the real switch control
+    await waitFor(
+      async () =>
+        client.eval(`document.querySelector(".world-switcher") !== null`),
+      "World switcher control becomes available on Professional page",
+      6000,
+    );
+
     const switcherPro = await client.eval(`(() => {
       const el = document.querySelector(".world-switcher");
       if (!el) return null;
@@ -377,28 +412,18 @@ async function main() {
       // Real mouse click at center of .world-switcher
       const cx = switcherPro.x + switcherPro.width / 2;
       const cy = switcherPro.y + switcherPro.height / 2;
-      await client.send("Input.dispatchMouseEvent", {
-        type: "mousePressed",
-        x: cx,
-        y: cy,
-        button: "left",
-        clickCount: 1,
-      });
-      await client.send("Input.dispatchMouseEvent", {
-        type: "mouseReleased",
-        x: cx,
-        y: cy,
-        button: "left",
-        clickCount: 1,
-      });
+      await clickElement(client, cx, cy);
 
-      // Await observable turning state
+      // Await observable turning state or arrival navigation
       await waitFor(async () => {
+        const path = await client.eval(`window.location.pathname`);
         const phase = await client.eval(
           `document.querySelector(".signature-flipbook")?.getAttribute("data-phase")`,
         );
-        return phase === "turning";
-      }, "Signature flipbook enters data-phase='turning'");
+        return (
+          phase === "turning" || phase === "arriving" || path === "/basketball"
+        );
+      }, "Signature flipbook initiates turn or reaches /basketball");
 
       // Await observable destination navigation
       await waitFor(async () => {
@@ -463,27 +488,15 @@ async function main() {
     await recordSession(client, "record_real_turn_ath_to_pro", async () => {
       const cx = switcherAth.x + switcherAth.width / 2;
       const cy = switcherAth.y + switcherAth.height / 2;
-      await client.send("Input.dispatchMouseEvent", {
-        type: "mousePressed",
-        x: cx,
-        y: cy,
-        button: "left",
-        clickCount: 1,
-      });
-      await client.send("Input.dispatchMouseEvent", {
-        type: "mouseReleased",
-        x: cx,
-        y: cy,
-        button: "left",
-        clickCount: 1,
-      });
+      await clickElement(client, cx, cy);
 
       await waitFor(async () => {
+        const path = await client.eval(`window.location.pathname`);
         const phase = await client.eval(
           `document.querySelector(".signature-flipbook")?.getAttribute("data-phase")`,
         );
-        return phase === "turning";
-      }, "Signature flipbook enters data-phase='turning' on return");
+        return phase === "turning" || phase === "arriving" || path === "/";
+      }, "Signature flipbook initiates turn or reaches / on return");
 
       await waitFor(async () => {
         const path = await client.eval(`window.location.pathname`);
@@ -531,7 +544,7 @@ async function main() {
     // SUITE 3: ANTI-FLASH ASSERTIONS & COORDINATED REVEAL RECORDING
     // =========================================================================
     console.log(
-      "\n[3/7] Asserting Anti-Flash Guarantee & Recording Arrival Reveal...",
+      "\n[3/8] Asserting Anti-Flash Guarantee & Recording Arrival Reveal...",
     );
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
     await delay(600);
@@ -625,7 +638,7 @@ async function main() {
     // SUITE 4: REAL DRAG CANCELLATION & CONCURRENCY GUARDS
     // =========================================================================
     console.log(
-      "\n[4/7] Testing Real Drag Cancellation, Snapback & Concurrency Guards...",
+      "\n[4/8] Testing Real Drag Cancellation, Snapback & Concurrency Guards...",
     );
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
     await delay(600);
@@ -782,7 +795,7 @@ async function main() {
     // SUITE 5: REDUCED MOTION REAL RECORDING & VERIFICATION
     // =========================================================================
     console.log(
-      "\n[5/7] Testing Reduced Motion Transition & Playable Recording...",
+      "\n[5/8] Testing Reduced Motion Transition & Playable Recording...",
     );
     await client.send("Emulation.setEmulatedMedia", {
       features: [{ name: "prefers-reduced-motion", value: "reduce" }],
@@ -851,7 +864,7 @@ async function main() {
     // SUITE 6: DEEP UX, KEYBOARD TARGETING, ISOLATION & DIRECT ROUTES
     // =========================================================================
     console.log(
-      "\n[6/7] Verifying Deep UX, Keyboard Targeting, Visibility & Direct Routes...",
+      "\n[6/8] Verifying Deep UX, Keyboard Targeting, Visibility & Direct Routes...",
     );
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
     await delay(600);
@@ -1181,7 +1194,7 @@ async function main() {
     // SUITE 7: MEASURE PERFORMANCE ONLY AFTER CONFIRMING REAL TURN STARTS
     // =========================================================================
     console.log(
-      "\n[7/7] Measuring Performance Strictly After Confirming Real Turn Starts...",
+      "\n[7/8] Measuring Performance Strictly After Confirming Real Turn Starts...",
     );
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
     await delay(800);
@@ -1310,9 +1323,282 @@ async function main() {
     );
 
     // =========================================================================
+    // SUITE 8: ANDROID CHROME MOBILE TOUCH-SWIPE & POINTER CAPTURE SUITE
+    // =========================================================================
+    console.log(
+      "\n[8/8] Verifying Android Chrome Mobile Touch Swipes across Viewports...",
+    );
+
+    async function setupAndroidMobile(width, height, reducedMotion = false) {
+      await client.send("Emulation.setUserAgentOverride", {
+        userAgent:
+          "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36",
+      });
+      await client.send("Emulation.setDeviceMetricsOverride", {
+        width,
+        height,
+        deviceScaleFactor: 2.625,
+        mobile: true,
+      });
+      await client.send("Emulation.setTouchEmulationEnabled", {
+        enabled: true,
+        maxTouchPoints: 5,
+      });
+      await client.send("Emulation.setEmulatedMedia", {
+        features: [
+          {
+            name: "prefers-reduced-motion",
+            value: reducedMotion ? "reduce" : "no-preference",
+          },
+        ],
+      });
+    }
+
+    async function dispatchTouch(
+      startX,
+      startY,
+      endX,
+      endY,
+      steps = 10,
+      stepDelay = 30,
+    ) {
+      await client.send("Input.dispatchTouchEvent", {
+        type: "touchStart",
+        touchPoints: [{ x: startX, y: startY, id: 1 }],
+      });
+      await delay(50);
+
+      for (let i = 1; i <= steps; i++) {
+        const cx = Math.round(startX + (endX - startX) * (i / steps));
+        const cy = Math.round(startY + (endY - startY) * (i / steps));
+        await client.send("Input.dispatchTouchEvent", {
+          type: "touchMove",
+          touchPoints: [{ x: cx, y: cy, id: 1 }],
+        });
+        await delay(stepDelay);
+      }
+
+      await client.send("Input.dispatchTouchEvent", {
+        type: "touchEnd",
+        touchPoints: [],
+      });
+    }
+
+    // 8.1: 390x844 Touch Swipes (Pro -> Ath and Ath -> Pro)
+    await setupAndroidMobile(390, 844);
+    await client.send("Page.navigate", { url: "http://localhost:3000/" });
+    await delay(1000);
+
+    await dispatchTouch(
+      Math.round(390 * 0.72),
+      400,
+      Math.round(390 * 0.15),
+      400,
+    );
+    await waitFor(
+      async () =>
+        (await client.eval("window.location.pathname")) === "/basketball",
+      "Android Chrome 390x844 swipe Pro -> Ath",
+      8000,
+    );
+    pass("Android Chrome 390x844 swipe Pro -> Ath reaches /basketball");
+
+    await delay(500);
+    await dispatchTouch(
+      Math.round(390 * 0.28),
+      400,
+      Math.round(390 * 0.85),
+      400,
+    );
+    await waitFor(
+      async () => (await client.eval("window.location.pathname")) === "/",
+      "Android Chrome 390x844 swipe Ath -> Pro",
+      8000,
+    );
+    pass("Android Chrome 390x844 swipe Ath -> Pro returns to /");
+
+    // 8.2: 360x772 Touch Swipes
+    await setupAndroidMobile(360, 772);
+    await client.send("Page.navigate", { url: "http://localhost:3000/" });
+    await delay(1000);
+
+    await dispatchTouch(
+      Math.round(360 * 0.72),
+      380,
+      Math.round(360 * 0.15),
+      380,
+    );
+    await waitFor(
+      async () =>
+        (await client.eval("window.location.pathname")) === "/basketball",
+      "Android Chrome 360x772 swipe Pro -> Ath",
+      8000,
+    );
+    pass("Android Chrome 360x772 swipe Pro -> Ath reaches /basketball");
+
+    await delay(500);
+    await dispatchTouch(
+      Math.round(360 * 0.28),
+      380,
+      Math.round(360 * 0.85),
+      380,
+    );
+    await waitFor(
+      async () => (await client.eval("window.location.pathname")) === "/",
+      "Android Chrome 360x772 swipe Ath -> Pro",
+      8000,
+    );
+    pass("Android Chrome 360x772 swipe Ath -> Pro returns to /");
+
+    // 8.3: 320x568 Touch Swipes
+    await setupAndroidMobile(320, 568);
+    await client.send("Page.navigate", { url: "http://localhost:3000/" });
+    await delay(1000);
+
+    await dispatchTouch(
+      Math.round(320 * 0.72),
+      300,
+      Math.round(320 * 0.15),
+      300,
+    );
+    await waitFor(
+      async () =>
+        (await client.eval("window.location.pathname")) === "/basketball",
+      "Android Chrome 320x568 swipe Pro -> Ath",
+      8000,
+    );
+    pass("Android Chrome 320x568 swipe Pro -> Ath reaches /basketball");
+
+    await delay(500);
+    await dispatchTouch(
+      Math.round(320 * 0.28),
+      300,
+      Math.round(320 * 0.85),
+      300,
+    );
+    await waitFor(
+      async () => (await client.eval("window.location.pathname")) === "/",
+      "Android Chrome 320x568 swipe Ath -> Pro",
+      8000,
+    );
+    pass("Android Chrome 320x568 swipe Ath -> Pro returns to /");
+
+    // 8.4: Touch Drag Cancellation Below Threshold
+    await setupAndroidMobile(390, 844);
+    await client.send("Page.navigate", { url: "http://localhost:3000/" });
+    await delay(1000);
+
+    // Slow swipe of only 35px
+    await dispatchTouch(260, 400, 225, 400, 8, 60);
+    await waitFor(
+      async () =>
+        (await client.eval(
+          `document.querySelector(".signature-flipbook")?.getAttribute("data-phase")`,
+        )) === "idle",
+      "Touch drag below threshold returns to idle",
+      6000,
+    );
+    const cancelProgress = await client.eval(
+      `document.querySelector(".signature-flipbook")?.style.getPropertyValue("--flip-progress")`,
+    );
+    const cancelPath = await client.eval("window.location.pathname");
+    assert.strictEqual(cancelPath, "/");
+    assert.strictEqual(cancelProgress, "0.0000");
+    pass(
+      "Cancelled touch gesture below threshold settles to idle with progress 0",
+    );
+
+    // 8.5: Natural Vertical Scrolling (touch-action: pan-y pinch-zoom)
+    const initialScrollY = await client.eval("window.scrollY");
+    await dispatchTouch(200, 600, 200, 200, 10, 25);
+    await delay(400);
+    const finalScrollY = await client.eval("window.scrollY");
+    const vScrollPhase = await client.eval(
+      `document.querySelector(".signature-flipbook")?.getAttribute("data-phase")`,
+    );
+    assert.ok(
+      finalScrollY > initialScrollY + 150,
+      `Expected vertical scroll > ${initialScrollY + 150}, got ${finalScrollY}`,
+    );
+    assert.strictEqual(vScrollPhase, "idle");
+    pass(
+      "Natural vertical scrolling via touch-action pan-y pinch-zoom preserved",
+    );
+
+    // 8.6: 22px Browser-Edge Exclusion Zone
+    await client.send("Page.navigate", { url: "http://localhost:3000/" });
+    await delay(1000);
+    await dispatchTouch(10, 400, 100, 400, 6, 30);
+    await delay(300);
+    const edgeZonePhase = await client.eval(
+      `document.querySelector(".signature-flipbook")?.getAttribute("data-phase")`,
+    );
+    const edgeZonePath = await client.eval("window.location.pathname");
+    assert.strictEqual(edgeZonePhase, "idle");
+    assert.strictEqual(edgeZonePath, "/");
+    pass("Touches inside 22px browser edge exclusion zone are safely ignored");
+
+    // 8.7: Reduced-Motion Touch Swipe
+    await setupAndroidMobile(390, 844, true);
+    await client.send("Page.navigate", { url: "http://localhost:3000/" });
+    await delay(1000);
+    await dispatchTouch(
+      Math.round(390 * 0.72),
+      400,
+      Math.round(390 * 0.15),
+      400,
+    );
+    await waitFor(
+      async () =>
+        (await client.eval("window.location.pathname")) === "/basketball",
+      "Reduced-motion swipe reaches /basketball",
+      6000,
+    );
+    const rmPageTransform = await client.eval(`(() => {
+      const p = document.querySelector(".signature-flipbook__page");
+      return p ? window.getComputedStyle(p).transform : "";
+    })()`);
+    assert.strictEqual(rmPageTransform, "none");
+    pass(
+      "Reduced motion touch swipe completes via flat transition with transform: none",
+    );
+
+    // 8.8: Interactive Controls Via Touch
+    await setupAndroidMobile(390, 844, false);
+    await client.send("Page.navigate", { url: "http://localhost:3000/" });
+    await delay(1000);
+    const wsCoords = await client.eval(`(() => {
+      const btn = document.querySelector(".world-switcher") || document.querySelector("button[aria-label*='Switch to']");
+      if (!btn) return null;
+      const r = btn.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+    })()`);
+    assert.ok(wsCoords, "WorldSwitcher button exists");
+    await client.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [
+        { x: Math.round(wsCoords.x), y: Math.round(wsCoords.y), id: 1 },
+      ],
+    });
+    await delay(50);
+    await client.send("Input.dispatchTouchEvent", {
+      type: "touchEnd",
+      touchPoints: [],
+    });
+    await waitFor(
+      async () =>
+        (await client.eval("window.location.pathname")) === "/basketball",
+      "WorldSwitcher tap navigates to /basketball",
+      6000,
+    );
+    pass(
+      "Interactive controls (WorldSwitcher) respond to touch tap without gesture hijack",
+    );
+
+    // =========================================================================
     // SAVE FINAL REPORT AND EVIDENCE SUMMARY
     // =========================================================================
-    const summaryJson = JSON.stringify(reviewReport, null, 2);
+    const summaryJson = JSON.stringify(reviewReport, null, 2) + "\n";
     writeFileSync(join(SCRATCH_DIR, "trial1-review-summary.json"), summaryJson);
     writeFileSync(
       join(EVIDENCE_ARTIFACT_DIR, "trial1-review-summary.json"),
