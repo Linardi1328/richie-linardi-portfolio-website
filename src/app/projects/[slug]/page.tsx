@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
@@ -5,6 +6,7 @@ import {
   getProjectBySlug,
   publicProjectCatalogue,
 } from "@/data/project-registry";
+import { getMediaByRoute } from "@/data/media-manifest";
 import { professionalWorldNavigation } from "@/data/world-navigation";
 
 type ProjectPageProps = {
@@ -26,6 +28,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const evidence = project.evidence.map((item) =>
     item.href ? `${item.label} — linked evidence` : item.label,
   );
+
+  const routeMedia = getMediaByRoute(`/projects/${slug}`);
+  const architectureDiagram = routeMedia[0];
 
   return (
     <PortfolioWorldShell
@@ -55,6 +60,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           className="foundation-route__sections"
           aria-label={`${project.title} case study foundation`}
         >
+          {/* Section 01: Current State */}
           <article className="foundation-route__section">
             <div className="foundation-route__section-index" aria-hidden="true">
               01
@@ -75,6 +81,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </article>
 
+          {/* Section 02: Boundaries */}
           <article className="foundation-route__section">
             <div className="foundation-route__section-index" aria-hidden="true">
               02
@@ -96,6 +103,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </article>
 
+          {/* Section 03: Evidence */}
           <article className="foundation-route__section">
             <div className="foundation-route__section-index" aria-hidden="true">
               03
@@ -115,9 +123,50 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </article>
 
+          {/* Section 04: Architecture & Workflow Diagram (if available) */}
+          {architectureDiagram ? (
+            <article className="foundation-route__section">
+              <div
+                className="foundation-route__section-index"
+                aria-hidden="true"
+              >
+                04
+              </div>
+              <div className="foundation-route__section-content">
+                <div className="foundation-route__section-header">
+                  <p className="foundation-route__eyebrow">
+                    System Architecture
+                  </p>
+                  <h2>Workflow &amp; Safety Engine.</h2>
+                </div>
+                <div className="foundation-route__section-body">
+                  <figure className="foundation-route__diagram-container">
+                    <div className="foundation-route__diagram-frame">
+                      <Image
+                        alt={architectureDiagram.altText}
+                        className="foundation-route__diagram-img"
+                        height={architectureDiagram.height ?? 450}
+                        loading="lazy"
+                        src={architectureDiagram.filename}
+                        width={architectureDiagram.width ?? 800}
+                      />
+                    </div>
+                    <figcaption className="foundation-route__diagram-caption">
+                      <strong>{architectureDiagram.caption}</strong>
+                      <span>
+                        Verified from repository architecture specifications
+                      </span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </article>
+          ) : null}
+
+          {/* Section 05 / 04: Roadmap & Navigation */}
           <article className="foundation-route__section">
             <div className="foundation-route__section-index" aria-hidden="true">
-              04
+              {architectureDiagram ? "05" : "04"}
             </div>
             <div className="foundation-route__section-content">
               <div className="foundation-route__section-header">

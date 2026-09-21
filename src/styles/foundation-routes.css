@@ -369,6 +369,48 @@
   }
 }
 
+.foundation-route__diagram-container {
+  margin: 1.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.foundation-route__diagram-frame {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--stage-line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #080d19;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.foundation-route__diagram-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.foundation-route__diagram-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--stage-muted);
+}
+
+.foundation-route__diagram-caption strong {
+  color: var(--stage-ink);
+  font-weight: 650;
+}
+
+.foundation-route__diagram-caption span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--stage-accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .foundation-route__primary-link {
     scroll-behavior: auto;
