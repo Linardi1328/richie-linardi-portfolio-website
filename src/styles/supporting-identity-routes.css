@@ -50,10 +50,12 @@
 .identity-hero__title {
   max-width: 16ch;
   margin: 0.85rem 0 0;
-  font-size: clamp(2.6rem, 7.5vw, 6rem);
+  font-size: clamp(2.1rem, 6.5vw + 0.4rem, 5.8rem);
   line-height: 0.95;
   letter-spacing: -0.045em;
   color: var(--stage-ink);
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 
 .identity-hero__lede {

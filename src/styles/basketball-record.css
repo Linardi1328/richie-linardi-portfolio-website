@@ -73,7 +73,8 @@
       rgb(200 164 92 / 18%),
       transparent 12rem
     ),
-    linear-gradient(145deg, rgb(139 21 30 / 16%), transparent 65%), #0d0c09;
+    linear-gradient(145deg, rgba(6, 182, 212, 0.14), transparent 65%),
+    rgba(14, 20, 36, 0.9);
 }
 
 .basketball-record__hero-index span {
@@ -125,7 +126,7 @@
     color-mix(in srgb, var(--stage-accent) 60%, var(--stage-line));
   background:
     radial-gradient(circle at 92% 0%, rgb(200 164 92 / 18%), transparent 20rem),
-    linear-gradient(145deg, rgb(139 21 30 / 12%), transparent 62%),
+    linear-gradient(145deg, rgba(6, 182, 212, 0.12), transparent 62%),
     var(--stage-paper-elevated);
 }
 

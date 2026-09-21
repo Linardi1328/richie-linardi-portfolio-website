@@ -205,7 +205,7 @@
   .proof-mode-toggle--active
   .proof-mode-toggle__state {
   background: #c8a45c;
-  color: #0c0b09;
+  color: #06080e;
 }
 
 /* -----------------------------------------------------------------------------
@@ -1405,7 +1405,7 @@
 
 .dt-primary-cta--gold {
   background: #c8a45c;
-  color: #0c0b09;
+  color: #06080e;
 }
 
 .dt-primary-cta:hover {

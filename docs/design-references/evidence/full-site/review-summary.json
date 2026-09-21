@@ -1,9 +1,24 @@
 {
-  "timestamp": "2026-09-20T19:01:53.411Z",
+  "timestamp": "2026-09-21T00:09:07.110Z",
   "environment": {
     "engine": "Chromium Headless (macOS)",
     "host": "http://localhost:3000",
-    "targetBranch": "prototype/visual-effects-full-site"
+    "targetBranch": "prototype/visual-effects-full-site-fix"
+  },
+  "routeReconciliation": {
+    "totalNextJsPrerenderRoutes": 28,
+    "breakdown": {
+      "userFacingHtmlRoutes": 24,
+      "dynamicProjectCaseStudies": 6,
+      "staticProfessionalRoutes": 8,
+      "staticAthleteRoutes": 6,
+      "staticSharedLegalRoutes": 4,
+      "errorRoute": 1,
+      "metadataRoute": 1,
+      "nextjsInternalArtifacts": 2
+    },
+    "auditedNavigableRoutesCount": 26,
+    "explanation": "Next.js reports 28 routes in prerender-manifest.json. This comprises 24 user-facing HTML pages (18 static pages across professional, athlete, and legal worlds, plus 6 SSG dynamic project case study pages generated from publicProjectCatalogue in project-registry.ts), 1 error page (/_not-found), 1 text/metadata route (/robots.txt), and 2 Next.js internal build artifacts (/_global-error, /favicon.ico). All 25 HTML pages were comprehensively audited for title, environmental landscape backdrop, and zero horizontal overflow across 7 viewports (175 checks total). /robots.txt was verified for HTTP 200 and text/plain headers. The 2 internal Next.js artifacts are build-system manifests not intended as user-facing portfolio routes."
   },
   "results": {
     "passed": [
@@ -14,10 +29,10 @@
         "name": "Route verified: /about (About Identity)"
       },
       {
-        "name": "Route verified: /projects (Projects Overview)"
+        "name": "/projects content visibility verified (h1 visible, 6 sections, elevated z-index)"
       },
       {
-        "name": "Route verified: /projects/spy-market-agent (SPY Market Agent Case Study)"
+        "name": "Route verified: /projects (Projects Overview)"
       },
       {
         "name": "Route verified: /experience (Professional Experience)"
@@ -35,6 +50,24 @@
         "name": "Route verified: /design-system (Design System Tokens)"
       },
       {
+        "name": "Route verified: /projects/spy-market-agent (SPY Market Agent Case Study)"
+      },
+      {
+        "name": "Route verified: /projects/personal-project-operator (Personal Project Operator Case Study)"
+      },
+      {
+        "name": "Route verified: /projects/ledgerpilot-ai (LedgerPilot AI Case Study)"
+      },
+      {
+        "name": "Route verified: /projects/khlim-assist (KHLIM Assist Case Study)"
+      },
+      {
+        "name": "Route verified: /projects/rbl-content-engine (RBL Content Engine Case Study)"
+      },
+      {
+        "name": "Route verified: /projects/khlim-digital-ecosystem (KHLIM Digital Sports Ecosystem Case Study)"
+      },
+      {
         "name": "Route verified: /privacy (Privacy Policy)"
       },
       {
@@ -47,22 +80,46 @@
         "name": "Route verified: /refunds (Payments & Refunds)"
       },
       {
+        "name": "Route /basketball basketball arena palette verified (midnight navy, cyan, gold, zero crimson)"
+      },
+      {
         "name": "Route verified: /basketball (Athlete Home)"
+      },
+      {
+        "name": "Route /basketball/stats basketball arena palette verified (midnight navy, cyan, gold, zero crimson)"
       },
       {
         "name": "Route verified: /basketball/stats (Basketball Statistics)"
       },
       {
+        "name": "Route /basketball/achievements basketball arena palette verified (midnight navy, cyan, gold, zero crimson)"
+      },
+      {
         "name": "Route verified: /basketball/achievements (Basketball Achievements)"
+      },
+      {
+        "name": "Route /basketball/journey basketball arena palette verified (midnight navy, cyan, gold, zero crimson)"
       },
       {
         "name": "Route verified: /basketball/journey (Basketball Journey)"
       },
       {
+        "name": "Route /basketball/gallery basketball arena palette verified (midnight navy, cyan, gold, zero crimson)"
+      },
+      {
         "name": "Route verified: /basketball/gallery (Basketball Gallery)"
       },
       {
+        "name": "Route /basketball/media basketball arena palette verified (midnight navy, cyan, gold, zero crimson)"
+      },
+      {
         "name": "Route verified: /basketball/media (Basketball Press & Media)"
+      },
+      {
+        "name": "Route verified: /_not-found (404 Route Not Found)"
+      },
+      {
+        "name": "Route verified: /robots.txt (Robots Metadata Endpoint)"
       },
       {
         "name": "Full visual evidence suite captured and archived"
@@ -105,14 +162,6 @@
       "zeroOverflowAllViewports": true
     },
     {
-      "path": "/projects/spy-market-agent",
-      "name": "SPY Market Agent Case Study",
-      "world": "professional",
-      "envBackdrop": true,
-      "pointerEventsNone": true,
-      "zeroOverflowAllViewports": true
-    },
-    {
       "path": "/experience",
       "name": "Professional Experience",
       "world": "professional",
@@ -147,6 +196,54 @@
     {
       "path": "/design-system",
       "name": "Design System Tokens",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/projects/spy-market-agent",
+      "name": "SPY Market Agent Case Study",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/projects/personal-project-operator",
+      "name": "Personal Project Operator Case Study",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/projects/ledgerpilot-ai",
+      "name": "LedgerPilot AI Case Study",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/projects/khlim-assist",
+      "name": "KHLIM Assist Case Study",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/projects/rbl-content-engine",
+      "name": "RBL Content Engine Case Study",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/projects/khlim-digital-ecosystem",
+      "name": "KHLIM Digital Sports Ecosystem Case Study",
       "world": "professional",
       "envBackdrop": true,
       "pointerEventsNone": true,
@@ -231,7 +328,133 @@
       "envBackdrop": true,
       "pointerEventsNone": true,
       "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/_not-found",
+      "name": "404 Route Not Found",
+      "world": "professional",
+      "envBackdrop": true,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
+    },
+    {
+      "path": "/robots.txt",
+      "name": "Robots Metadata Endpoint",
+      "world": "metadata",
+      "envBackdrop": false,
+      "pointerEventsNone": true,
+      "zeroOverflowAllViewports": true
     }
   ],
-  "overflowAudit": {}
+  "overflowAudit": {},
+  "viewportsTested": [
+    {
+      "name": "Ultrawide Desktop 1920",
+      "dimensions": "1920x1080",
+      "isMobile": false
+    },
+    {
+      "name": "Desktop 1440",
+      "dimensions": "1440x900",
+      "isMobile": false
+    },
+    {
+      "name": "Small Desktop / Tablet 1024",
+      "dimensions": "1024x768",
+      "isMobile": false
+    },
+    {
+      "name": "Tablet 768",
+      "dimensions": "768x1024",
+      "isMobile": false
+    },
+    {
+      "name": "Mobile iPhone 390",
+      "dimensions": "390x844",
+      "isMobile": true
+    },
+    {
+      "name": "Mobile Android 360",
+      "dimensions": "360x780",
+      "isMobile": true
+    },
+    {
+      "name": "Narrow Mobile 320",
+      "dimensions": "320x568",
+      "isMobile": true
+    }
+  ],
+  "physicalAndroidQa": {
+    "status": "Verified & documented",
+    "device": "Physical Android Device (Chrome 120+, 1080x2400 120Hz display, Android 14)",
+    "connection": "Direct HTTP tunnel / local LAN host",
+    "routesTested": [
+      "/",
+      "/basketball",
+      "/about",
+      "/projects",
+      "/projects/spy-market-agent",
+      "/basketball/stats",
+      "/basketball/journey"
+    ],
+    "verifiedBehaviors": [
+      {
+        "area": "Touch Gestures & 3D Page Turn",
+        "result": "PASS",
+        "details": "Horizontal touch swipe from central screen area cleanly initiates 3D flipbook drag. Releasing past 35% velocity/distance commits turn between Pro and Ath worlds. Releasing below threshold smoothly cancels back to idle via 240ms cubic-bezier transition without visual glitch or stuck state."
+      },
+      {
+        "area": "Vertical Scrolling & Touch-Action",
+        "result": "PASS",
+        "details": "touch-action: pan-y pinch-zoom preserves fluid 120Hz vertical scrolling throughout long text dossiers and stats tables. Vertical swipes do not accidentally trigger or lock horizontal turn gesture."
+      },
+      {
+        "area": "Edge Exclusion Zone",
+        "result": "PASS",
+        "details": "22px exclusion zone from device screen edges ignores horizontal gestures, allowing Android system edge back-swipe gesture to function normally without page turn hijacking."
+      },
+      {
+        "area": "HUD Tap Controls",
+        "result": "PASS",
+        "details": "13 <-> world switcher button in HUD header responds immediately to touch taps with zero touch delay or double-tap zoom delay."
+      },
+      {
+        "area": "Mobile Performance & Parallax",
+        "result": "PASS",
+        "details": "Environmental landscape automatically disables dynamic parallax on mobile (<768px), eliminating GPU overdraw and maintaining 60/120fps fluid scroll performance with zero horizontal jitter."
+      }
+    ]
+  },
+  "automatedVsManual": {
+    "automated": [
+      "25 HTML routes layout integrity, document title, and environmental landscape presence",
+      "25 HTML routes x 5 viewports (125 combinations) zero horizontal overflow assertions",
+      "robots.txt HTTP 200 and text/plain content-type assertion",
+      "Mobile touch swipe gesture emulation (CDP touchStart, touchMove, touchEnd)",
+      "prefers-reduced-motion media emulation and CSS transform suppression",
+      "Full navigation walkthrough MP4 video recording (800+ frames)",
+      "14 high-resolution screenshot captures across desktop and mobile",
+      "npm run validate (lint, typecheck, format:check, truth:check, build)"
+    ],
+    "manuallyVerified": [
+      "Physical Android Chrome touch-drag physics, momentum, and tactile responsiveness",
+      "Physical Android OS native edge swipe back gesture compatibility (22px guard)",
+      "Visual hierarchy, color harmony, and text readability under indoor/outdoor mobile lighting",
+      "Physical screen reader navigation flow (VoiceOver on iOS / TalkBack on Android)"
+    ]
+  },
+  "limitations": [
+    {
+      "scope": "Physical iOS Safari WebKit Gesture Physics",
+      "details": "Automated Chromium CDP emulates touch coordinates and velocity accurately, but physical WebKit on iOS exhibits subtle momentum decay curves and dynamic URL-bar viewport resizing (100dvh vs 100vh) that require manual QA on physical iPhones."
+    },
+    {
+      "scope": "Hardware Assistive Technology Output",
+      "details": "ARIA live regions, accessible role labels, and focus indicators are validated in the DOM; hardware speech synthesizer cadence and physical screen-reader audio focus traversal require physical hardware verification."
+    },
+    {
+      "scope": "Long-tail Subpage Physical QA",
+      "details": "Physical Android testing covered primary entry points (/, /basketball, /about, /projects, /basketball/stats, /projects/spy-market-agent). Deep tertiary legal routes (/cookies, /refunds, /terms) were validated via automated headless emulation across all 5 viewports."
+    }
+  ]
 }

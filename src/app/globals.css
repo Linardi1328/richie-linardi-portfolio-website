@@ -145,7 +145,7 @@
   --context-accent: var(--accent);
   --context-accent-hover: var(--accent-hover);
   --context-accent-soft: var(--accent-soft);
-  --context-surface: #fff8ec;
+  --context-surface: #0a0e1a;
 }
 
 * {
