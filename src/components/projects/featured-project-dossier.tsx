@@ -56,7 +56,7 @@ export function FeaturedProjectDossier({
             {project.currentStatus}
           </p>
           <p className="featured-project-dossier__verified">
-            Status verified {project.statusVerifiedAt}
+            Implementation reviewed {project.statusVerifiedAt}
           </p>
         </section>
 

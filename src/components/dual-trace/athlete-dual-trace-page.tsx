@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
 import {
   dblSeasonStats,
   asg2024FinalSnapshot,
@@ -85,52 +86,55 @@ export function AthleteDualTracePage() {
           </div>
 
           {/* Author Positioning Statement */}
-          <div className="dt-hero-statement">
-            <p className="dt-lead-statement" data-trace-node="ath-lead">
-              Competitive basketball spanning DBL East Java (Runner-Up & First
-              Team), East Java Provincial Championship (PorProv VIII Gold), and
-              representing Indonesia in international competition in 2024.
-            </p>
+          <div className="dt-portrait-band">
+            <PortfolioPhotograph photo="allStar" preload />
+            <div className="dt-hero-statement">
+              <p className="dt-lead-statement" data-trace-node="ath-lead">
+                Competitive basketball spanning DBL East Java (Runner-Up & First
+                Team), East Java Provincial Championship (PorProv VIII Gold),
+                and representing Indonesia in international competition in 2024.
+              </p>
 
-            <div
-              className="dt-hero-telemetry dt-hero-telemetry--ath"
-              data-trace-node="hero-telemetry"
-            >
-              <div className="dt-telem-cell" data-trace-node="telem-0">
-                <span className="dt-telem-num dt-telem-num--gold">
-                  {asg2024FinalSnapshot.points} PTS
-                </span>
-                <span className="dt-telem-lbl">ASG 2024 Final</span>
-                {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--published">
-                    <span className="dt-proof-id">[A01]</span>
-                    <span>IBL INDONESIA</span>
+              <div
+                className="dt-hero-telemetry dt-hero-telemetry--ath"
+                data-trace-node="hero-telemetry"
+              >
+                <div className="dt-telem-cell" data-trace-node="telem-0">
+                  <span className="dt-telem-num dt-telem-num--gold">
+                    {asg2024FinalSnapshot.points} PTS
                   </span>
-                )}
-              </div>
-              <div className="dt-telem-cell" data-trace-node="telem-1">
-                <span className="dt-telem-num dt-telem-num--gold">
-                  {porprovViiiFinalSnapshot.points} PTS
-                </span>
-                <span className="dt-telem-lbl">PorProv VIII Gold</span>
-                {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--published">
-                    <span className="dt-proof-id">[A02]</span>
-                    <span>LENZA NASIONAL</span>
+                  <span className="dt-telem-lbl">ASG 2024 Final</span>
+                  {isProofMode && (
+                    <span className="dt-proof-chip dt-proof-chip--published">
+                      <span className="dt-proof-id">[A01]</span>
+                      <span>IBL INDONESIA</span>
+                    </span>
+                  )}
+                </div>
+                <div className="dt-telem-cell" data-trace-node="telem-1">
+                  <span className="dt-telem-num dt-telem-num--gold">
+                    {porprovViiiFinalSnapshot.points} PTS
                   </span>
-                )}
-              </div>
-              <div className="dt-telem-cell" data-trace-node="telem-2">
-                <span className="dt-telem-num dt-telem-num--gold">
-                  {dbl2023?.points ?? 121} PTS
-                </span>
-                <span className="dt-telem-lbl">DBL East Java 2023</span>
-                {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--published">
-                    <span className="dt-proof-id">[A03]</span>
-                    <span>DBL INDONESIA PROFILE</span>
+                  <span className="dt-telem-lbl">PorProv VIII Gold</span>
+                  {isProofMode && (
+                    <span className="dt-proof-chip dt-proof-chip--published">
+                      <span className="dt-proof-id">[A02]</span>
+                      <span>LENZA NASIONAL</span>
+                    </span>
+                  )}
+                </div>
+                <div className="dt-telem-cell" data-trace-node="telem-2">
+                  <span className="dt-telem-num dt-telem-num--gold">
+                    {dbl2023?.points ?? 121} PTS
                   </span>
-                )}
+                  <span className="dt-telem-lbl">DBL East Java 2023</span>
+                  {isProofMode && (
+                    <span className="dt-proof-chip dt-proof-chip--published">
+                      <span className="dt-proof-id">[A03]</span>
+                      <span>DBL INDONESIA PROFILE</span>
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>

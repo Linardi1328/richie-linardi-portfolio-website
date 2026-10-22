@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
 import { useState, useId } from "react";
 
 export type ProofMoment = {
@@ -38,7 +39,7 @@ const proofMoments: readonly ProofMoment[] = [
     sourceLabel: "IBL Indonesia · ASG 2024 final box score",
     sourceHref:
       "https://iblindonesia.com/news/timnas-putra-indonesia-sabet-medali-emas-asg-2024",
-    locationYear: "Semarang, Indonesia · 2024",
+    locationYear: "Da Nang, Vietnam · 2024",
     ledgerId: "PROOF-ASG-2024",
   },
   {
@@ -112,7 +113,7 @@ const proofMoments: readonly ProofMoment[] = [
     metricValue: "INA #13",
     stats: "Official Registered Number",
     sourceLabel: "Roster verification archive",
-    locationYear: "Jakarta / Semarang · 2024",
+    locationYear: "Indonesia / Vietnam · 2024",
     ledgerId: "PROOF-UNIFORM-13",
   },
   {
@@ -156,7 +157,7 @@ const milestoneBadges = [
     href: "https://www.dbl.id/r/19150/richie-bertrand-dan-kenangan-manis-bawa-gloria-1-ke-partai-final",
   },
   {
-    title: "2023 DBL EAST JAVA",
+    title: "2021 DBL EAST JAVA",
     detail: "Second Team Selection",
     verified: true,
     href: "https://www.dbl.id/u/profile/27842/richie-bertrand-linardi",
@@ -253,38 +254,7 @@ export function AthleteProofGalleryPage() {
             data-reveal
             data-reveal-delay="1"
           >
-            <div className="proof-featured-credential">
-              <div className="proof-featured-credential__frame">
-                <div className="proof-credential-card">
-                  <div className="proof-credential-card__header">
-                    <span className="proof-credential-flag" aria-hidden="true">
-                      🇮🇩
-                    </span>
-                    <span className="proof-credential-nation">INDONESIA</span>
-                  </div>
-                  <div className="proof-credential-jersey">
-                    <span className="proof-credential-number">13</span>
-                    <span className="proof-credential-name">LINARDI</span>
-                  </div>
-                  <div className="proof-credential-body">
-                    <span className="proof-credential-role">
-                      NATIONAL SQUAD #13
-                    </span>
-                    <span className="proof-credential-event">
-                      ASG 2024 GOLD MEDALIST
-                    </span>
-                    <span className="proof-credential-comp">
-                      FIBA U18 ASIA CUP
-                    </span>
-                  </div>
-                  <div className="proof-credential-footer">
-                    <span className="proof-credential-status">
-                      VERIFIED ROSTER ✓
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PortfolioPhotograph photo="gold" preload />
 
             <aside
               aria-label="Featured proof: ASEAN Schools Games 2024 Gold"
@@ -351,8 +321,8 @@ export function AthleteProofGalleryPage() {
             </p>
             <h2 id="proof-wall-heading">Moments That Prove The Work.</h2>
             <p>
-              Archival telemetry connecting directly to game outcomes, official
-              rosters, and verified competition milestones.
+              Personal photographs and published records connecting game
+              outcomes, official rosters, and verified competition milestones.
             </p>
           </div>
 
@@ -404,6 +374,11 @@ export function AthleteProofGalleryPage() {
                   role="button"
                   tabIndex={0}
                 >
+                  {moment.id === "asg-2024-final" ? (
+                    <PortfolioPhotograph photo="team" />
+                  ) : moment.id === "dbl-all-star-2024" ? (
+                    <PortfolioPhotograph photo="allStar" />
+                  ) : null}
                   <div className="proof-card__telemetry-display">
                     <div className="proof-card__telemetry-header">
                       <span className="proof-card__category">
@@ -443,37 +418,6 @@ export function AthleteProofGalleryPage() {
                 </article>
               );
             })}
-
-            {/* [MEDIA SLOT] Reserved Verified Archive Slots */}
-            <div className="proof-slot-card">
-              <div className="proof-slot-card__inner">
-                <span aria-hidden="true" className="proof-slot-card__icon">
-                  📷
-                </span>
-                <p className="proof-slot-card__label">PROOF SLOT</p>
-                <p className="proof-slot-card__desc">
-                  DBL East Java Gloria 1 Run Photography
-                </p>
-                <span className="proof-slot-card__status">
-                  Archive Clearance In Progress
-                </span>
-              </div>
-            </div>
-
-            <div className="proof-slot-card">
-              <div className="proof-slot-card__inner">
-                <span aria-hidden="true" className="proof-slot-card__icon">
-                  📷
-                </span>
-                <p className="proof-slot-card__label">PROOF SLOT</p>
-                <p className="proof-slot-card__desc">
-                  DBL Academy International Tour Photography
-                </p>
-                <span className="proof-slot-card__status">
-                  Archive Clearance In Progress
-                </span>
-              </div>
-            </div>
           </div>
 
           {/* 5 Milestone Summary Badges */}

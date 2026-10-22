@@ -3,14 +3,15 @@ import type { PortfolioProject, ProjectCardData } from "@/types/project";
 export const projectRegistry = [
   {
     slug: "spy-market-agent",
-    title: "SPY Market Agent",
+    title: "AXIOM QUANTUM",
     summary:
       "A leakage-aware SPY market-research and paper-operation system with deterministic safety gates, audit artifacts, walk-forward research, and explicit fail-closed execution boundaries.",
-    repositoryUrl: "https://github.com/Linardi1328/spy-market-agent",
-    phase: "Phase 5",
+    repositoryUrl: "https://github.com/Linardi1328/axiom-quantum",
+    phase: "Quantitative research",
     release: "v2.0.0-beta.1",
-    currentStatus: "v2.0.0-beta.1 · Phase 5 safety/recovery scaffold active",
-    statusVerifiedAt: "2026-08-31",
+    currentStatus:
+      "SPY research baseline · staged validation and risk controls",
+    statusVerifiedAt: "2026-10-22",
     catalogueState: "featured",
     sortOrder: 10,
     tags: ["Python", "ML research", "FastAPI", "SQLite", "Alpaca paper"],
@@ -22,9 +23,14 @@ export const projectRegistry = [
     ],
     evidence: [
       {
+        kind: "documentation",
+        label: "Public README reviewed 22 October 2026",
+        href: "https://github.com/Linardi1328/axiom-quantum/blob/main/README.md",
+      },
+      {
         kind: "repository",
         label: "Public source repository",
-        href: "https://github.com/Linardi1328/spy-market-agent",
+        href: "https://github.com/Linardi1328/axiom-quantum",
       },
       {
         kind: "release",
@@ -42,9 +48,9 @@ export const projectRegistry = [
     summary:
       "A phone-controlled project command center that combines live GitHub state, deterministic planning, controlled write approvals, and a bounded development-run lifecycle for managing personal software projects.",
     repositoryUrl: "https://github.com/Linardi1328/personal-project-operator",
-    phase: "Phase 6 complete",
-    currentStatus: "Phase 6 complete · integrated user acceptance",
-    statusVerifiedAt: "2026-08-31",
+    phase: "Approval-gated operator",
+    currentStatus: "Phone-controlled project operations · read-only by default",
+    statusVerifiedAt: "2026-10-22",
     catalogueState: "catalogue",
     sortOrder: 20,
     tags: ["Node.js", "GitHub", "Telegram", "OpenClaw", "Automation"],
@@ -54,6 +60,11 @@ export const projectRegistry = [
       "GitHub remains the project source of truth.",
     ],
     evidence: [
+      {
+        kind: "documentation",
+        label: "Public README reviewed 22 October 2026",
+        href: "https://github.com/Linardi1328/personal-project-operator/blob/main/README.md",
+      },
       {
         kind: "repository",
         label: "Public source repository",
@@ -71,10 +82,10 @@ export const projectRegistry = [
     summary:
       "A human-supervised accounting workflow platform that turns document evidence into reviewable accounting decisions while preserving deterministic controls, reviewer authority, audit history, and reconciliation evidence.",
     repositoryUrl: "https://github.com/Linardi1328/ledgerpilot-ai",
-    phase: "Phase 6",
+    phase: "Human review workflow",
     currentStatus:
-      "Phase 6 · bank reconciliation foundation and controlled human outcomes",
-    statusVerifiedAt: "2026-08-31",
+      "Phase 5 human-review completion documented in the public README",
+    statusVerifiedAt: "2026-10-22",
     catalogueState: "catalogue",
     sortOrder: 30,
     tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "Next.js"],
@@ -84,6 +95,11 @@ export const projectRegistry = [
       "No production accounting-platform or MyInvois integration is implied by the current prototype.",
     ],
     evidence: [
+      {
+        kind: "documentation",
+        label: "Public README reviewed 22 October 2026",
+        href: "https://github.com/Linardi1328/ledgerpilot-ai/blob/main/README.md",
+      },
       {
         kind: "repository",
         label: "Public source repository",
@@ -106,9 +122,10 @@ export const projectRegistry = [
     summary:
       "A multilingual event-support assistant foundation with typed knowledge retrieval, AI interpretation, deterministic GREEN/YELLOW/RED policy decisions, and stored draft responses for human-controlled operations.",
     repositoryUrl: "https://github.com/Linardi1328/khlim-assist",
-    phase: "v0.1 Phase 2",
-    currentStatus: "v0.1 Phase 2 · AI FAQ Engine · auto-replies disabled",
-    statusVerifiedAt: "2026-08-31",
+    phase: "AI FAQ foundation",
+    currentStatus:
+      "Multilingual interpretation and draft responses · auto-replies disabled",
+    statusVerifiedAt: "2026-10-22",
     catalogueState: "catalogue",
     sortOrder: 40,
     tags: ["Python", "FastAPI", "PostgreSQL", "OpenAI", "WhatsApp"],
@@ -118,6 +135,11 @@ export const projectRegistry = [
       "Production handoff, registration/payment lookup, and autonomous workflows are not yet implemented.",
     ],
     evidence: [
+      {
+        kind: "documentation",
+        label: "Public README reviewed 22 October 2026",
+        href: "https://github.com/Linardi1328/khlim-assist/blob/main/README.md",
+      },
       {
         kind: "repository",
         label: "Public source repository",
@@ -136,9 +158,10 @@ export const projectRegistry = [
     summary:
       "An evidence-driven manual content pipeline that separates factual project verification from platform strategy, producing platform-native drafts and storyboards while preserving human approval before publication.",
     repositoryUrl: "https://github.com/Linardi1328/rbl-content-engine",
-    phase: "Phase 0 manual pilot",
-    currentStatus: "Phase 0 · manual pilot · human approval required",
-    statusVerifiedAt: "2026-08-31",
+    phase: "V1 workflow completion",
+    currentStatus:
+      "Offline weekly packages implemented · downstream publishing approval-gated",
+    statusVerifiedAt: "2026-10-22",
     catalogueState: "catalogue",
     sortOrder: 50,
     tags: [
@@ -154,6 +177,11 @@ export const projectRegistry = [
       "Human approval is required before publication.",
     ],
     evidence: [
+      {
+        kind: "documentation",
+        label: "Public README reviewed 22 October 2026",
+        href: "https://github.com/Linardi1328/rbl-content-engine/blob/main/README.md",
+      },
       {
         kind: "repository",
         label: "Public source repository",
@@ -171,10 +199,10 @@ export const projectRegistry = [
     summary:
       "A production-oriented sports platform connecting public discovery, family accounts, programmes, memberships, billing, staff operations, and future athlete services through one shared backend and account ecosystem.",
     repositoryUrl: "https://github.com/Linardi1328/khlim-digital-ecosystem",
-    phase: "Integration / pre-alpha hardening",
+    phase: "Integration / hardening",
     currentStatus:
-      "Integration / pre-alpha hardening · real staff access and account controls connected",
-    statusVerifiedAt: "2026-08-31",
+      "Public/member and admin surfaces · integration and workflow hardening",
+    statusVerifiedAt: "2026-10-22",
     catalogueState: "catalogue",
     sortOrder: 60,
     tags: ["Next.js", "NestJS", "PostgreSQL", "Supabase", "Prisma"],
@@ -184,6 +212,11 @@ export const projectRegistry = [
       "The native Super App remains a later client of the same platform rather than a separate backend.",
     ],
     evidence: [
+      {
+        kind: "documentation",
+        label: "Public README reviewed 22 October 2026",
+        href: "https://github.com/Linardi1328/khlim-digital-ecosystem/blob/main/README.md",
+      },
       {
         kind: "repository",
         label: "Public source repository",

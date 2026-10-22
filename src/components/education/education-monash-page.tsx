@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
 import { foundationPages } from "@/data/foundation-pages";
 
 const academicFoundations = [
@@ -97,7 +98,7 @@ export function EducationMonashPage() {
     <main className="identity-page">
       {/* [HERO] Academic Growth at Monash */}
       <section className="identity-hero">
-        <div className="identity-container identity-hero__inner">
+        <div className="identity-container identity-hero__inner identity-hero__inner--split">
           <div data-reveal>
             <p className="identity-eyebrow">{data.eyebrow}</p>
             <h1 className="identity-hero__title">{data.title}</h1>
@@ -116,6 +117,7 @@ export function EducationMonashPage() {
               </Link>
             </div>
           </div>
+          <PortfolioPhotograph photo="monash" preload />
         </div>
       </section>
 

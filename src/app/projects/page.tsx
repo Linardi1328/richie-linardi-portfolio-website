@@ -44,7 +44,7 @@ export default function ProjectsPage() {
                   <ul>
                     <li>{project.currentStatus}</li>
                     <li>{project.tags.join(" · ")}</li>
-                    <li>Verified {project.statusVerifiedAt}</li>
+                    <li>Implementation reviewed {project.statusVerifiedAt}</li>
                   </ul>
                   <Link
                     className="foundation-route__primary-link"

@@ -1,3 +1,5 @@
+import { portfolioPhotos } from "@/data/portfolio-photos";
+
 export type ProvenanceCategory =
   | "1. Approved original media"
   | "2. Approved derivative/crop"
@@ -9,7 +11,8 @@ export type MediaItem = {
   id: string;
   filename: string;
   targetRoute: string;
-  mediaType: "image/jpeg" | "image/png" | "image/svg+xml" | "video/mp4";
+  mediaType:
+    "image/jpeg" | "image/png" | "image/webp" | "image/svg+xml" | "video/mp4";
   provenance: ProvenanceCategory;
   caption: string;
   altText: string;
@@ -25,26 +28,23 @@ export type MediaItem = {
 };
 
 export const mediaManifest: readonly MediaItem[] = [
-  {
-    id: "richie-professional-portrait",
-    filename: "/portraits/richie-professional.jpg",
-    targetRoute: "/about",
-    mediaType: "image/jpeg",
-    provenance: "1. Approved original media",
-    caption: "Richie Linardi · Professional portrait",
-    altText: "Richie Linardi wearing a black blazer and white shirt",
-    creditSource: "Owner personal archive",
-    usageStatus: "REVIEW_REQUIRED",
-    verificationBasis: "Personal photograph owned by Richie Linardi.",
-    boundaryNote:
-      "Subject to final personal review before commercial release; approved for preview prototype.",
+  ...Object.entries(portfolioPhotos).map(([id, photo]): MediaItem => ({
+    id: `owner-photo-${id}`,
+    filename: photo.src,
+    targetRoute: photo.route,
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: photo.caption,
+    altText: photo.alt,
+    creditSource: "Richie Linardi · supplied personal photo archive",
+    usageStatus: "LICENSED",
+    verificationBasis:
+      "Supplied by Richie through his Professional and Athlete Drive folders; owner explicitly authorized website use. Optimized from the original photographs without generated content.",
     mobileBehavior:
-      "Contained in a responsive 4:5 aspect ratio card; priority loading above the fold on About and Resume; zero layout shift.",
-    width: 420,
-    height: 420,
-    aspectRatio: "1/1",
-    tags: ["professional", "portrait", "identity"],
-  },
+      "Responsive image with intrinsic dimensions, preserved framing, reserved layout space, and lazy loading below the fold.",
+    width: photo.width,
+    height: photo.height,
+  })),
   {
     id: "spy-market-architecture-diagram",
     filename: "/projects/spy-market/architecture-diagram.svg",
@@ -52,9 +52,9 @@ export const mediaManifest: readonly MediaItem[] = [
     mediaType: "image/svg+xml",
     provenance: "4. Generated decorative diagram",
     caption:
-      "SPY Market Agent · Walk-Forward Research Engine & Paper-Only Safety Gates",
+      "AXIOM QUANTUM · Walk-Forward Research Engine & Paper-Only Safety Gates",
     altText:
-      "Technical system architecture diagram showing SPY Market Agent data ingestion, regime detection, 7 ML models, deterministic safety gate, Alpaca paper execution, and SQLite audit trail",
+      "Technical system architecture diagram showing AXIOM QUANTUM data ingestion, regime detection, 7 ML models, deterministic safety gate, Alpaca paper execution, and SQLite audit trail",
     creditSource:
       "Public source repository specification (Linardi1328/spy-market-agent)",
     usageStatus: "VERIFIED",
