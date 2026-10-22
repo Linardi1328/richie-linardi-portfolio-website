@@ -23,7 +23,7 @@ export const foundationPages = {
     description:
       "I study Computer Science with a Data Science specialization at Monash University Malaysia while building software, data, and AI systems outside class. Basketball shaped the same habits I bring to engineering: preparation, review, discipline, and decision-making under pressure.",
     portrait: {
-      src: "/portraits/richie-professional.jpg",
+      src: "/images/portfolio/richie-professional.webp",
       alt: "Richie Linardi wearing a black blazer and white shirt",
       label: "Professional portrait · RBL",
       note: "Software and basketball are presented as two sides of the same working mindset.",
@@ -177,7 +177,7 @@ export const foundationPages = {
     description:
       "Computer Science student specializing in Data Science at Monash University Malaysia, independent software builder, and competitive basketball athlete. Project and athlete pages carry the deeper proof behind this summary.",
     portrait: {
-      src: "/portraits/richie-professional.jpg",
+      src: "/images/portfolio/richie-professional.webp",
       alt: "Richie Linardi wearing a black blazer and white shirt",
       label: "Richie Linardi · Professional record",
     },
@@ -204,7 +204,7 @@ export const foundationPages = {
         eyebrow: "Selected systems",
         title: "Six public projects, each with a clear status.",
         description:
-          "The catalogue includes SPY Market Agent, Personal Project Operator, LedgerPilot AI, KHLIM Assist, RBL Content Engine, and KHLIM Digital Sports Ecosystem. Project pages link the implementation, evidence, and current limitations.",
+          "The catalogue includes AXIOM QUANTUM, Personal Project Operator, LedgerPilot AI, KHLIM Assist, RBL Content Engine, and KHLIM Digital Sports Ecosystem. Project pages link the implementation, evidence, and current limitations.",
       },
     ],
     primaryHref: "/experience",

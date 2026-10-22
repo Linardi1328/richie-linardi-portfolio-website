@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="khBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090e17" />
+      <stop offset="100%" stop-color="#111c30" />
+    </linearGradient>
+    <pattern id="khGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="0.5" />
+    </pattern>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#khBg)" />
+  <rect width="800" height="450" fill="url(#khGrid)" opacity="0.6" />
+  <rect x="15" y="15" width="770" height="420" rx="8" fill="none" stroke="#334155" stroke-width="1" />
+
+  <text x="35" y="48" fill="#38bdf8" font-family="monospace" font-size="11" letter-spacing="2">EVENT ASSISTANT WORKFLOW &amp; SAFETY ENGINE</text>
+  <text x="35" y="72" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="18" font-weight="700">KHLIM Assist · Typed Knowledge &amp; Deterministic Policy</text>
+  <rect x="585" y="35" width="180" height="26" rx="4" fill="#450a0a" stroke="#ef4444" stroke-width="1" />
+  <circle cx="598" cy="48" r="4" fill="#ef4444" />
+  <text x="608" y="52" fill="#fca5a5" font-family="monospace" font-size="10" font-weight="700">AUTO-REPLIES DISABLED</text>
+
+  <!-- Step 1 -->
+  <g transform="translate(35, 95)">
+    <rect width="210" height="175" rx="6" fill="#0f172a" stroke="#2563eb" stroke-width="1.5" />
+    <text x="16" y="28" fill="#60a5fa" font-family="monospace" font-size="11" font-weight="700">01 · INCOMING INQUIRY</text>
+    <text x="16" y="52" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Participant Message</text>
+    <text x="16" y="72" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">WhatsApp or Web inquiry</text>
+    <text x="16" y="88" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">Typed message ingestion</text>
+    <text x="16" y="120" fill="#38bdf8" font-family="monospace" font-size="10">Knowledge Grounding:</text>
+    <text x="16" y="138" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">Approved event handbook &amp;</text>
+    <text x="16" y="154" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">official schedule knowledge</text>
+  </g>
+
+  <path d="M 250 180 L 285 180" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3 3" />
+  <polygon points="285,176 293,180 285,184" fill="#38bdf8" />
+
+  <!-- Step 2 -->
+  <g transform="translate(295, 95)">
+    <rect width="210" height="175" rx="6" fill="#0f172a" stroke="#d97706" stroke-width="1.5" />
+    <text x="16" y="28" fill="#fbbf24" font-family="monospace" font-size="11" font-weight="700">02 · POLICY DECISION ENGINE</text>
+    <text x="16" y="52" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Deterministic Safety Gate</text>
+
+    <rect x="16" y="66" width="178" height="26" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1" />
+    <text x="26" y="83" fill="#6ee7b7" font-family="monospace" font-size="10" font-weight="700">GREEN</text>
+    <text x="80" y="83" fill="#a7f3d0" font-family="system-ui, sans-serif" font-size="10">Approved Knowledge</text>
+
+    <rect x="16" y="100" width="178" height="26" rx="4" fill="#78350f" stroke="#f59e0b" stroke-width="1" />
+    <text x="26" y="117" fill="#fde68a" font-family="monospace" font-size="10" font-weight="700">YELLOW</text>
+    <text x="80" y="117" fill="#fef3c7" font-family="system-ui, sans-serif" font-size="10">Conditional / Review</text>
+
+    <rect x="16" y="134" width="178" height="26" rx="4" fill="#450a0a" stroke="#ef4444" stroke-width="1" />
+    <text x="26" y="151" fill="#fca5a5" font-family="monospace" font-size="10" font-weight="700">RED</text>
+    <text x="80" y="151" fill="#fee2e2" font-family="system-ui, sans-serif" font-size="10">Prohibited / Escalate</text>
+  </g>
+
+  <path d="M 510 180 L 545 180" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3 3" />
+  <polygon points="545,176 553,180 545,184" fill="#38bdf8" />
+
+  <!-- Step 3 -->
+  <g transform="translate(555, 95)">
+    <rect width="210" height="175" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+    <text x="16" y="28" fill="#34d399" font-family="monospace" font-size="11" font-weight="700">03 · ORGANIZER OVERSIGHT</text>
+    <text x="16" y="52" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Draft Response Preview</text>
+    <text x="16" y="74" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Draft grounded in approved data</text>
+    <text x="16" y="92" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Organizer checks &amp; edits</text>
+    <text x="16" y="110" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Human clicks send</text>
+    <rect x="16" y="128" width="178" height="34" rx="4" fill="#065f46" />
+    <text x="105" y="144" fill="#a7f3d0" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">HUMAN CONFIRMATION</text>
+    <text x="105" y="156" fill="#6ee7b7" font-family="monospace" font-size="9" text-anchor="middle">Auto-replies disabled</text>
+  </g>
+
+  <g transform="translate(35, 295)">
+    <rect width="730" height="110" rx="6" fill="#0b1329" stroke="#334155" stroke-width="1" />
+    <text x="24" y="26" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Controlled AI Architecture &amp; System Safeguards</text>
+    <text x="24" y="48" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Participant AI auto-replies remain disabled. Provider-generated drafts must remain grounded in approved knowledge and deterministic policy decisions.</text>
+    <text x="24" y="68" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Production handoff, registration/payment lookup, and autonomous workflows are not implemented in the current v0.1 Phase 2 prototype.</text>
+    <text x="24" y="92" fill="#64748b" font-family="monospace" font-size="9">FastAPI · PostgreSQL · OpenAI draft generation · WhatsApp interface · Deterministic policy gate</text>
+  </g>
+</svg>

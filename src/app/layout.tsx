@@ -12,9 +12,12 @@ import "../styles/production-hardening.css";
 import "../styles/signature-flipbook.css";
 import "../styles/supporting-identity-routes.css";
 import "../styles/dual-trace.css";
+import "../styles/environmental-landscape.css";
 import "../styles/legal-pages.css";
+import "../styles/athlete-media-gallery.css";
+import "../styles/portfolio-photography.css";
 
-const portfolioTitle = "Richie Linardi | Software, Data & Basketball";
+const portfolioTitle = "Richie Linardi | Data Science, AI & Basketball";
 const portfolioDescription =
   "Two-sided portfolio for Richie Linardi, connecting software, data, AI, and basketball through one evidence-driven personal archive.";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
