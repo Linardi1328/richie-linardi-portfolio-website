@@ -1,5 +1,7 @@
 # Antigravity Frontend Collaboration Contract
 
+> Current direction: [Editorial redesign · 23 October 2026](EDITORIAL_REDESIGN_2026-10-23.md). The owner requested a full replacement of the prior design and effects. Use the new screenshots and brief for visual refinement; earlier flipbook, landscape, and motion references are historical.
+
 Google Antigravity is used as a frontend implementation and browser-QA collaborator. It does not replace the repository's source-of-truth rules, owner review, or CI gates.
 
 Workspace-scoped custom agents live under `.agents/agents/<agent-name>/agent.md` and are committed with the repository so the same specialized behaviors are discoverable from the workspace.
@@ -19,8 +21,8 @@ Owner
 
 ## Required workflow for visual implementation
 
-1. Read the approved interface reference under `docs/design-references/current/`.
-2. Read `docs/FRONTEND_REFERENCE_RESEARCH.md` for secondary interaction/design references and `docs/VISUAL_EFFECTS_BRIEF.md` for the signature-motion trial and acceptance criteria.
+1. Read the current editorial design brief and screenshots linked above.
+2. Read `docs/FRONTEND_REFERENCE_RESEARCH.md` for secondary references. The historical signature-motion trial is superseded by the owner’s full redesign request.
 3. Read the typed content layer before rendering project or achievement claims.
 4. Produce or review an implementation plan before broad page changes.
 5. Implement one bounded interface or system slice at a time.

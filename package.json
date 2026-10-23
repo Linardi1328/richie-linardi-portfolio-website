@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack --hostname 127.0.0.1",
+    "dev": "node scripts/dev.mjs",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
@@ -11,7 +11,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "truth:check": "node scripts/verify-content-truth.mjs",
-    "validate": "npm run lint && npm run typecheck && npm run format:check && npm run truth:check && npm run build"
+    "validate": "npm run lint && npm run typecheck && npm run format:check && npm run truth:check && npm run test:repository-activity && npm run build",
+    "test:repository-activity": "node --experimental-strip-types --test tests/repository-activity.test.mjs"
   },
   "dependencies": {
     "next": "16.3.1",

@@ -1,15 +1,10 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { PortfolioEffects } from "@/components/effects/portfolio-effects";
-import { SignatureFlipbook } from "@/components/interaction/signature-flipbook";
-import { WorldNavigation } from "@/components/navigation/world-navigation";
-import { ProofModeProvider } from "@/components/dual-trace/proof-mode-context";
-import { PortfolioSpine } from "@/components/dual-trace/portfolio-spine";
+import { EditorialNavigation } from "@/components/editorial/navigation";
 import type {
   PortfolioWorld,
   WorldNavigationItem,
 } from "@/data/world-navigation";
-import { cn } from "@/lib/cn";
 
 type PortfolioWorldShellProps = {
   children: ReactNode;
@@ -21,71 +16,48 @@ type PortfolioWorldShellProps = {
 
 export function PortfolioWorldShell({
   children,
-  className,
-  dualTraceHome = false,
+  className = "",
   navigation,
   world,
 }: PortfolioWorldShellProps) {
   return (
-    <ProofModeProvider enabled={dualTraceHome}>
-      <div
-        className={cn(
-          "portfolio-stage",
-          `portfolio-stage--${world}`,
-          dualTraceHome && "portfolio-stage--dual-trace",
-          className,
-        )}
-        data-context={world}
-        data-world={world}
-      >
-        <a className="portfolio-skip-link" href="#portfolio-main">
-          Skip to main content
-        </a>
-        <PortfolioEffects />
-        <div aria-hidden="true" className="portfolio-atmosphere" />
-        <div
-          className={cn(
-            "portfolio-book",
-            dualTraceHome && "portfolio-book--dual-trace",
-          )}
-        >
-          {dualTraceHome && <PortfolioSpine world={world} />}
-
-          <SignatureFlipbook world={world}>
-            <div className="portfolio-page">
-              <div className="portfolio-page__chrome">
-                <WorldNavigation
-                  dualTraceHome={dualTraceHome}
-                  items={navigation}
-                  world={world}
-                />
-              </div>
-
-              <div
-                className="portfolio-page__content"
-                id="portfolio-main"
-                tabIndex={-1}
-              >
-                {children}
-              </div>
-
-              <footer className="portfolio-page__footer">
-                <p>One journey. Two sides. The same discipline.</p>
-                <nav
-                  className="portfolio-page__legal-links"
-                  aria-label="Site policies"
-                >
-                  <Link href="/privacy">Privacy</Link>
-                  <Link href="/terms">Terms</Link>
-                  <Link href="/cookies">Cookies</Link>
-                  <Link href="/refunds">Payments & refunds</Link>
-                </nav>
-                <span aria-hidden="true">RBL · 2026</span>
-              </footer>
-            </div>
-          </SignatureFlipbook>
-        </div>
+    <div
+      className={`editorial-site editorial-site--${world} ${className}`}
+      data-world={world}
+    >
+      <a className="skip-link" href="#portfolio-main">
+        Skip to main content
+      </a>
+      <EditorialNavigation items={navigation} world={world} />
+      <div id="portfolio-main" tabIndex={-1}>
+        {children}
       </div>
-    </ProofModeProvider>
+      <footer className="site-footer container">
+        <div className="footer-invitation">
+          <div>
+            <p className="eyebrow">The next conversation</p>
+            <h2>
+              Good things start
+              <br />
+              with a connection.
+            </h2>
+          </div>
+          <Link className="button button--primary" href="/contact">
+            Let’s connect ↗
+          </Link>
+        </div>
+        <div className="footer-bottom">
+          <p>
+            © {new Date().getFullYear()} Richie Linardi. Two sides, one story.
+          </p>
+          <nav aria-label="Site policies">
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/cookies">Cookies</Link>
+            <Link href="/refunds">Payments & refunds</Link>
+          </nav>
+        </div>
+      </footer>
+    </div>
   );
 }

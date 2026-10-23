@@ -1,146 +1,143 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
+import { PageIntro, SectionHeading } from "@/components/editorial/shared";
 import {
   getProjectBySlug,
   publicProjectCatalogue,
 } from "@/data/project-registry";
+import { getMediaByRoute } from "@/data/media-manifest";
 import { professionalWorldNavigation } from "@/data/world-navigation";
+import { getRepositoryActivity } from "@/lib/repository-activity";
 
-type ProjectPageProps = {
-  params: Promise<{ slug: string }>;
-};
-
+export const revalidate = 3600;
 export function generateStaticParams() {
   return publicProjectCatalogue.map((project) => ({ slug: project.slug }));
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-
-  if (!project || project.catalogueState === "candidate") {
-    notFound();
-  }
-
-  const evidence = project.evidence.map((item) =>
-    item.href ? `${item.label} — linked evidence` : item.label,
-  );
-
+  if (!project || project.catalogueState === "candidate") notFound();
+  const activity = await getRepositoryActivity(project.repositoryUrl);
+  const media = getMediaByRoute(`/projects/${slug}`);
   return (
     <PortfolioWorldShell
       navigation={professionalWorldNavigation}
       world="professional"
     >
-      <main className="foundation-route">
-        <section className="foundation-route__hero">
-          <div className="foundation-route__hero-inner">
-            <p className="foundation-route__eyebrow">
-              Project case study · {project.phase}
-            </p>
-            <h1>{project.title}</h1>
-            <p className="foundation-route__lede">{project.summary}</p>
+      <main>
+        <PageIntro
+          eyebrow={`Project / ${project.phase}`}
+          title={project.title}
+          description={project.summary}
+        />
+        <section className="section container section--compact">
+          <div className="project-actions">
             <a
-              className="foundation-route__primary-link"
+              className="button button--primary"
               href={project.repositoryUrl}
-              rel="noreferrer"
               target="_blank"
+              rel="noreferrer"
             >
-              Open source repository <span aria-hidden="true">↗</span>
+              Explore the repository ↗
             </a>
+            <Link className="text-link" href="/projects">
+              ← All projects
+            </Link>
+          </div>
+          <div className="case-layout">
+            <article className="content-card">
+              <p className="eyebrow">Implementation</p>
+              <h2 className="card-heading">Where the project stands.</h2>
+              <p>{project.currentStatus}</p>
+              <ul className="tag-list">
+                {project.tags.map((tag) => (
+                  <li key={tag}>{tag}</li>
+                ))}
+              </ul>
+              <p className="small-note">
+                Implementation reviewed {project.statusVerifiedAt}
+                {project.release ? ` · Release ${project.release}` : ""}
+              </p>
+              {activity ? (
+                <p className="small-note">
+                  Latest repository push:{" "}
+                  <time dateTime={activity.pushedAt}>
+                    {new Date(activity.pushedAt).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                      timeZone: "UTC",
+                    })}
+                  </time>
+                  . Repository activity refreshes hourly; implementation claims
+                  keep their review date.
+                </p>
+              ) : (
+                <p className="small-note">
+                  Repository activity is temporarily unavailable. Visit the
+                  source for subsequent changes.
+                </p>
+              )}
+            </article>
+            <article className="content-card">
+              <p className="eyebrow">Scope & boundaries</p>
+              <h2 className="card-heading">Clarity is part of the work.</h2>
+              <ul className="detail-list">
+                {project.boundaries.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
           </div>
         </section>
-
-        <section
-          className="foundation-route__sections"
-          aria-label={`${project.title} case study foundation`}
-        >
-          <article className="foundation-route__section">
-            <div className="foundation-route__section-index" aria-hidden="true">
-              01
+        {media.length ? (
+          <section className="section section--tinted">
+            <div className="container">
+              <SectionHeading
+                label="The system"
+                title="How the pieces fit together."
+              />
+              {media.map((item) => (
+                <figure className="architecture-figure" key={item.id}>
+                  <Image
+                    src={item.filename}
+                    alt={item.altText}
+                    width={item.width ?? 800}
+                    height={item.height ?? 450}
+                    sizes="(min-width: 1280px) 1180px, 92vw"
+                  />
+                  <figcaption>{item.caption}</figcaption>
+                </figure>
+              ))}
             </div>
-            <div className="foundation-route__section-content">
-              <div className="foundation-route__section-header">
-                <p className="foundation-route__eyebrow">Current state</p>
-                <h2>What exists now.</h2>
-              </div>
-              <div className="foundation-route__section-body">
-                <p>{project.currentStatus}</p>
-                <ul>
-                  <li>Verified {project.statusVerifiedAt}</li>
-                  {project.release ? <li>Release {project.release}</li> : null}
-                  <li>{project.tags.join(" · ")}</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article className="foundation-route__section">
-            <div className="foundation-route__section-index" aria-hidden="true">
-              02
-            </div>
-            <div className="foundation-route__section-content">
-              <div className="foundation-route__section-header">
-                <p className="foundation-route__eyebrow">
-                  Operating boundaries
-                </p>
-                <h2>What this project does not claim.</h2>
-              </div>
-              <div className="foundation-route__section-body">
-                <ul>
-                  {project.boundaries.map((boundary) => (
-                    <li key={boundary}>{boundary}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article className="foundation-route__section">
-            <div className="foundation-route__section-index" aria-hidden="true">
-              03
-            </div>
-            <div className="foundation-route__section-content">
-              <div className="foundation-route__section-header">
-                <p className="foundation-route__eyebrow">Evidence</p>
-                <h2>Proof stays visible.</h2>
-              </div>
-              <div className="foundation-route__section-body">
-                <ul>
-                  {evidence.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article className="foundation-route__section">
-            <div className="foundation-route__section-index" aria-hidden="true">
-              04
-            </div>
-            <div className="foundation-route__section-content">
-              <div className="foundation-route__section-header">
-                <p className="foundation-route__eyebrow">Next interface pass</p>
-                <h2>
-                  Architecture, workflow, decisions, limitations, roadmap.
-                </h2>
-              </div>
-              <div className="foundation-route__section-body">
-                <p>
-                  The detailed visual case-study modules will be filled after
-                  the preview review. The route, evidence model, truth boundary,
-                  and responsive composition are already in place.
-                </p>
-                <Link
-                  className="foundation-route__primary-link"
-                  href="/projects"
-                >
-                  Back to projects <span aria-hidden="true">←</span>
-                </Link>
-              </div>
-            </div>
-          </article>
+          </section>
+        ) : null}
+        <section className="section container">
+          <SectionHeading
+            label="Evidence & further reading"
+            title="Go a little deeper."
+          />
+          <ul className="evidence-list">
+            {project.evidence.map((item) => (
+              <li key={item.label}>
+                <span>{item.kind}</span>
+                {item.href ? (
+                  <a href={item.href} target="_blank" rel="noreferrer">
+                    {item.label} ↗
+                  </a>
+                ) : (
+                  <p>{item.label}</p>
+                )}
+              </li>
+            ))}
+          </ul>
         </section>
       </main>
     </PortfolioWorldShell>

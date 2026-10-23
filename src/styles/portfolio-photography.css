@@ -1,0 +1,66 @@
+.portfolio-photograph {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--stage-line);
+  border-radius: 4px;
+  background: var(--stage-paper, #f4f0e8);
+}
+
+.portfolio-photograph img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.portfolio-photograph figcaption {
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--stage-line);
+  color: var(--stage-ink);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.dt-portrait-band {
+  display: grid;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.dt-portrait-band > .portfolio-photograph {
+  max-width: 26rem;
+}
+
+.identity-hero__inner--split > .portfolio-photograph {
+  width: 100%;
+  max-width: 27rem;
+  justify-self: center;
+}
+
+.proof-gallery-hero .portfolio-photograph,
+.proof-card .portfolio-photograph {
+  background: #0b1426;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.proof-gallery-hero .portfolio-photograph figcaption,
+.proof-card .portfolio-photograph figcaption {
+  color: #e2e8f0;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.proof-gallery-hero__featured-card > .portfolio-photograph {
+  max-width: 25rem;
+  justify-self: center;
+}
+
+.proof-card .portfolio-photograph {
+  border: 0;
+  border-radius: 0;
+}
+
+@media (min-width: 900px) {
+  .dt-portrait-band {
+    grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.6fr);
+  }
+}

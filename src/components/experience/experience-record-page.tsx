@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
 import { foundationPages } from "@/data/foundation-pages";
 import { publicProjectCatalogue } from "@/data/project-registry";
 
@@ -69,7 +70,7 @@ export function ExperienceRecordPage() {
     <main className="identity-page">
       {/* [HERO] Professional Experience */}
       <section className="identity-hero">
-        <div className="identity-container identity-hero__inner">
+        <div className="identity-container identity-hero__inner identity-hero__inner--split">
           <div data-reveal>
             <p className="identity-eyebrow">{data.eyebrow}</p>
             <h1 className="identity-hero__title">{data.title}</h1>
@@ -88,6 +89,7 @@ export function ExperienceRecordPage() {
               </Link>
             </div>
           </div>
+          <PortfolioPhotograph photo="hackathon" preload />
         </div>
       </section>
 

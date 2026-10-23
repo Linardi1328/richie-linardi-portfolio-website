@@ -7,7 +7,13 @@
   position: relative;
   width: 100%;
   color: var(--stage-ink);
-  background: var(--stage-paper);
+  background: transparent;
+}
+
+.athlete-subpage {
+  position: relative;
+  z-index: 1;
+  background: transparent;
 }
 
 .athlete-container {
@@ -113,11 +119,20 @@
   background:
     radial-gradient(
       circle at 82% 38%,
-      rgb(200 164 92 / 12%),
+      rgba(200, 164, 92, 0.12),
       transparent 32rem
     ),
-    radial-gradient(circle at 14% 18%, rgb(177 22 32 / 14%), transparent 26rem),
-    linear-gradient(150deg, #050504 0%, #0c0b08 55%, #050504 100%);
+    radial-gradient(
+      circle at 14% 18%,
+      rgba(6, 182, 212, 0.12),
+      transparent 26rem
+    ),
+    linear-gradient(
+      150deg,
+      rgba(6, 8, 14, 0.6) 0%,
+      rgba(10, 14, 26, 0.72) 55%,
+      rgba(6, 8, 14, 0.6) 100%
+    );
 }
 
 .athlete-hero__grid {
@@ -135,10 +150,13 @@
 
 .athlete-hero__title {
   margin-top: 0;
-  font-size: clamp(2.4rem, 4.4vw, 4.25rem);
+  font-size: clamp(2rem, 4.4vw + 0.4rem, 4.25rem);
   line-height: 0.98;
   max-width: 15ch;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
   min-width: 0;
 }
 
@@ -233,7 +251,7 @@
       rgb(200 164 92 / 14%),
       transparent 14rem
     ),
-    linear-gradient(145deg, rgb(177 22 32 / 10%), transparent 60%),
+    linear-gradient(145deg, rgba(6, 182, 212, 0.12), transparent 60%),
     var(--stage-paper-elevated);
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 4%);
 }
@@ -330,8 +348,11 @@
 
 .athlete-section-heading h2 {
   margin: 0;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  line-height: 1;
+  font-size: clamp(1.75rem, 4vw + 0.4rem, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .athlete-section-heading p:last-child {
@@ -395,7 +416,7 @@
 }
 
 .athlete-chapter-card__tag--red {
-  color: #ff9b9b;
+  color: #38bdf8;
 }
 
 .athlete-chapter-card__years {
@@ -427,9 +448,9 @@
 }
 
 .athlete-chapter-card__badge--red {
-  border-color: #b11620;
-  background: rgb(177 22 32 / 18%);
-  color: #ff9b9b;
+  border-color: rgba(6, 182, 212, 0.45);
+  background: rgba(6, 182, 212, 0.15);
+  color: #38bdf8;
 }
 
 .athlete-chapter-card__headline {
@@ -719,12 +740,16 @@
 
 /* Chapter 03 Pinnacle Escalation Card */
 .athlete-chapter-card--pinnacle {
-  border-color: color-mix(in srgb, var(--stage-accent) 55%, #b11620);
+  border-color: color-mix(in srgb, var(--stage-accent) 60%, #06b6d4);
   background:
-    radial-gradient(circle at 90% 12%, rgb(177 22 32 / 14%), transparent 24rem),
+    radial-gradient(
+      circle at 90% 12%,
+      rgba(6, 182, 212, 0.14),
+      transparent 24rem
+    ),
     radial-gradient(
       circle at 10% 85%,
-      rgb(200 164 92 / 10%),
+      rgba(200, 164, 92, 0.1),
       transparent 22rem
     ),
     var(--stage-paper-elevated);
@@ -775,7 +800,7 @@
 }
 
 .athlete-scope-highlight {
-  color: #ff9b9b;
+  color: #38bdf8;
 }
 
 .athlete-pinnacle-card h4 {
@@ -894,9 +919,13 @@
 }
 
 .athlete-ladder-tier--international {
-  border-color: color-mix(in srgb, #b11620 50%, var(--stage-line));
+  border-color: color-mix(in srgb, #06b6d4 50%, var(--stage-line));
   background:
-    radial-gradient(circle at 95% 15%, rgb(177 22 32 / 12%), transparent 18rem),
+    radial-gradient(
+      circle at 95% 15%,
+      rgba(6, 182, 212, 0.12),
+      transparent 18rem
+    ),
     var(--stage-paper-elevated);
 }
 
@@ -1154,8 +1183,12 @@
 
 .athlete-performance {
   background:
-    radial-gradient(circle at 18% 30%, rgb(177 22 32 / 9%), transparent 28rem),
-    linear-gradient(180deg, var(--stage-paper) 0%, #090807 100%);
+    radial-gradient(
+      circle at 18% 30%,
+      rgba(6, 182, 212, 0.09),
+      transparent 28rem
+    ),
+    linear-gradient(180deg, transparent 0%, rgba(6, 8, 14, 0.4) 100%);
 }
 
 .athlete-performance__grid {
@@ -1181,7 +1214,7 @@
       rgb(200 164 92 / 16%),
       transparent 18rem
     ),
-    linear-gradient(145deg, rgb(177 22 32 / 10%), transparent 60%),
+    linear-gradient(145deg, rgba(6, 182, 212, 0.1), transparent 60%),
     var(--stage-paper-elevated);
 }
 
@@ -1467,10 +1500,10 @@
   background:
     radial-gradient(
       circle at 80% 20%,
-      rgb(200 164 92 / 14%),
+      rgba(200, 164, 92, 0.14),
       transparent 26rem
     ),
-    linear-gradient(180deg, #090807 0%, #050504 100%);
+    linear-gradient(180deg, transparent 0%, rgba(6, 8, 14, 0.7) 100%);
 }
 
 .athlete-closing__inner {
@@ -1647,22 +1680,41 @@
 }
 
 .athlete-track-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: clamp(1.4rem, 2.5vw, 2rem);
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(200, 164, 92, 0.22);
+  border-left: 3px solid #c8a45c;
+  border-radius: 4px;
+  background: rgba(14, 19, 32, 0.88);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.athlete-track-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(200, 164, 92, 0.5);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(200, 164, 92, 0.25);
 }
 
 .athlete-track-card--featured {
-  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
+  border-color: rgba(200, 164, 92, 0.45);
+  border-left: 4px solid #c8a45c;
   background:
     radial-gradient(
       circle at 90% 10%,
-      rgb(200 164 92 / 10%),
+      rgb(200 164 92 / 16%),
       transparent 14rem
     ),
-    var(--stage-paper-elevated);
+    rgba(14, 19, 32, 0.92);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
 }
 
 .athlete-track-card__header {
@@ -1764,8 +1816,12 @@
 
 .athlete-timeline-section {
   background:
-    radial-gradient(circle at 20% 40%, rgb(177 22 32 / 7%), transparent 28rem),
-    var(--stage-paper);
+    radial-gradient(
+      circle at 20% 40%,
+      rgba(6, 182, 212, 0.08),
+      transparent 28rem
+    ),
+    transparent;
 }
 
 .athlete-timeline {
@@ -1928,26 +1984,37 @@
   flex-direction: column;
   justify-content: space-between;
   padding: clamp(1.25rem, 2.5vw, 1.85rem);
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(200, 164, 92, 0.22);
+  border-left: 3px solid #c8a45c;
+  border-radius: 4px;
+  background: rgba(14, 19, 32, 0.88);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
   transition:
     border-color 200ms ease,
+    box-shadow 200ms ease,
     transform 200ms ease;
 }
 
 .athlete-ledger-card:hover {
-  border-color: color-mix(in srgb, var(--stage-accent) 45%, var(--stage-line));
+  transform: translateY(-2px);
+  border-color: rgba(200, 164, 92, 0.5);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(200, 164, 92, 0.25);
 }
 
 .athlete-ledger-card--featured {
-  border-color: color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+  border-color: rgba(200, 164, 92, 0.45);
+  border-left: 4px solid #c8a45c;
   background:
     radial-gradient(
       circle at 90% 10%,
-      rgb(200 164 92 / 12%),
+      rgb(200 164 92 / 16%),
       transparent 14rem
     ),
-    var(--stage-paper-elevated);
+    rgba(14, 19, 32, 0.92);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
 }
 
 .athlete-ledger-card__top {
@@ -2069,19 +2136,39 @@
   display: flex;
   flex-direction: column;
   padding: clamp(1.4rem, 3vw, 2.25rem);
-  border: 1px solid var(--stage-line);
-  background: var(--stage-paper-elevated);
+  border: 1px solid rgba(200, 164, 92, 0.24);
+  border-left: 3px solid #c8a45c;
+  border-radius: 4px;
+  background: rgba(14, 19, 32, 0.88);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  transition:
+    transform var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.athlete-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(200, 164, 92, 0.5);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(200, 164, 92, 0.3);
 }
 
 .athlete-stat-card--featured {
-  border-color: color-mix(in srgb, var(--stage-accent) 55%, var(--stage-line));
+  border-color: rgba(200, 164, 92, 0.5);
+  border-left: 4px solid #c8a45c;
   background:
     radial-gradient(
       circle at 90% 12%,
-      rgb(200 164 92 / 12%),
+      rgb(200 164 92 / 16%),
       transparent 16rem
     ),
-    var(--stage-paper-elevated);
+    rgba(14, 19, 32, 0.92);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(200, 164, 92, 0.2);
 }
 
 .athlete-stat-card__header {
