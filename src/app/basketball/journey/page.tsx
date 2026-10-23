@@ -1,15 +1,15 @@
-import { AthleteJourneyPage } from "@/components/basketball/athlete-journey-page";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { basketballWorldNavigation } from "@/data/world-navigation";
+import { AthleteJourney } from "@/components/editorial/athlete-pages";
 
-export default function BasketballJourneyPage() {
+export default function Page() {
   return (
     <PortfolioWorldShell
       navigation={basketballWorldNavigation}
       world="basketball"
     >
-      <main className="theme-basketball">
-        <AthleteJourneyPage />
+      <main>
+        <AthleteJourney />
       </main>
     </PortfolioWorldShell>
   );

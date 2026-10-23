@@ -1,15 +1,15 @@
-import { AthletePressMediaPage } from "@/components/basketball/athlete-press-media-page";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { basketballWorldNavigation } from "@/data/world-navigation";
+import { AthleteMedia } from "@/components/editorial/athlete-pages";
 
-export default function BasketballMediaPage() {
+export default function Page() {
   return (
     <PortfolioWorldShell
       navigation={basketballWorldNavigation}
       world="basketball"
     >
-      <main className="theme-basketball">
-        <AthletePressMediaPage />
+      <main>
+        <AthleteMedia />
       </main>
     </PortfolioWorldShell>
   );

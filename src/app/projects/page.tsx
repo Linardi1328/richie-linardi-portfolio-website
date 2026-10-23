@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
-import { publicProjectCatalogue } from "@/data/project-registry";
 import { professionalWorldNavigation } from "@/data/world-navigation";
+import { publicProjectCatalogue } from "@/data/project-registry";
+import { PageIntro, ProjectCard } from "@/components/editorial/shared";
 
 export default function ProjectsPage() {
   return (
@@ -9,53 +9,22 @@ export default function ProjectsPage() {
       navigation={professionalWorldNavigation}
       world="professional"
     >
-      <main className="foundation-route">
-        <section className="foundation-route__hero">
-          <div className="foundation-route__hero-inner">
-            <p className="foundation-route__eyebrow">Projects</p>
-            <h1>Systems first. Evidence attached.</h1>
-            <p className="foundation-route__lede">
-              The preview catalogue exposes the full project architecture now.
-              Each project routes to a case-study foundation built from the
-              verified project registry instead of generated marketing copy.
-            </p>
+      <main>
+        <PageIntro
+          eyebrow="Projects & exploration"
+          title="From a question to a working system."
+          description="Research, applied AI, automation, and software projects. Explore the thinking, the implementation, and the boundaries behind each one."
+        />
+        <section className="section container section--compact">
+          <div className="gallery-toolbar">
+            <p>{publicProjectCatalogue.length} public projects</p>
+            <span>Data · Intelligence · Systems</span>
           </div>
-        </section>
-
-        <section
-          className="foundation-route__sections"
-          aria-label="Project catalogue"
-        >
-          {publicProjectCatalogue.map((project, index) => (
-            <article className="foundation-route__section" key={project.slug}>
-              <div
-                className="foundation-route__section-index"
-                aria-hidden="true"
-              >
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <div className="foundation-route__section-content">
-                <div className="foundation-route__section-header">
-                  <p className="foundation-route__eyebrow">{project.phase}</p>
-                  <h2>{project.title}</h2>
-                </div>
-                <div className="foundation-route__section-body">
-                  <p>{project.summary}</p>
-                  <ul>
-                    <li>{project.currentStatus}</li>
-                    <li>{project.tags.join(" · ")}</li>
-                    <li>Implementation reviewed {project.statusVerifiedAt}</li>
-                  </ul>
-                  <Link
-                    className="foundation-route__primary-link"
-                    href={`/projects/${project.slug}`}
-                  >
-                    Open case-study foundation <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
+          <div className="card-grid">
+            {publicProjectCatalogue.map((project, index) => (
+              <ProjectCard project={project} index={index} key={project.slug} />
+            ))}
+          </div>
         </section>
       </main>
     </PortfolioWorldShell>

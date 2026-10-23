@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import localFont from "next/font/local";
 import "./globals.css";
-import "../styles/production-shell.css";
-import "../styles/featured-project-dossier.css";
-import "../styles/foundation-routes.css";
-import "../styles/portfolio-depth.css";
-import "../styles/motion-effects.css";
-import "../styles/basketball-record.css";
-import "../styles/athlete-home.css";
-import "../styles/production-hardening.css";
-import "../styles/signature-flipbook.css";
-import "../styles/supporting-identity-routes.css";
-import "../styles/dual-trace.css";
-import "../styles/environmental-landscape.css";
-import "../styles/legal-pages.css";
-import "../styles/athlete-media-gallery.css";
-import "../styles/portfolio-photography.css";
+import "../styles/editorial.css";
+
+const manrope = localFont({
+  src: "../../public/fonts/manrope-variable.ttf",
+  display: "swap",
+  variable: "--font-manrope",
+  weight: "200 800",
+});
 
 const portfolioTitle = "Richie Linardi | Data Science, AI & Basketball";
 const portfolioDescription =
-  "Two-sided portfolio for Richie Linardi, connecting software, data, AI, and basketball through one evidence-driven personal archive.";
+  "Richie Linardi’s portfolio: data science, applied AI, software projects, and a life in competitive basketball.";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 const isPreview = process.env.PORTFOLIO_PREVIEW === "1";
 
@@ -67,7 +61,7 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`${manrope.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

@@ -1,15 +1,15 @@
-import { AthleteAchievementsPage } from "@/components/basketball/athlete-achievements-page";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { basketballWorldNavigation } from "@/data/world-navigation";
+import { AthleteAchievements } from "@/components/editorial/athlete-pages";
 
-export default function BasketballAchievementsPage() {
+export default function Page() {
   return (
     <PortfolioWorldShell
       navigation={basketballWorldNavigation}
       world="basketball"
     >
-      <main className="theme-basketball">
-        <AthleteAchievementsPage />
+      <main>
+        <AthleteAchievements />
       </main>
     </PortfolioWorldShell>
   );

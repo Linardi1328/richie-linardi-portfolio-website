@@ -1,17 +1,14 @@
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { professionalWorldNavigation } from "@/data/world-navigation";
-import { ProfessionalDualTracePage } from "@/components/dual-trace/professional-dual-trace-page";
+import { ProfessionalHome } from "@/components/editorial/home-pages";
 
-export default function Home() {
+export default function Page() {
   return (
     <PortfolioWorldShell
-      dualTraceHome={true}
       navigation={professionalWorldNavigation}
       world="professional"
     >
-      <main className="theme-professional">
-        <ProfessionalDualTracePage />
-      </main>
+      <ProfessionalHome />
     </PortfolioWorldShell>
   );
 }
