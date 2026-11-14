@@ -566,7 +566,8 @@ export function AthleteHome() {
       <section className="home-hero home-hero--athlete container">
         <div className="home-hero__copy">
           <p className="eyebrow">
-            <span className="status-dot" /> Indonesia · No. 13
+            <span className="status-dot" /> Indonesia · No. 13 · National
+            Athlete
           </p>
           <h1>
             For the game.
@@ -577,12 +578,16 @@ export function AthleteHome() {
           </h1>
           <p className="lede">
             I’m Richie Linardi. From DBL Academy in Surabaya to representing
-            Indonesia, basketball has been a journey of preparation,
-            competition, and growing together.
+            Indonesia internationally, basketball has been an eight-year
+            discipline of preparation, high-stakes competition, and collective
+            accountability.
           </p>
           <div className="button-row">
             <Link className="button button--primary" href="/basketball/journey">
               Follow my journey ↗
+            </Link>
+            <Link className="button button--plain" href="/basketball/stats">
+              Verified statistics ↗
             </Link>
             <Link className="button button--plain" href="/basketball/gallery">
               The photo archive →
@@ -610,14 +615,36 @@ export function AthleteHome() {
           </div>
         </div>
       </section>
-      <div className="focus-strip">
-        <div className="container">
-          <span>Career landmarks</span>
-          <p>
-            ASG Gold 2024 <i /> DBL All-Star <i /> FIBA U18 Asia Cup
-          </p>
+
+      <section className="section container section--compact">
+        <div className="athlete-landmark-bar">
+          <div className="athlete-landmark-item">
+            <span className="landmark-label">International Gold</span>
+            <strong>ASEAN Schools Games 2024</strong>
+            <span className="landmark-sub">
+              56–54 vs Philippines · Da Nang, Vietnam
+            </span>
+          </div>
+          <div className="athlete-landmark-item">
+            <span className="landmark-label">National Selection</span>
+            <strong>DBL Indonesia All-Star</strong>
+            <span className="landmark-sub">2024 Boys All-Star Roster</span>
+          </div>
+          <div className="athlete-landmark-item">
+            <span className="landmark-label">Continental Play</span>
+            <strong>FIBA U18 Asia Cup 2024</strong>
+            <span className="landmark-sub">Amman, Jordan · Indonesia</span>
+          </div>
+          <div className="athlete-landmark-item">
+            <span className="landmark-label">Provincial Games</span>
+            <strong>PorProv VIII Champion</strong>
+            <span className="landmark-sub">
+              Kota Surabaya · 21 PTS in Final
+            </span>
+          </div>
         </div>
-      </div>
+      </section>
+
       <section className="section container">
         <SectionHeading
           label="Moments that matter"
@@ -645,6 +672,7 @@ export function AthleteHome() {
           ))}
         </div>
       </section>
+
       <section className="section section--tinted">
         <div className="container feature-split">
           <PortfolioPhotograph photo="gold" />
@@ -678,6 +706,48 @@ export function AthleteHome() {
           </div>
         </div>
       </section>
+
+      <section className="section container dual-identity-section">
+        <SectionHeading
+          label="Court to Codebase · Dual Identity"
+          title="How competitive basketball shapes software engineering."
+        >
+          Preparation, resilience under pressure, and collective accountability
+          bridge both worlds.
+        </SectionHeading>
+        <div className="dual-identity-grid">
+          <article className="dual-identity-card">
+            <p className="eyebrow">Preparation & Systematic Execution</p>
+            <h3 className="card-heading">Reps Before the Game</h3>
+            <p>
+              In basketball, execution in the fourth quarter is determined by
+              thousands of repetitions in empty gyms. In software, system
+              resilience under peak tournament load is determined by
+              deterministic error handling, edge caching, and automated testing
+              before release.
+            </p>
+          </article>
+          <article className="dual-identity-card">
+            <p className="eyebrow">Trust & Composure Under Pressure</p>
+            <h3 className="card-heading">Accountability in High Stakes</h3>
+            <p>
+              Whether defending a two-point lead in the final seconds of an
+              international championship match or deploying live scoring
+              infrastructure across two courts and four divisions, clarity of
+              role and calm communication make the difference.
+            </p>
+          </article>
+        </div>
+        <div className="button-row" style={{ marginTop: "2rem" }}>
+          <Link className="button button--primary" href="/projects">
+            Explore technical projects ↗
+          </Link>
+          <Link className="button button--plain" href="/about">
+            Dual identity profile →
+          </Link>
+        </div>
+      </section>
+
       <section className="section container">
         <SectionHeading
           label="Explore the athlete"
@@ -692,14 +762,26 @@ export function AthleteHome() {
               copy: "Academy foundations, school competition, club basketball, and international representation.",
             },
             {
-              href: "/basketball/gallery",
+              href: "/basketball/achievements",
               no: "02",
+              title: "Milestones & honors",
+              copy: "Documented gold medals, All-Star selection, and competitive podium finishes.",
+            },
+            {
+              href: "/basketball/stats",
+              no: "03",
+              title: "Verified statistics",
+              copy: "Official season progression, tournament shooting, and championship box scores.",
+            },
+            {
+              href: "/basketball/gallery",
+              no: "04",
               title: "The photographs",
-              copy: "A personal collection of game moments, teammates, and milestones.",
+              copy: "A personal collection of game moments, teammates, and milestones from Da Nang to Jakarta.",
             },
             {
               href: "/basketball/media",
-              no: "03",
+              no: "05",
               title: "In the record",
               copy: "Published coverage, federation profiles, and sources behind the competitive record.",
             },

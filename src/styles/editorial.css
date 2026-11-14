@@ -2463,8 +2463,182 @@ tbody th {
   line-height: 1.65;
 }
 
+/* Athlete Experience System (Phase D) */
+.athlete-landmark-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+}
+.athlete-landmark-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.athlete-landmark-item .landmark-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 700;
+}
+.athlete-landmark-item strong {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.athlete-landmark-item .landmark-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.dual-identity-section {
+  margin-top: 1rem;
+}
+.dual-identity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+.dual-identity-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.dual-identity-card .card-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.dual-identity-card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.timeline-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.verification-pill {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.verification-pill--published {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.achievement-hero-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 2.25rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  transition: border-color 0.2s ease;
+}
+.achievement-hero-card:hover {
+  border-color: var(--accent);
+}
+.achievement-hero-card .portfolio-photograph img {
+  border-radius: 8px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+}
+.achievement-hero-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.achievement-hero-card__body .large-year {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.05em;
+}
+.achievement-hero-card__body h3 {
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.achievement-hero-card__body p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.stats-integrity-banner {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.25rem 1.75rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+.stats-integrity-banner strong {
+  color: var(--ink);
+}
+
+.gallery-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+.gallery-provenance {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
 /* Responsive Overrides */
 @media (max-width: 900px) {
+  .athlete-landmark-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .dual-identity-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .achievement-hero-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
   .credentials-bar {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -2476,6 +2650,13 @@ tbody th {
   .resume-skills-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .athlete-landmark-bar {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
