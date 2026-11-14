@@ -60,10 +60,13 @@ jobs:
             "/"
             "/about"
             "/projects"
+            "/projects/khlim-3x3-live"
+            "/projects/kynexa"
+            "/projects/rivora"
             "/projects/spy-market-agent"
+            "/projects/tourism-dashboard"
+            "/projects/personal-portfolio"
             "/projects/personal-project-operator"
-            "/projects/ledgerpilot-ai"
-            "/projects/khlim-assist"
             "/projects/rbl-content-engine"
             "/projects/khlim-digital-ecosystem"
             "/experience"
@@ -76,14 +79,33 @@ jobs:
             "/basketball/stats"
             "/basketball/gallery"
             "/basketball/media"
+            "/privacy"
+            "/terms"
+            "/cookies"
+            "/refunds"
             "/design-system"
             "/robots.txt"
+            "/sitemap.xml"
           )
 
           for route in "${routes[@]}"; do
             echo "Smoke testing $route"
             if ! curl --fail --silent --show-error "http://127.0.0.1:3000${route}" > /dev/null; then
               cat /tmp/portfolio-next.log
+              exit 1
+            fi
+          done
+
+          excluded_routes=(
+            "/projects/ledgerpilot-ai"
+            "/projects/khlim-assist"
+          )
+
+          for route in "${excluded_routes[@]}"; do
+            echo "Smoke testing excluded 404 for $route"
+            status=$(curl --silent --output /dev/null --write-out "%{http_code}" "http://127.0.0.1:3000${route}")
+            if [ "$status" != "404" ]; then
+              echo "Expected 404 for excluded route $route, got $status"
               exit 1
             fi
           done
