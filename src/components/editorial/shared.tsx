@@ -60,10 +60,35 @@ const projectThemes: Record<
   string,
   { code: string; label: string; motif: string }
 > = {
+  "khlim-3x3-live": {
+    code: "3X3",
+    label: "Live tournament platform",
+    motif: "chart",
+  },
+  kynexa: {
+    code: "KY",
+    label: "Registration platform",
+    motif: "nodes",
+  },
+  rivora: {
+    code: "RV",
+    label: "Managed tournament ops",
+    motif: "chart",
+  },
   "spy-market-agent": {
     code: "AQ",
     label: "Research & intelligence",
     motif: "chart",
+  },
+  "tourism-dashboard": {
+    code: "TM",
+    label: "Interactive visualization",
+    motif: "chart",
+  },
+  "personal-portfolio": {
+    code: "RL",
+    label: "Personal web system",
+    motif: "nodes",
   },
   "personal-project-operator": {
     code: "PPO",

@@ -1,19 +1,41 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { PageIntro, SectionHeading } from "@/components/editorial/shared";
-import {
-  getProjectBySlug,
-  publicProjectCatalogue,
-} from "@/data/project-registry";
+import { getProjectBySlug, projectRegistry } from "@/data/project-registry";
 import { getMediaByRoute } from "@/data/media-manifest";
 import { professionalWorldNavigation } from "@/data/world-navigation";
 import { getRepositoryActivity } from "@/lib/repository-activity";
 
 export const revalidate = 3600;
 export function generateStaticParams() {
-  return publicProjectCatalogue.map((project) => ({ slug: project.slug }));
+  return projectRegistry
+    .filter((project) => project.catalogueState !== "candidate")
+    .map((project) => ({ slug: project.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+  if (!project || project.catalogueState === "candidate") return {};
+  const isUnlisted = project.catalogueState === "unlisted";
+
+  return {
+    title: `${project.title} · Richie Linardi`,
+    description: project.summary,
+    robots: isUnlisted
+      ? {
+          index: false,
+          follow: false,
+        }
+      : undefined,
+  };
 }
 
 export default async function ProjectPage({
@@ -24,8 +46,15 @@ export default async function ProjectPage({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project || project.catalogueState === "candidate") notFound();
-  const activity = await getRepositoryActivity(project.repositoryUrl);
+  const hasDedicatedRepo =
+    Boolean(project.repositoryUrl) &&
+    project.repositoryUrl !== "https://github.com/Linardi1328";
+  const activity = hasDedicatedRepo
+    ? await getRepositoryActivity(project.repositoryUrl)
+    : null;
   const media = getMediaByRoute(`/projects/${slug}`);
+  const isUnlisted = project.catalogueState === "unlisted";
+
   return (
     <PortfolioWorldShell
       navigation={professionalWorldNavigation}
@@ -37,16 +66,46 @@ export default async function ProjectPage({
           title={project.title}
           description={project.summary}
         />
+        {isUnlisted ? (
+          <div className="container" style={{ marginBottom: "1.5rem" }}>
+            <div
+              style={{
+                padding: "0.85rem 1.25rem",
+                borderRadius: "8px",
+                border: "1px solid var(--line)",
+                background: "var(--surface)",
+                fontSize: "0.8rem",
+                color: "var(--muted)",
+              }}
+            >
+              <strong>Archival Notice:</strong> This project entry is an
+              unlisted historical reference retained for direct link and route
+              integrity. It is excluded from the active public showcase.
+            </div>
+          </div>
+        ) : null}
         <section className="section container section--compact">
           <div className="project-actions">
-            <a
-              className="button button--primary"
-              href={project.repositoryUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Explore the repository ↗
-            </a>
+            {project.deploymentUrl ? (
+              <a
+                className="button button--primary"
+                href={project.deploymentUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open live deployment ↗
+              </a>
+            ) : null}
+            {hasDedicatedRepo ? (
+              <a
+                className={`button ${project.deploymentUrl ? "button--plain" : "button--primary"}`}
+                href={project.repositoryUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Explore the repository ↗
+              </a>
+            ) : null}
             <Link className="text-link" href="/projects">
               ← All projects
             </Link>

@@ -24,7 +24,7 @@ export function ProfessionalHome() {
             <span className="hero-status-pill">
               <span className="status-dot-pulse" aria-hidden="true" />
               Monash CS (Data Science) · CGPA 3.50 · Incoming Intern @ GTEX Asia
-              (Nov 2026)
+              (Scheduled Nov 2026)
             </span>
             <h2
               style={{
@@ -200,8 +200,15 @@ export function ProfessionalHome() {
               <div className="flagship-metric-label">Tournament Divisions</div>
             </div>
             <div className="flagship-metric-card">
-              <div className="flagship-metric-number">100%</div>
-              <div className="flagship-metric-label">Centralized Standings</div>
+              <div
+                className="flagship-metric-number"
+                style={{ fontSize: "clamp(1.6rem, 2.4vw, 2.2rem)" }}
+              >
+                Automated
+              </div>
+              <div className="flagship-metric-label">
+                Division Standings & Brackets
+              </div>
             </div>
           </div>
 
@@ -240,22 +247,24 @@ export function ProfessionalHome() {
                 <p>
                   Cloudflare Workers edge endpoint serves the live spectator
                   schedules, live scores, and updated ladders to players,
-                  coaches, and spectators without server bottlenecks.
+                  coaches, and spectators, decoupling public read traffic from
+                  the scoring sheet.
                 </p>
               </div>
             </div>
           </div>
 
           <div className="flagship-reflection">
-            <h4>Operational Reality & Engineering Lessons</h4>
+            <h4>Operational Reality & Tournament Lessons</h4>
             <p>
-              Operating live during the October tournament revealed real-world
-              network variance at the scoring desk and peak concurrent spectator
-              query spikes. While automated standings eliminated paper
-              tabulation delays and dispute resolution time, edge caching rules
-              and mobile connectivity resilience provided foundational
-              architectural insights now informing the next-generation managed
-              platform (RIVORA).
+              Operating live during the October tournament provided practical
+              operational feedback regarding courtside score entry response
+              times and scoring table network variance during peak concurrent
+              game transitions. While automated standings eliminated paper
+              calculation delays and expedited bracket progressions, these
+              tournament realities provided concrete requirements for caching
+              strategies, offline tolerance, and clear boundary separation in
+              future platform development.
             </p>
           </div>
 
@@ -269,8 +278,9 @@ export function ProfessionalHome() {
               View Cloudflare Worker Deployment ↗
             </a>
             <span style={{ fontSize: "0.75rem", color: "#64748b" }}>
-              Historical event deployment reviewed 24 Oct 2026; live
-              availability reflects documented Worker runtime.
+              Completed one-day tournament deployment (24 Oct 2026); live
+              availability reflects documented Worker runtime. Multi-tournament
+              management development continues separately under RIVORA.
             </span>
           </div>
         </div>
