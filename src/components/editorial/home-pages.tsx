@@ -1,142 +1,550 @@
 import Link from "next/link";
 import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
-import { publicProjectCatalogue } from "@/data/project-registry";
 import {
   basketballAchievements,
   asg2024FinalSnapshot,
   fibaU18Snapshot,
 } from "@/data/basketball-record";
-import { ProjectCard, SectionHeading } from "./shared";
+import { SectionHeading } from "./shared";
 
 export function ProfessionalHome() {
   return (
     <main>
-      <section className="home-hero container">
-        <div className="home-hero__copy">
-          <p className="eyebrow">
-            <span className="status-dot" /> Data science · Applied AI · Computer
-            science
-          </p>
-          <h1>
-            Curiosity.
-            <br />
-            Built into
-            <br />
-            <em>something real.</em>
-          </h1>
-          <p className="lede">
-            I’m Richie Linardi, a Computer Science student at Monash University
-            Malaysia. I explore how data, AI, and thoughtful software can turn
-            complex problems into useful systems.
-          </p>
-          <div className="button-row">
-            <Link className="button button--primary" href="#selected-work">
-              Explore my work ↗
-            </Link>
-            <Link className="button button--plain" href="/about">
-              A little about me →
-            </Link>
-          </div>
-          <div className="hero-footnote">
-            <span>Based in Malaysia</span>
-            <span>Monash University Malaysia</span>
-          </div>
-        </div>
-        <div className="home-hero__visual">
-          <div className="photo-label">
-            <span>01 / The professional side</span>
-            <span>Richie Linardi</span>
-          </div>
-          <PortfolioPhotograph photo="professional" preload />
-          <div className="hero-photo-note">
-            <span className="note-number">RL.</span>
-            <p>
-              Analytical by nature.
-              <br />
-              Driven by possibility.
+      {/* Monumental Cinematic Hero */}
+      <section className="cinematic-hero-wrap container">
+        <h1 className="monumental-name">
+          <span>Richie</span>
+          <span className="accent-text">
+            Linardi<span className="wordmark__dot">.</span>
+          </span>
+        </h1>
+
+        <div className="home-hero" style={{ paddingTop: 0 }}>
+          <div className="home-hero__copy">
+            <span className="hero-status-pill">
+              <span className="status-dot-pulse" aria-hidden="true" />
+              Monash CS (Data Science) · CGPA 3.50 · Incoming Intern @ GTEX Asia
+              (Nov 2026)
+            </span>
+            <h2
+              style={{
+                fontSize: "clamp(1.75rem, 2.8vw, 2.6rem)",
+                lineHeight: 1.15,
+                letterSpacing: "-0.04em",
+                marginBlock: "0.75rem 1.25rem",
+                fontWeight: 750,
+              }}
+            >
+              Developing secure, data-driven software, human-supervised AI
+              systems, and competitive athletic discipline.
+            </h2>
+            <p className="lede">
+              I’m Richie Linardi, a Computer Science student at Monash
+              University Malaysia specializing in Data Science. I build
+              practical software across full-stack engineering, quantitative
+              research, live sports operations, and independent ventures.
             </p>
-            <Link href="/basketball">Meet the athlete ↗</Link>
+            <div className="button-row">
+              <a className="button button--primary" href="#flagship-system">
+                Explore Flagship System ↓
+              </a>
+              <Link className="button button--plain" href="/resume">
+                Read Résumé ↗
+              </Link>
+              <Link className="button button--plain" href="/contact">
+                Let’s Connect →
+              </Link>
+            </div>
+            <div className="hero-footnote">
+              <span>Subang Jaya, Selangor, Malaysia</span>
+              <span>Monash University Malaysia (Expected 2027)</span>
+              <span>Flagship: KHLIM 3x3 Live (118 Matches)</span>
+            </div>
+          </div>
+          <div className="home-hero__visual">
+            <div className="photo-label">
+              <span>01 / The professional side</span>
+              <span>Richie Linardi</span>
+            </div>
+            <PortfolioPhotograph photo="professional" preload />
+            <div className="hero-photo-note">
+              <span className="note-number">RL.</span>
+              <p>
+                Analytical by nature.
+                <br />
+                Built with engineering rigor and competitive focus.
+              </p>
+              <Link href="/basketball">Meet the athlete ↗</Link>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Focus strip */}
       <div className="focus-strip">
         <div className="container">
-          <span>My areas of focus</span>
+          <span>Core technical domains</span>
           <p>
-            Data Science <i /> Applied AI <i /> Automation <i /> Reliable
-            Systems
+            Data Science <i /> Applied AI <i /> Full-Stack Engineering <i />
+            Live Sports Operations <i /> Quantitative Research
           </p>
         </div>
       </div>
-      <section className="section container" id="selected-work">
-        <SectionHeading
-          label="Selected work"
-          title="Ideas, put into practice."
-          link={{ href: "/projects", label: "All projects" }}
-        >
-          A selection of research, automation, and software projects. Each one
-          is connected to its source and current boundaries.
-        </SectionHeading>
-        <div className="card-grid">
-          {publicProjectCatalogue.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} index={index} />
-          ))}
-        </div>
-      </section>
+
+      {/* Editorial Narrative Bridge */}
       <section className="section section--tinted">
         <div className="container">
           <SectionHeading
-            label="Beyond the code"
-            title="Learning happens everywhere."
-          />
+            label="The editorial thread"
+            title="One journey. Two sides. The same discipline."
+          >
+            Whether architecting deterministic event scoring systems,
+            researching walk-forward market models, or competing against
+            national-caliber guards at the FIBA U18 Asia Cup, the standard is
+            identical: rigorous preparation, calm execution under pressure, and
+            relentless accountability.
+          </SectionHeading>
           <div className="story-grid">
             <article className="story-card">
               <PortfolioPhotograph photo="monash" />
               <div>
-                <p className="eyebrow">Education</p>
-                <h3>A foundation in curiosity.</h3>
+                <p className="eyebrow">
+                  Academic Foundation · Monash University Malaysia
+                </p>
+                <h3>Bachelor of Computer Science (Data Science)</h3>
                 <p>
-                  Computer Science, a Data Science specialization, and room to
-                  keep asking better questions.
+                  CGPA 3.50 with expected graduation in Nov 2027. Foundational
+                  coursework in algorithms, databases, data visualisation,
+                  statistics, and software design.
                 </p>
                 <Link className="text-link" href="/education">
-                  My academic journey ↗
+                  View academic pathway ↗
                 </Link>
               </div>
             </article>
             <article className="story-card">
               <PortfolioPhotograph photo="hackathon" />
               <div>
-                <p className="eyebrow">Collaboration</p>
-                <h3>Different perspectives. New ideas.</h3>
+                <p className="eyebrow">Collaborative Sprint · Midnight Owls</p>
+                <h3>AI Video Hackathon KL 2026</h3>
                 <p>
-                  Bringing basketball and generative video together at the AI
-                  Video Hackathon KL 2026.
+                  Participant in the AI Video Hackathon KL 2026 with team
+                  Midnight Owls, merging generative AI workflows, rapid problem
+                  formulation, and real-time sprint execution.
                 </p>
                 <Link className="text-link" href="/experience">
-                  Explore my experience ↗
+                  Explore experience and leadership ↗
                 </Link>
               </div>
             </article>
           </div>
         </div>
       </section>
-      <section className="section container bridge">
-        <div>
-          <p className="eyebrow">The other side of the story</p>
-          <h2>
-            The same discipline.
-            <br />A different arena.
-          </h2>
-          <p>
-            Basketball has shaped how I prepare, communicate, and respond under
-            pressure. It is a big part of the person behind the projects.
+
+      {/* Flagship Deployed System: KHLIM 3x3 Live V1 */}
+      <section className="section container" id="flagship-system">
+        <div className="flagship-dossier">
+          <div className="flagship-badge-row">
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.75rem",
+                flexWrap: "wrap",
+              }}
+            >
+              <span className="flagship-badge">
+                <span
+                  className="status-dot-pulse"
+                  style={{ backgroundColor: "#38bdf8" }}
+                  aria-hidden="true"
+                />
+                FLAGSHIP DEPLOYED SYSTEM · 24 OCT 2026
+              </span>
+              <span
+                style={{
+                  fontSize: "0.72rem",
+                  color: "#94a3b8",
+                  fontWeight: 700,
+                }}
+              >
+                KHLIM 3x3 Basketball Tournament
+              </span>
+            </div>
+            <span
+              style={{ fontSize: "0.72rem", color: "#64748b", fontWeight: 600 }}
+            >
+              Cloudflare Workers · Google Apps Script · Google Sheets
+            </span>
+          </div>
+
+          <h2 className="flagship-title">KHLIM 3x3 Live V1</h2>
+          <p className="flagship-subtitle">
+            Delivered live tournament scoring for 118 matches across 2 courts
+            and 4 divisions; automated standings and brackets via Google Sheets,
+            Apps Script, and Cloudflare Workers, reducing manual workload and
+            centralising tournament results.
           </p>
-          <Link className="button button--primary" href="/basketball">
-            Step onto the court ↗
-          </Link>
+
+          <div className="flagship-metrics-grid">
+            <div className="flagship-metric-card">
+              <div className="flagship-metric-number">118</div>
+              <div className="flagship-metric-label">Matches Scored</div>
+            </div>
+            <div className="flagship-metric-card">
+              <div className="flagship-metric-number">2</div>
+              <div className="flagship-metric-label">Active Courts</div>
+            </div>
+            <div className="flagship-metric-card">
+              <div className="flagship-metric-number">4</div>
+              <div className="flagship-metric-label">Tournament Divisions</div>
+            </div>
+            <div className="flagship-metric-card">
+              <div className="flagship-metric-number">100%</div>
+              <div className="flagship-metric-label">Centralized Standings</div>
+            </div>
+          </div>
+
+          <div className="flagship-architecture">
+            <div className="flagship-arch-title">
+              Technical Architecture & Workflow Breakdown
+            </div>
+            <div className="flagship-flow-grid">
+              <div className="flagship-flow-card">
+                <span className="flow-step-number">
+                  PHASE 01 / COURT INGESTION
+                </span>
+                <h4>Mobile Scorekeeping</h4>
+                <p>
+                  Courtside table officials record points, fouls, and match
+                  clock directly via an optimized mobile Google Sheets interface
+                  designed for rapid 3x3 game pace.
+                </p>
+              </div>
+              <div className="flagship-flow-card">
+                <span className="flow-step-number">
+                  PHASE 02 / AUTOMATION ENGINE
+                </span>
+                <h4>Validation & Standings</h4>
+                <p>
+                  Google Apps Script automation computes tiebreakers, division
+                  standings, and playoff bracket progressions deterministically
+                  upon score confirmation.
+                </p>
+              </div>
+              <div className="flagship-flow-card">
+                <span className="flow-step-number">
+                  PHASE 03 / EDGE DISTRIBUTION
+                </span>
+                <h4>Cloudflare Workers Feed</h4>
+                <p>
+                  Cloudflare Workers edge endpoint serves the live spectator
+                  schedules, live scores, and updated ladders to players,
+                  coaches, and spectators without server bottlenecks.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flagship-reflection">
+            <h4>Operational Reality & Engineering Lessons</h4>
+            <p>
+              Operating live during the October tournament revealed real-world
+              network variance at the scoring desk and peak concurrent spectator
+              query spikes. While automated standings eliminated paper
+              tabulation delays and dispute resolution time, edge caching rules
+              and mobile connectivity resilience provided foundational
+              architectural insights now informing the next-generation managed
+              platform (RIVORA).
+            </p>
+          </div>
+
+          <div className="flagship-actions">
+            <a
+              className="button button--flagship-live"
+              href="https://prod.khlim-3x3-live.workers.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Cloudflare Worker Deployment ↗
+            </a>
+            <span style={{ fontSize: "0.75rem", color: "#64748b" }}>
+              Historical event deployment reviewed 24 Oct 2026; live
+              availability reflects documented Worker runtime.
+            </span>
+          </div>
         </div>
-        <PortfolioPhotograph photo="allStar" />
+      </section>
+
+      {/* Active & In-Development Systems */}
+      <section className="section container" id="selected-systems">
+        <SectionHeading
+          label="02 / Active & in-development systems"
+          title="Focused software engineering across sports, research, and data."
+          link={{ href: "/projects", label: "All projects" }}
+        >
+          Selected technical systems developed by Richie Linardi. Each project
+          maintains explicit boundaries, verified implementations, and clear
+          operational status.
+        </SectionHeading>
+
+        <div className="secondary-systems-grid">
+          {/* KYNEXA */}
+          <article className="secondary-system-card">
+            <div>
+              <p className="eyebrow" style={{ color: "#2563eb" }}>
+                In development · Sports Infrastructure
+              </p>
+              <h3>KYNEXA</h3>
+              <p>
+                Sports opportunity and registration platform. Developing athlete
+                and organizer workflows with Supabase/PostgreSQL authorization
+                and registration validation; pilot acceptance ongoing.
+              </p>
+            </div>
+            <div className="system-tag-list">
+              <span className="system-tag">Next.js</span>
+              <span className="system-tag">TypeScript</span>
+              <span className="system-tag">Supabase</span>
+              <span className="system-tag">PostgreSQL</span>
+              <span className="system-tag">Role Authorization</span>
+            </div>
+          </article>
+
+          {/* RIVORA */}
+          <article className="secondary-system-card">
+            <div>
+              <p className="eyebrow" style={{ color: "#2563eb" }}>
+                In development · Tournament Platform
+              </p>
+              <h3>RIVORA</h3>
+              <p>
+                Developer-managed basketball tournament platform. Building
+                branded spectator experiences and tournament operations for
+                schedules, live scores, standings, and brackets; V1 validation
+                ongoing.
+              </p>
+            </div>
+            <div className="system-tag-list">
+              <span className="system-tag">TypeScript</span>
+              <span className="system-tag">React</span>
+              <span className="system-tag">Tournament Operations</span>
+              <span className="system-tag">Live Brackets</span>
+            </div>
+          </article>
+
+          {/* AXIOM QUANTUM */}
+          <article className="secondary-system-card">
+            <div>
+              <p className="eyebrow" style={{ color: "#2563eb" }}>
+                Quantitative research · v2 beta research baseline
+              </p>
+              <h3>AXIOM QUANTUM</h3>
+              <p>
+                Leakage-aware SPY market-research and walk-forward evaluation
+                system with deterministic safety gates, backtesting, and
+                independent risk controls. Experimental research software with
+                no live trading or profitability claims.
+              </p>
+            </div>
+            <div className="system-tag-list">
+              <span className="system-tag">Python</span>
+              <span className="system-tag">pandas</span>
+              <span className="system-tag">scikit-learn</span>
+              <span className="system-tag">Walk-forward ML</span>
+              <span className="system-tag">Risk Controls</span>
+            </div>
+          </article>
+
+          {/* Tourism in Malaysia Dashboard */}
+          <article className="secondary-system-card">
+            <div>
+              <p className="eyebrow" style={{ color: "#2563eb" }}>
+                Completed academic project · Apr 2026
+              </p>
+              <h3>Tourism in Malaysia Interactive Dashboard</h3>
+              <p>
+                Cleaned public datasets and built interactive maps and
+                time-series visualisations of Malaysian tourism recovery, hotel
+                occupancy rates, and regional expenditure patterns.
+              </p>
+              <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+                <a
+                  className="text-link"
+                  href="https://linardi1328.github.io/FIT2179_DV2/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View live interactive dashboard ↗
+                </a>
+              </div>
+            </div>
+            <div className="system-tag-list">
+              <span className="system-tag">JavaScript</span>
+              <span className="system-tag">HTML/CSS</span>
+              <span className="system-tag">Data Visualisation</span>
+              <span className="system-tag">Public Datasets</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* Supporting Ventures Chapter */}
+      <section className="section section--tinted">
+        <div className="container">
+          <SectionHeading
+            label="03 / Supporting ventures"
+            title="Independent initiatives and product exploration."
+          >
+            Supporting ventures within Richie Linardi’s personal portfolio. Both
+            entities are represented with neutral typography in accordance with
+            brand usage guidelines, preserving distinct professional contexts.
+          </SectionHeading>
+
+          <div className="ventures-grid">
+            <article className="venture-card">
+              <span className="venture-badge">
+                Venture in development · 2026–Present
+              </span>
+              <h3 className="venture-wordmark">R&E Technologies</h3>
+              <p>
+                Independent software development and problem-first technology
+                solutions. Architecting product scope, technical specifications,
+                and automated testing across sports technology and applied AI
+                systems (KYNEXA, RIVORA, AXIOM QUANTUM).
+              </p>
+              <div className="system-tag-list">
+                <span className="system-tag">Systems Architecture</span>
+                <span className="system-tag">Product Engineering</span>
+                <span className="system-tag">Software Development</span>
+              </div>
+            </article>
+
+            <article className="venture-card">
+              <span className="venture-badge">Creative & Media Initiative</span>
+              <h3 className="venture-wordmark">RBL</h3>
+              <p>
+                Creative media and digital storytelling initiative supporting
+                competitive basketball documentation, video production
+                workflows, and athletic portfolio presentation.
+              </p>
+              <div className="system-tag-list">
+                <span className="system-tag">Media Production</span>
+                <span className="system-tag">Digital Storytelling</span>
+                <span className="system-tag">Athlete Brand</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* The Other Side — Cross-Identity Transition */}
+      <section className="container">
+        <div className="cross-identity-cinematic">
+          <div className="cross-identity-grid">
+            <div className="cross-identity-copy">
+              <p className="eyebrow">04 / The other side of the story</p>
+              <h2>
+                One journey.
+                <br />
+                The other arena.
+              </h2>
+              <p>
+                Basketball has shaped how I prepare, communicate, and respond
+                under pressure. The same analytical precision, pressure
+                tolerance, and relentless preparation behind every commit also
+                drives my play on the court.
+              </p>
+
+              <div className="honours-pills">
+                <div className="honour-pill">
+                  <span className="honour-dot" aria-hidden="true" />
+                  <span>
+                    ASEAN Schools Games 2024 Gold Medalist (Indonesia)
+                  </span>
+                </div>
+                <div className="honour-pill">
+                  <span className="honour-dot" aria-hidden="true" />
+                  <span>DBL Indonesia All-Star 2024</span>
+                </div>
+                <div className="honour-pill">
+                  <span className="honour-dot" aria-hidden="true" />
+                  <span>FIBA U18 Asia Cup 2024 (Indonesia National Team)</span>
+                </div>
+              </div>
+
+              <Link className="button button--athlete-hero" href="/basketball">
+                Step onto the court ↗
+              </Link>
+            </div>
+
+            <div>
+              <div className="photo-label" style={{ color: "#94a3b8" }}>
+                <span>02 / The athlete side</span>
+                <span>Richie Linardi · Indonesia No. 13</span>
+              </div>
+              <PortfolioPhotograph photo="allStar" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Memorable Closing / Contact Pathway */}
+      <section className="section container" style={{ paddingTop: 0 }}>
+        <div
+          style={{ borderTop: "1px solid var(--line)", paddingTop: "3.5rem" }}
+        >
+          <SectionHeading
+            label="05 / The next conversation"
+            title="Let’s build something real together."
+          >
+            Open for software engineering opportunities, technical
+            collaborations, and data science projects. Incoming Data Annotation
+            Intern at GTEX Asia Sdn Bhd scheduled 23 Nov 2026–19 Feb 2027.
+          </SectionHeading>
+
+          <div
+            className="button-row"
+            style={{ marginTop: "1.75rem", marginBottom: "2rem" }}
+          >
+            <Link className="button button--primary" href="/contact">
+              Get in touch ↗
+            </Link>
+            <Link className="button button--plain" href="/resume">
+              View full résumé →
+            </Link>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "1.5rem",
+              fontSize: "0.85rem",
+              fontWeight: 700,
+            }}
+          >
+            <a
+              className="text-link"
+              href="https://www.linkedin.com/in/richie-linardi/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn ↗
+            </a>
+            <a
+              className="text-link"
+              href="https://github.com/Linardi1328"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub ↗
+            </a>
+            <a className="text-link" href="mailto:richb.linardi@gmail.com">
+              richb.linardi@gmail.com ↗
+            </a>
+          </div>
+        </div>
       </section>
     </main>
   );
