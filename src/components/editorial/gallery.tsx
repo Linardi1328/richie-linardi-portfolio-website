@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
 import {
@@ -46,6 +49,8 @@ const photos: GalleryPhotoItem[] = [
 ];
 
 export function AthleteGallery() {
+  const [activeFilter, setActiveFilter] = useState("all");
+
   return (
     <>
       <PageIntro
@@ -54,7 +59,10 @@ export function AthleteGallery() {
         description="On the court, with teammates, and at the podium. An authentic collection of high-resolution photographs documenting competition milestones across Da Nang and Jakarta."
       />
 
-      <section className="section container section--compact gallery-section">
+      <section
+        className="section container section--compact gallery-section"
+        data-active-filter={activeFilter}
+      >
         <div className="gallery-toolbar">
           <p className="gallery-count" aria-live="polite">
             <span data-count="all">3 photographs</span>
@@ -78,7 +86,8 @@ export function AthleteGallery() {
                   id={`photo-filter-${id}`}
                   value={id}
                   aria-label={label}
-                  defaultChecked={id === "all"}
+                  checked={activeFilter === id}
+                  onChange={(e) => setActiveFilter(e.target.value)}
                 />
                 <span>{label}</span>
               </label>

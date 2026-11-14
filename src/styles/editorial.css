@@ -1701,6 +1701,10 @@ tbody th {
 .gallery-section:has(#photo-filter-indonesia:checked)
   .gallery-card:not([data-category="indonesia"]),
 .gallery-section:has(#photo-filter-all-star:checked)
+  .gallery-card:not([data-category="all-star"]),
+.gallery-section[data-active-filter="indonesia"]
+  .gallery-card:not([data-category="indonesia"]),
+.gallery-section[data-active-filter="all-star"]
   .gallery-card:not([data-category="all-star"]) {
   display: none;
 }
@@ -1709,6 +1713,12 @@ tbody th {
   [data-count="all"],
 .gallery-section:has(#photo-filter-all-star:checked)
   .gallery-count
+  [data-count="all"],
+.gallery-section[data-active-filter="indonesia"]
+  .gallery-count
+  [data-count="all"],
+.gallery-section[data-active-filter="all-star"]
+  .gallery-count
   [data-count="all"] {
   display: none;
 }
@@ -1716,6 +1726,12 @@ tbody th {
   .gallery-count
   [data-count="indonesia"],
 .gallery-section:has(#photo-filter-all-star:checked)
+  .gallery-count
+  [data-count="all-star"],
+.gallery-section[data-active-filter="indonesia"]
+  .gallery-count
+  [data-count="indonesia"],
+.gallery-section[data-active-filter="all-star"]
   .gallery-count
   [data-count="all-star"] {
   display: inline;

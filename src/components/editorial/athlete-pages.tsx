@@ -566,11 +566,12 @@ export function AthleteStats() {
       <div className="container">
         <div className="stats-integrity-banner">
           <strong>Statistical Scope & Integrity Standard:</strong> Basketball
-          statistics originate from distinct competitions with separate tracking
-          standards—from FIBA 40-minute continental play and DBL 10-minute
-          quarter high-school series to inter-club invitationals. To maintain
-          veracity, figures are never aggregated across incompatible leagues and
-          always link to verified third-party records.
+          statistics originate from distinct tournament environments and
+          tracking frameworks—from international FIBA continental competition
+          and DBL high-school varsity league series to regional inter-club
+          invitationals. To maintain veracity, figures are never aggregated
+          across incompatible competitions and always link directly to verified
+          third-party records.
         </div>
       </div>
 
