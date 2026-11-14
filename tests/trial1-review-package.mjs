@@ -1,17 +1,26 @@
 import assert from "node:assert/strict";
 import { spawn, execSync } from "node:child_process";
 import { writeFileSync, mkdirSync, copyFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const REPO_ROOT = resolve(__dirname, "..");
 
 const ARTIFACT_DIR =
-  "/Users/richie/.gemini/antigravity/brain/bddbd5af-a297-44d4-8e5a-f2d2adb5c265";
+  process.env.ARTIFACT_DIR || resolve(REPO_ROOT, ".artifacts");
 const SCRATCH_DIR = join(ARTIFACT_DIR, "scratch");
 const EVIDENCE_ARTIFACT_DIR = join(ARTIFACT_DIR, "trial1-evidence");
-const EVIDENCE_REPO_DIR =
-  "/Users/richie/richie-linardi-portfolio-website/docs/design-references/evidence/trial1";
+const EVIDENCE_REPO_DIR = resolve(
+  REPO_ROOT,
+  "docs/design-references/evidence/trial1",
+);
 
 mkdirSync(SCRATCH_DIR, { recursive: true });
-mkdirSync(EVIDENCE_ARTIFACT_DIR, { recursive: true });
+try {
+  mkdirSync(EVIDENCE_ARTIFACT_DIR, { recursive: true });
+} catch {}
 mkdirSync(EVIDENCE_REPO_DIR, { recursive: true });
 
 async function delay(ms) {

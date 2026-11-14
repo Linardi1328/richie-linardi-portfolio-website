@@ -7,7 +7,13 @@ const args = process.argv
   .filter((arg) => arg !== "--strictPort")
   .map((arg) => (arg === "--host" ? "--hostname" : arg));
 if (
-  !args.some((arg) => arg === "--hostname" || arg.startsWith("--hostname="))
+  !args.some(
+    (arg) =>
+      arg === "--hostname" ||
+      arg.startsWith("--hostname=") ||
+      arg === "-H" ||
+      arg.startsWith("-H="),
+  )
 ) {
   args.push("--hostname", "127.0.0.1");
 }

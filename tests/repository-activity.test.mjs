@@ -8,7 +8,9 @@ afterEach(() => {
 });
 
 test("rejects arbitrary hosts and repositories without fetching", async () => {
+  let fetchCallCount = 0;
   globalThis.fetch = () => {
+    fetchCallCount += 1;
     throw new Error("Unexpected external request");
   };
   assert.equal(await getRepositoryActivity("http://localhost/admin"), null);
@@ -16,6 +18,7 @@ test("rejects arbitrary hosts and repositories without fetching", async () => {
     await getRepositoryActivity("https://github.com/another-owner/repo"),
     null,
   );
+  assert.equal(fetchCallCount, 0);
 });
 
 test("returns public repository activity with hourly revalidation", async () => {

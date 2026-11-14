@@ -67,7 +67,7 @@ const pressArticles: readonly PressArticle[] = [
       "Begini Wejangan Richie dan Kennie untuk DBL Academy Selection Team 2024",
     excerpt:
       "Advice and guidance from All-Star alumni to the incoming 2024 DBL Academy Selection Team.",
-    date: "July 2024",
+    date: "November 2024",
     href: "https://www.dbl.id/r/23090/begini-wejangan-richie-dan-kennie-untuk-dbl-academy-selection-team-2024",
     tag: "Academy Mentorship",
   },

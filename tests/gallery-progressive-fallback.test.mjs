@@ -1,8 +1,90 @@
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
 import http from "node:http";
+import net from "node:net";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const REPO_ROOT = resolve(__dirname, "..");
+
+function getAvailablePort() {
+  return new Promise((res, rej) => {
+    const srv = net.createServer();
+    srv.unref();
+    srv.on("error", rej);
+    srv.listen(0, "127.0.0.1", () => {
+      const { port } = srv.address();
+      srv.close(() => res(port));
+    });
+  });
+}
+
+function getChromeExecutable() {
+  if (process.env.CHROME_BIN && existsSync(process.env.CHROME_BIN)) {
+    return process.env.CHROME_BIN;
+  }
+  const candidates = [
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Applications/Chromium.app/Contents/MacOS/Chromium",
+    "/usr/bin/google-chrome",
+    "/usr/bin/google-chrome-stable",
+    "/usr/bin/chromium",
+    "/usr/bin/chromium-browser",
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+  ];
+  for (const c of candidates) {
+    if (existsSync(c)) return c;
+  }
+  return "google-chrome";
+}
 
 function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function waitForServer(port, maxAttempts = 40, intervalMs = 250) {
+  for (let i = 0; i < maxAttempts; i++) {
+    try {
+      const res = await fetch(`http://127.0.0.1:${port}/`);
+      if (res.status === 200) return true;
+    } catch {
+      // not ready yet
+    }
+    await delay(intervalMs);
+  }
+  return false;
+}
+
+async function waitForCdp(debugPort, maxAttempts = 30, intervalMs = 200) {
+  for (let i = 0; i < maxAttempts; i++) {
+    try {
+      const res = await new Promise((resTarget) => {
+        const req = http.get(`http://127.0.0.1:${debugPort}/json`, (r) => {
+          let data = "";
+          r.on("data", (c) => (data += c));
+          r.on("end", () => {
+            try {
+              resTarget(JSON.parse(data));
+            } catch {
+              resTarget(null);
+            }
+          });
+        });
+        req.on("error", () => resTarget(null));
+      });
+      if (res && Array.isArray(res)) {
+        const page = res.find((t) => t.type === "page");
+        if (page?.webSocketDebuggerUrl) return page.webSocketDebuggerUrl;
+      }
+    } catch {
+      // wait
+    }
+    await delay(intervalMs);
+  }
+  return null;
 }
 
 class CDPClient {
@@ -33,211 +115,389 @@ class CDPClient {
       returnByValue: true,
       awaitPromise: true,
     });
+    if (res.exceptionDetails) {
+      throw new Error(
+        `CDP evaluation error: ${JSON.stringify(res.exceptionDetails)}`,
+      );
+    }
     return res.result?.value;
   }
 }
 
 async function run() {
-  const port = 3755;
-  console.log(`Starting Next.js server on port ${port}...`);
-  const server = spawn("npx", ["next", "start", "-p", String(port)], {
-    cwd: "/Users/richie/richie-linardi-portfolio-website",
-    env: { ...process.env, PORT: String(port) },
-  });
-
-  await delay(1500);
-
-  const chrome = spawn(
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    [
-      "--headless=new",
-      "--remote-debugging-port=9489",
-      "--no-first-run",
-      "--no-default-browser-check",
-      "about:blank",
-    ],
-  );
-  await delay(1200);
-
-  const targets = await new Promise((resolve) => {
-    http.get("http://127.0.0.1:9489/json", (res) => {
-      let data = "";
-      res.on("data", (c) => (data += c));
-      res.on("end", () => resolve(JSON.parse(data)));
-    });
-  });
-
-  const pageTarget = targets.find((t) => t.type === "page");
-  const ws = new WebSocket(pageTarget.webSocketDebuggerUrl);
-  await new Promise((r) => {
-    ws.onopen = r;
-  });
-
-  const cdp = new CDPClient(ws);
-  await cdp.send("Page.enable");
-  await cdp.send("Runtime.enable");
-
-  await cdp.send("Page.navigate", {
-    url: `http://localhost:${port}/basketball/gallery`,
-  });
-  await delay(800);
-
-  console.log("\n--- Test 1: Initial All Photos Count ---");
-  const initial = await cdp.eval(`
-    (() => {
-      const cards = Array.from(document.querySelectorAll('.gallery-card'));
-      const visible = cards.filter(c => window.getComputedStyle(c).display !== 'none');
-      return { total: cards.length, visible: visible.length };
-    })()
-  `);
-  console.log(
-    `Initial total cards: ${initial.total}, visible: ${initial.visible} (Expected: 3)`,
-  );
-  if (initial.visible !== 3)
-    throw new Error("Expected 3 visible cards initially");
-
-  console.log("\n--- Test 2: Modern :has() Filtering (Indonesia) ---");
-  await cdp.eval(`document.querySelector('#photo-filter-indonesia').click()`);
-  await delay(200);
-
-  const indonesia = await cdp.eval(`
-    (() => {
-      const cards = Array.from(document.querySelectorAll('.gallery-card'));
-      const visible = cards.filter(c => window.getComputedStyle(c).display !== 'none');
-      return visible.length;
-    })()
-  `);
-  console.log(`Indonesia filter visible: ${indonesia} (Expected: 2)`);
-  if (indonesia !== 2)
-    throw new Error("Expected 2 visible cards for Indonesia");
-
-  console.log("\n--- Test 3: Modern :has() Filtering (DBL All-Star) ---");
-  await cdp.eval(`document.querySelector('#photo-filter-all-star').click()`);
-  await delay(200);
-
-  const allStar = await cdp.eval(`
-    (() => {
-      const cards = Array.from(document.querySelectorAll('.gallery-card'));
-      const visible = cards.filter(c => window.getComputedStyle(c).display !== 'none');
-      return visible.length;
-    })()
-  `);
-  console.log(`DBL All-Star filter visible: ${allStar} (Expected: 1)`);
-  if (allStar !== 1)
-    throw new Error("Expected 1 visible card for DBL All-Star");
+  const serverPort = await getAvailablePort();
+  const cdpPort = await getAvailablePort();
+  const chromePath = getChromeExecutable();
 
   console.log(
-    "\n--- Test 4: Progressive Fallback (Simulating Browser WITHOUT :has Support) ---",
+    `Starting Next.js production server on ephemeral port ${serverPort}...`,
   );
-  // In a browser without :has, the @supports selector(:has(*)) block is rejected.
-  // We simulate this by removing the @supports selector(:has(*)) rules from the document style sheets.
-  await cdp.eval(`
-    (() => {
-      for (const sheet of document.styleSheets) {
-        try {
-          for (let i = sheet.cssRules.length - 1; i >= 0; i--) {
-            const rule = sheet.cssRules[i];
-            if (rule.conditionText && rule.conditionText.includes(':has')) {
-              sheet.deleteRule(i);
-            }
-          }
-        } catch (e) {}
-      }
-    })()
-  `);
+  const server = spawn(
+    "npx",
+    ["next", "start", "-p", String(serverPort), "-H", "127.0.0.1"],
+    {
+      cwd: REPO_ROOT,
+      env: { ...process.env, PORT: String(serverPort) },
+      stdio: "ignore",
+    },
+  );
 
-  // Now test clicks purely relying on data-active-filter progressive fallback
-  console.log("  -> Click Indonesia via fallback:");
-  await cdp.eval(`document.querySelector('#photo-filter-indonesia').click()`);
-  await delay(200);
-  const fbIndo = await cdp.eval(`
-    (() => {
-      const cards = Array.from(document.querySelectorAll('.gallery-card'));
-      return cards.filter(c => window.getComputedStyle(c).display !== 'none').length;
-    })()
-  `);
-  console.log(`  Visible with fallback alone: ${fbIndo} (Expected: 2)`);
-  if (fbIndo !== 2)
-    throw new Error("Progressive fallback failed for Indonesia without :has");
+  let chrome = null;
+  let ws = null;
 
-  console.log("  -> Click DBL All-Star via fallback:");
-  await cdp.eval(`document.querySelector('#photo-filter-all-star').click()`);
-  await delay(200);
-  const fbAllStar = await cdp.eval(`
-    (() => {
-      const cards = Array.from(document.querySelectorAll('.gallery-card'));
-      return cards.filter(c => window.getComputedStyle(c).display !== 'none').length;
-    })()
-  `);
-  console.log(`  Visible with fallback alone: ${fbAllStar} (Expected: 1)`);
-  if (fbAllStar !== 1)
-    throw new Error(
-      "Progressive fallback failed for DBL All-Star without :has",
+  try {
+    const serverReady = await waitForServer(serverPort);
+    if (!serverReady) {
+      throw new Error(`Server failed to start on port ${serverPort}`);
+    }
+
+    console.log(
+      `Launching headless browser (${chromePath}) on debug port ${cdpPort}...`,
+    );
+    chrome = spawn(
+      chromePath,
+      [
+        "--headless=new",
+        `--remote-debugging-port=${cdpPort}`,
+        "--no-first-run",
+        "--no-default-browser-check",
+        "--disable-gpu",
+        "about:blank",
+      ],
+      { stdio: "ignore" },
     );
 
-  console.log("  -> Click All via fallback:");
-  await cdp.eval(`document.querySelector('#photo-filter-all').click()`);
-  await delay(200);
-  const fbAll = await cdp.eval(`
-    (() => {
-      const cards = Array.from(document.querySelectorAll('.gallery-card'));
-      return cards.filter(c => window.getComputedStyle(c).display !== 'none').length;
-    })()
-  `);
-  console.log(`  Visible with fallback alone: ${fbAll} (Expected: 3)`);
-  if (fbAll !== 3)
-    throw new Error("Progressive fallback failed for All without :has");
+    const wsUrl = await waitForCdp(cdpPort);
+    if (!wsUrl) {
+      throw new Error(`Failed to connect to CDP on port ${cdpPort}`);
+    }
 
-  console.log("\n--- Test 5: Keyboard Arrow Navigation ---");
-  await cdp.eval(`
-    (() => {
-      const radio = document.querySelector('#photo-filter-all');
-      radio.focus();
-    })()
-  `);
-  await delay(100);
-  await cdp.send("Input.dispatchKeyEvent", {
-    type: "rawKeyDown",
-    key: "ArrowRight",
-    code: "ArrowRight",
-    windowsVirtualKeyCode: 39,
-  });
-  await cdp.send("Input.dispatchKeyEvent", {
-    type: "keyUp",
-    key: "ArrowRight",
-    code: "ArrowRight",
-    windowsVirtualKeyCode: 39,
-  });
-  await delay(200);
+    ws = new WebSocket(wsUrl);
+    await new Promise((resolveWs, rejectWs) => {
+      ws.onopen = resolveWs;
+      ws.onerror = rejectWs;
+    });
 
-  const focused = await cdp.eval(`document.activeElement?.id`);
-  console.log(`Focused after ArrowRight: ${focused}`);
+    const cdp = new CDPClient(ws);
+    await cdp.send("Page.enable");
+    await cdp.send("Runtime.enable");
+    await cdp.send("DOM.enable");
 
-  console.log("\n--- Test 6: Touch Interaction Emulation ---");
-  await cdp.send("Emulation.setTouchEmulationEnabled", { enabled: true });
-  await cdp.eval(`
-    (() => {
-      const label = document.querySelector('label[for="photo-filter-indonesia"]');
-      label.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    })()
-  `);
-  await delay(200);
-  const touchIndo = await cdp.eval(`
-    (() => {
-      const cards = Array.from(document.querySelectorAll('.gallery-card'));
-      return cards.filter(c => window.getComputedStyle(c).display !== 'none').length;
-    })()
-  `);
-  console.log(
-    `Visible after touch click on Indonesia: ${touchIndo} (Expected: 2)`,
-  );
-  if (touchIndo !== 2) throw new Error("Touch click failed");
+    await cdp.send("Page.navigate", {
+      url: `http://127.0.0.1:${serverPort}/basketball/gallery`,
+    });
+    await delay(600);
 
-  console.log("\n🎉 ALL GALLERY PROGRESSIVE FALLBACK TESTS PASSED ACCURATELY!");
+    // Helper to read gallery state
+    const getGalleryState = async () => {
+      return await cdp.eval(`
+        (() => {
+          const section = document.querySelector('.gallery-section');
+          const activeFilterAttr = section ? section.getAttribute('data-active-filter') : null;
+          const cards = Array.from(document.querySelectorAll('.gallery-card'));
+          const visibleCards = cards.filter(c => window.getComputedStyle(c).display !== 'none');
 
-  ws.close();
-  chrome.kill();
-  server.kill();
+          const countSpans = Array.from(document.querySelectorAll('.gallery-count [data-count]'));
+          const visibleCountSpan = countSpans.find(s => window.getComputedStyle(s).display !== 'none');
+
+          const checkedRadio = document.querySelector('input[name="photo-category"]:checked');
+
+          return {
+            activeFilterAttr,
+            checkedRadioId: checkedRadio ? checkedRadio.id : null,
+            totalCards: cards.length,
+            visibleCardsCount: visibleCards.length,
+            visibleCountText: visibleCountSpan ? visibleCountSpan.textContent.trim() : null,
+          };
+        })()
+      `);
+    };
+
+    console.log("\n--- Test 1: Initial All Photos Count ---");
+    const initial = await getGalleryState();
+    console.log(`Initial state:`, initial);
+    if (initial.visibleCardsCount !== 3)
+      throw new Error(
+        `Expected 3 visible cards initially, got ${initial.visibleCardsCount}`,
+      );
+    if (initial.activeFilterAttr !== "all")
+      throw new Error(
+        `Expected activeFilter=all, got ${initial.activeFilterAttr}`,
+      );
+    if (initial.visibleCountText !== "3 photographs")
+      throw new Error(
+        `Expected '3 photographs', got ${initial.visibleCountText}`,
+      );
+
+    console.log(
+      "\n--- Test 2: Modern :has() Filtering (Indonesia) via Nested Label Click ---",
+    );
+    // Click matching actual nested label markup
+    await cdp.eval(`
+      (() => {
+        const input = document.querySelector('#photo-filter-indonesia');
+        const label = input.closest('label.filter-label');
+        if (label) {
+          label.click();
+        } else {
+          input.click();
+        }
+      })()
+    `);
+    await delay(250);
+
+    const indonesia = await getGalleryState();
+    console.log(`Indonesia state:`, indonesia);
+    if (indonesia.visibleCardsCount !== 2)
+      throw new Error(
+        `Expected 2 visible cards for Indonesia, got ${indonesia.visibleCardsCount}`,
+      );
+    if (indonesia.activeFilterAttr !== "indonesia")
+      throw new Error(
+        `Expected activeFilter=indonesia, got ${indonesia.activeFilterAttr}`,
+      );
+    if (indonesia.visibleCountText !== "2 photographs")
+      throw new Error(
+        `Expected '2 photographs', got ${indonesia.visibleCountText}`,
+      );
+
+    console.log(
+      "\n--- Test 3: Modern :has() Filtering (DBL All-Star) via Nested Label Click ---",
+    );
+    await cdp.eval(`
+      (() => {
+        const input = document.querySelector('#photo-filter-all-star');
+        const label = input.closest('label.filter-label');
+        if (label) label.click();
+        else input.click();
+      })()
+    `);
+    await delay(250);
+
+    const allStar = await getGalleryState();
+    console.log(`DBL All-Star state:`, allStar);
+    if (allStar.visibleCardsCount !== 1)
+      throw new Error(
+        `Expected 1 visible card for DBL All-Star, got ${allStar.visibleCardsCount}`,
+      );
+    if (allStar.activeFilterAttr !== "all-star")
+      throw new Error(
+        `Expected activeFilter=all-star, got ${allStar.activeFilterAttr}`,
+      );
+    if (allStar.visibleCountText !== "1 photograph")
+      throw new Error(
+        `Expected '1 photograph', got ${allStar.visibleCountText}`,
+      );
+
+    console.log(
+      "\n--- Test 4: Progressive Fallback (Asserting Complete Removal of Modern :has Rules) ---",
+    );
+    const removalResult = await cdp.eval(`
+      (() => {
+        let rulesRemoved = 0;
+        for (const sheet of document.styleSheets) {
+          try {
+            for (let i = sheet.cssRules.length - 1; i >= 0; i--) {
+              const rule = sheet.cssRules[i];
+              if ((rule.conditionText && rule.conditionText.includes(':has')) ||
+                  (rule.selectorText && rule.selectorText.includes(':has'))) {
+                sheet.deleteRule(i);
+                rulesRemoved++;
+              }
+            }
+          } catch (e) {}
+        }
+
+        // Verify remaining rules
+        let remainingHasRules = 0;
+        for (const sheet of document.styleSheets) {
+          try {
+            for (let i = 0; i < sheet.cssRules.length; i++) {
+              const rule = sheet.cssRules[i];
+              if ((rule.conditionText && rule.conditionText.includes(':has')) ||
+                  (rule.selectorText && rule.selectorText.includes(':has'))) {
+                remainingHasRules++;
+              }
+            }
+          } catch (e) {}
+        }
+
+        return { rulesRemoved, remainingHasRules };
+      })()
+    `);
+    console.log(
+      `CSS rules removed: ${removalResult.rulesRemoved}, remaining :has rules: ${removalResult.remainingHasRules}`,
+    );
+    if (removalResult.rulesRemoved === 0)
+      throw new Error("Expected to find and remove modern :has() CSS rules");
+    if (removalResult.remainingHasRules !== 0)
+      throw new Error(
+        "Expected 0 :has() rules remaining in document stylesheets",
+      );
+
+    // Test fallback behavior without :has()
+    console.log("  -> Testing fallback on Indonesia filter:");
+    await cdp.eval(`
+      (() => {
+        const input = document.querySelector('#photo-filter-indonesia');
+        input.closest('label.filter-label').click();
+      })()
+    `);
+    await delay(250);
+    const fbIndo = await getGalleryState();
+    console.log("  Fallback Indonesia state:", fbIndo);
+    if (fbIndo.visibleCardsCount !== 2)
+      throw new Error(
+        `Fallback failed: expected 2 visible cards, got ${fbIndo.visibleCardsCount}`,
+      );
+    if (fbIndo.visibleCountText !== "2 photographs")
+      throw new Error(
+        `Fallback failed: expected '2 photographs', got ${fbIndo.visibleCountText}`,
+      );
+
+    console.log("  -> Testing fallback on DBL All-Star filter:");
+    await cdp.eval(`
+      (() => {
+        const input = document.querySelector('#photo-filter-all-star');
+        input.closest('label.filter-label').click();
+      })()
+    `);
+    await delay(250);
+    const fbAllStar = await getGalleryState();
+    console.log("  Fallback DBL All-Star state:", fbAllStar);
+    if (fbAllStar.visibleCardsCount !== 1)
+      throw new Error(
+        `Fallback failed: expected 1 visible card, got ${fbAllStar.visibleCardsCount}`,
+      );
+    if (fbAllStar.visibleCountText !== "1 photograph")
+      throw new Error(
+        `Fallback failed: expected '1 photograph', got ${fbAllStar.visibleCountText}`,
+      );
+
+    console.log("  -> Testing fallback on All photos filter:");
+    await cdp.eval(`
+      (() => {
+        const input = document.querySelector('#photo-filter-all');
+        input.closest('label.filter-label').click();
+      })()
+    `);
+    await delay(250);
+    const fbAll = await getGalleryState();
+    console.log("  Fallback All state:", fbAll);
+    if (fbAll.visibleCardsCount !== 3)
+      throw new Error(
+        `Fallback failed: expected 3 visible cards, got ${fbAll.visibleCardsCount}`,
+      );
+    if (fbAll.visibleCountText !== "3 photographs")
+      throw new Error(
+        `Fallback failed: expected '3 photographs', got ${fbAll.visibleCountText}`,
+      );
+
+    console.log(
+      "\n--- Test 5: Keyboard Arrow Navigation (Focus AND Selection Change) ---",
+    );
+    await cdp.eval(`
+      (() => {
+        const radio = document.querySelector('#photo-filter-all');
+        radio.focus();
+      })()
+    `);
+    await delay(100);
+
+    // Send ArrowRight key event
+    await cdp.send("Input.dispatchKeyEvent", {
+      type: "rawKeyDown",
+      key: "ArrowRight",
+      code: "ArrowRight",
+      windowsVirtualKeyCode: 39,
+    });
+    await cdp.send("Input.dispatchKeyEvent", {
+      type: "keyUp",
+      key: "ArrowRight",
+      code: "ArrowRight",
+      windowsVirtualKeyCode: 39,
+    });
+    await delay(250);
+
+    const keyboardState = await cdp.eval(`
+      (() => {
+        const activeEl = document.activeElement;
+        const section = document.querySelector('.gallery-section');
+        return {
+          focusedId: activeEl ? activeEl.id : null,
+          checkedId: document.querySelector('input[name="photo-category"]:checked')?.id,
+          activeFilterAttr: section ? section.getAttribute('data-active-filter') : null,
+        };
+      })()
+    `);
+    console.log("Keyboard navigation state after ArrowRight:", keyboardState);
+    if (keyboardState.focusedId !== "photo-filter-indonesia") {
+      throw new Error(
+        `Expected focus on photo-filter-indonesia, got ${keyboardState.focusedId}`,
+      );
+    }
+    if (keyboardState.checkedId !== "photo-filter-indonesia") {
+      throw new Error(
+        `Expected selection on photo-filter-indonesia, got ${keyboardState.checkedId}`,
+      );
+    }
+
+    console.log("\n--- Test 6: Real Browser Touch Input Emulation ---");
+    // Enable touch emulation and perform real touch gesture on DBL All-Star filter label
+    await cdp.send("Emulation.setTouchEmulationEnabled", {
+      enabled: true,
+      maxTouchPoints: 1,
+    });
+
+    const labelRect = await cdp.eval(`
+      (() => {
+        const label = document.querySelector('#photo-filter-all-star').closest('label.filter-label');
+        const rect = label.getBoundingClientRect();
+        return { x: Math.round(rect.left + rect.width / 2), y: Math.round(rect.top + rect.height / 2) };
+      })()
+    `);
+
+    console.log(
+      `  Dispatching real touch tap at (${labelRect.x}, ${labelRect.y})...`,
+    );
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [{ x: labelRect.x, y: labelRect.y, id: 1 }],
+    });
+    await delay(50);
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchEnd",
+      touchPoints: [],
+    });
+    await delay(300);
+
+    const touchState = await getGalleryState();
+    console.log("Touch tap state result:", touchState);
+    if (touchState.visibleCardsCount !== 1) {
+      throw new Error(
+        `Real touch tap failed: expected 1 visible card, got ${touchState.visibleCardsCount}`,
+      );
+    }
+    if (touchState.checkedRadioId !== "photo-filter-all-star") {
+      throw new Error(
+        `Real touch tap failed: expected photo-filter-all-star checked, got ${touchState.checkedRadioId}`,
+      );
+    }
+
+    console.log(
+      "\n🎉 ALL GALLERY PROGRESSIVE FALLBACK TESTS PASSED ACCURATELY!",
+    );
+  } finally {
+    if (ws) {
+      try {
+        ws.close();
+      } catch {}
+    }
+    if (chrome) {
+      chrome.kill("SIGTERM");
+    }
+    server.kill("SIGTERM");
+  }
 }
 
 run().catch((e) => {

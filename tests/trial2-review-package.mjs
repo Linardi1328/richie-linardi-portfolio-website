@@ -1,18 +1,53 @@
 import assert from "node:assert/strict";
 import { spawn, execSync } from "node:child_process";
-import { writeFileSync, mkdirSync, copyFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import {
+  writeFileSync,
+  mkdirSync,
+  copyFileSync,
+  existsSync,
+  rmSync,
+} from "node:fs";
+import { join, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const REPO_ROOT = resolve(__dirname, "..");
 
 const ARTIFACT_DIR =
-  "/Users/richie/.gemini/antigravity/brain/bddbd5af-a297-44d4-8e5a-f2d2adb5c265";
+  process.env.ARTIFACT_DIR || resolve(REPO_ROOT, ".artifacts");
 const SCRATCH_DIR = join(ARTIFACT_DIR, "scratch");
 const EVIDENCE_ARTIFACT_DIR = join(ARTIFACT_DIR, "trial2-evidence");
-const EVIDENCE_REPO_DIR =
-  "/Users/richie/richie-linardi-portfolio-website/docs/design-references/evidence/trial2";
+const EVIDENCE_REPO_DIR = resolve(
+  REPO_ROOT,
+  "docs/design-references/evidence/trial2",
+);
 
 mkdirSync(SCRATCH_DIR, { recursive: true });
-mkdirSync(EVIDENCE_ARTIFACT_DIR, { recursive: true });
+try {
+  mkdirSync(EVIDENCE_ARTIFACT_DIR, { recursive: true });
+} catch {}
 mkdirSync(EVIDENCE_REPO_DIR, { recursive: true });
+
+function getChromeExecutable() {
+  if (process.env.CHROME_BIN && existsSync(process.env.CHROME_BIN)) {
+    return process.env.CHROME_BIN;
+  }
+  const candidates = [
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Applications/Chromium.app/Contents/MacOS/Chromium",
+    "/usr/bin/google-chrome",
+    "/usr/bin/google-chrome-stable",
+    "/usr/bin/chromium",
+    "/usr/bin/chromium-browser",
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+  ];
+  for (const c of candidates) {
+    if (existsSync(c)) return c;
+  }
+  return "google-chrome";
+}
 
 async function delay(ms) {
   return new Promise((res) => setTimeout(res, ms));
@@ -126,6 +161,7 @@ async function captureShot(client, filename, clip = null) {
 
 async function recordSession(client, videoName, actionFn) {
   const framesDir = join(SCRATCH_DIR, `frames_${videoName}`);
+  rmSync(framesDir, { recursive: true, force: true });
   mkdirSync(framesDir, { recursive: true });
 
   let frameIdx = 0;
@@ -194,8 +230,9 @@ async function main() {
   );
 
   const userDataDir = `/tmp/chrome-trial2-pkg-${Date.now()}`;
+  const chromePath = getChromeExecutable();
   const chromeProcess = spawn(
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    chromePath,
     [
       "--headless=new",
       "--remote-debugging-port=9366",
@@ -294,100 +331,65 @@ async function main() {
     }
 
     // =========================================================================
-    // SUITE 1: ENVIRONMENTAL LANDSCAPE DOM & STYLE INVARIANTS
+    // SUITE 1: EDITORIAL SHELL DOM & STYLE INVARIANTS
     // =========================================================================
-    console.log(
-      "\n[1/6] Verifying Environmental Landscape DOM & Style Invariants...",
-    );
+    console.log("\n[1/6] Verifying Editorial Shell DOM & Style Invariants...");
     await setVp(1440, 900);
     await isolateSession(client);
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
     await delay(1000);
 
-    const proLandscapeInfo = await client.eval(`(() => {
-      const el = document.querySelector(".environmental-landscape--professional");
-      if (!el) return null;
-      const cs = window.getComputedStyle(el);
+    const proEditorialInfo = await client.eval(`(() => {
+      const el = document.querySelector(".editorial-site--professional");
+      const name = document.querySelector(".monumental-name");
+      const dot = document.querySelector(".wordmark__dot");
       return {
-        exists: true,
-        ariaHidden: el.getAttribute("aria-hidden"),
-        pointerEvents: cs.pointerEvents,
-        hasAtmosphere: !!el.querySelector(".env-pro__atmosphere"),
-        hasGrid: !!el.querySelector(".env-pro__grid-layer"),
-        hasContours: !!el.querySelector(".env-pro__contour-layer"),
-        hasCalipers: !!el.querySelector(".env-pro__caliper-layer")
+        exists: !!el,
+        hasMonumentalName: !!name,
+        nameText: name ? name.textContent.trim() : null,
+        dotDisplay: dot ? window.getComputedStyle(dot).display : null,
       };
     })()`);
 
     assert.ok(
-      proLandscapeInfo,
-      "Professional environmental landscape must exist",
-    );
-    assert.strictEqual(
-      proLandscapeInfo.ariaHidden,
-      "true",
-      "Must have aria-hidden='true'",
-    );
-    assert.strictEqual(
-      proLandscapeInfo.pointerEvents,
-      "none",
-      "Must have pointer-events: none",
+      proEditorialInfo.exists,
+      "Professional editorial shell must exist",
     );
     assert.ok(
-      proLandscapeInfo.hasGrid,
-      "Must contain blueprint coordinate grid layer",
+      proEditorialInfo.hasMonumentalName,
+      "Must contain monumental name headline",
     );
-    assert.ok(
-      proLandscapeInfo.hasContours,
-      "Must contain technical terrain contours layer",
+    assert.strictEqual(
+      proEditorialInfo.dotDisplay,
+      "inline",
+      "Nested wordmark punctuation dot must remain inline",
     );
-    pass("Professional environmental landscape contract verified", {
-      proLandscapeInfo,
+    pass("Professional editorial shell contract verified", {
+      proEditorialInfo,
     });
 
-    // Check Athlete landscape
+    // Check Athlete shell
     await client.send("Page.navigate", {
       url: "http://localhost:3000/basketball",
     });
     await delay(1000);
 
-    const athLandscapeInfo = await client.eval(`(() => {
-      const el = document.querySelector(".environmental-landscape--basketball");
-      if (!el) return null;
-      const cs = window.getComputedStyle(el);
+    const athEditorialInfo = await client.eval(`(() => {
+      const el = document.querySelector(".editorial-site--basketball");
+      const cs = el ? window.getComputedStyle(el) : null;
       return {
-        exists: true,
-        ariaHidden: el.getAttribute("aria-hidden"),
-        pointerEvents: cs.pointerEvents,
-        hasAtmosphere: !!el.querySelector(".env-ath__atmosphere"),
-        hasRafters: !!el.querySelector(".env-ath__rafter-layer"),
-        hasCourt: !!el.querySelector(".env-ath__court-layer"),
-        hasScoreboard: !!el.querySelector(".env-ath__scoreboard-layer")
+        exists: !!el,
+        accent: cs ? cs.getPropertyValue("--accent").trim() : null,
       };
     })()`);
 
-    assert.ok(athLandscapeInfo, "Athlete environmental landscape must exist");
+    assert.ok(athEditorialInfo.exists, "Athlete editorial shell must exist");
     assert.strictEqual(
-      athLandscapeInfo.ariaHidden,
-      "true",
-      "Must have aria-hidden='true'",
+      athEditorialInfo.accent,
+      "#a2442c",
+      "Must have terracotta accent #a2442c",
     );
-    assert.strictEqual(
-      athLandscapeInfo.pointerEvents,
-      "none",
-      "Must have pointer-events: none",
-    );
-    assert.ok(
-      athLandscapeInfo.hasCourt,
-      "Must contain FIBA court geometry layer",
-    );
-    assert.ok(
-      athLandscapeInfo.hasScoreboard,
-      "Must contain scoreboard telemetry layer",
-    );
-    pass("Athlete environmental landscape contract verified", {
-      athLandscapeInfo,
-    });
+    pass("Athlete editorial shell contract verified", { athEditorialInfo });
 
     // Verify Header HUD and telemetry cartridges
     const hudInfo = await client.eval(`(() => {

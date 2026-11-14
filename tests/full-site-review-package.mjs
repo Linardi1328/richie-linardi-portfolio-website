@@ -1,18 +1,53 @@
 import assert from "node:assert/strict";
 import { spawn, execSync } from "node:child_process";
-import { writeFileSync, mkdirSync, copyFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import {
+  writeFileSync,
+  mkdirSync,
+  copyFileSync,
+  existsSync,
+  rmSync,
+} from "node:fs";
+import { join, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const REPO_ROOT = resolve(__dirname, "..");
 
 const ARTIFACT_DIR =
-  "/Users/richie/.gemini/antigravity/brain/bddbd5af-a297-44d4-8e5a-f2d2adb5c265";
+  process.env.ARTIFACT_DIR || resolve(REPO_ROOT, ".artifacts");
 const SCRATCH_DIR = join(ARTIFACT_DIR, "scratch");
 const EVIDENCE_ARTIFACT_DIR = join(ARTIFACT_DIR, "full-site-evidence");
-const EVIDENCE_REPO_DIR =
-  "/Users/richie/richie-linardi-portfolio-website/docs/design-references/evidence/full-site";
+const EVIDENCE_REPO_DIR = resolve(
+  REPO_ROOT,
+  "docs/design-references/evidence/full-site",
+);
 
 mkdirSync(SCRATCH_DIR, { recursive: true });
-mkdirSync(EVIDENCE_ARTIFACT_DIR, { recursive: true });
+try {
+  mkdirSync(EVIDENCE_ARTIFACT_DIR, { recursive: true });
+} catch {}
 mkdirSync(EVIDENCE_REPO_DIR, { recursive: true });
+
+function getChromeExecutable() {
+  if (process.env.CHROME_BIN && existsSync(process.env.CHROME_BIN)) {
+    return process.env.CHROME_BIN;
+  }
+  const candidates = [
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Applications/Chromium.app/Contents/MacOS/Chromium",
+    "/usr/bin/google-chrome",
+    "/usr/bin/google-chrome-stable",
+    "/usr/bin/chromium",
+    "/usr/bin/chromium-browser",
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+  ];
+  for (const c of candidates) {
+    if (existsSync(c)) return c;
+  }
+  return "google-chrome";
+}
 
 async function delay(ms) {
   return new Promise((res) => setTimeout(res, ms));
@@ -105,6 +140,7 @@ async function captureShot(client, filename, clip = null) {
 
 async function recordSession(client, videoName, actionFn) {
   const framesDir = join(SCRATCH_DIR, `frames_${videoName}`);
+  rmSync(framesDir, { recursive: true, force: true });
   mkdirSync(framesDir, { recursive: true });
 
   let frameIdx = 0;
@@ -146,17 +182,21 @@ async function recordSession(client, videoName, actionFn) {
       console.warn(
         "  [Video Warning] ffmpeg encoding omitted; frames preserved.",
       );
-      return;
+      return false;
     }
 
     if (existsSync(scratchMp4)) {
-      copyFileSync(scratchMp4, artifactMp4);
+      try {
+        copyFileSync(scratchMp4, artifactMp4);
+      } catch {}
       copyFileSync(scratchMp4, repoMp4);
       console.log(
         `  [Video Recording] Encoded playable MP4 (${frameIdx} frames): ${mp4Name}`,
       );
+      return true;
     }
   }
+  return false;
 }
 
 async function main() {
@@ -169,10 +209,17 @@ async function main() {
   );
   console.log("  Starting fresh Next.js production server on port 3000...");
   const serverProcess = spawn(
-    "node_modules/.bin/next",
-    ["start", "-p", "3000"],
+    "node",
+    [
+      "node_modules/next/dist/bin/next",
+      "start",
+      "-p",
+      "3000",
+      "-H",
+      "127.0.0.1",
+    ],
     {
-      cwd: "/Users/richie/richie-linardi-portfolio-website",
+      cwd: REPO_ROOT,
       stdio: "ignore",
     },
   );
@@ -191,8 +238,9 @@ async function main() {
   }
 
   const userDataDir = join(SCRATCH_DIR, `chrome-fullsite-pkg-${Date.now()}`);
+  const chromePath = getChromeExecutable();
   const chromeProcess = spawn(
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    chromePath,
     [
       "--headless=new",
       "--remote-debugging-port=9377",
@@ -516,44 +564,36 @@ async function main() {
         `Route ${r.path} must have valid title, got: ${title}`,
       );
 
-      // Verify environmental landscape backdrop exists
-      const envInfo = await client.eval(`(() => {
-        const el = document.querySelector(".environmental-landscape");
-        if (!el) return null;
-        const cs = window.getComputedStyle(el);
+      // Verify editorial container and structure
+      const editorialContainer = await client.eval(`(() => {
+        const el = document.querySelector(".editorial-site");
+        const main = document.querySelector("main");
         return {
-          exists: true,
-          pointerEvents: cs.pointerEvents,
-          position: cs.position,
-          zIndex: cs.zIndex,
-          worldClass: el.className
+          hasEditorialSite: !!el,
+          hasMain: !!main,
+          className: el ? el.className : "",
         };
       })()`);
 
       assert.ok(
-        envInfo && envInfo.exists,
-        `Route ${r.path} must render .environmental-landscape`,
+        editorialContainer && editorialContainer.hasEditorialSite,
+        `Route ${r.path} must render .editorial-site container`,
       );
-      assert.equal(
-        envInfo.pointerEvents,
-        "none",
-        `Route ${r.path} environmental landscape must have pointer-events: none`,
+      assert.ok(
+        editorialContainer.hasMain,
+        `Route ${r.path} must contain main element`,
       );
 
-      // Explicit check for /projects: verify primary content is fully visible and not obscured
+      // Explicit check for /projects: verify primary content is fully visible and cards render
       if (r.path === "/projects") {
         const projectsContent = await client.eval(`(() => {
           const h1 = document.querySelector("h1");
-          const sections = document.querySelectorAll(".foundation-route__section");
-          const content = document.querySelector(".portfolio-page__content");
-          const contentStyle = content ? window.getComputedStyle(content) : null;
+          const cards = document.querySelectorAll(".project-card");
           const h1Style = h1 ? window.getComputedStyle(h1) : null;
           return {
             h1Text: h1 ? h1.textContent : null,
             h1Visible: h1 ? (h1.offsetWidth > 0 && h1.offsetHeight > 0 && h1Style.visibility !== 'hidden' && h1Style.display !== 'none') : false,
-            sectionCount: sections.length,
-            contentZIndex: contentStyle ? contentStyle.zIndex : null,
-            contentPosition: contentStyle ? contentStyle.position : null,
+            cardCount: cards.length,
           };
         })()`);
 
@@ -562,31 +602,23 @@ async function main() {
           `/projects heading must be rendered and visible, got: ${JSON.stringify(projectsContent)}`,
         );
         assert.ok(
-          projectsContent.sectionCount > 0,
-          `/projects must render sections/cards, found: ${projectsContent.sectionCount}`,
-        );
-        assert.equal(
-          projectsContent.contentZIndex,
-          "1",
-          `/projects .portfolio-page__content must have z-index: 1 to elevate above landscape backdrop`,
+          projectsContent.cardCount > 0,
+          `/projects must render project cards, found: ${projectsContent.cardCount}`,
         );
         pass(
-          `/projects content visibility verified (h1 visible, ${projectsContent.sectionCount} sections, elevated z-index)`,
+          `/projects content visibility verified (h1 visible, ${projectsContent.cardCount} project cards)`,
         );
       }
 
-      // Explicit check for basketball world: verify arena styling and zero legacy crimson colors
+      // Explicit check for basketball world: verify zero legacy crimson colors and editorial world class
       if (r.world === "basketball") {
         const basketballStyleCheck = await client.eval(`(() => {
           const bodyHtml = document.body.innerHTML;
           const hasLegacyCrimson = /rgb\\(177\\s+22\\s+32|rgb\\(139\\s+21\\s+30|#b11620|#0c0b09|#0d0c09/i.test(bodyHtml);
-          const stage = document.querySelector(".portfolio-stage--basketball");
-          const stageStyle = stage ? window.getComputedStyle(stage) : null;
+          const editorial = document.querySelector(".editorial-site--basketball");
           return {
             hasLegacyCrimson,
-            stagePaper: stageStyle ? stageStyle.getPropertyValue("--stage-paper").trim() : null,
-            stageAccent: stageStyle ? stageStyle.getPropertyValue("--stage-accent").trim() : null,
-            stageCyan: stageStyle ? stageStyle.getPropertyValue("--stage-cyan").trim() : null,
+            hasBasketballClass: !!editorial,
           };
         })()`);
 
@@ -595,13 +627,12 @@ async function main() {
           false,
           `Route ${r.path} must not contain legacy crimson colors`,
         );
-        assert.equal(
-          basketballStyleCheck.stagePaper,
-          "#06080e",
-          `Route ${r.path} stage-paper must be #06080e (midnight navy)`,
+        assert.ok(
+          basketballStyleCheck.hasBasketballClass,
+          `Route ${r.path} must have .editorial-site--basketball`,
         );
         pass(
-          `Route ${r.path} basketball arena palette verified (midnight navy, cyan, gold, zero crimson)`,
+          `Route ${r.path} basketball styling verified (zero legacy crimson, editorial athlete class)`,
         );
       }
 
@@ -834,48 +865,50 @@ async function main() {
       },
     );
 
-    pass("Video walkthrough recorded and encoded as playable MP4");
+    if (videoRecorded) {
+      pass("Video walkthrough recorded and encoded as playable MP4");
+    } else {
+      console.warn(
+        "  [Notice] Video walkthrough recording omitted or ffmpeg not present.",
+      );
+    }
 
     // =========================================================================
-    // SUITE 4: INTERACTIVE WORLD FLIP & TOUCH SWIPE VALIDATION
+    // SUITE 4: INTERACTIVE WORLD FLIP & NAVIGATION VALIDATION
     // =========================================================================
     console.log(
-      "\n[4/5] Verifying page-turn interaction and gesture contracts...",
+      "\n[4/5] Verifying page navigation and world switching contracts...",
     );
     await setVp(390, 844, true);
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
     await delay(1000);
 
-    // Verify touch swipe on Android/iOS mobile
-    await client.send("Input.dispatchTouchEvent", {
-      type: "touchStart",
-      touchPoints: [{ x: 340, y: 400, id: 1 }],
-    });
-    await delay(40);
-
-    for (let x = 320; x >= 80; x -= 30) {
-      await client.send("Input.dispatchTouchEvent", {
-        type: "touchMove",
-        touchPoints: [{ x, y: 400, id: 1 }],
-      });
-      await delay(25);
-    }
-
-    await client.send("Input.dispatchTouchEvent", {
-      type: "touchEnd",
-      touchPoints: [],
-    });
-    await delay(1200);
+    // Switch to athlete side via mobile navigation / world switch
+    const switchClicked = await client.eval(`(() => {
+      const link = document.querySelector('.world-selector a[href="/basketball"]') ||
+                   document.querySelector('.mobile-navigation a[href="/basketball"]') ||
+                   document.querySelector('a.button--athlete-hero');
+      if (link) {
+        link.click();
+        return true;
+      }
+      return false;
+    })()`);
+    assert.ok(
+      switchClicked,
+      "Athlete world switch link must exist and be clickable on mobile",
+    );
+    await delay(1000);
 
     const targetWorld = await client.eval(
-      `document.querySelector(".portfolio-stage")?.getAttribute("data-world")`,
+      `document.querySelector(".editorial-site--basketball") ? "basketball" : null`,
     );
     assert.equal(
       targetWorld,
       "basketball",
-      "Touch swipe from Professional must transition to basketball world",
+      "Switching to athlete side must transition to basketball editorial world",
     );
-    pass("Touch swipe gesture commits page turn to basketball world on mobile");
+    pass("World switch transitions cleanly to basketball world on mobile");
 
     // =========================================================================
     // SUITE 5: REDUCED MOTION CONTRACT
@@ -887,19 +920,19 @@ async function main() {
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
     await delay(800);
 
-    const parallaxRunning = await client.eval(`(() => {
-      const el = document.querySelector(".env-parallax--slow");
-      if (!el) return false;
-      const st = window.getComputedStyle(el);
-      return st.transform !== "none" && st.transform !== "matrix(1, 0, 0, 1, 0, 0)";
+    const motionDisabled = await client.eval(`(() => {
+      const name = document.querySelector(".monumental-name");
+      const st = name ? window.getComputedStyle(name) : null;
+      return {
+        animName: st ? st.animationName : null,
+      };
     })()`);
 
-    assert.equal(
-      parallaxRunning,
-      false,
-      "Scroll parallax transform must remain inactive under prefers-reduced-motion",
+    assert.ok(
+      motionDisabled.animName === "none" || !motionDisabled.animName,
+      "Hero animations must remain inactive under prefers-reduced-motion",
     );
-    pass("Prefers-reduced-motion disables parallax animations properly");
+    pass("Prefers-reduced-motion disables animations properly");
 
     // =========================================================================
     // WRITE SUMMARY REPORT
