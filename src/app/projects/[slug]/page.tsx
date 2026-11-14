@@ -12,7 +12,11 @@ import { getRepositoryActivity } from "@/lib/repository-activity";
 export const revalidate = 3600;
 export function generateStaticParams() {
   return projectRegistry
-    .filter((project) => project.catalogueState !== "candidate")
+    .filter(
+      (project) =>
+        project.catalogueState !== "candidate" &&
+        project.catalogueState !== "unlisted",
+    )
     .map((project) => ({ slug: project.slug }));
 }
 
@@ -23,18 +27,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  if (!project || project.catalogueState === "candidate") return {};
-  const isUnlisted = project.catalogueState === "unlisted";
+  if (
+    !project ||
+    project.catalogueState === "candidate" ||
+    project.catalogueState === "unlisted"
+  ) {
+    return {};
+  }
 
   return {
     title: `${project.title} · Richie Linardi`,
     description: project.summary,
-    robots: isUnlisted
-      ? {
-          index: false,
-          follow: false,
-        }
-      : undefined,
   };
 }
 
@@ -45,7 +48,13 @@ export default async function ProjectPage({
 }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  if (!project || project.catalogueState === "candidate") notFound();
+  if (
+    !project ||
+    project.catalogueState === "candidate" ||
+    project.catalogueState === "unlisted"
+  ) {
+    notFound();
+  }
   const hasDedicatedRepo =
     Boolean(project.repositoryUrl) &&
     project.repositoryUrl !== "https://github.com/Linardi1328";
@@ -53,7 +62,6 @@ export default async function ProjectPage({
     ? await getRepositoryActivity(project.repositoryUrl)
     : null;
   const media = getMediaByRoute(`/projects/${slug}`);
-  const isUnlisted = project.catalogueState === "unlisted";
 
   return (
     <PortfolioWorldShell
@@ -66,24 +74,6 @@ export default async function ProjectPage({
           title={project.title}
           description={project.summary}
         />
-        {isUnlisted ? (
-          <div className="container" style={{ marginBottom: "1.5rem" }}>
-            <div
-              style={{
-                padding: "0.85rem 1.25rem",
-                borderRadius: "8px",
-                border: "1px solid var(--line)",
-                background: "var(--surface)",
-                fontSize: "0.8rem",
-                color: "var(--muted)",
-              }}
-            >
-              <strong>Archival Notice:</strong> This project entry is an
-              unlisted historical reference retained for direct link and route
-              integrity. It is excluded from the active public showcase.
-            </div>
-          </div>
-        ) : null}
         <section className="section container section--compact">
           <div className="project-actions">
             {project.deploymentUrl ? (
