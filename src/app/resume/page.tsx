@@ -381,27 +381,27 @@ export default function ResumePage() {
             <div className="resume-section__content">
               <div className="resume-skills-grid">
                 <div>
-                  <h4 className="resume-skills-label">
+                  <h3 className="resume-skills-label">
                     Languages & Frameworks
-                  </h4>
+                  </h3>
                   <p className="resume-skills-value">
                     Python, SQL, Java, TypeScript, JavaScript, React, Next.js,
                     FastAPI, NestJS
                   </p>
                 </div>
                 <div>
-                  <h4 className="resume-skills-label">
+                  <h3 className="resume-skills-label">
                     Data & Engineering Tools
-                  </h4>
+                  </h3>
                   <p className="resume-skills-value">
                     pandas, scikit-learn, Tableau, PostgreSQL, Supabase,
                     Git/GitHub, CI, Linux, Excel
                   </p>
                 </div>
                 <div>
-                  <h4 className="resume-skills-label">
+                  <h3 className="resume-skills-label">
                     Achievements & Competition
-                  </h4>
+                  </h3>
                   <p className="resume-skills-value">
                     ASEAN Schools Games 2024 gold (Indonesia); DBL Indonesia
                     All-Star 2024; FIBA U18 Asia Cup 2024; AI Video Hackathon KL
@@ -409,7 +409,7 @@ export default function ResumePage() {
                   </p>
                 </div>
                 <div>
-                  <h4 className="resume-skills-label">Spoken Languages</h4>
+                  <h3 className="resume-skills-label">Spoken Languages</h3>
                   <p className="resume-skills-value">
                     English, Malay, Mandarin, Indonesian
                   </p>

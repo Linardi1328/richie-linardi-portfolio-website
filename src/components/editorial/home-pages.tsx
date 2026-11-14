@@ -172,7 +172,7 @@ export function ProfessionalHome() {
               </span>
             </div>
             <span
-              style={{ fontSize: "0.72rem", color: "#64748b", fontWeight: 600 }}
+              style={{ fontSize: "0.72rem", color: "#94a3b8", fontWeight: 600 }}
             >
               Cloudflare Workers · Google Apps Script · Google Sheets
             </span>
@@ -213,9 +213,9 @@ export function ProfessionalHome() {
           </div>
 
           <div className="flagship-architecture">
-            <div className="flagship-arch-title">
+            <h3 className="flagship-arch-title">
               Technical Architecture & Workflow Breakdown
-            </div>
+            </h3>
             <div className="flagship-flow-grid">
               <div className="flagship-flow-card">
                 <span className="flow-step-number">
@@ -255,7 +255,16 @@ export function ProfessionalHome() {
           </div>
 
           <div className="flagship-reflection">
-            <h4>Operational Reality & Tournament Lessons</h4>
+            <h3
+              style={{
+                fontSize: "1.05rem",
+                fontWeight: 750,
+                color: "#ffffff",
+                marginBottom: "0.5rem",
+              }}
+            >
+              Operational Reality & Tournament Lessons
+            </h3>
             <p>
               Operating live during the October tournament provided practical
               operational feedback regarding courtside score entry response
@@ -277,7 +286,13 @@ export function ProfessionalHome() {
             >
               View Cloudflare Worker Deployment ↗
             </a>
-            <span style={{ fontSize: "0.75rem", color: "#64748b" }}>
+            <Link
+              className="button button--secondary"
+              href="/projects/khlim-3x3-live"
+            >
+              Read Full Case Study →
+            </Link>
+            <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
               Completed one-day tournament deployment (24 Oct 2026); live
               availability reflects documented Worker runtime. Multi-tournament
               management development continues separately under RIVORA.

@@ -361,7 +361,7 @@ ul {
 }
 .portfolio-photograph figcaption {
   padding: 0.85rem 1rem;
-  color: var(--muted);
+  color: #434e54;
   font-size: 0.67rem;
   line-height: 1.6;
   border-top: 1px solid rgb(32 43 50 / 8%);
@@ -1089,7 +1089,7 @@ tbody th {
 .foundation-route__portrait figcaption {
   padding-block: 0.8rem;
   font-size: 0.7rem;
-  color: var(--muted);
+  color: #434e54;
 }
 .foundation-route__sections {
   display: grid;
@@ -2683,7 +2683,10 @@ tbody th {
     font-size: 11pt;
   }
   header.world-header,
+  header.site-header,
+  .site-header,
   footer,
+  .site-footer,
   .resume-actions,
   .inline-invitation {
     display: none !important;

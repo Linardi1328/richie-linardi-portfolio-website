@@ -40,7 +40,10 @@ export function LegalPage({
           <h1>{title}</h1>
           <p className="portfolio-legal__summary">{summary}</p>
           <p className="portfolio-legal__date">Effective: {effectiveDate}</p>
-          <nav className="portfolio-legal__nav" aria-label="Site policies">
+          <nav
+            className="portfolio-legal__nav"
+            aria-label="Legal policy navigation"
+          >
             {legalLinks.map(([label, href]) => (
               <Link href={href} key={href}>
                 {label}

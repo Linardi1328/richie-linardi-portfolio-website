@@ -50,7 +50,7 @@ export function PortfolioWorldShell({
           <p>
             © {new Date().getFullYear()} Richie Linardi. Two sides, one story.
           </p>
-          <nav aria-label="Site policies">
+          <nav aria-label="Footer policy links">
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
             <Link href="/cookies">Cookies</Link>
