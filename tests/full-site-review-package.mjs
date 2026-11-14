@@ -7,6 +7,7 @@ import {
   existsSync,
   rmSync,
 } from "node:fs";
+import { tmpdir } from "node:os";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -15,7 +16,7 @@ const __dirname = dirname(__filename);
 const REPO_ROOT = resolve(__dirname, "..");
 
 const ARTIFACT_DIR =
-  process.env.ARTIFACT_DIR || resolve(REPO_ROOT, ".artifacts");
+  process.env.ARTIFACT_DIR || join(tmpdir(), "portfolio-artifacts");
 const SCRATCH_DIR = join(ARTIFACT_DIR, "scratch");
 const EVIDENCE_ARTIFACT_DIR = join(ARTIFACT_DIR, "full-site-evidence");
 const EVIDENCE_REPO_DIR = resolve(
@@ -805,7 +806,7 @@ async function main() {
     await client.send("Page.navigate", { url: "http://localhost:3000/" });
     await delay(800);
 
-    await recordSession(
+    const videoRecorded = await recordSession(
       client,
       "fullsite_navigation_walkthrough_1440",
       async () => {

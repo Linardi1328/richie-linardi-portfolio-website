@@ -354,9 +354,11 @@ async function main() {
     );
     await delay(300);
 
-    const indoCardsCount = await client.eval(
-      `document.querySelectorAll(".gallery-card:not([style*='display: none'])").length`,
-    );
+    const indoCardsCount = await client.eval(`
+      Array.from(document.querySelectorAll(".gallery-card"))
+        .filter(card => window.getComputedStyle(card).display !== "none")
+        .length
+    `);
     assert.equal(
       indoCardsCount,
       2,
@@ -383,9 +385,11 @@ async function main() {
     );
     await delay(300);
 
-    const allStarCardsCount = await client.eval(
-      `document.querySelectorAll(".gallery-card:not([style*='display: none'])").length`,
-    );
+    const allStarCardsCount = await client.eval(`
+      Array.from(document.querySelectorAll(".gallery-card"))
+        .filter(card => window.getComputedStyle(card).display !== "none")
+        .length
+    `);
     assert.equal(
       allStarCardsCount,
       1,
@@ -412,9 +416,11 @@ async function main() {
     );
     await delay(300);
 
-    const allCardsCount = await client.eval(
-      `document.querySelectorAll(".gallery-card:not([style*='display: none'])").length`,
-    );
+    const allCardsCount = await client.eval(`
+      Array.from(document.querySelectorAll(".gallery-card"))
+        .filter(card => window.getComputedStyle(card).display !== "none")
+        .length
+    `);
     assert.equal(
       allCardsCount,
       3,
