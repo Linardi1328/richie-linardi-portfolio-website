@@ -70,54 +70,6 @@ export const mediaManifest: readonly MediaItem[] = [
     tags: ["software", "architecture", "data-science", "safety-gates"],
   },
   {
-    id: "ledgerpilot-review-pipeline",
-    filename: "/projects/ledgerpilot/human-review-pipeline.svg",
-    targetRoute: "/projects/ledgerpilot-ai",
-    mediaType: "image/svg+xml",
-    provenance: "4. Generated decorative diagram",
-    caption:
-      "LedgerPilot AI · 6-Step Human-in-the-Loop Accounting Workflow & Review Gates",
-    altText:
-      "Diagram of 6-step human-supervised accounting process: Intake, Validation, Recommendation, Human Review, Audit Log, and ERP Export",
-    creditSource:
-      "Public source repository specification (Linardi1328/ledgerpilot-ai)",
-    usageStatus: "VERIFIED",
-    verificationBasis:
-      "Derived strictly from src/data/project-registry.ts ledgerpilot-ai specification (evidence intake, rule validation, advisory recommendation, human reviewer gate, audit history, bank reconciliation foundation).",
-    boundaryNote:
-      "Autonomous financial transactions and automated payments strictly prohibited; human approval required for every journal mutation.",
-    mobileBehavior:
-      "Responsive SVG with 16:9 intrinsic viewBox (800x450); fluid scaling across desktop, tablet, and mobile with high-contrast text.",
-    width: 800,
-    height: 450,
-    aspectRatio: "16/9",
-    tags: ["software", "architecture", "human-in-the-loop", "accounting"],
-  },
-  {
-    id: "khlim-policy-engine",
-    filename: "/projects/khlim/policy-decision-engine.svg",
-    targetRoute: "/projects/khlim-assist",
-    mediaType: "image/svg+xml",
-    provenance: "4. Generated decorative diagram",
-    caption:
-      "KHLIM Assist · Multilingual Assistant Workflow, Policy Decisions, and Organizer Oversight",
-    altText:
-      "Workflow diagram of participant message arrival, typed knowledge retrieval, GREEN/YELLOW/RED policy engine, draft response preview, and organizer oversight with auto-replies disabled",
-    creditSource:
-      "Public source repository specification (Linardi1328/khlim-assist)",
-    usageStatus: "VERIFIED",
-    verificationBasis:
-      "Derived strictly from src/data/project-registry.ts khlim-assist specification (typed knowledge retrieval, policy engine, draft preview, organizer oversight).",
-    boundaryNote:
-      "Direct participant auto-replies strictly disabled; all draft communications require explicit organizer sign-off.",
-    mobileBehavior:
-      "Responsive SVG with 16:9 intrinsic viewBox (800x450); scales cleanly to all viewports without horizontal overflow.",
-    width: 800,
-    height: 450,
-    aspectRatio: "16/9",
-    tags: ["software", "architecture", "controlled-ai", "safety-engine"],
-  },
-  {
     id: "ppo-architecture-diagram",
     filename: "/projects/personal-project-operator/operator-architecture.svg",
     targetRoute: "/projects/personal-project-operator",

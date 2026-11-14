@@ -1698,43 +1698,66 @@ tbody th {
 .gallery-count [data-count]:not([data-count="all"]) {
   display: none;
 }
-.gallery-section:has(#photo-filter-indonesia:checked)
-  .gallery-card:not([data-category="indonesia"]),
-.gallery-section:has(#photo-filter-all-star:checked)
-  .gallery-card:not([data-category="all-star"]),
+/* Progressive fallback rules (independent of :has) */
 .gallery-section[data-active-filter="indonesia"]
-  .gallery-card:not([data-category="indonesia"]),
+  .gallery-card:not([data-category="indonesia"]) {
+  display: none;
+}
 .gallery-section[data-active-filter="all-star"]
   .gallery-card:not([data-category="all-star"]) {
   display: none;
 }
-.gallery-section:has(#photo-filter-indonesia:checked)
-  .gallery-count
-  [data-count="all"],
-.gallery-section:has(#photo-filter-all-star:checked)
-  .gallery-count
-  [data-count="all"],
 .gallery-section[data-active-filter="indonesia"]
   .gallery-count
-  [data-count="all"],
+  [data-count="all"] {
+  display: none;
+}
 .gallery-section[data-active-filter="all-star"]
   .gallery-count
   [data-count="all"] {
   display: none;
 }
-.gallery-section:has(#photo-filter-indonesia:checked)
-  .gallery-count
-  [data-count="indonesia"],
-.gallery-section:has(#photo-filter-all-star:checked)
-  .gallery-count
-  [data-count="all-star"],
 .gallery-section[data-active-filter="indonesia"]
   .gallery-count
-  [data-count="indonesia"],
+  [data-count="indonesia"] {
+  display: inline;
+}
 .gallery-section[data-active-filter="all-star"]
   .gallery-count
   [data-count="all-star"] {
   display: inline;
+}
+
+/* Native CSS-only :has() filtering (independent rules for modern browsers) */
+@supports selector(:has(*)) {
+  .gallery-section:has(#photo-filter-indonesia:checked)
+    .gallery-card:not([data-category="indonesia"]) {
+    display: none;
+  }
+  .gallery-section:has(#photo-filter-all-star:checked)
+    .gallery-card:not([data-category="all-star"]) {
+    display: none;
+  }
+  .gallery-section:has(#photo-filter-indonesia:checked)
+    .gallery-count
+    [data-count="all"] {
+    display: none;
+  }
+  .gallery-section:has(#photo-filter-all-star:checked)
+    .gallery-count
+    [data-count="all"] {
+    display: none;
+  }
+  .gallery-section:has(#photo-filter-indonesia:checked)
+    .gallery-count
+    [data-count="indonesia"] {
+    display: inline;
+  }
+  .gallery-section:has(#photo-filter-all-star:checked)
+    .gallery-count
+    [data-count="all-star"] {
+    display: inline;
+  }
 }
 
 /* ==========================================================================
