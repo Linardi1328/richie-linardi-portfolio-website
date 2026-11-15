@@ -122,9 +122,10 @@ export default function ResumePage() {
                 </div>
                 <ul className="resume-entry__bullets">
                   <li>
-                    Lead development of sports and AI software projects; define
-                    architecture, product scope, release criteria, and testing
-                    across Python and TypeScript systems.
+                    Lead software engineering for a broader technology solutions
+                    venture in development; develop proprietary software
+                    products (KYNEXA, RIVORA, AXIOM QUANTUM) while exploring
+                    practical solutions for business problems.
                   </li>
                 </ul>
               </article>
@@ -237,16 +238,17 @@ export default function ResumePage() {
                       <Link href="/projects/kynexa">KYNEXA</Link>
                     </h3>
                     <p className="resume-entry__org">
-                      Sports Opportunity and Registration Platform
+                      Athlete Passport & Sports Registration Platform
                     </p>
                   </div>
                   <span className="resume-entry__period">In development</span>
                 </div>
                 <ul className="resume-entry__bullets">
                   <li>
-                    Developing Next.js/TypeScript athlete and organizer
-                    workflows with Supabase/PostgreSQL authorization and
-                    registration validation; pilot acceptance ongoing.
+                    Developing Next.js/TypeScript Athlete Passport workflows for
+                    player profiles, verified competition records, and
+                    tournament registrations with Supabase/PostgreSQL role-based
+                    authorization; pilot acceptance ongoing.
                   </li>
                 </ul>
               </article>
@@ -258,7 +260,7 @@ export default function ResumePage() {
                       <Link href="/projects/rivora">RIVORA</Link>
                     </h3>
                     <p className="resume-entry__org">
-                      Managed Basketball Tournament Platform
+                      Developer-Managed Tournament Platform
                     </p>
                   </div>
                   <span className="resume-entry__period">In development</span>
@@ -266,8 +268,10 @@ export default function ResumePage() {
                 <ul className="resume-entry__bullets">
                   <li>
                     Building branded spectator experiences and tournament
-                    operations for schedules, live scores, standings, and
-                    brackets; V1 validation ongoing.
+                    operations for live schedules, real-time scores, standings,
+                    and automated bracket progression; distinct from the
+                    completed KHLIM 3x3 Live V1 deployment; V1 validation
+                    ongoing.
                   </li>
                 </ul>
               </article>
@@ -307,16 +311,27 @@ export default function ResumePage() {
                       </Link>
                     </h3>
                     <p className="resume-entry__org">
-                      Next.js, React, TypeScript, Tailwind CSS
+                      Next.js, React, TypeScript, Tailwind CSS ·{" "}
+                      <a
+                        href="https://richielinardi.vercel.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-link"
+                      >
+                        richielinardi.vercel.app ↗
+                      </a>
                     </p>
                   </div>
-                  <span className="resume-entry__period">In development</span>
+                  <span className="resume-entry__period">
+                    Production released 15 Nov 2026
+                  </span>
                 </div>
                 <ul className="resume-entry__bullets">
                   <li>
-                    Building a responsive professional and athlete portfolio
-                    with evidence-backed case studies, optimised photography,
-                    accessibility, and automated validation.
+                    Engineered and deployed an accessible, dual-identity
+                    cinematic editorial portfolio with verified case studies,
+                    optimized photography, automated pass gates, and zero-defect
+                    browser regression suites.
                   </li>
                 </ul>
               </article>

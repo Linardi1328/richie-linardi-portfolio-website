@@ -22,6 +22,18 @@ export const projectRegistry = [
       "Live Scoring",
       "Edge Feed",
     ],
+    caseStudy: {
+      problem:
+        "Courtside scoring and bracket management at multi-division 3x3 tournaments were historically reliant on paper sheets or uncoordinated manual entries, creating score calculation delays, risk of bracket progression errors, and physical congestion around the tournament control desk.",
+      intendedUsers:
+        "Tournament directors, table scorekeepers, court marshals, competing 3x3 athletes, and live on-site/remote spectators.",
+      personalContribution:
+        "End-to-end architecture and implementation: engineered Google Apps Script scoring triggers, automated tiebreaker and bracket progression calculations, and built the edge-distributed Cloudflare Workers spectator feed.",
+      technicalApproach:
+        "Architected a decoupled edge read layer using Cloudflare Workers to cache and distribute match states, shielding the underlying Google Sheets and Apps Script backend from concurrent spectator read spikes during peak tournament hours.",
+      verifiedOutcomes:
+        "Successfully delivered live scoring and automated division brackets across 118 matches, 2 courts, and 4 divisions during the one-day event on 24 October 2026 with zero court downtime. Highlighted requirements for local offline tolerance in future platforms.",
+    },
     boundaries: [
       "Completed one-day tournament deployment executed on 24 October 2026.",
       "Live deployment availability reflects documented Cloudflare Worker runtime.",
@@ -44,12 +56,12 @@ export const projectRegistry = [
     slug: "kynexa",
     title: "KYNEXA",
     summary:
-      "A sports opportunity and registration platform connecting athletes, teams, and tournament organisers with role-based authorization and registration validation.",
+      "An Athlete Passport and sports opportunity platform connecting athletes, teams, and tournament organisers with role-based authorization, competition records, and registration validation.",
     repositoryUrl: "https://github.com/Linardi1328",
     phase: "In development",
     currentStatus:
-      "Next.js/TypeScript and Supabase/PostgreSQL registration · pilot acceptance ongoing",
-    statusVerifiedAt: "2026-11-14",
+      "Athlete Passport vision & tournament registration in development · pilot acceptance ongoing",
+    statusVerifiedAt: "2026-11-15",
     catalogueState: "catalogue",
     sortOrder: 15,
     tags: [
@@ -58,11 +70,25 @@ export const projectRegistry = [
       "Supabase",
       "PostgreSQL",
       "Role Authorization",
+      "Athlete Passport",
     ],
+    caseStudy: {
+      problem:
+        "Grassroots and amateur athletes lack a consolidated, portable competition passport, while tournament organizers struggle with manual document verification, scattered team rosters, and unstandardized entry eligibility.",
+      intendedUsers:
+        "Competitive basketball athletes, developmental academies, club managers, and tournament organizers seeking streamlined player registration.",
+      personalContribution:
+        "Product vision and full-stack engineering: designing database models, authentication roles, athlete passport schemas, and tournament registration workflows.",
+      technicalApproach:
+        "Full-stack Next.js and TypeScript application backed by Supabase and PostgreSQL, implementing row-level security policies, role-based access control, and human-in-the-loop document validation.",
+      verifiedOutcomes:
+        "Core athlete profile, competition history, and tournament sign-up flows implemented and undergoing pilot acceptance testing. Credible athlete assessment remains a long-term exploratory direction; no commercial launch or federation certification claimed.",
+    },
     boundaries: [
       "In active development; pilot acceptance validation ongoing.",
-      "No real-user public registration or commercial launch is claimed.",
-      "Supports player profiles and tournament sign-up workflows under human review.",
+      "No claims of association certification, official federation endorsement, commercial launch, or unrestricted production registration.",
+      "Supports athlete profiles, verified competition records, and human-supervised registration workflows.",
+      "Credible athlete assessment represents a long-term exploration direction.",
     ],
     evidence: [
       {
@@ -79,8 +105,8 @@ export const projectRegistry = [
     repositoryUrl: "https://github.com/Linardi1328",
     phase: "In development",
     currentStatus:
-      "Tournament operations and branded spectator feeds · V1 validation ongoing",
-    statusVerifiedAt: "2026-11-14",
+      "Developer-managed tournament operations & spectator feeds · V1 operational validation ongoing",
+    statusVerifiedAt: "2026-11-15",
     catalogueState: "catalogue",
     sortOrder: 25,
     tags: [
@@ -90,10 +116,23 @@ export const projectRegistry = [
       "Tournament Operations",
       "Live Brackets",
     ],
+    caseStudy: {
+      problem:
+        "Amateur basketball tournaments require dedicated digital operations—dynamic schedules, court assignments, real-time score updates, and automated bracket progression—without the overhead and lock-in of generic SaaS platforms.",
+      intendedUsers:
+        "Tournament organizers, court coordinators, statistics teams, and spectators following tournament live progression.",
+      personalContribution:
+        "System architecture and operational design: building real-time match state synchronization, bracket progression engines, and branded responsive spectator feeds.",
+      technicalApproach:
+        "Modular TypeScript and React architecture with edge distribution on Cloudflare, engineered for low-latency score updates, clean bracket rendering, and resilience against event-day connectivity constraints.",
+      verifiedOutcomes:
+        "Core tournament lifecycle, live bracket logic, and spectator views implemented and undergoing V1 operational validation. Distinct from the completed KHLIM 3x3 Live event deployment.",
+    },
     boundaries: [
       "In active development; V1 operational validation ongoing.",
-      "Developer-managed platform; not launched as a self-service SaaS product.",
+      "Developer-managed tournament platform; not launched as a self-service commercial SaaS product.",
       "Distinct from the completed KHLIM 3x3 Live V1 event deployment.",
+      "Designed to address event-day offline tolerance, scoring ergonomics, and multi-division bracket progression.",
     ],
     evidence: [
       {
@@ -122,6 +161,18 @@ export const projectRegistry = [
       "Walk-forward ML",
       "Risk Controls",
     ],
+    caseStudy: {
+      problem:
+        "Quantitative market models frequently suffer from lookahead bias, data leakage, and unconstrained paper risk assumptions when translating research concepts into systematic software.",
+      intendedUsers:
+        "Quantitative developers and data science researchers evaluating walk-forward model reliability and risk boundary enforcement.",
+      personalContribution:
+        "Design and implementation of leak-free feature pipelines, walk-forward validation harnesses, backtesting logic, and fail-closed deterministic execution boundaries.",
+      technicalApproach:
+        "Python, pandas, and scikit-learn pipeline implementing strict chronological training-test splits, transaction cost modeling, drawdown limits, and independent safety gates.",
+      verifiedOutcomes:
+        "Released v2.0.0-beta.1 quantitative research baseline. Explicitly confined to historical walk-forward research; live trading is strictly prohibited with zero profitability claims.",
+    },
     boundaries: [
       "Experimental research software; not investment advice.",
       "No approved shadow or paper model currently exists.",
@@ -181,12 +232,14 @@ export const projectRegistry = [
     title: "Personal Portfolio Website",
     summary:
       "A cinematic editorial portfolio and dual-identity digital profile engineered with Next.js, React, TypeScript, and Tailwind CSS, featuring verified project case studies, optimized photography, accessibility, and automated CI validation.",
+    deploymentUrl: "https://richielinardi.vercel.app",
     repositoryUrl:
       "https://github.com/Linardi1328/richie-linardi-portfolio-website",
-    phase: "In development",
+    phase: "Production release",
+    release: "v1.0.0",
     currentStatus:
-      "Active project · evidence-led case studies and automated validation",
-    statusVerifiedAt: "2026-11-14",
+      "Production released 15 Nov 2026 · dual-identity architecture · released & maintained",
+    statusVerifiedAt: "2026-11-15",
     catalogueState: "catalogue",
     sortOrder: 55,
     tags: [
@@ -197,15 +250,38 @@ export const projectRegistry = [
       "Accessibility",
       "CI",
     ],
+    caseStudy: {
+      problem:
+        "Personal digital presence was fragmented across platforms without verified source-of-truth evidence, making it difficult to present both technical software capabilities and serious competitive athletic achievements in a single coherent experience.",
+      intendedUsers:
+        "Prospective engineering employers, technical collaborators, academic evaluators, and athletic scouts.",
+      personalContribution:
+        "Sole design and engineering: architected dual-identity narrative, implemented cinematic editorial layouts, authored regression test suites, and established the verified Vercel production deployment pipeline.",
+      technicalApproach:
+        "Next.js App Router, React 19, TypeScript, Manrope typography, custom responsive CSS without bloated runtime animation libraries, and strict CI enforcement covering linting, typechecks, truth contracts, and browser tests.",
+      verifiedOutcomes:
+        "Production released on 15 November 2026 at richielinardi.vercel.app with 100% route verification across 26 sitemap endpoints, zero detected axe-core accessibility violations, and genuine 404 gates for excluded historical assets.",
+    },
     boundaries: [
-      "Active portfolio project in continuous development.",
-      "Strictly adheres to content truth, verified credentials, and responsive accessibility gates.",
+      "Production released on 15 November 2026 under verified Vercel hosting.",
+      "Dual-identity narrative connects data science engineering with competitive basketball.",
+      "Automated CI validation enforces linting, typechecks, formatting, truth contracts, and browser regression suites.",
+      "Historical preview deployments remain protected under separate SSO access controls.",
     ],
     evidence: [
+      {
+        kind: "deployment",
+        label: "Live production deployment",
+        href: "https://richielinardi.vercel.app",
+      },
       {
         kind: "repository",
         label: "Public source repository",
         href: "https://github.com/Linardi1328/richie-linardi-portfolio-website",
+      },
+      {
+        kind: "documentation",
+        label: "Production release handover specification",
       },
     ],
   },

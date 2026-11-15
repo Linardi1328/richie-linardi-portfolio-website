@@ -133,13 +133,14 @@ export default function ProjectsPage() {
           />
           <div className="card-grid card-grid--two">
             <article className="content-card">
-              <p className="eyebrow">Product & System Engineering</p>
+              <p className="eyebrow">Technology Solutions Venture</p>
               <h2 className="card-heading">R&E Technologies</h2>
               <p>
-                An independent technology venture in development (2026–Present),
-                focused on sports software architecture, scoring infrastructure,
-                and applied AI tools. Kept distinct from corporate registration
-                or commercial client representations.
+                A broader technology solutions venture in development
+                (2026–Present) that develops its own software products while
+                selectively exploring practical software solutions for business
+                problems. Kept distinct from unverified incorporation,
+                partnership, or revenue claims.
               </p>
             </article>
             <article className="content-card">

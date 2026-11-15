@@ -75,7 +75,7 @@ export const foundationPages = {
         eyebrow: "Independent Product Builder · 2026–Present",
         title: "Independent Software Developer · R&E Technologies.",
         description:
-          "Leading development of sports and AI software projects as an independent builder (venture in development); defining architecture, product scope, release criteria, and testing across Python and TypeScript systems (KYNEXA, RIVORA, AXIOM QUANTUM).",
+          "Leading software engineering for R&E Technologies, a broader technology solutions venture in development that builds its own software products (KYNEXA, RIVORA, AXIOM QUANTUM) while selectively exploring practical software solutions for business problems.",
       },
       {
         eyebrow: "Statistics & operations · Jan 2026–Present",

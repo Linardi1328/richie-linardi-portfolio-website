@@ -10,8 +10,17 @@ export type ProjectEvidence = {
   label: string;
 };
 
+export type ProjectCaseStudy = {
+  intendedUsers?: string;
+  personalContribution?: string;
+  problem?: string;
+  technicalApproach?: string;
+  verifiedOutcomes?: string;
+};
+
 export type PortfolioProject = {
   boundaries: readonly string[];
+  caseStudy?: ProjectCaseStudy;
   catalogueState: ProjectCatalogueState;
   currentStatus: string;
   deploymentUrl?: string;
