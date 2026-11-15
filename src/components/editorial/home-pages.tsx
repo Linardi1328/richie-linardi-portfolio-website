@@ -484,7 +484,10 @@ export function ProfessionalHome() {
               Power BI visualisation.
             </p>
             <div className="academic-spotlight-actions">
-              <Link className="text-link" href="/projects/moncity-data-warehouse">
+              <Link
+                className="text-link"
+                href="/projects/moncity-data-warehouse"
+              >
                 Read Academic Case Study →
               </Link>
             </div>
