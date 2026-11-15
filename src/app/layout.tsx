@@ -14,8 +14,9 @@ const manrope = localFont({
 const portfolioTitle = "Richie Linardi | Data Science, AI & Basketball";
 const portfolioDescription =
   "Richie Linardi’s portfolio: data science, applied AI, software projects, and a life in competitive basketball.";
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://richielinardi.vercel.app";
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://richielinardi.vercel.app"
+).replace(/\/+$/, "");
 const isPreview = process.env.PORTFOLIO_PREVIEW === "1";
 
 export const metadata: Metadata = {
