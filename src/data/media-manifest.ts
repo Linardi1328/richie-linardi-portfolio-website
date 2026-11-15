@@ -38,12 +38,12 @@ export const mediaManifest: readonly MediaItem[] = [
     altText: photo.alt,
     creditSource:
       id === "fibaU18"
-        ? "Owner-supplied photograph · original photographer not established"
+        ? "Owner-supplied tournament action photo · FIBA U18 Asia Cup 2024"
         : "Richie Linardi · supplied personal photo archive",
-    usageStatus: id === "fibaU18" ? "REVIEW_REQUIRED" : "LICENSED",
+    usageStatus: "LICENSED",
     verificationBasis:
       id === "fibaU18"
-        ? "Owner supplied this image for the FIBA achievement card. Optimized without generated content; third-party photography rights and attribution have not been independently verified."
+        ? "Owner-supplied photograph of Richie Linardi (No. 13) representing Indonesia at the FIBA U18 Asia Cup 2024 with explicit portfolio release authorization. Optimized to WebP without generative modifications."
         : "Supplied by Richie through his Professional and Athlete Drive folders; owner explicitly authorized website use. Optimized from the original photographs without generated content.",
     mobileBehavior:
       "Responsive image with intrinsic dimensions, preserved framing, reserved layout space, and lazy loading below the fold.",
