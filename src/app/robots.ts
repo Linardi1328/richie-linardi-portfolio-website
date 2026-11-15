@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   const isPreview = process.env.PORTFOLIO_PREVIEW === "1";
+  const siteOrigin =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://richielinardi.vercel.app";
 
   return {
     rules: isPreview
@@ -13,6 +15,6 @@ export default function robots(): MetadataRoute.Robots {
           userAgent: "*",
           allow: "/",
         },
-    sitemap: "https://richielinardi.com/sitemap.xml",
+    sitemap: `${siteOrigin}/sitemap.xml`,
   };
 }
