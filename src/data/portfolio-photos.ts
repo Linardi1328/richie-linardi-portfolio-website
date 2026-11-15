@@ -47,6 +47,14 @@ export const portfolioPhotos = {
     caption: "DBL Indonesia All-Star 2024 · Richie Linardi / No. 13",
     route: "/basketball",
   },
+  fibaU18: {
+    src: "/images/portfolio/fiba-u18-asia-cup-2024.webp",
+    width: 600,
+    height: 338,
+    alt: "Indonesia basketball player wearing a red number 13 jersey and dribbling during a game",
+    caption: "FIBA U18 Asia Cup 2024 · Indonesia · Amman, Jordan",
+    route: "/basketball/achievements",
+  },
 } as const;
 
 export type PortfolioPhotoId = keyof typeof portfolioPhotos;

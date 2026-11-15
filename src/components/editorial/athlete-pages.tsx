@@ -314,6 +314,7 @@ export function AthleteAchievements() {
       stat: "3 GP · 5.3 PPG · 3.0 RPG · 0.7 APG",
       detail:
         "Represented Indonesia in group stage play at the FIBA U18 Asia Cup in Amman, Jordan, facing elite continental junior competition.",
+      photo: "fibaU18" as const,
       source: basketballSources.fiba,
     },
   ];
@@ -410,7 +411,12 @@ export function AthleteAchievements() {
         {signatureRecords.map((item) => (
           <article className="achievement-hero-card" key={item.id}>
             {item.photo ? (
-              <PortfolioPhotograph photo={item.photo} />
+              <PortfolioPhotograph
+                photo={item.photo}
+                className={
+                  item.id === "fiba-u18" ? "portfolio-photograph--fiba" : ""
+                }
+              />
             ) : (
               <div
                 style={{
