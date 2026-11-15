@@ -18,7 +18,7 @@ export default function ProjectsPage() {
     "spy-market-agent",
     "personal-portfolio",
   ];
-  const academicSlugs = ["tourism-dashboard"];
+  const academicSlugs = ["moncity-data-warehouse", "tourism-dashboard"];
   const engineeringProjects = publicProjectCatalogue.filter((p) =>
     engineeringSlugs.includes(p.slug),
   );

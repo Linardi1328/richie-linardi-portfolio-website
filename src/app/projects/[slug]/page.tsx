@@ -130,8 +130,9 @@ export default async function ProjectPage({
                 </p>
               ) : (
                 <p className="small-note">
-                  Repository activity is temporarily unavailable. Visit the
-                  source for subsequent changes.
+                  {hasDedicatedRepo
+                    ? "Repository activity is temporarily unavailable. Visit the source for subsequent changes."
+                    : "No dedicated public repository is linked."}
                 </p>
               )}
             </article>

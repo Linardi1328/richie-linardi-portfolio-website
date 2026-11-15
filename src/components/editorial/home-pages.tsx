@@ -474,6 +474,32 @@ export function ProfessionalHome() {
 
         <article className="academic-spotlight-card">
           <div>
+            <span className="eyebrow">
+              Academic Project · Monash University Malaysia (FIT3003)
+            </span>
+            <h3>MonCity Data Warehouse</h3>
+            <p>
+              Business intelligence and data warehousing coursework exploring
+              data quality assessment, dimensional modelling, Oracle SQL, and
+              Power BI visualisation.
+            </p>
+            <div className="academic-spotlight-actions">
+              <Link className="text-link" href="/projects/moncity-data-warehouse">
+                Read Academic Case Study →
+              </Link>
+            </div>
+          </div>
+          <div className="system-tag-list academic-spotlight-tags">
+            <span className="system-tag">Oracle SQL</span>
+            <span className="system-tag">Data Warehousing</span>
+            <span className="system-tag">Dimensional Modelling</span>
+            <span className="system-tag">Power BI</span>
+            <span className="system-tag">Data Quality</span>
+          </div>
+        </article>
+
+        <article className="academic-spotlight-card">
+          <div>
             <span
               className="academic-badge"
               style={{

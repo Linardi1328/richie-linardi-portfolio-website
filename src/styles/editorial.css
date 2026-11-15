@@ -2197,6 +2197,19 @@ tbody th {
   align-items: center;
 }
 
+.academic-spotlight-card + .academic-spotlight-card {
+  margin-top: 1.25rem;
+}
+
+.academic-spotlight-actions {
+  margin-top: 1.25rem;
+}
+
+.academic-spotlight-tags {
+  border-top: none;
+  padding: 0;
+}
+
 .academic-spotlight-card > div:first-child {
   display: flex;
   flex-direction: column;

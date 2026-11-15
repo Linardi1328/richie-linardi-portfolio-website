@@ -191,6 +191,66 @@ export const projectRegistry = [
     ],
   },
   {
+    slug: "moncity-data-warehouse",
+    title: "MonCity Data Warehouse",
+    summary:
+      "Academic coursework in business intelligence and data warehousing, applying data quality assessment, dimensional modelling, Oracle SQL, and Power BI to develop analytical skills.",
+    repositoryUrl: "https://github.com/Linardi1328",
+    phase: "Completed academic project",
+    currentStatus:
+      "Completed FIT3003 coursework · learning reflection · original assessment materials not published",
+    statusVerifiedAt: "2026-10-14",
+    catalogueState: "catalogue",
+    sortOrder: 44,
+    tags: [
+      "Oracle SQL",
+      "Data Warehousing",
+      "Dimensional Modelling",
+      "Power BI",
+      "Data Quality",
+    ],
+    boundaries: [
+      "Academic coursework, not a commercial deployment or live business system.",
+      "Assessment solutions, original datasets and original submitted visuals are not published here.",
+      "No grade or university endorsement is claimed.",
+    ],
+    caseStudy: {
+      academicContext: {
+        institution: "Monash University Malaysia",
+        unit: "FIT3003 — Business Intelligence and Data Warehousing",
+        period: "Semester 2, 2026",
+        disclaimer:
+          "A high-level learning reflection on academic coursework, not a commercial deployment. Generative AI assistance is acknowledged in the original submission.",
+      },
+      problem:
+        "Developing the ability to transform operational data into useful analytical information through careful data preparation, modelling, and visual communication.",
+      learningObjectives: [
+        "Assess data quality and document cleaning decisions.",
+        "Understand dimensional modelling and the role of grain in analytical design.",
+        "Develop SQL-based analytical workflows and communicate findings through business intelligence visuals.",
+      ],
+      personalContribution:
+        "Completed coursework involving data exploration, data warehouse design, Oracle SQL implementation and Power BI visualisation, with AI assistance acknowledged in the original submission.",
+      technicalSkills: [
+        "Oracle SQL",
+        "Data Quality Assessment",
+        "Dimensional Modelling",
+        "Business Intelligence",
+        "Power BI",
+      ],
+      verifiedOutcomes:
+        "Completed an academic report and dashboard as part of FIT3003 coursework. This portfolio entry describes the learning experience rather than reproducing assessment solutions.",
+      limitations:
+        "Academic exercise only. No production deployment, commercial outcomes or assessment grade is claimed.",
+    },
+    evidence: [
+      {
+        kind: "documentation",
+        label: "Original submitted academic materials retained privately.",
+      },
+    ],
+  },
+  {
     slug: "tourism-dashboard",
     title: "Tourism in Malaysia Interactive Dashboard",
     summary:
