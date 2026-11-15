@@ -191,6 +191,66 @@ export const projectRegistry = [
     ],
   },
   {
+    slug: "moncity-data-warehouse",
+    title: "MonCity Data Warehouse",
+    summary:
+      "Academic coursework in business intelligence and data warehousing, applying data quality assessment, dimensional modelling, Oracle SQL, and Power BI to develop analytical skills.",
+    repositoryUrl: "https://github.com/Linardi1328",
+    phase: "Completed academic project",
+    currentStatus:
+      "Completed FIT3003 coursework · learning reflection · original assessment materials not published",
+    statusVerifiedAt: "2026-10-14",
+    catalogueState: "catalogue",
+    sortOrder: 44,
+    tags: [
+      "Oracle SQL",
+      "Data Warehousing",
+      "Dimensional Modelling",
+      "Power BI",
+      "Data Quality",
+    ],
+    boundaries: [
+      "Academic coursework, not a commercial deployment or live business system.",
+      "Assessment solutions, original datasets and original submitted visuals are not published here.",
+      "No grade or university endorsement is claimed.",
+    ],
+    caseStudy: {
+      academicContext: {
+        institution: "Monash University Malaysia",
+        unit: "FIT3003 — Business Intelligence and Data Warehousing",
+        period: "Semester 2, 2026",
+        disclaimer:
+          "A high-level learning reflection on academic coursework, not a commercial deployment. Generative AI assistance is acknowledged in the original submission.",
+      },
+      problem:
+        "Developing the ability to transform operational data into useful analytical information through careful data preparation, modelling, and visual communication.",
+      learningObjectives: [
+        "Assess data quality and document cleaning decisions.",
+        "Understand dimensional modelling and the role of grain in analytical design.",
+        "Develop SQL-based analytical workflows and communicate findings through business intelligence visuals.",
+      ],
+      personalContribution:
+        "Completed coursework involving data exploration, data warehouse design, Oracle SQL implementation and Power BI visualisation, with AI assistance acknowledged in the original submission.",
+      technicalSkills: [
+        "Oracle SQL",
+        "Data Quality Assessment",
+        "Dimensional Modelling",
+        "Business Intelligence",
+        "Power BI",
+      ],
+      verifiedOutcomes:
+        "Completed an academic report and dashboard as part of FIT3003 coursework. This portfolio entry describes the learning experience rather than reproducing assessment solutions.",
+      limitations:
+        "Academic exercise only. No production deployment, commercial outcomes or assessment grade is claimed.",
+    },
+    evidence: [
+      {
+        kind: "documentation",
+        label: "Original submitted academic materials retained privately.",
+      },
+    ],
+  },
+  {
     slug: "tourism-dashboard",
     title: "Tourism in Malaysia Interactive Dashboard",
     summary:
@@ -200,7 +260,7 @@ export const projectRegistry = [
     phase: "Completed academic project",
     release: "v1.0",
     currentStatus: "Completed academic work · public interactive web dashboard",
-    statusVerifiedAt: "2026-04-30",
+    statusVerifiedAt: "2026-05-31",
     catalogueState: "catalogue",
     sortOrder: 45,
     tags: [
@@ -209,11 +269,46 @@ export const projectRegistry = [
       "Data Visualisation",
       "Public Datasets",
       "Vega-Lite",
+      "TopoJSON",
     ],
     boundaries: [
       "Completed academic project for FIT2179 Data Visualisation.",
       "Visualises public tourism datasets through interactive maps and time-series charts.",
     ],
+    caseStudy: {
+      academicContext: {
+        institution: "Monash University Malaysia",
+        unit: "FIT2179 — Data Visualisation",
+        period: "Semester 1, 2026",
+        disclaimer:
+          "Academic coursework project developed at Monash University Malaysia. This represents coursework rather than a commercial deployment.",
+      },
+      problem:
+        "Post-pandemic tourism recovery across Malaysia required accessible analytical exploration of multi-dimensional indicators—spanning state-by-state visitor volume, hotel occupancy rates, and regional expenditure distribution—synthesised from official public records.",
+      intendedUsers:
+        "Students, researchers, and public observers analyzing regional Malaysian tourism trends and post-pandemic recovery patterns.",
+      learningObjectives: [
+        "Multi-dimensional visual encoding of temporal, categorical, and geospatial public datasets.",
+        "Geospatial choropleth mapping using embedded TopoJSON geometries and custom territory insets.",
+        "Effective visual narrative design following established perceptual and visual communication principles.",
+      ],
+      technicalApproach:
+        "Engineered an interactive web dashboard utilizing Vega-Lite declarative specifications embedded in a responsive web layout. Built state-level geospatial choropleth maps with embedded TopoJSON geometries and territory insets for Penang, Kuala Lumpur, and Putrajaya, paired with multi-series temporal line charts, a pre-COVID seasonal heat matrix, regional share comparisons, and inbound expenditure waterfall breakdowns.",
+      personalContribution:
+        "Designed the dashboard visual hierarchy and layout, authored declarative Vega-Lite specifications, integrated embedded TopoJSON state boundaries, structured responsive CSS styling, and cleaned public tourism datasets, utilizing GenAI tools for ideation, specification debugging, and wording refinement while retaining full design ownership and submission responsibility.",
+      technicalSkills: [
+        "Vega-Lite",
+        "JavaScript",
+        "TopoJSON & Spatial Mapping",
+        "Data Transformation",
+        "Exploratory Data Analysis",
+        "Responsive Web Presentation",
+      ],
+      verifiedOutcomes:
+        "Publicly deployed interactive web dashboard accessible via GitHub Pages, enabling exploratory inspection across state tourist arrivals, hotel occupancy percentages, and tourist expenditure metrics without requiring live database backends.",
+      limitations:
+        "Based on static historical public datasets (2015–2022); does not connect to live government transactional feeds or provide real-time updates.",
+    },
     evidence: [
       {
         kind: "deployment",

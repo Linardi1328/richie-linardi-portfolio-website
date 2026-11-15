@@ -12,18 +12,24 @@ export default function ProjectsPage() {
   const flagshipProject = publicProjectCatalogue.find(
     (p) => p.slug === "khlim-3x3-live",
   );
-  const coreResumeSlugs = [
+  const engineeringSlugs = [
     "kynexa",
     "rivora",
     "spy-market-agent",
-    "tourism-dashboard",
     "personal-portfolio",
   ];
-  const coreProjects = publicProjectCatalogue.filter((p) =>
-    coreResumeSlugs.includes(p.slug),
+  const academicSlugs = ["moncity-data-warehouse", "tourism-dashboard"];
+  const engineeringProjects = publicProjectCatalogue.filter((p) =>
+    engineeringSlugs.includes(p.slug),
+  );
+  const academicProjects = publicProjectCatalogue.filter((p) =>
+    academicSlugs.includes(p.slug),
   );
   const secondaryProjects = publicProjectCatalogue.filter(
-    (p) => p.slug !== "khlim-3x3-live" && !coreResumeSlugs.includes(p.slug),
+    (p) =>
+      p.slug !== "khlim-3x3-live" &&
+      !engineeringSlugs.includes(p.slug) &&
+      !academicSlugs.includes(p.slug),
   );
 
   return (
@@ -95,12 +101,32 @@ export default function ProjectsPage() {
             title="Core engineering & applied research."
           >
             Systems from Résumé V4 spanning registration platforms, tournament
-            SaaS development, quantitative market research, and public data
-            visualisation.
+            operations, quantitative market research, and portfolio
+            infrastructure.
           </SectionHeading>
           <div className="card-grid">
-            {coreProjects.map((project, index) => (
+            {engineeringProjects.map((project, index) => (
               <ProjectCard project={project} index={index} key={project.slug} />
+            ))}
+          </div>
+        </section>
+
+        <section className="section container section--tinted" id="academic">
+          <SectionHeading
+            label="Academic & Data Science"
+            title="From data to decisions."
+          >
+            Coursework and academic data science projects at Monash University
+            Malaysia. Grounded in dimensional modelling, data quality
+            assessment, SQL, and interactive data visualisation.
+          </SectionHeading>
+          <div className="card-grid">
+            {academicProjects.map((project, index) => (
+              <ProjectCard
+                project={project}
+                index={index + engineeringProjects.length}
+                key={project.slug}
+              />
             ))}
           </div>
         </section>
@@ -118,7 +144,9 @@ export default function ProjectsPage() {
               {secondaryProjects.map((project, index) => (
                 <ProjectCard
                   project={project}
-                  index={index + coreProjects.length}
+                  index={
+                    index + engineeringProjects.length + academicProjects.length
+                  }
                   key={project.slug}
                 />
               ))}

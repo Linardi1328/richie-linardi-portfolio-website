@@ -2153,6 +2153,311 @@ tbody th {
   margin-bottom: 1rem;
 }
 
+/* ==========================================================================
+   Academic & Data Science Section
+   ========================================================================== */
+.academic-competencies-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.academic-competency-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.academic-competency-card h4 {
+  font-size: 0.92rem;
+  font-weight: 750;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+.academic-competency-card p {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.academic-spotlight-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 2.25rem;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.academic-spotlight-card + .academic-spotlight-card {
+  margin-top: 1.25rem;
+}
+
+.academic-spotlight-actions {
+  margin-top: 1.25rem;
+}
+
+.academic-spotlight-tags {
+  border-top: none;
+  padding: 0;
+}
+
+.academic-spotlight-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.academic-spotlight-card h3 {
+  font-size: 1.45rem;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  margin-block: 0.5rem 0.75rem;
+}
+
+.academic-spotlight-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   R&E Technologies — Dedicated Entrepreneurship Chapter
+   Corporate Identity V1: Graphite, Slate, Cyan, Ice, White
+   ========================================================================== */
+.re-entrepreneurship {
+  --re-graphite: #111827;
+  --re-slate: #263449;
+  --re-cyan: #35cadb;
+  --re-cyan-glow: rgba(53, 202, 219, 0.15);
+  --re-cyan-border: rgba(53, 202, 219, 0.35);
+  --re-ice: #e9f3f5;
+  --re-white: #ffffff;
+  --re-muted: #cbd5e1;
+  background-color: var(--re-graphite);
+  color: var(--re-ice);
+  padding-block: clamp(4rem, 7vw, 6rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.re-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.re-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--re-cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.re-brand-mark {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.re-title {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  color: var(--re-white);
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+
+.re-value-prop {
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 600;
+  color: var(--re-cyan);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.25rem;
+  max-width: 42ch;
+}
+
+.re-narrative-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+  align-items: start;
+}
+
+.re-narrative-copy p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+.re-founder-card {
+  background: rgba(38, 52, 73, 0.4);
+  border: 1px solid rgba(53, 202, 219, 0.2);
+  border-left: 3px solid var(--re-cyan);
+  border-radius: 10px;
+  padding: 1.75rem;
+}
+
+.re-founder-quote {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--re-ice);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.re-founder-attribution {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  color: var(--re-cyan);
+  text-transform: uppercase;
+}
+
+.re-ecosystem-heading {
+  font-size: 1.25rem;
+  font-weight: 750;
+  color: var(--re-white);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.re-ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.re-card {
+  background: rgba(38, 52, 73, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.re-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--re-cyan-border);
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.4);
+}
+
+.re-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.re-card-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--re-cyan);
+  margin-bottom: 0.75rem;
+}
+
+.re-card h4 {
+  font-size: 1.35rem;
+  font-weight: 750;
+  color: var(--re-white);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.re-card p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.re-card__link {
+  margin-top: auto;
+  padding-top: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.re-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--re-cyan);
+  transition:
+    gap 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.re-card-link:hover {
+  gap: 0.55rem;
+  opacity: 0.9;
+}
+
+.re-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.re-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  background: rgba(17, 24, 39, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+}
+
+.re-governance-note {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.re-governance-note p {
+  font-size: 0.75rem;
+  color: var(--re-muted);
+  line-height: 1.5;
+}
+
+.re-governance-note strong {
+  color: var(--re-white);
+}
+
 /* Cinematic Cross-Identity Section */
 .cross-identity-cinematic {
   background: #0a0b0d;
@@ -2266,9 +2571,26 @@ tbody th {
   .cross-identity-grid {
     grid-template-columns: 1fr;
   }
+  .re-narrative-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .re-ecosystem-grid {
+    grid-template-columns: 1fr;
+  }
+  .academic-competencies-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .academic-spotlight-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 640px) {
+  .academic-competencies-grid {
+    grid-template-columns: 1fr;
+  }
   .flagship-metrics-grid {
     grid-template-columns: 1fr;
   }
@@ -2286,7 +2608,8 @@ tbody th {
     animation: none !important;
   }
   .button,
-  .secondary-system-card {
+  .secondary-system-card,
+  .re-card {
     transition: none !important;
     transform: none !important;
   }

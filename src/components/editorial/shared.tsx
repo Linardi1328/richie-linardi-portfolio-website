@@ -80,6 +80,11 @@ const projectThemes: Record<
     label: "Research & intelligence",
     motif: "chart",
   },
+  "moncity-data-warehouse": {
+    code: "MC",
+    label: "Business intelligence",
+    motif: "chart",
+  },
   "tourism-dashboard": {
     code: "TM",
     label: "Interactive visualization",
