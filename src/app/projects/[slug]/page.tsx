@@ -146,6 +146,53 @@ export default async function ProjectPage({
             </article>
           </div>
         </section>
+        {project.caseStudy ? (
+          <section className="section container section--compact">
+            <SectionHeading
+              label="Case study dossier"
+              title="Architecture, approach, and verified outcomes."
+            />
+            <div className="case-layout">
+              <article className="content-card">
+                <p className="eyebrow">Problem & intended users</p>
+                <h3 className="card-heading">The challenge addressed.</h3>
+                {project.caseStudy.problem ? (
+                  <p>{project.caseStudy.problem}</p>
+                ) : null}
+                {project.caseStudy.intendedUsers ? (
+                  <p className="small-note" style={{ marginTop: "1rem" }}>
+                    <strong>Intended users:</strong>{" "}
+                    {project.caseStudy.intendedUsers}
+                  </p>
+                ) : null}
+              </article>
+              <article className="content-card">
+                <p className="eyebrow">Technical approach & contribution</p>
+                <h3 className="card-heading">Engineering & architecture.</h3>
+                {project.caseStudy.technicalApproach ? (
+                  <p>{project.caseStudy.technicalApproach}</p>
+                ) : null}
+                {project.caseStudy.personalContribution ? (
+                  <p className="small-note" style={{ marginTop: "1rem" }}>
+                    <strong>Personal contribution:</strong>{" "}
+                    {project.caseStudy.personalContribution}
+                  </p>
+                ) : null}
+              </article>
+            </div>
+            {project.caseStudy.verifiedOutcomes ? (
+              <div style={{ marginTop: "1.5rem" }}>
+                <article className="content-card">
+                  <p className="eyebrow">Verified outcomes & limitations</p>
+                  <h3 className="card-heading">
+                    What was measured and learned.
+                  </h3>
+                  <p>{project.caseStudy.verifiedOutcomes}</p>
+                </article>
+              </div>
+            ) : null}
+          </section>
+        ) : null}
         {media.length ? (
           <section className="section section--tinted">
             <div className="container">

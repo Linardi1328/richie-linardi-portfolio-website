@@ -75,7 +75,7 @@ export const foundationPages = {
         eyebrow: "Independent Product Builder · 2026–Present",
         title: "Independent Software Developer · R&E Technologies.",
         description:
-          "Leading development of sports and AI software projects as an independent builder (venture in development); defining architecture, product scope, release criteria, and testing across Python and TypeScript systems (KYNEXA, RIVORA, AXIOM QUANTUM).",
+          "Leading software engineering for R&E Technologies, a broader technology solutions venture in development that builds its own software products (KYNEXA, RIVORA, AXIOM QUANTUM) while selectively exploring practical software solutions for business problems.",
       },
       {
         eyebrow: "Statistics & operations · Jan 2026–Present",
@@ -159,7 +159,7 @@ export const foundationPages = {
         description:
           "For internship, software engineering, data science, or AI project conversations, connect via LinkedIn, GitHub, or direct email.",
         items: [
-          "LinkedIn · linkedin.com/in/richie-linardi",
+          "LinkedIn · linkedin.com/in/richie-linardi-595370314",
           "GitHub · github.com/Linardi1328",
           "Email · richb.linardi@gmail.com",
         ],
@@ -178,7 +178,7 @@ export const foundationPages = {
           "This portfolio displays only authentic, verified channels. Private contact information remains protected in accordance with privacy safeguards.",
       },
     ],
-    primaryHref: "https://www.linkedin.com/in/richie-linardi/",
+    primaryHref: "https://www.linkedin.com/in/richie-linardi-595370314/",
     primaryLabel: "Connect on LinkedIn",
   },
   resume: {

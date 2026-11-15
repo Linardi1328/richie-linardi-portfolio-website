@@ -322,17 +322,23 @@ export function ProfessionalHome() {
               </p>
               <h3>KYNEXA</h3>
               <p>
-                Sports opportunity and registration platform. Developing athlete
-                and organizer workflows with Supabase/PostgreSQL authorization
-                and registration validation; pilot acceptance ongoing.
+                Athlete Passport and sports opportunity platform connecting
+                athletes, teams, and tournament organisers with role-based
+                authorization, competition records, and registration validation;
+                pilot acceptance ongoing.
               </p>
+              <div className="secondary-system-card__link">
+                <Link className="text-link" href="/projects/kynexa">
+                  View case study →
+                </Link>
+              </div>
             </div>
             <div className="system-tag-list">
               <span className="system-tag">Next.js</span>
               <span className="system-tag">TypeScript</span>
               <span className="system-tag">Supabase</span>
               <span className="system-tag">PostgreSQL</span>
-              <span className="system-tag">Role Authorization</span>
+              <span className="system-tag">Athlete Passport</span>
             </div>
           </article>
 
@@ -344,11 +350,16 @@ export function ProfessionalHome() {
               </p>
               <h3>RIVORA</h3>
               <p>
-                Developer-managed basketball tournament platform. Building
-                branded spectator experiences and tournament operations for
-                schedules, live scores, standings, and brackets; V1 validation
-                ongoing.
+                Developer-managed basketball tournament operations platform
+                providing branded spectator experiences, live schedules,
+                real-time scores, standings, and automated bracket progression;
+                V1 operational validation ongoing.
               </p>
+              <div className="secondary-system-card__link">
+                <Link className="text-link" href="/projects/rivora">
+                  View case study →
+                </Link>
+              </div>
             </div>
             <div className="system-tag-list">
               <span className="system-tag">TypeScript</span>
@@ -368,9 +379,14 @@ export function ProfessionalHome() {
               <p>
                 Leakage-aware SPY market-research and walk-forward evaluation
                 system with deterministic safety gates, backtesting, and
-                independent risk controls. Experimental research software with
+                independent risk controls. Experimental research baseline with
                 no live trading or profitability claims.
               </p>
+              <div className="secondary-system-card__link">
+                <Link className="text-link" href="/projects/spy-market-agent">
+                  View case study →
+                </Link>
+              </div>
             </div>
             <div className="system-tag-list">
               <span className="system-tag">Python</span>
@@ -378,6 +394,34 @@ export function ProfessionalHome() {
               <span className="system-tag">scikit-learn</span>
               <span className="system-tag">Walk-forward ML</span>
               <span className="system-tag">Risk Controls</span>
+            </div>
+          </article>
+
+          {/* Personal Portfolio Website */}
+          <article className="secondary-system-card">
+            <div>
+              <p className="eyebrow" style={{ color: "#2563eb" }}>
+                Production released 15 Nov 2026 · Maintained
+              </p>
+              <h3>Personal Portfolio Website</h3>
+              <p>
+                Cinematic editorial dual-identity portfolio showcasing verified
+                technical systems and competitive basketball achievements, built
+                with Next.js 16, React 19, TypeScript, and rigorous automated CI
+                verification gates.
+              </p>
+              <div className="secondary-system-card__link">
+                <Link className="text-link" href="/projects/personal-portfolio">
+                  View case study →
+                </Link>
+              </div>
+            </div>
+            <div className="system-tag-list">
+              <span className="system-tag">Next.js</span>
+              <span className="system-tag">React</span>
+              <span className="system-tag">TypeScript</span>
+              <span className="system-tag">Accessibility</span>
+              <span className="system-tag">Automated CI</span>
             </div>
           </article>
 
@@ -393,7 +437,7 @@ export function ProfessionalHome() {
                 time-series visualisations of Malaysian tourism recovery, hotel
                 occupancy rates, and regional expenditure patterns.
               </p>
-              <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+              <div className="secondary-system-card__link">
                 <a
                   className="text-link"
                   href="https://linardi1328.github.io/FIT2179_DV2/"
@@ -433,10 +477,11 @@ export function ProfessionalHome() {
               </span>
               <h3 className="venture-wordmark">R&E Technologies</h3>
               <p>
-                Independent software development and problem-first technology
-                solutions. Architecting product scope, technical specifications,
-                and automated testing across sports technology and applied AI
-                systems (KYNEXA, RIVORA, AXIOM QUANTUM).
+                A broader technology solutions venture in development that
+                develops its own software products while selectively exploring
+                practical software solutions for business problems. Leads
+                engineering across sports operations and applied AI systems
+                (KYNEXA, RIVORA, AXIOM QUANTUM).
               </p>
               <div className="system-tag-list">
                 <span className="system-tag">Systems Architecture</span>
@@ -551,7 +596,7 @@ export function ProfessionalHome() {
           >
             <a
               className="text-link"
-              href="https://www.linkedin.com/in/richie-linardi/"
+              href="https://www.linkedin.com/in/richie-linardi-595370314/"
               target="_blank"
               rel="noopener noreferrer"
             >
