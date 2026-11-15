@@ -200,7 +200,7 @@ export const projectRegistry = [
     phase: "Completed academic project",
     release: "v1.0",
     currentStatus: "Completed academic work · public interactive web dashboard",
-    statusVerifiedAt: "2026-04-30",
+    statusVerifiedAt: "2026-05-31",
     catalogueState: "catalogue",
     sortOrder: 45,
     tags: [
@@ -209,6 +209,7 @@ export const projectRegistry = [
       "Data Visualisation",
       "Public Datasets",
       "Vega-Lite",
+      "TopoJSON",
     ],
     boundaries: [
       "Completed academic project for FIT2179 Data Visualisation.",
@@ -218,7 +219,7 @@ export const projectRegistry = [
       academicContext: {
         institution: "Monash University Malaysia",
         unit: "FIT2179 — Data Visualisation",
-        period: "Semester 1, 2024",
+        period: "Semester 1, 2026",
         disclaimer:
           "Academic coursework project developed at Monash University Malaysia. This represents coursework rather than a commercial deployment.",
       },
@@ -227,26 +228,26 @@ export const projectRegistry = [
       intendedUsers:
         "Students, researchers, and public observers analyzing regional Malaysian tourism trends and post-pandemic recovery patterns.",
       learningObjectives: [
-        "Multi-dimensional visual encoding of temporal, categorical, and geospatial datasets.",
-        "Interactive coordination between choropleth maps, time-series charts, and stacked breakdowns.",
+        "Multi-dimensional visual encoding of temporal, categorical, and geospatial public datasets.",
+        "Geospatial choropleth mapping using embedded TopoJSON geometries and custom territory insets.",
         "Effective visual narrative design following established perceptual and visual communication principles.",
       ],
       technicalApproach:
-        "Engineered an interactive web dashboard utilizing Vega-Lite declarative specifications embedded in a responsive web layout. Built state-level geospatial choropleth maps coordinated with time-series charts, implementing cross-filtering and timeline brushes to enable exploratory analysis across public tourism records.",
+        "Engineered an interactive web dashboard utilizing Vega-Lite declarative specifications embedded in a responsive web layout. Built state-level geospatial choropleth maps with embedded TopoJSON geometries and territory insets for Penang, Kuala Lumpur, and Putrajaya, paired with multi-series temporal line charts, a pre-COVID seasonal heat matrix, regional share comparisons, and inbound expenditure waterfall breakdowns.",
       personalContribution:
-        "Independently designed the visual hierarchy, authored all declarative Vega-Lite specifications, integrated state-level GeoJSON boundaries, structured responsive layout styling, and deployed the interactive dashboard to GitHub Pages.",
+        "Designed the dashboard visual hierarchy and layout, authored declarative Vega-Lite specifications, integrated embedded TopoJSON state boundaries, structured responsive CSS styling, and cleaned public tourism datasets, utilizing GenAI tools for ideation, specification debugging, and wording refinement while retaining full design ownership and submission responsibility.",
       technicalSkills: [
         "Vega-Lite",
         "JavaScript",
-        "GeoJSON & Spatial Mapping",
+        "TopoJSON & Spatial Mapping",
         "Data Transformation",
         "Exploratory Data Analysis",
         "Responsive Web Presentation",
       ],
       verifiedOutcomes:
-        "Publicly deployed interactive web dashboard accessible via GitHub Pages, enabling exploratory inspection across state tourist arrivals, hotel occupancy percentages, and tourist expenditure metrics.",
+        "Publicly deployed interactive web dashboard accessible via GitHub Pages, enabling exploratory inspection across state tourist arrivals, hotel occupancy percentages, and tourist expenditure metrics without requiring live database backends.",
       limitations:
-        "Based on static historical public datasets; does not connect to live government transactional feeds.",
+        "Based on static historical public datasets (2015–2022); does not connect to live government transactional feeds or provide real-time updates.",
     },
     evidence: [
       {

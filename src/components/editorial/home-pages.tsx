@@ -527,7 +527,7 @@ export function ProfessionalHome() {
           >
             <span className="system-tag">Vega-Lite</span>
             <span className="system-tag">JavaScript</span>
-            <span className="system-tag">GeoJSON Choropleths</span>
+            <span className="system-tag">TopoJSON Choropleths</span>
             <span className="system-tag">Data Visualisation</span>
             <span className="system-tag">Exploratory Analytics</span>
             <span className="system-tag">Public Datasets</span>

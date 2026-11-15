@@ -111,7 +111,7 @@ export default function ProjectsPage() {
           </div>
         </section>
 
-        <section className="section container section--tinted">
+        <section className="section container section--tinted" id="academic">
           <SectionHeading
             label="Academic & Data Science"
             title="From data to decisions."
