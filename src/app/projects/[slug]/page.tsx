@@ -149,26 +149,89 @@ export default async function ProjectPage({
         {project.caseStudy ? (
           <section className="section container section--compact">
             <SectionHeading
-              label="Case study dossier"
-              title="Architecture, approach, and verified outcomes."
+              label={
+                project.caseStudy.academicContext
+                  ? "Academic dossier"
+                  : "Case study dossier"
+              }
+              title={
+                project.caseStudy.academicContext
+                  ? "Methodology, analytical approach, and outcomes."
+                  : "Architecture, approach, and verified outcomes."
+              }
             />
+
+            {project.caseStudy.academicContext ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "0.75rem",
+                  marginBottom: "1.5rem",
+                  alignItems: "center",
+                }}
+              >
+                <span className="hero-status-pill" style={{ margin: 0 }}>
+                  <span
+                    className="status-dot-pulse"
+                    style={{ backgroundColor: "#38bdf8" }}
+                    aria-hidden="true"
+                  />
+                  {project.caseStudy.academicContext.unit} ·{" "}
+                  {project.caseStudy.academicContext.institution} (
+                  {project.caseStudy.academicContext.period})
+                </span>
+              </div>
+            ) : null}
+
             <div className="case-layout">
               <article className="content-card">
-                <p className="eyebrow">Problem & intended users</p>
-                <h3 className="card-heading">The challenge addressed.</h3>
+                <p className="eyebrow">
+                  {project.caseStudy.academicContext
+                    ? "Inquiry & intended audience"
+                    : "Problem & intended users"}
+                </p>
+                <h3 className="card-heading">
+                  {project.caseStudy.academicContext
+                    ? "The analytical challenge."
+                    : "The challenge addressed."}
+                </h3>
                 {project.caseStudy.problem ? (
                   <p>{project.caseStudy.problem}</p>
                 ) : null}
                 {project.caseStudy.intendedUsers ? (
                   <p className="small-note" style={{ marginTop: "1rem" }}>
-                    <strong>Intended users:</strong>{" "}
+                    <strong>Intended audience:</strong>{" "}
                     {project.caseStudy.intendedUsers}
                   </p>
                 ) : null}
+                {project.caseStudy.learningObjectives ? (
+                  <div style={{ marginTop: "1rem" }}>
+                    <p
+                      className="small-note"
+                      style={{ fontWeight: 750, marginBottom: "0.5rem" }}
+                    >
+                      Learning objectives:
+                    </p>
+                    <ul className="detail-list" style={{ fontSize: "0.8rem" }}>
+                      {project.caseStudy.learningObjectives.map((obj) => (
+                        <li key={obj}>{obj}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </article>
               <article className="content-card">
-                <p className="eyebrow">Technical approach & contribution</p>
-                <h3 className="card-heading">Engineering & architecture.</h3>
+                <p className="eyebrow">
+                  {project.caseStudy.academicContext
+                    ? "Technical skills & implementation"
+                    : "Technical approach & contribution"}
+                </p>
+                <h3 className="card-heading">
+                  {project.caseStudy.academicContext
+                    ? "Visual encoding & execution."
+                    : "Engineering & architecture."}
+                </h3>
                 {project.caseStudy.technicalApproach ? (
                   <p>{project.caseStudy.technicalApproach}</p>
                 ) : null}
@@ -178,16 +241,56 @@ export default async function ProjectPage({
                     {project.caseStudy.personalContribution}
                   </p>
                 ) : null}
+                {project.caseStudy.technicalSkills ? (
+                  <div
+                    className="system-tag-list"
+                    style={{ marginTop: "1rem" }}
+                  >
+                    {project.caseStudy.technicalSkills.map((skill) => (
+                      <span className="system-tag" key={skill}>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
               </article>
             </div>
-            {project.caseStudy.verifiedOutcomes ? (
+            {project.caseStudy.verifiedOutcomes ||
+            project.caseStudy.limitations ||
+            project.caseStudy.academicContext?.disclaimer ? (
               <div style={{ marginTop: "1.5rem" }}>
                 <article className="content-card">
-                  <p className="eyebrow">Verified outcomes & limitations</p>
+                  <p className="eyebrow">
+                    {project.caseStudy.academicContext
+                      ? "Verified outcomes, limitations & academic note"
+                      : "Verified outcomes & limitations"}
+                  </p>
                   <h3 className="card-heading">
                     What was measured and learned.
                   </h3>
-                  <p>{project.caseStudy.verifiedOutcomes}</p>
+                  {project.caseStudy.verifiedOutcomes ? (
+                    <p>{project.caseStudy.verifiedOutcomes}</p>
+                  ) : null}
+                  {project.caseStudy.limitations ? (
+                    <p className="small-note" style={{ marginTop: "0.75rem" }}>
+                      <strong>Limitations:</strong>{" "}
+                      {project.caseStudy.limitations}
+                    </p>
+                  ) : null}
+                  {project.caseStudy.academicContext?.disclaimer ? (
+                    <p
+                      className="small-note"
+                      style={{
+                        marginTop: "0.75rem",
+                        padding: "0.75rem 1rem",
+                        borderRadius: "8px",
+                        backgroundColor: "rgba(0, 0, 0, 0.03)",
+                        borderLeft: "3px solid #38bdf8",
+                      }}
+                    >
+                      {project.caseStudy.academicContext.disclaimer}
+                    </p>
+                  ) : null}
                 </article>
               </div>
             ) : null}

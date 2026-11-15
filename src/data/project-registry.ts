@@ -214,6 +214,40 @@ export const projectRegistry = [
       "Completed academic project for FIT2179 Data Visualisation.",
       "Visualises public tourism datasets through interactive maps and time-series charts.",
     ],
+    caseStudy: {
+      academicContext: {
+        institution: "Monash University Malaysia",
+        unit: "FIT2179 — Data Visualisation",
+        period: "Semester 1, 2024",
+        disclaimer:
+          "Academic coursework project developed at Monash University Malaysia. This represents coursework rather than a commercial deployment.",
+      },
+      problem:
+        "Post-pandemic tourism recovery across Malaysia required accessible analytical exploration of multi-dimensional indicators—spanning state-by-state visitor volume, hotel occupancy rates, and regional expenditure distribution—synthesised from official public records.",
+      intendedUsers:
+        "Students, researchers, and public observers analyzing regional Malaysian tourism trends and post-pandemic recovery patterns.",
+      learningObjectives: [
+        "Multi-dimensional visual encoding of temporal, categorical, and geospatial datasets.",
+        "Interactive coordination between choropleth maps, time-series charts, and stacked breakdowns.",
+        "Effective visual narrative design following established perceptual and visual communication principles.",
+      ],
+      technicalApproach:
+        "Engineered an interactive web dashboard utilizing Vega-Lite declarative specifications embedded in a responsive web layout. Built state-level geospatial choropleth maps coordinated with time-series charts, implementing cross-filtering and timeline brushes to enable exploratory analysis across public tourism records.",
+      personalContribution:
+        "Independently designed the visual hierarchy, authored all declarative Vega-Lite specifications, integrated state-level GeoJSON boundaries, structured responsive layout styling, and deployed the interactive dashboard to GitHub Pages.",
+      technicalSkills: [
+        "Vega-Lite",
+        "JavaScript",
+        "GeoJSON & Spatial Mapping",
+        "Data Transformation",
+        "Exploratory Data Analysis",
+        "Responsive Web Presentation",
+      ],
+      verifiedOutcomes:
+        "Publicly deployed interactive web dashboard accessible via GitHub Pages, enabling exploratory inspection across state tourist arrivals, hotel occupancy percentages, and tourist expenditure metrics.",
+      limitations:
+        "Based on static historical public datasets; does not connect to live government transactional feeds.",
+    },
     evidence: [
       {
         kind: "deployment",

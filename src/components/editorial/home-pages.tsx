@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
 import {
   basketballAchievements,
@@ -304,7 +305,7 @@ export function ProfessionalHome() {
       {/* Active & In-Development Systems */}
       <section className="section container" id="selected-systems">
         <SectionHeading
-          label="02 / Active & in-development systems"
+          label="02 / Featured engineering systems"
           title="Focused software engineering across sports, research, and data."
           link={{ href: "/projects", label: "All projects" }}
         >
@@ -424,74 +425,316 @@ export function ProfessionalHome() {
               <span className="system-tag">Automated CI</span>
             </div>
           </article>
-
-          {/* Tourism in Malaysia Dashboard */}
-          <article className="secondary-system-card">
-            <div>
-              <p className="eyebrow" style={{ color: "#2563eb" }}>
-                Completed academic project · Apr 2026
-              </p>
-              <h3>Tourism in Malaysia Interactive Dashboard</h3>
-              <p>
-                Cleaned public datasets and built interactive maps and
-                time-series visualisations of Malaysian tourism recovery, hotel
-                occupancy rates, and regional expenditure patterns.
-              </p>
-              <div className="secondary-system-card__link">
-                <a
-                  className="text-link"
-                  href="https://linardi1328.github.io/FIT2179_DV2/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View live interactive dashboard ↗
-                </a>
-              </div>
-            </div>
-            <div className="system-tag-list">
-              <span className="system-tag">JavaScript</span>
-              <span className="system-tag">HTML/CSS</span>
-              <span className="system-tag">Data Visualisation</span>
-              <span className="system-tag">Public Datasets</span>
-            </div>
-          </article>
         </div>
       </section>
 
-      {/* Supporting Ventures Chapter */}
-      <section className="section section--tinted">
-        <div className="container">
-          <SectionHeading
-            label="03 / Supporting ventures"
-            title="Independent initiatives and product exploration."
-          >
-            Supporting ventures within Richie Linardi’s personal portfolio. Both
-            entities are represented with neutral typography in accordance with
-            brand usage guidelines, preserving distinct professional contexts.
-          </SectionHeading>
+      {/* Academic & Data Science */}
+      <section className="section container" id="academic-data-science">
+        <SectionHeading
+          label="03 / Academic & data science"
+          title="From data to decisions."
+          link={{ href: "/projects#academic", label: "Academic projects" }}
+        >
+          Rigorous coursework, dimensional modelling, and interactive data
+          visualisation developed at Monash University. Applying structured
+          methodologies to data quality, analytical storytelling, and business
+          intelligence.
+        </SectionHeading>
 
-          <div className="ventures-grid">
-            <article className="venture-card">
-              <span className="venture-badge">
-                Venture in development · 2026–Present
-              </span>
-              <h3 className="venture-wordmark">R&E Technologies</h3>
+        <div className="academic-competencies-grid">
+          <article className="academic-competency-card">
+            <h4>Data Quality &amp; Assessment</h4>
+            <p>
+              Schema profiling, missingness diagnosis, outlier detection, and
+              cleansing pipelines with deterministic audit logging.
+            </p>
+          </article>
+          <article className="academic-competency-card">
+            <h4>Dimensional Modelling</h4>
+            <p>
+              Star-schema design, grain definition, surrogate key management,
+              and fact-dimension relationship structuring.
+            </p>
+          </article>
+          <article className="academic-competency-card">
+            <h4>Business Intelligence &amp; SQL</h4>
+            <p>
+              Complex analytical aggregation, window functions, KPI tracking,
+              and decision-support data transformations.
+            </p>
+          </article>
+          <article className="academic-competency-card">
+            <h4>Data Visualisation &amp; Narrative</h4>
+            <p>
+              Interactive visual analytics, choropleth mapping, and time-series
+              dashboards translating raw metrics into clear insights.
+            </p>
+          </article>
+        </div>
+
+        <article className="academic-spotlight-card">
+          <div>
+            <span
+              className="academic-badge"
+              style={{
+                alignSelf: "flex-start",
+                backgroundColor: "rgba(37, 99, 235, 0.08)",
+                color: "var(--accent)",
+                border: "1px solid rgba(37, 99, 235, 0.2)",
+                padding: "0.3rem 0.65rem",
+                borderRadius: "4px",
+                fontSize: "0.68rem",
+                fontWeight: 750,
+                letterSpacing: "0.05em",
+                textTransform: "uppercase",
+                marginBottom: "0.75rem",
+              }}
+            >
+              Academic Project · Monash University Malaysia (FIT2179)
+            </span>
+            <h3>Tourism in Malaysia Interactive Dashboard</h3>
+            <p>
+              Cleaned public datasets and built interactive choropleth maps and
+              time-series visualisations of Malaysian tourism recovery,
+              state-by-state hotel occupancy rates, and regional expenditure
+              patterns.
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "1rem",
+                marginTop: "1.25rem",
+                alignItems: "center",
+              }}
+            >
+              <a
+                className="button button--secondary"
+                href="https://linardi1328.github.io/FIT2179_DV2/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Live Interactive Dashboard ↗
+              </a>
+              <Link className="text-link" href="/projects/tourism-dashboard">
+                Read Academic Case Study →
+              </Link>
+            </div>
+          </div>
+          <div
+            className="system-tag-list"
+            style={{ borderTop: "none", padding: 0 }}
+          >
+            <span className="system-tag">Vega-Lite</span>
+            <span className="system-tag">JavaScript</span>
+            <span className="system-tag">GeoJSON Choropleths</span>
+            <span className="system-tag">Data Visualisation</span>
+            <span className="system-tag">Exploratory Analytics</span>
+            <span className="system-tag">Public Datasets</span>
+          </div>
+        </article>
+      </section>
+
+      {/* Technology Entrepreneurship — R&E Technologies */}
+      <section className="re-entrepreneurship" id="entrepreneurship">
+        <div className="container">
+          <div className="re-header-row">
+            <span className="re-eyebrow">
+              <span
+                className="status-dot-pulse"
+                style={{ backgroundColor: "#35cadb" }}
+                aria-hidden="true"
+              />
+              04 / Technology entrepreneurship · R&amp;E Technologies
+            </span>
+            <Image
+              src="/branding/re-mark-light.webp"
+              alt="R&E Technologies brand mark"
+              width={80}
+              height={47}
+              className="re-brand-mark"
+            />
+          </div>
+
+          <h2 className="re-title">R&amp;E Technologies</h2>
+          <p className="re-value-prop">
+            Engineering practical solutions for real-world problems.
+          </p>
+
+          <div className="re-narrative-grid">
+            <div className="re-narrative-copy">
               <p>
-                A broader technology solutions venture in development that
-                develops its own software products while selectively exploring
-                practical software solutions for business problems. Leads
-                engineering across sports operations and applied AI systems
-                (KYNEXA, RIVORA, AXIOM QUANTUM).
+                R&amp;E Technologies is an independent technology venture
+                founded to develop practical, domain-specific software systems.
+                Rooted in hands-on engineering across sports infrastructure,
+                quantitative research, and workflow automation, the initiative
+                designs and builds focused software products addressing concrete
+                operational bottlenecks.
               </p>
-              <div className="system-tag-list">
-                <span className="system-tag">Systems Architecture</span>
-                <span className="system-tag">Product Engineering</span>
-                <span className="system-tag">Software Development</span>
+              <p style={{ marginTop: "1rem" }}>
+                From automating live tournament brackets to designing
+                walk-forward evaluation pipelines, every system adheres to
+                verified technical boundaries, independent risk controls, and
+                sustainable architecture.
+              </p>
+            </div>
+
+            <div className="re-founder-card">
+              <blockquote className="re-founder-quote">
+                &ldquo;My interest in building technology started with problems
+                I encountered firsthand. Whether coordinating basketball
+                tournaments under courtside pressure or analyzing financial
+                data, I focus on engineering systems that deliver verifiable
+                utility where it matters most.&rdquo;
+              </blockquote>
+              <cite className="re-founder-attribution">
+                Richie Linardi · Founder &amp; Lead Engineer
+              </cite>
+            </div>
+          </div>
+
+          <h3 className="re-ecosystem-heading">
+            <span>Product Ecosystem &amp; Development Tracks</span>
+          </h3>
+
+          <div className="re-ecosystem-grid">
+            {/* KYNEXA */}
+            <article className="re-card">
+              <div>
+                <span className="re-card-badge">Sports Infrastructure</span>
+                <h4>KYNEXA</h4>
+                <p>
+                  Athlete Passport and sports opportunity platform connecting
+                  athletes, teams, and tournament organisers with role-based
+                  authorization, competition records, and registration
+                  validation; pilot acceptance ongoing.
+                </p>
+                <div className="re-card__link">
+                  <Link className="re-card-link" href="/projects/kynexa">
+                    View project dossier →
+                  </Link>
+                </div>
+              </div>
+              <div className="re-tag-list">
+                <span className="re-tag">Next.js</span>
+                <span className="re-tag">TypeScript</span>
+                <span className="re-tag">Supabase</span>
+                <span className="re-tag">PostgreSQL</span>
+                <span className="re-tag">Athlete Passport</span>
               </div>
             </article>
 
+            {/* RIVORA */}
+            <article className="re-card">
+              <div>
+                <span className="re-card-badge">Tournament Operations</span>
+                <h4>RIVORA</h4>
+                <p>
+                  Developer-managed tournament operations platform delivering
+                  automated brackets, live scoring, and public spectator
+                  schedules; architected to advance multi-tournament management
+                  beyond KHLIM 3x3 Live V1.
+                </p>
+                <div className="re-card__link">
+                  <Link className="re-card-link" href="/projects/rivora">
+                    View project dossier →
+                  </Link>
+                </div>
+              </div>
+              <div className="re-tag-list">
+                <span className="re-tag">TypeScript</span>
+                <span className="re-tag">React</span>
+                <span className="re-tag">Tournament Operations</span>
+                <span className="re-tag">Live Brackets</span>
+              </div>
+            </article>
+
+            {/* AXIOM QUANTUM */}
+            <article className="re-card">
+              <div>
+                <span className="re-card-badge">Quantitative Research</span>
+                <h4>AXIOM QUANTUM</h4>
+                <p>
+                  Leakage-aware SPY market-research and walk-forward evaluation
+                  system with deterministic safety gates, backtesting, and
+                  independent risk controls. Experimental research baseline with
+                  no live trading or profitability claims.
+                </p>
+                <div className="re-card__link">
+                  <Link
+                    className="re-card-link"
+                    href="/projects/spy-market-agent"
+                  >
+                    View research dossier →
+                  </Link>
+                </div>
+              </div>
+              <div className="re-tag-list">
+                <span className="re-tag">Python</span>
+                <span className="re-tag">pandas</span>
+                <span className="re-tag">scikit-learn</span>
+                <span className="re-tag">Walk-forward ML</span>
+              </div>
+            </article>
+
+            {/* Business Solutions */}
+            <article className="re-card">
+              <div>
+                <span className="re-card-badge">Product Exploration</span>
+                <h4>Business Solutions</h4>
+                <p>
+                  Selective exploration of targeted workflow automation,
+                  structured data pipelines, and internal tools addressing
+                  operational friction for small businesses and independent
+                  organizations.
+                </p>
+                <div className="re-card__link">
+                  <Link className="re-card-link" href="/contact">
+                    Explore collaboration →
+                  </Link>
+                </div>
+              </div>
+              <div className="re-tag-list">
+                <span className="re-tag">Workflow Automation</span>
+                <span className="re-tag">Data Pipelines</span>
+                <span className="re-tag">Systems Integration</span>
+              </div>
+            </article>
+          </div>
+
+          <div className="re-governance-note">
+            <p>
+              <strong>Governance &amp; Venture Status:</strong> R&amp;E
+              Technologies is an independent venture in product development and
+              exploration phase. All listed platforms represent verified
+              technical architectures and ongoing software implementations
+              without third-party commercial liability or unverified corporate
+              entity claims.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Creative Initiatives — RBL */}
+      <section className="section section--tinted" id="creative-initiatives">
+        <div className="container">
+          <SectionHeading
+            label="05 / Creative initiatives"
+            title="Creative media & digital storytelling."
+          >
+            Digital production and athletic documentation initiative supporting
+            high-performance basketball content, video analysis workflows, and
+            visual storytelling.
+          </SectionHeading>
+
+          <div
+            className="ventures-grid"
+            style={{ gridTemplateColumns: "1fr", maxWidth: "720px" }}
+          >
             <article className="venture-card">
-              <span className="venture-badge">Creative & Media Initiative</span>
+              <span className="venture-badge">
+                Creative &amp; Media Initiative · 2024–Present
+              </span>
               <h3 className="venture-wordmark">RBL</h3>
               <p>
                 Creative media and digital storytelling initiative supporting
@@ -502,6 +745,7 @@ export function ProfessionalHome() {
                 <span className="system-tag">Media Production</span>
                 <span className="system-tag">Digital Storytelling</span>
                 <span className="system-tag">Athlete Brand</span>
+                <span className="system-tag">Video Workflows</span>
               </div>
             </article>
           </div>
@@ -513,7 +757,7 @@ export function ProfessionalHome() {
         <div className="cross-identity-cinematic">
           <div className="cross-identity-grid">
             <div className="cross-identity-copy">
-              <p className="eyebrow">04 / The other side of the story</p>
+              <p className="eyebrow">06 / The other side of the story</p>
               <h2>
                 One journey.
                 <br />
@@ -565,7 +809,7 @@ export function ProfessionalHome() {
           style={{ borderTop: "1px solid var(--line)", paddingTop: "3.5rem" }}
         >
           <SectionHeading
-            label="05 / The next conversation"
+            label="07 / The next conversation"
             title="Let’s build something real together."
           >
             Open for software engineering opportunities, technical

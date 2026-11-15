@@ -10,11 +10,22 @@ export type ProjectEvidence = {
   label: string;
 };
 
+export type AcademicContext = {
+  disclaimer?: string;
+  institution: string;
+  period: string;
+  unit: string;
+};
+
 export type ProjectCaseStudy = {
+  academicContext?: AcademicContext;
   intendedUsers?: string;
+  learningObjectives?: readonly string[];
+  limitations?: string;
   personalContribution?: string;
   problem?: string;
   technicalApproach?: string;
+  technicalSkills?: readonly string[];
   verifiedOutcomes?: string;
 };
 
