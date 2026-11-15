@@ -3015,6 +3015,9 @@ tbody th {
   object-fit: cover;
   width: 100%;
 }
+.achievement-hero-card .portfolio-photograph--fiba img {
+  object-position: 60% center;
+}
 .achievement-hero-card__body {
   display: flex;
   flex-direction: column;

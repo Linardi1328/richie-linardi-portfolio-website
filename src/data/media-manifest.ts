@@ -36,10 +36,15 @@ export const mediaManifest: readonly MediaItem[] = [
     provenance: "2. Approved derivative/crop",
     caption: photo.caption,
     altText: photo.alt,
-    creditSource: "Richie Linardi · supplied personal photo archive",
-    usageStatus: "LICENSED",
+    creditSource:
+      id === "fibaU18"
+        ? "Owner-supplied photograph · original photographer not established"
+        : "Richie Linardi · supplied personal photo archive",
+    usageStatus: id === "fibaU18" ? "REVIEW_REQUIRED" : "LICENSED",
     verificationBasis:
-      "Supplied by Richie through his Professional and Athlete Drive folders; owner explicitly authorized website use. Optimized from the original photographs without generated content.",
+      id === "fibaU18"
+        ? "Owner supplied this image for the FIBA achievement card. Optimized without generated content; third-party photography rights and attribution have not been independently verified."
+        : "Supplied by Richie through his Professional and Athlete Drive folders; owner explicitly authorized website use. Optimized from the original photographs without generated content.",
     mobileBehavior:
       "Responsive image with intrinsic dimensions, preserved framing, reserved layout space, and lazy loading below the fold.",
     width: photo.width,
