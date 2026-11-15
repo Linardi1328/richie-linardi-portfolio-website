@@ -39,18 +39,16 @@ Tablet QA must explicitly consider:
 
 Do not rely on hover as the only way to reveal critical actions on any tablet-like device.
 
-## Signature flipbook behavior
+## Portfolio-side navigation and motion
 
-The two-sided professional/basketball interaction must adapt by capability as well as width:
+The owner’s 23 October 2026 redesign request supersedes the previous signature flipbook.
 
-- desktop / precise pointer: hover hint, click, and drag;
-- tablet / touch-first: tap edge and optional drag gesture with shallower 3D perspective;
-- phone / narrow touch layout: edge-origin swipe plus explicit tap control;
-- reduced-motion preference: quick crossfade/theme swap with no 3D rotation;
-- keyboard: real focusable flip button with Enter/Space activation;
-- inactive surface: `inert` and hidden from assistive technology.
-
-The page-turn effect must never block normal vertical scrolling, especially on touch devices. Mobile/tablet drag gestures should begin from a dedicated edge interaction zone.
+- Professional and Athlete remain explicit links in the shared header at every width.
+- Navigation must work with touch, pointer, keyboard, and ordinary page navigation.
+- Narrow screens use a native disclosure menu; essential content is always available without hover.
+- The design uses short CSS entrance transitions and small hover responses. No page rotation, scroll parallax, pointer tracking, or animated backgrounds are mounted.
+- Under `prefers-reduced-motion: reduce`, entrance animations, transitions, and smooth scrolling are disabled.
+- Keep normal vertical scrolling and browser history behavior.
 
 ## Orientation behavior
 

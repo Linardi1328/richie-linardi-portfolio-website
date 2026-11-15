@@ -1,6 +1,16 @@
-import { FoundationRoutePage } from "@/components/layout/foundation-route-page";
-import { foundationPages } from "@/data/foundation-pages";
+import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
+import { basketballWorldNavigation } from "@/data/world-navigation";
+import { AthleteMedia } from "@/components/editorial/athlete-pages";
 
-export default function BasketballMediaPage() {
-  return <FoundationRoutePage {...foundationPages.media} />;
+export default function Page() {
+  return (
+    <PortfolioWorldShell
+      navigation={basketballWorldNavigation}
+      world="basketball"
+    >
+      <main>
+        <AthleteMedia />
+      </main>
+    </PortfolioWorldShell>
+  );
 }

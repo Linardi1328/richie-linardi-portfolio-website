@@ -1,14 +1,14 @@
-import { ExperienceRecordPage } from "@/components/experience/experience-record-page";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { professionalWorldNavigation } from "@/data/world-navigation";
+import { IdentityPage } from "@/components/editorial/identity-pages";
 
-export default function ExperiencePage() {
+export default function Page() {
   return (
     <PortfolioWorldShell
       navigation={professionalWorldNavigation}
       world="professional"
     >
-      <ExperienceRecordPage />
+      <IdentityPage kind="experience" />
     </PortfolioWorldShell>
   );
 }

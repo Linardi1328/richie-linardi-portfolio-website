@@ -425,7 +425,7 @@ export function DualTraceEngine({ world }: DualTraceEngineProps) {
               </>
             )}
 
-            {/* SEGMENT 02: Hero -> Featured Project (SPY Market Agent) */}
+            {/* SEGMENT 02: Hero -> Featured Project (AXIOM QUANTUM) */}
             <path
               d={proPathSeg2}
               className={`trace-path trace-path--pro ${

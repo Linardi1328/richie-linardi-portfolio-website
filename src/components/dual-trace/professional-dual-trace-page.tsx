@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
 import { publicProjectCatalogue } from "@/data/project-registry";
 import { useProofMode } from "./proof-mode-context";
 import { DualTraceEngine } from "./dual-trace-engine";
@@ -75,53 +76,60 @@ export function ProfessionalDualTracePage() {
               </span>
             </h1>
             <div className="dt-monument-secondary" data-trace-node="pro-tags">
-              <span className="dt-monument-tag">SYSTEMS</span>
+              <span className="dt-monument-tag">DATA SCIENCE</span>
               <span className="dt-monument-sep">/</span>
-              <span className="dt-monument-tag">DATA</span>
+              <span className="dt-monument-tag">AI</span>
               <span className="dt-monument-sep">/</span>
               <span className="dt-monument-tag">SOFTWARE</span>
             </div>
           </div>
 
           {/* Author Positioning Statement */}
-          <div className="dt-hero-statement">
-            <p className="dt-lead-statement">
-              I build software around explicit boundaries, inspectable evidence,
-              and controlled execution.
-            </p>
+          <div className="dt-portrait-band">
+            <PortfolioPhotograph photo="professional" preload />
+            <div className="dt-hero-statement">
+              <p className="dt-lead-statement">
+                I study Data Science and build applied AI, analytics, and
+                software systems with inspectable evidence and clear operating
+                boundaries.
+              </p>
 
-            <div className="dt-hero-telemetry" data-trace-node="hero-telemetry">
-              <div className="dt-telem-cell" data-trace-node="telem-0">
-                <span className="dt-telem-num">
-                  {String(publicProjectCatalogue.length).padStart(2, "0")}
-                </span>
-                <span className="dt-telem-lbl">Public Systems</span>
-                {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--registry">
-                    <span className="dt-proof-id">[P01]</span>
-                    <span>PUBLIC PROJECT REGISTRY</span>
+              <div
+                className="dt-hero-telemetry"
+                data-trace-node="hero-telemetry"
+              >
+                <div className="dt-telem-cell" data-trace-node="telem-0">
+                  <span className="dt-telem-num">
+                    {String(publicProjectCatalogue.length).padStart(2, "0")}
                   </span>
-                )}
-              </div>
-              <div className="dt-telem-cell" data-trace-node="telem-1">
-                <span className="dt-telem-num">CS / DS</span>
-                <span className="dt-telem-lbl">Monash University</span>
-                {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--owner">
-                    <span className="dt-proof-id">[P02]</span>
-                    <span>MONASH · EXPECTED 2027</span>
-                  </span>
-                )}
-              </div>
-              <div className="dt-telem-cell" data-trace-node="telem-2">
-                <span className="dt-telem-num">Controlled</span>
-                <span className="dt-telem-lbl">Execution Gates</span>
-                {isProofMode && (
-                  <span className="dt-proof-chip dt-proof-chip--registry">
-                    <span className="dt-proof-id">[P03]</span>
-                    <span>PROJECT BOUNDARY DOCUMENTATION</span>
-                  </span>
-                )}
+                  <span className="dt-telem-lbl">Public Systems</span>
+                  {isProofMode && (
+                    <span className="dt-proof-chip dt-proof-chip--registry">
+                      <span className="dt-proof-id">[P01]</span>
+                      <span>PUBLIC PROJECT REGISTRY</span>
+                    </span>
+                  )}
+                </div>
+                <div className="dt-telem-cell" data-trace-node="telem-1">
+                  <span className="dt-telem-num">CS / DS</span>
+                  <span className="dt-telem-lbl">Monash University</span>
+                  {isProofMode && (
+                    <span className="dt-proof-chip dt-proof-chip--owner">
+                      <span className="dt-proof-id">[P02]</span>
+                      <span>MONASH · EXPECTED 2027</span>
+                    </span>
+                  )}
+                </div>
+                <div className="dt-telem-cell" data-trace-node="telem-2">
+                  <span className="dt-telem-num">Controlled</span>
+                  <span className="dt-telem-lbl">Execution Gates</span>
+                  {isProofMode && (
+                    <span className="dt-proof-chip dt-proof-chip--registry">
+                      <span className="dt-proof-id">[P03]</span>
+                      <span>PROJECT BOUNDARY DOCUMENTATION</span>
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>

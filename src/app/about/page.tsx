@@ -1,14 +1,14 @@
-import { AboutIdentityPage } from "@/components/about/about-identity-page";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { professionalWorldNavigation } from "@/data/world-navigation";
+import { IdentityPage } from "@/components/editorial/identity-pages";
 
-export default function AboutPage() {
+export default function Page() {
   return (
     <PortfolioWorldShell
       navigation={professionalWorldNavigation}
       world="professional"
     >
-      <AboutIdentityPage />
+      <IdentityPage kind="about" />
     </PortfolioWorldShell>
   );
 }

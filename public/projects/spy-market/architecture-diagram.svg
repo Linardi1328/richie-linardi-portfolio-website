@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080d19" />
+      <stop offset="100%" stop-color="#0e172a" />
+    </linearGradient>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="0.5" />
+    </pattern>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bgGrad)" />
+  <rect width="800" height="450" fill="url(#grid)" opacity="0.6" />
+  <rect x="15" y="15" width="770" height="420" rx="8" fill="none" stroke="#334155" stroke-width="1" />
+  <rect x="20" y="20" width="760" height="410" rx="6" fill="none" stroke="#1e293b" stroke-width="1" stroke-dasharray="4 4" />
+
+  <text x="35" y="48" fill="#38bdf8" font-family="monospace" font-size="11" letter-spacing="2">SYSTEM ARCHITECTURE · SAFETY GATES &amp; BOUNDARIES</text>
+  <text x="35" y="72" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="18" font-weight="700">SPY Market Agent · Walk-Forward Research Engine</text>
+  <rect x="620" y="35" width="145" height="26" rx="4" fill="#032b1b" stroke="#10b981" stroke-width="1" />
+  <circle cx="633" cy="48" r="4" fill="#10b981" />
+  <text x="643" y="52" fill="#34d399" font-family="monospace" font-size="10" font-weight="600">v2.0.0-beta.1 · PHASE 5</text>
+
+  <!-- Step 1 -->
+  <g transform="translate(35, 95)">
+    <rect width="210" height="120" rx="6" fill="#0f172a" stroke="#2563eb" stroke-width="1.5" />
+    <rect x="12" y="12" width="28" height="20" rx="3" fill="#1e3a8a" />
+    <text x="26" y="26" fill="#60a5fa" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">01</text>
+    <text x="48" y="27" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Market Data Ingestion</text>
+    <text x="14" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· SPY Market Research Feed</text>
+    <text x="14" y="72" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Data Pipeline &amp; Storage</text>
+    <text x="14" y="90" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Survivorship Bias Prevention</text>
+    <text x="14" y="105" fill="#38bdf8" font-family="monospace" font-size="9">FastAPI / SQLite</text>
+  </g>
+
+  <path d="M 250 155 L 285 155" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3 3" />
+  <polygon points="285,151 293,155 285,159" fill="#38bdf8" />
+
+  <!-- Step 2 -->
+  <g transform="translate(295, 95)">
+    <rect width="210" height="120" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="12" y="12" width="28" height="20" rx="3" fill="#0369a1" />
+    <text x="26" y="26" fill="#bae6fd" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">02</text>
+    <text x="48" y="27" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Leakage-Aware Research</text>
+    <text x="14" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Walk-Forward Research Design</text>
+    <text x="14" y="72" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Strict Out-of-Sample Testing</text>
+    <text x="14" y="90" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Lookahead Bias Prevention</text>
+    <text x="14" y="105" fill="#38bdf8" font-family="monospace" font-size="9">Python ML Research</text>
+  </g>
+
+  <path d="M 510 155 L 545 155" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3 3" />
+  <polygon points="545,151 553,155 545,159" fill="#38bdf8" />
+
+  <!-- Step 3 -->
+  <g transform="translate(555, 95)">
+    <rect width="210" height="120" rx="6" fill="#0f172a" stroke="#d97706" stroke-width="1.5" />
+    <rect x="12" y="12" width="28" height="20" rx="3" fill="#78350f" />
+    <text x="26" y="26" fill="#fef3c7" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">03</text>
+    <text x="48" y="27" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Empirical Evaluation</text>
+    <text x="14" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Objective Hypothesis Testing</text>
+    <text x="14" y="72" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Honest Research Reporting</text>
+    <text x="14" y="90" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Reproducible Backtest Artifacts</text>
+    <text x="14" y="105" fill="#f59e0b" font-family="monospace" font-size="9">Research Integrity First</text>
+  </g>
+
+  <!-- Step 4 -->
+  <g transform="translate(35, 245)">
+    <rect width="210" height="155" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+    <rect x="12" y="12" width="28" height="20" rx="3" fill="#064e3b" />
+    <text x="26" y="26" fill="#a7f3d0" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">04</text>
+    <text x="48" y="27" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Deterministic Safety</text>
+    <text x="14" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Fail-Closed Risk Policy</text>
+    <text x="14" y="72" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Pre-Execution Safety Gates</text>
+    <text x="14" y="90" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Strict Execution Boundaries</text>
+    <rect x="14" y="108" width="182" height="34" rx="4" fill="#14532d" opacity="0.7" />
+    <text x="105" y="124" fill="#86efac" font-family="monospace" font-size="9" text-anchor="middle" font-weight="700">DETERMINISTIC GATES</text>
+    <text x="105" y="136" fill="#bbf7d0" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Enforced on all operations</text>
+  </g>
+
+  <path d="M 250 320 L 285 320" stroke="#10b981" stroke-width="2" stroke-dasharray="3 3" />
+  <polygon points="285,316 293,320 285,324" fill="#10b981" />
+
+  <!-- Step 5 -->
+  <g transform="translate(295, 245)">
+    <rect width="210" height="155" rx="6" fill="#0f172a" stroke="#ef4444" stroke-width="1.5" />
+    <rect x="12" y="12" width="28" height="20" rx="3" fill="#450a0a" />
+    <text x="26" y="26" fill="#fca5a5" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">05</text>
+    <text x="48" y="27" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Paper-Only Scaffold</text>
+    <text x="14" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Alpaca Paper Environment</text>
+    <text x="14" y="72" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Simulated Paper Execution</text>
+    <text x="14" y="90" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Submission Blocked by Policy</text>
+    <rect x="14" y="108" width="182" height="34" rx="4" fill="#450a0a" stroke="#ef4444" stroke-width="1" />
+    <text x="105" y="124" fill="#fca5a5" font-family="monospace" font-size="9" text-anchor="middle" font-weight="700">LIVE TRADING PROHIBITED</text>
+    <text x="105" y="136" fill="#fecaca" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Explicit system constraint</text>
+  </g>
+
+  <path d="M 510 320 L 545 320" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 3" />
+  <polygon points="545,316 553,320 545,324" fill="#ef4444" />
+
+  <!-- Step 6 -->
+  <g transform="translate(555, 245)">
+    <rect width="210" height="155" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="12" y="12" width="28" height="20" rx="3" fill="#0369a1" />
+    <text x="26" y="26" fill="#e0f2fe" font-family="monospace" font-size="11" font-weight="700" text-anchor="middle">06</text>
+    <text x="48" y="27" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Audit &amp; Telemetry</text>
+    <text x="14" y="54" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· SQLite Append-Only Records</text>
+    <text x="14" y="72" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Telemetry &amp; Error Logging</text>
+    <text x="14" y="90" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">· Recovery Runbook Verification</text>
+    <rect x="14" y="108" width="182" height="34" rx="4" fill="#082f49" stroke="#0284c7" stroke-width="1" />
+    <text x="105" y="124" fill="#7dd3fc" font-family="monospace" font-size="9" text-anchor="middle" font-weight="600">TRACEABLE AUDIT TRAIL</text>
+    <text x="105" y="136" fill="#bae6fd" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Documented in repo runbook</text>
+  </g>
+</svg>

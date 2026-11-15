@@ -1,61 +1,158 @@
 import Link from "next/link";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
-import { publicProjectCatalogue } from "@/data/project-registry";
 import { professionalWorldNavigation } from "@/data/world-navigation";
+import { publicProjectCatalogue } from "@/data/project-registry";
+import {
+  PageIntro,
+  ProjectCard,
+  SectionHeading,
+} from "@/components/editorial/shared";
 
 export default function ProjectsPage() {
+  const flagshipProject = publicProjectCatalogue.find(
+    (p) => p.slug === "khlim-3x3-live",
+  );
+  const coreResumeSlugs = [
+    "kynexa",
+    "rivora",
+    "spy-market-agent",
+    "tourism-dashboard",
+    "personal-portfolio",
+  ];
+  const coreProjects = publicProjectCatalogue.filter((p) =>
+    coreResumeSlugs.includes(p.slug),
+  );
+  const secondaryProjects = publicProjectCatalogue.filter(
+    (p) => p.slug !== "khlim-3x3-live" && !coreResumeSlugs.includes(p.slug),
+  );
+
   return (
     <PortfolioWorldShell
       navigation={professionalWorldNavigation}
       world="professional"
     >
-      <main className="foundation-route">
-        <section className="foundation-route__hero">
-          <div className="foundation-route__hero-inner">
-            <p className="foundation-route__eyebrow">Projects</p>
-            <h1>Systems first. Evidence attached.</h1>
-            <p className="foundation-route__lede">
-              The preview catalogue exposes the full project architecture now.
-              Each project routes to a case-study foundation built from the
-              verified project registry instead of generated marketing copy.
-            </p>
+      <main>
+        <PageIntro
+          eyebrow="Technical Systems & Projects"
+          title="From inquiry to working systems."
+          description="A curated catalogue of software systems, tournament platforms, quantitative research, and interactive data visualization. Built with strict verification, transparent operational boundaries, and documented evidence."
+        />
+
+        {flagshipProject ? (
+          <section className="section container section--compact">
+            <SectionHeading
+              label="Flagship Deployed System"
+              title="KHLIM 3x3 Live V1"
+            >
+              Real-time court operations, automated division standings, and
+              decoupled edge spectator feeds deployed under tournament
+              conditions.
+            </SectionHeading>
+            <div className="flagship-hero-card">
+              <div className="flagship-hero-card__badge">
+                <span>Deployed 24 Oct 2026</span>
+                <span>118 Matches · 2 Courts · 4 Divisions</span>
+              </div>
+              <h2 className="flagship-hero-card__title">
+                Tournament Scoring Engine & Decoupled Spectator Edge Feed
+              </h2>
+              <p className="flagship-hero-card__desc">
+                Architected to handle live courtside scoring and tournament
+                brackets while shielding primary data sources from public
+                spectator traffic via Cloudflare Workers. Delivered automated
+                standings, schedule distribution, and results tracking.
+              </p>
+              <div className="flagship-hero-card__tags">
+                <span className="tag">Cloudflare Workers</span>
+                <span className="tag">Google Apps Script</span>
+                <span className="tag">Google Sheets</span>
+                <span className="tag">Edge Cache</span>
+                <span className="tag">Tournament Ops</span>
+              </div>
+              <div className="flagship-hero-card__actions">
+                <a
+                  className="button button--primary"
+                  href="https://prod.khlim-3x3-live.workers.dev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open live deployment ↗
+                </a>
+                <Link
+                  className="button button--plain"
+                  href="/projects/khlim-3x3-live"
+                >
+                  Read full case study →
+                </Link>
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        <section className="section container">
+          <SectionHeading
+            label="Selected Technical Systems"
+            title="Core engineering & applied research."
+          >
+            Systems from Résumé V4 spanning registration platforms, tournament
+            SaaS development, quantitative market research, and public data
+            visualisation.
+          </SectionHeading>
+          <div className="card-grid">
+            {coreProjects.map((project, index) => (
+              <ProjectCard project={project} index={index} key={project.slug} />
+            ))}
           </div>
         </section>
 
-        <section
-          className="foundation-route__sections"
-          aria-label="Project catalogue"
-        >
-          {publicProjectCatalogue.map((project, index) => (
-            <article className="foundation-route__section" key={project.slug}>
-              <div
-                className="foundation-route__section-index"
-                aria-hidden="true"
-              >
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <div className="foundation-route__section-content">
-                <div className="foundation-route__section-header">
-                  <p className="foundation-route__eyebrow">{project.phase}</p>
-                  <h2>{project.title}</h2>
-                </div>
-                <div className="foundation-route__section-body">
-                  <p>{project.summary}</p>
-                  <ul>
-                    <li>{project.currentStatus}</li>
-                    <li>{project.tags.join(" · ")}</li>
-                    <li>Verified {project.statusVerifiedAt}</li>
-                  </ul>
-                  <Link
-                    className="foundation-route__primary-link"
-                    href={`/projects/${project.slug}`}
-                  >
-                    Open case-study foundation <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </div>
+        {secondaryProjects.length > 0 ? (
+          <section className="section container">
+            <SectionHeading
+              label="Supporting Systems & Operations"
+              title="Infrastructure, tooling, and internal platforms."
+            >
+              Approval-gated developer operations, sports digital
+              infrastructure, and internal content verification tooling.
+            </SectionHeading>
+            <div className="card-grid">
+              {secondaryProjects.map((project, index) => (
+                <ProjectCard
+                  project={project}
+                  index={index + coreProjects.length}
+                  key={project.slug}
+                />
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <section className="section container section--tinted">
+          <SectionHeading
+            label="Supporting Ventures & Context"
+            title="Distinct from standalone software engineering."
+          />
+          <div className="card-grid card-grid--two">
+            <article className="content-card">
+              <p className="eyebrow">Product & System Engineering</p>
+              <h2 className="card-heading">R&E Technologies</h2>
+              <p>
+                An independent technology venture in development (2026–Present),
+                focused on sports software architecture, scoring infrastructure,
+                and applied AI tools. Kept distinct from corporate registration
+                or commercial client representations.
+              </p>
             </article>
-          ))}
+            <article className="content-card">
+              <p className="eyebrow">Personal Identity & Content</p>
+              <h2 className="card-heading">RBL</h2>
+              <p>
+                The supporting personal brand and athlete identity of Richie
+                Linardi, connecting collegiate basketball competition, media
+                storytelling, and community engagement with technical
+                foundations.
+              </p>
+            </article>
+          </div>
         </section>
       </main>
     </PortfolioWorldShell>

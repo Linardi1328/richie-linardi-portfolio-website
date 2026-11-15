@@ -1,4 +1,5 @@
-export type ProjectCatalogueState = "featured" | "catalogue" | "candidate";
+export type ProjectCatalogueState =
+  "featured" | "catalogue" | "candidate" | "unlisted";
 
 export type ProjectEvidenceKind =
   "deployment" | "documentation" | "release" | "repository" | "tests";
@@ -13,6 +14,7 @@ export type PortfolioProject = {
   boundaries: readonly string[];
   catalogueState: ProjectCatalogueState;
   currentStatus: string;
+  deploymentUrl?: string;
   evidence: readonly ProjectEvidence[];
   phase: string;
   release?: string;
@@ -26,6 +28,7 @@ export type PortfolioProject = {
 };
 
 export type ProjectCardData = {
+  deploymentUrl?: string;
   description: string;
   href: string;
   status: string;

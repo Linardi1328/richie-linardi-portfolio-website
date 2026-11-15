@@ -51,6 +51,9 @@ export function WorldNavigation({
               {worldLabels[world]}
             </span>
           </span>
+          <span className="world-navigation__hud-tag" aria-hidden="true">
+            {world === "professional" ? "SYS // PRO" : "ATH // 13"}
+          </span>
         </Link>
 
         <nav

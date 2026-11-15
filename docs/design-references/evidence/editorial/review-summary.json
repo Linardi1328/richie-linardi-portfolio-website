@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-23",
+  "design": "Editorial portfolio redesign",
+  "desktop": {
+    "browser": "Local cloud Chrome",
+    "width": 1363,
+    "routesReviewed": [
+      "/",
+      "/basketball",
+      "/about",
+      "/education",
+      "/experience",
+      "/resume",
+      "/contact",
+      "/projects",
+      "/projects/spy-market-agent",
+      "/basketball/journey",
+      "/basketball/achievements",
+      "/basketball/stats",
+      "/basketball/gallery",
+      "/basketball/media",
+      "/privacy",
+      "/design-system"
+    ],
+    "projectCardDimensions": {
+      "width": 384,
+      "height": 653,
+      "count": 6
+    },
+    "horizontalOverflow": false
+  },
+  "responsive": {
+    "method": "DOM snapshots rendered in same-origin srcdoc frames with application CSS and font assets; JavaScript stripped for layout inspection",
+    "templates": [
+      "/",
+      "/basketball",
+      "/experience",
+      "/resume",
+      "/contact",
+      "/basketball/journey",
+      "/basketball/stats",
+      "/basketball/media"
+    ],
+    "sizes": [
+      [320, 740],
+      [390, 844],
+      [540, 900],
+      [650, 960],
+      [960, 650],
+      [820, 1180],
+      [1180, 820],
+      [1024, 1366],
+      [1366, 1024],
+      [1600, 1000],
+      [2200, 1100]
+    ],
+    "cases": 88,
+    "horizontalOverflowCases": 0,
+    "missingStylesCases": 0,
+    "incorrectH1CountCases": 0
+  },
+  "interactions": {
+    "galleryIndonesiaVisiblePhotos": 2,
+    "galleryAllStarVisiblePhotos": 1,
+    "galleryKeyboardArrowRightSelection": "indonesia",
+    "galleryKeyboardVisiblePhotos": 2,
+    "nativeMobileMenu": "Opened in 390px snapshot"
+  },
+  "limits": [
+    "Responsive checks are layout snapshots, not physical device tests.",
+    "Reduced-motion override reviewed in CSS; preference emulation was unavailable.",
+    "Hosted preview keeps existing Vercel authentication."
+  ]
+}
