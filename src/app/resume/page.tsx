@@ -26,7 +26,7 @@ export default function ResumePage() {
           >
             <a
               className="button button--primary"
-              href="https://www.linkedin.com/in/richie-linardi/"
+              href="https://www.linkedin.com/in/richie-linardi-595370314/"
               target="_blank"
               rel="noopener noreferrer"
             >

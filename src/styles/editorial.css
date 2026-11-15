@@ -2073,8 +2073,10 @@ tbody th {
   flex: 1;
 }
 
-.secondary-system-card > div:first-child > div:last-child {
+.secondary-system-card__link {
   margin-top: auto;
+  padding-top: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .secondary-system-card:hover {

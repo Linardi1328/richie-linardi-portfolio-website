@@ -159,7 +159,7 @@ export const foundationPages = {
         description:
           "For internship, software engineering, data science, or AI project conversations, connect via LinkedIn, GitHub, or direct email.",
         items: [
-          "LinkedIn · linkedin.com/in/richie-linardi",
+          "LinkedIn · linkedin.com/in/richie-linardi-595370314",
           "GitHub · github.com/Linardi1328",
           "Email · richb.linardi@gmail.com",
         ],
@@ -178,7 +178,7 @@ export const foundationPages = {
           "This portfolio displays only authentic, verified channels. Private contact information remains protected in accordance with privacy safeguards.",
       },
     ],
-    primaryHref: "https://www.linkedin.com/in/richie-linardi/",
+    primaryHref: "https://www.linkedin.com/in/richie-linardi-595370314/",
     primaryLabel: "Connect on LinkedIn",
   },
   resume: {

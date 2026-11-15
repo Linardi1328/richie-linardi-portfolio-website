@@ -327,7 +327,7 @@ export function ProfessionalHome() {
                 authorization, competition records, and registration validation;
                 pilot acceptance ongoing.
               </p>
-              <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+              <div className="secondary-system-card__link">
                 <Link className="text-link" href="/projects/kynexa">
                   View case study →
                 </Link>
@@ -355,7 +355,7 @@ export function ProfessionalHome() {
                 real-time scores, standings, and automated bracket progression;
                 V1 operational validation ongoing.
               </p>
-              <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+              <div className="secondary-system-card__link">
                 <Link className="text-link" href="/projects/rivora">
                   View case study →
                 </Link>
@@ -382,7 +382,7 @@ export function ProfessionalHome() {
                 independent risk controls. Experimental research baseline with
                 no live trading or profitability claims.
               </p>
-              <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+              <div className="secondary-system-card__link">
                 <Link className="text-link" href="/projects/spy-market-agent">
                   View case study →
                 </Link>
@@ -410,7 +410,7 @@ export function ProfessionalHome() {
                 with Next.js 16, React 19, TypeScript, and rigorous automated CI
                 verification gates.
               </p>
-              <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+              <div className="secondary-system-card__link">
                 <Link className="text-link" href="/projects/personal-portfolio">
                   View case study →
                 </Link>
@@ -437,7 +437,7 @@ export function ProfessionalHome() {
                 time-series visualisations of Malaysian tourism recovery, hotel
                 occupancy rates, and regional expenditure patterns.
               </p>
-              <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+              <div className="secondary-system-card__link">
                 <a
                   className="text-link"
                   href="https://linardi1328.github.io/FIT2179_DV2/"
@@ -596,7 +596,7 @@ export function ProfessionalHome() {
           >
             <a
               className="text-link"
-              href="https://www.linkedin.com/in/richie-linardi/"
+              href="https://www.linkedin.com/in/richie-linardi-595370314/"
               target="_blank"
               rel="noopener noreferrer"
             >

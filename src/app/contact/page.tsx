@@ -7,7 +7,7 @@ const channels = [
     title: "Professional & Technical Networking",
     label: "LinkedIn",
     handle: "in/richie-linardi",
-    href: "https://www.linkedin.com/in/richie-linardi/",
+    href: "https://www.linkedin.com/in/richie-linardi-595370314/",
     description:
       "Connect for software engineering opportunities, internships, data science collaborations, or technical inquiries.",
   },
