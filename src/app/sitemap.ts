@@ -2,7 +2,9 @@ import type { MetadataRoute } from "next";
 import { projectRegistry } from "@/data/project-registry";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://richielinardi.com";
+  const baseUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL || "https://richielinardi.vercel.app"
+  ).replace(/\/+$/, "");
 
   const staticRoutes = [
     "",
