@@ -198,7 +198,7 @@ export const projectRegistry = [
     repositoryUrl: "https://github.com/Linardi1328",
     phase: "Completed academic project",
     currentStatus:
-      "Completed FIT3003 coursework · learning reflection · original assessment materials not published",
+      "Completed FIT3003 coursework · selected Power BI dashboard and academic poster",
     statusVerifiedAt: "2026-10-14",
     catalogueState: "catalogue",
     sortOrder: 44,
@@ -211,7 +211,7 @@ export const projectRegistry = [
     ],
     boundaries: [
       "Academic coursework, not a commercial deployment or live business system.",
-      "Assessment solutions, original datasets and original submitted visuals are not published here.",
+      "Selected visual outputs are displayed; the full assessment report, source dataset, SQL scripts and presentation video are not published.",
       "No grade or university endorsement is claimed.",
     ],
     caseStudy: {
@@ -220,7 +220,7 @@ export const projectRegistry = [
         unit: "FIT3003 — Business Intelligence and Data Warehousing",
         period: "Semester 2, 2026",
         disclaimer:
-          "A high-level learning reflection on academic coursework, not a commercial deployment. Generative AI assistance is acknowledged in the original submission.",
+          "Selected visuals from FIT3003 coursework at Monash University Malaysia, Semester 2, 2026. Academic work, not a commercial deployment. Generative AI assistance is acknowledged in the original submission. Student ID removed from the poster.",
       },
       problem:
         "Developing the ability to transform operational data into useful analytical information through careful data preparation, modelling, and visual communication.",
@@ -239,14 +239,15 @@ export const projectRegistry = [
         "Power BI",
       ],
       verifiedOutcomes:
-        "Completed an academic report and dashboard as part of FIT3003 coursework. This portfolio entry describes the learning experience rather than reproducing assessment solutions.",
+        "Completed an academic report, Power BI dashboard and poster as part of FIT3003 coursework. Selected visual outputs illustrate the analytical work; no grade or commercial outcome is claimed.",
       limitations:
         "Academic exercise only. No production deployment, commercial outcomes or assessment grade is claimed.",
     },
     evidence: [
       {
         kind: "documentation",
-        label: "Original submitted academic materials retained privately.",
+        label:
+          "Selected academic visuals: MonCity Power BI dashboard and redacted poster.",
       },
     ],
   },

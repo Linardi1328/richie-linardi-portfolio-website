@@ -492,12 +492,26 @@ export function ProfessionalHome() {
               </Link>
             </div>
           </div>
-          <div className="system-tag-list academic-spotlight-tags">
-            <span className="system-tag">Oracle SQL</span>
-            <span className="system-tag">Data Warehousing</span>
-            <span className="system-tag">Dimensional Modelling</span>
-            <span className="system-tag">Power BI</span>
-            <span className="system-tag">Data Quality</span>
+          <div className="moncity-spotlight-visual">
+            <Link
+              href="/projects/moncity-data-warehouse"
+              aria-label="View MonCity dashboard and case study"
+            >
+              <Image
+                src="/projects/moncity/moncity-power-bi-dashboard.webp"
+                alt="MonCity Power BI dashboard showing booking volume, maintenance costs, accident categories and passenger age groups"
+                width={2000}
+                height={1296}
+                sizes="(max-width: 900px) 90vw, 500px"
+              />
+            </Link>
+            <div className="system-tag-list academic-spotlight-tags">
+              <span className="system-tag">Oracle SQL</span>
+              <span className="system-tag">Data Warehousing</span>
+              <span className="system-tag">Dimensional Modelling</span>
+              <span className="system-tag">Power BI</span>
+              <span className="system-tag">Data Quality</span>
+            </div>
           </div>
         </article>
 
