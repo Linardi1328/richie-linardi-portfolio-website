@@ -216,17 +216,17 @@ async function run() {
     console.log("\n--- Test 1: Initial All Photos Count ---");
     const initial = await getGalleryState();
     console.log(`Initial state:`, initial);
-    if (initial.visibleCardsCount !== 3)
+    if (initial.visibleCardsCount !== 4)
       throw new Error(
-        `Expected 3 visible cards initially, got ${initial.visibleCardsCount}`,
+        `Expected 4 visible cards initially, got ${initial.visibleCardsCount}`,
       );
     if (initial.activeFilterAttr !== "all")
       throw new Error(
         `Expected activeFilter=all, got ${initial.activeFilterAttr}`,
       );
-    if (initial.visibleCountText !== "3 photographs")
+    if (initial.visibleCountText !== "4 photographs")
       throw new Error(
-        `Expected '3 photographs', got ${initial.visibleCountText}`,
+        `Expected '4 photographs', got ${initial.visibleCountText}`,
       );
 
     console.log(
@@ -248,18 +248,64 @@ async function run() {
 
     const indonesia = await getGalleryState();
     console.log(`Indonesia state:`, indonesia);
-    if (indonesia.visibleCardsCount !== 2)
+    if (indonesia.visibleCardsCount !== 3)
       throw new Error(
-        `Expected 2 visible cards for Indonesia, got ${indonesia.visibleCardsCount}`,
+        `Expected 3 visible cards for Indonesia, got ${indonesia.visibleCardsCount}`,
       );
     if (indonesia.activeFilterAttr !== "indonesia")
       throw new Error(
         `Expected activeFilter=indonesia, got ${indonesia.activeFilterAttr}`,
       );
-    if (indonesia.visibleCountText !== "2 photographs")
+    if (indonesia.visibleCountText !== "3 photographs")
       throw new Error(
-        `Expected '2 photographs', got ${indonesia.visibleCountText}`,
+        `Expected '3 photographs', got ${indonesia.visibleCountText}`,
       );
+
+    console.log(
+      "\n--- Test 2b: FIBA U18 Asia Cup 2024 Membership & Full-Resolution Link ---",
+    );
+    const fibaCardInfo = await cdp.eval(`
+      (() => {
+        const headings = Array.from(document.querySelectorAll('.gallery-card .card-heading'));
+        const fibaHeading = headings.find(h => h.textContent.includes('FIBA U18 Asia Cup 2024'));
+        if (!fibaHeading) return null;
+        const card = fibaHeading.closest('.gallery-card');
+        const link = card ? card.querySelector('a[href*="fiba-u18-asia-cup-2024.webp"]') : null;
+        return {
+          found: true,
+          category: card ? card.getAttribute('data-category') : null,
+          isDisplayed: card ? window.getComputedStyle(card).display !== 'none' : false,
+          linkHref: link ? link.getAttribute('href') : null,
+          linkTarget: link ? link.getAttribute('target') : null,
+        };
+      })()
+    `);
+    console.log("FIBA Card Info:", fibaCardInfo);
+    if (!fibaCardInfo || !fibaCardInfo.found) {
+      throw new Error("Expected FIBA U18 Asia Cup 2024 card in gallery");
+    }
+    if (fibaCardInfo.category !== "indonesia") {
+      throw new Error(
+        `Expected category 'indonesia', got ${fibaCardInfo.category}`,
+      );
+    }
+    if (!fibaCardInfo.isDisplayed) {
+      throw new Error(
+        "Expected FIBA card to be visible when Indonesia filter is active",
+      );
+    }
+    if (
+      fibaCardInfo.linkHref !== "/images/portfolio/fiba-u18-asia-cup-2024.webp"
+    ) {
+      throw new Error(
+        `Expected full-resolution link to /images/portfolio/fiba-u18-asia-cup-2024.webp, got ${fibaCardInfo.linkHref}`,
+      );
+    }
+    if (fibaCardInfo.linkTarget !== "_blank") {
+      throw new Error(
+        `Expected link target='_blank', got ${fibaCardInfo.linkTarget}`,
+      );
+    }
 
     console.log(
       "\n--- Test 3: Modern :has() Filtering (DBL All-Star) via Nested Label Click ---",
@@ -288,6 +334,20 @@ async function run() {
       throw new Error(
         `Expected '1 photograph', got ${allStar.visibleCountText}`,
       );
+
+    const fibaHiddenInAllStar = await cdp.eval(`
+      (() => {
+        const headings = Array.from(document.querySelectorAll('.gallery-card .card-heading'));
+        const fibaHeading = headings.find(h => h.textContent.includes('FIBA U18 Asia Cup 2024'));
+        const card = fibaHeading ? fibaHeading.closest('.gallery-card') : null;
+        return card ? window.getComputedStyle(card).display === 'none' : false;
+      })()
+    `);
+    if (!fibaHiddenInAllStar) {
+      throw new Error(
+        "Expected FIBA card to be hidden under DBL All-Star filter",
+      );
+    }
 
     console.log(
       "\n--- Test 4: Progressive Fallback (Asserting Complete Removal of Modern :has Rules) ---",
@@ -346,13 +406,13 @@ async function run() {
     await delay(250);
     const fbIndo = await getGalleryState();
     console.log("  Fallback Indonesia state:", fbIndo);
-    if (fbIndo.visibleCardsCount !== 2)
+    if (fbIndo.visibleCardsCount !== 3)
       throw new Error(
-        `Fallback failed: expected 2 visible cards, got ${fbIndo.visibleCardsCount}`,
+        `Fallback failed: expected 3 visible cards, got ${fbIndo.visibleCardsCount}`,
       );
-    if (fbIndo.visibleCountText !== "2 photographs")
+    if (fbIndo.visibleCountText !== "3 photographs")
       throw new Error(
-        `Fallback failed: expected '2 photographs', got ${fbIndo.visibleCountText}`,
+        `Fallback failed: expected '3 photographs', got ${fbIndo.visibleCountText}`,
       );
 
     console.log("  -> Testing fallback on DBL All-Star filter:");
@@ -384,13 +444,13 @@ async function run() {
     await delay(250);
     const fbAll = await getGalleryState();
     console.log("  Fallback All state:", fbAll);
-    if (fbAll.visibleCardsCount !== 3)
+    if (fbAll.visibleCardsCount !== 4)
       throw new Error(
-        `Fallback failed: expected 3 visible cards, got ${fbAll.visibleCardsCount}`,
+        `Fallback failed: expected 4 visible cards, got ${fbAll.visibleCardsCount}`,
       );
-    if (fbAll.visibleCountText !== "3 photographs")
+    if (fbAll.visibleCountText !== "4 photographs")
       throw new Error(
-        `Fallback failed: expected '3 photographs', got ${fbAll.visibleCountText}`,
+        `Fallback failed: expected '4 photographs', got ${fbAll.visibleCountText}`,
       );
 
     console.log(

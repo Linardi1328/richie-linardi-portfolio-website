@@ -51,6 +51,57 @@ export const mediaManifest: readonly MediaItem[] = [
     height: photo.height,
   })),
   {
+    id: "re-brand-primary-dark",
+    filename: "/branding/re-primary-dark.webp",
+    targetRoute: "/",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "R&E Technologies — owner-supplied brand identity",
+    altText: "R&E Technologies logo",
+    creditSource: "Owner-supplied R&E Technologies brand identity board",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Portfolio owner supplied the brand reference and requested section-specific website use; extracted without redrawing.",
+    mobileBehavior:
+      "Responsive, intrinsic dimensions and contained aspect ratio; no cropping.",
+    width: 368,
+    height: 236,
+  },
+  {
+    id: "re-brand-primary-light",
+    filename: "/branding/re-primary-light.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "R&E Technologies — owner-supplied brand identity",
+    altText: "R&E Technologies logo",
+    creditSource: "Owner-supplied R&E Technologies brand identity board",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Portfolio owner supplied the brand reference and requested section-specific website use; extracted without redrawing.",
+    mobileBehavior:
+      "Responsive, intrinsic dimensions and contained aspect ratio; no cropping.",
+    width: 408,
+    height: 259,
+  },
+  {
+    id: "rbl-brand-primary-dark",
+    filename: "/branding/rbl-primary-dark.webp",
+    targetRoute: "/",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "RBL — owner-supplied brand identity",
+    altText: "RBL logo",
+    creditSource: "Owner-supplied RBL brand identity board",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Portfolio owner supplied the brand reference and requested section-specific website use; extracted without redrawing.",
+    mobileBehavior:
+      "Responsive, intrinsic dimensions and contained aspect ratio; no cropping.",
+    width: 487,
+    height: 415,
+  },
+  {
     id: "spy-market-architecture-diagram",
     filename: "/projects/spy-market/architecture-diagram.svg",
     targetRoute: "/projects/spy-market-agent",

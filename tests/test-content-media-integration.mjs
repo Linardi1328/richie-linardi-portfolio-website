@@ -361,11 +361,42 @@ async function main() {
     `);
     assert.equal(
       indoCardsCount,
-      2,
-      "Indonesia filter must display exactly 2 visible photos",
+      3,
+      "Indonesia filter must display exactly 3 visible photos",
     );
     console.log(
       `  Filter clicked: Indonesia photos rendered = ${indoCardsCount}`,
+    );
+
+    const fibaCardCheck = await client.eval(`(() => {
+      const fibaCard = Array.from(document.querySelectorAll(".gallery-card")).find(c => {
+        const h2 = c.querySelector(".card-heading");
+        return h2 && h2.textContent.includes("FIBA U18 Asia Cup 2024");
+      });
+      if (!fibaCard) return { found: false };
+      const link = fibaCard.querySelector("a[href*='fiba-u18-asia-cup-2024.webp']");
+      return {
+        found: true,
+        category: fibaCard.getAttribute("data-category"),
+        visible: window.getComputedStyle(fibaCard).display !== "none",
+        linkHref: link ? link.getAttribute("href") : null
+      };
+    })()`);
+    assert.equal(fibaCardCheck.found, true, "FIBA card must exist in gallery");
+    assert.equal(
+      fibaCardCheck.category,
+      "indonesia",
+      "FIBA card category must be indonesia",
+    );
+    assert.equal(
+      fibaCardCheck.visible,
+      true,
+      "FIBA card must be visible under indonesia filter",
+    );
+    assert.equal(
+      fibaCardCheck.linkHref,
+      "/images/portfolio/fiba-u18-asia-cup-2024.webp",
+      "FIBA card must link to full-resolution image",
     );
 
     // Click DBL All-Star filter radio
@@ -399,6 +430,19 @@ async function main() {
       `  Filter clicked: DBL All-Star photos rendered = ${allStarCardsCount}`,
     );
 
+    const fibaHiddenInAllStar = await client.eval(`(() => {
+      const fibaCard = Array.from(document.querySelectorAll(".gallery-card")).find(c => {
+        const h2 = c.querySelector(".card-heading");
+        return h2 && h2.textContent.includes("FIBA U18 Asia Cup 2024");
+      });
+      return fibaCard ? window.getComputedStyle(fibaCard).display === "none" : false;
+    })()`);
+    assert.equal(
+      fibaHiddenInAllStar,
+      true,
+      "FIBA card must be hidden under DBL All-Star filter",
+    );
+
     // Click All filter radio
     const allFilterClicked = await client.eval(`(() => {
       const radio = document.querySelector("#photo-filter-all");
@@ -423,8 +467,8 @@ async function main() {
     `);
     assert.equal(
       allCardsCount,
-      3,
-      "All filter must display exactly 3 visible photos",
+      4,
+      "All filter must display exactly 4 visible photos",
     );
     console.log(`  Filter clicked: All photos rendered = ${allCardsCount}`);
 

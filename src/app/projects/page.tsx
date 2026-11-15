@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PortfolioWorldShell } from "@/components/layout/portfolio-world-shell";
 import { professionalWorldNavigation } from "@/data/world-navigation";
@@ -162,7 +163,17 @@ export default function ProjectsPage() {
           <div className="card-grid card-grid--two">
             <article className="content-card">
               <p className="eyebrow">Technology Solutions Venture</p>
-              <h2 className="card-heading">R&E Technologies</h2>
+              <div className="venture-catalogue-brand">
+                <h2 className="card-heading">R&amp;E Technologies</h2>
+                <Image
+                  src="/branding/re-primary-light.webp"
+                  alt="R&E Technologies official logo"
+                  width={408}
+                  height={259}
+                  sizes="132px"
+                  className="venture-catalogue-logo"
+                />
+              </div>
               <p>
                 A broader technology solutions venture in development
                 (2026–Present) that develops its own software products while
@@ -173,7 +184,17 @@ export default function ProjectsPage() {
             </article>
             <article className="content-card">
               <p className="eyebrow">Personal Identity & Content</p>
-              <h2 className="card-heading">RBL</h2>
+              <div className="venture-catalogue-brand">
+                <h2 className="card-heading">RBL</h2>
+                <Image
+                  src="/branding/rbl-primary-dark.webp"
+                  alt="RBL official gold emblem"
+                  width={487}
+                  height={415}
+                  sizes="132px"
+                  className="venture-catalogue-logo"
+                />
+              </div>
               <p>
                 The supporting personal brand and athlete identity of Richie
                 Linardi, connecting collegiate basketball competition, media

@@ -591,11 +591,12 @@ export function ProfessionalHome() {
               04 / Technology entrepreneurship · R&amp;E Technologies
             </span>
             <Image
-              src="/branding/re-mark-light.webp"
-              alt="R&E Technologies brand mark"
-              width={80}
-              height={47}
-              className="re-brand-mark"
+              src="/branding/re-primary-dark.webp"
+              alt="R&E Technologies official logo"
+              width={368}
+              height={236}
+              sizes="(max-width: 640px) 144px, 208px"
+              className="re-brand-mark re-brand-lockup"
             />
           </div>
 
@@ -778,7 +779,17 @@ export function ProfessionalHome() {
               <span className="venture-badge">
                 Creative &amp; Media Initiative · 2024–Present
               </span>
-              <h3 className="venture-wordmark">RBL</h3>
+              <div className="rbl-brand-heading">
+                <h3 className="venture-wordmark">RBL</h3>
+                <Image
+                  src="/branding/rbl-primary-dark.webp"
+                  alt="RBL official gold emblem"
+                  width={487}
+                  height={415}
+                  sizes="(max-width: 640px) 112px, 156px"
+                  className="rbl-brand-lockup"
+                />
+              </div>
               <p>
                 Creative media and digital storytelling initiative supporting
                 competitive basketball documentation, video production
