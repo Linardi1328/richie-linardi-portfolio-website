@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { PortfolioPhotograph } from "@/components/ui/portfolio-photograph";
@@ -137,33 +138,46 @@ export function ProjectCard({
   return (
     <article className="project-card">
       <Link
-        className={`project-cover project-cover--${index % 3}`}
+        className={`project-cover project-cover--${index % 3}${project.slug === "moncity-data-warehouse" ? " project-cover--moncity" : ""}`}
         href={`/projects/${project.slug}`}
         aria-label={`Explore ${project.title}`}
       >
         <span className="project-cover__label">{theme.label}</span>
-        <strong>
-          {theme.code}
-          <span>·</span>
-        </strong>
-        <svg
-          viewBox="0 0 360 120"
-          aria-hidden="true"
-          className={`project-motif project-motif--${theme.motif}`}
-        >
-          <path
-            d={
-              theme.motif === "chart"
-                ? "M0 96 L35 76 L65 89 L103 39 L141 62 L180 34 L218 50 L260 12 L300 27 L360 4"
-                : theme.motif === "ledger"
-                  ? "M18 20 H340 M18 48 H270 M18 76 H310 M18 104 H215"
-                  : "M30 60 H140 L195 20 H320 M140 60 L195 100 H320"
-            }
+        {project.slug === "moncity-data-warehouse" ? (
+          <Image
+            src="/projects/moncity/moncity-power-bi-dashboard.webp"
+            alt="MonCity Operations Intelligence dashboard preview"
+            width={2000}
+            height={1296}
+            sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 400px"
+            className="project-cover__moncity-image"
           />
-          <circle cx="140" cy="60" r="5" />
-          <circle cx="320" cy="20" r="5" />
-          <circle cx="320" cy="100" r="5" />
-        </svg>
+        ) : (
+          <>
+            <strong>
+              {theme.code}
+              <span>·</span>
+            </strong>
+            <svg
+              viewBox="0 0 360 120"
+              aria-hidden="true"
+              className={`project-motif project-motif--${theme.motif}`}
+            >
+              <path
+                d={
+                  theme.motif === "chart"
+                    ? "M0 96 L35 76 L65 89 L103 39 L141 62 L180 34 L218 50 L260 12 L300 27 L360 4"
+                    : theme.motif === "ledger"
+                      ? "M18 20 H340 M18 48 H270 M18 76 H310 M18 104 H215"
+                      : "M30 60 H140 L195 20 H320 M140 60 L195 100 H320"
+                }
+              />
+              <circle cx="140" cy="60" r="5" />
+              <circle cx="320" cy="20" r="5" />
+              <circle cx="320" cy="100" r="5" />
+            </svg>
+          </>
+        )}
         <span className="project-cover__arrow" aria-hidden="true">
           ↗
         </span>

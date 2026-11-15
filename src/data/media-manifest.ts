@@ -93,6 +93,46 @@ export const mediaManifest: readonly MediaItem[] = [
     aspectRatio: "16/9",
     tags: ["software", "architecture", "automation", "github-api"],
   },
+  {
+    id: "moncity-dashboard",
+    filename: "/projects/moncity/moncity-power-bi-dashboard.webp",
+    targetRoute: "/projects/moncity-data-warehouse",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption:
+      "MonCity Operations Intelligence — original Power BI dashboard from FIT3003, Monash University Malaysia, Semester 2, 2026. Academic coursework, not a commercial deployment. AI assistance acknowledged in the original submission.",
+    altText:
+      "MonCity Operations Intelligence dashboard showing annual bookings, known maintenance costs by type, keyed accidents by reported error category, and bookings by passenger age group.",
+    creditSource: "Richie Linardi · owner-supplied FIT3003 dashboard export",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Genuine owner-supplied dashboard, optimized to WebP; owner explicitly requested publication. Institutional permission has not been confirmed.",
+    mobileBehavior:
+      "Responsive image; preserved aspect ratio; full-size link for chart readability.",
+    width: 2000,
+    height: 1296,
+    tags: ["academic", "power-bi", "data-science"],
+  },
+  {
+    id: "moncity-poster",
+    filename: "/projects/moncity/moncity-poster-redacted.webp",
+    targetRoute: "/projects/moncity-data-warehouse",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption:
+      "MonCity academic poster — FIT3003, Monash University Malaysia, Semester 2, 2026. Original coursework visual with student ID removed. AI assistance acknowledged in the original submission. Not a commercial deployment.",
+    altText:
+      "MonCity academic poster summarizing the data warehousing project and its visual analytical outputs, with student identification removed.",
+    creditSource: "Richie Linardi · owner-supplied FIT3003 poster",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Genuine owner-supplied poster, optimized to WebP and redacted; owner explicitly requested publication. Institutional permission has not been confirmed.",
+    mobileBehavior:
+      "Responsive portrait image with full-size link; no cropped content.",
+    width: 1132,
+    height: 1600,
+    tags: ["academic", "poster", "data-science"],
+  },
 ] as const;
 
 export function getMediaByRoute(targetRoute: string): readonly MediaItem[] {

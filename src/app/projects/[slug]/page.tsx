@@ -74,6 +74,45 @@ export default async function ProjectPage({
           title={project.title}
           description={project.summary}
         />
+        {slug === "moncity-data-warehouse" && media.length ? (
+          <section
+            className="section container section--compact moncity-visuals"
+            aria-label="Academic visual evidence"
+          >
+            <SectionHeading
+              label="Academic visuals"
+              title="From data to decisions."
+            />
+            {media.map((item) => (
+              <figure
+                className={`architecture-figure${item.id === "moncity-poster" ? " moncity-poster" : ""}`}
+                key={item.id}
+              >
+                <a
+                  href={item.filename}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open full-size ${item.id === "moncity-poster" ? "academic poster" : "Power BI dashboard"}`}
+                >
+                  <Image
+                    src={item.filename}
+                    alt={item.altText}
+                    width={item.width ?? 800}
+                    height={item.height ?? 450}
+                    sizes={
+                      item.id === "moncity-poster"
+                        ? "(max-width: 768px) 90vw, 720px"
+                        : "(min-width: 1280px) 1180px, 92vw"
+                    }
+                  />
+                </a>
+                <figcaption>
+                  {item.caption} Select the image to view it at full size.
+                </figcaption>
+              </figure>
+            ))}
+          </section>
+        ) : null}
         <section className="section container section--compact">
           <div className="project-actions">
             {project.deploymentUrl ? (
@@ -297,7 +336,7 @@ export default async function ProjectPage({
             ) : null}
           </section>
         ) : null}
-        {media.length ? (
+        {media.length && slug !== "moncity-data-warehouse" ? (
           <section className="section section--tinted">
             <div className="container">
               <SectionHeading
