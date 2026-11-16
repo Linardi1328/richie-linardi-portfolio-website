@@ -38,6 +38,15 @@ const photos: GalleryPhotoItem[] = [
       "Richie Linardi supplied photo archive · Approved derivative crop",
   },
   {
+    id: "fibaU18",
+    category: "indonesia",
+    title: "FIBA U18 Asia Cup 2024",
+    location: "Amman, Jordan",
+    year: "2024",
+    provenance:
+      "Owner-supplied tournament action photograph · FIBA U18 Asia Cup 2024",
+  },
+  {
     id: "allStar",
     category: "all-star",
     title: "DBL Indonesia All-Star 2024",
@@ -50,13 +59,18 @@ const photos: GalleryPhotoItem[] = [
 
 export function AthleteGallery() {
   const [activeFilter, setActiveFilter] = useState("all");
+  const allCount = photos.length;
+  const indonesiaCount = photos.filter(
+    (p) => p.category === "indonesia",
+  ).length;
+  const allStarCount = photos.filter((p) => p.category === "all-star").length;
 
   return (
     <>
       <PageIntro
         eyebrow="Personal Photo Archive"
         title="Moments that define the competitive journey."
-        description="On the court, with teammates, and at the podium. An authentic collection of high-resolution photographs documenting competition milestones across Da Nang and Jakarta."
+        description="On the court, with teammates, and at the podium. An authentic collection of high-resolution photographs documenting competition milestones across Amman, Da Nang and Jakarta."
       />
 
       <section
@@ -65,9 +79,9 @@ export function AthleteGallery() {
       >
         <div className="gallery-toolbar">
           <p className="gallery-count" aria-live="polite">
-            <span data-count="all">3 photographs</span>
-            <span data-count="indonesia">2 photographs</span>
-            <span data-count="all-star">1 photograph</span>
+            <span data-count="all">{`${allCount} photographs`}</span>
+            <span data-count="indonesia">{`${indonesiaCount} photographs`}</span>
+            <span data-count="all-star">{`${allStarCount} photograph`}</span>
           </p>
 
           <fieldset className="filter-tabs">
@@ -75,9 +89,9 @@ export function AthleteGallery() {
               Filter photographs by competition
             </legend>
             {[
-              ["all", "All photos (3)"],
-              ["indonesia", "Indonesia (2)"],
-              ["all-star", "DBL All-Star (1)"],
+              ["all", `All photos (${allCount})`],
+              ["indonesia", `Indonesia (${indonesiaCount})`],
+              ["all-star", `DBL All-Star (${allStarCount})`],
             ].map(([id, label]) => (
               <label className="filter-label" key={id}>
                 <input

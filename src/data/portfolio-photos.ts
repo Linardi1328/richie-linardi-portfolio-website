@@ -1,8 +1,8 @@
 export const portfolioPhotos = {
   professional: {
     src: "/images/portfolio/richie-professional.webp",
-    width: 1800,
-    height: 1800,
+    width: 2048,
+    height: 2048,
     alt: "Richie Linardi in a black blazer and white shirt",
     caption: "Richie Linardi · Data Science & Applied AI",
     route: "/about",
@@ -49,8 +49,8 @@ export const portfolioPhotos = {
   },
   fibaU18: {
     src: "/images/portfolio/fiba-u18-asia-cup-2024.webp",
-    width: 600,
-    height: 338,
+    width: 2048,
+    height: 1365,
     alt: "Indonesia basketball player wearing a red number 13 jersey and dribbling during a game",
     caption: "FIBA U18 Asia Cup 2024 · Indonesia · Amman, Jordan",
     route: "/basketball/achievements",

@@ -2313,6 +2313,40 @@ tbody th {
   border-radius: 4px;
 }
 
+.re-brand-lockup {
+  width: clamp(144px, 18vw, 208px);
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.rbl-brand-heading,
+.venture-catalogue-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.rbl-brand-lockup {
+  width: clamp(112px, 15vw, 156px);
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.venture-catalogue-logo {
+  width: 132px;
+  height: auto;
+  max-width: 100%;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
 .re-title {
   font-size: clamp(2.4rem, 5.5vw, 4.2rem);
   font-weight: 850;
