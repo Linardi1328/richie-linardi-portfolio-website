@@ -489,7 +489,14 @@ async function main() {
       return {
         flexWrap: s.flexWrap,
         hamRight: rect ? rect.right : 0,
-        hamVisible: rect ? rect.right <= 320 && rect.left >= 0 : false,
+        hamVisible: Boolean(
+          rect &&
+            getComputedStyle(summary).visibility !== "hidden" &&
+            rect.width > 0 &&
+            rect.height > 0 &&
+            rect.left >= 0 &&
+            rect.right <= 320,
+        ),
         docWidth: document.documentElement.scrollWidth,
       };
     })()`);
@@ -516,7 +523,14 @@ async function main() {
       const rect = summary ? summary.getBoundingClientRect() : null;
       const res = {
         hamRight: rect ? rect.right : 0,
-        hamVisible: rect ? rect.right <= 320 : false,
+        hamVisible: Boolean(
+          rect &&
+            getComputedStyle(summary).visibility !== "hidden" &&
+            rect.width > 0 &&
+            rect.height > 0 &&
+            rect.left >= 0 &&
+            rect.right <= 320,
+        ),
         docWidth: document.documentElement.scrollWidth,
       };
       document.documentElement.style.fontSize = "";
