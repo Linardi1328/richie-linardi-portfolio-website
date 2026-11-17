@@ -144,6 +144,24 @@ const projectLogos: Record<
     width: 960,
     height: 320,
   },
+  "spy-market-agent": {
+    src: "/products/axiom-quantum/website-lockup-v1-960x320.webp",
+    alt: "AXIOM QUANTUM official logo",
+    width: 960,
+    height: 320,
+  },
+  "axiom-quantum": {
+    src: "/products/axiom-quantum/website-lockup-v1-960x320.webp",
+    alt: "AXIOM QUANTUM official logo",
+    width: 960,
+    height: 320,
+  },
+  "rbl-content-engine": {
+    src: "/products/rbl-content-engine/website-lockup-v1-960x320.webp",
+    alt: "RBL Content Engine official logo",
+    width: 960,
+    height: 320,
+  },
 };
 
 export function ProjectCard({
