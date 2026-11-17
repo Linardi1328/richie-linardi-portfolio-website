@@ -15,9 +15,7 @@ export function ProfessionalHome() {
       <section className="cinematic-hero-wrap container">
         <h1 className="monumental-name">
           <span>Richie</span>
-          <span className="accent-text">
-            Linardi<span className="wordmark__dot">.</span>
-          </span>
+          <span className="accent-text">Linardi.</span>
         </h1>
 
         <div className="home-hero" style={{ paddingTop: 0 }}>
