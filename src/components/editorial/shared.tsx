@@ -123,6 +123,29 @@ const projectThemes: Record<
   },
 };
 
+const projectLogos: Record<
+  string,
+  {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  }
+> = {
+  kynexa: {
+    src: "/products/kynexa/website-lockup-v1-960x320.webp",
+    alt: "KYNEXA official logo",
+    width: 960,
+    height: 320,
+  },
+  rivora: {
+    src: "/products/rivora/website-lockup-v1-960x320.webp",
+    alt: "RIVORA official logo",
+    width: 960,
+    height: 320,
+  },
+};
+
 export function ProjectCard({
   project,
   index = 0,
@@ -135,15 +158,18 @@ export function ProjectCard({
     label: "Applied systems",
     motif: "nodes",
   };
+  const logo = projectLogos[project.slug];
+  const isMoncity = project.slug === "moncity-data-warehouse";
+
   return (
     <article className="project-card">
       <Link
-        className={`project-cover project-cover--${index % 3}${project.slug === "moncity-data-warehouse" ? " project-cover--moncity" : ""}`}
+        className={`project-cover project-cover--${index % 3}${isMoncity ? " project-cover--moncity" : ""}${logo ? " project-cover--logo" : ""}`}
         href={`/projects/${project.slug}`}
         aria-label={`Explore ${project.title}`}
       >
         <span className="project-cover__label">{theme.label}</span>
-        {project.slug === "moncity-data-warehouse" ? (
+        {isMoncity ? (
           <Image
             src="/projects/moncity/moncity-power-bi-dashboard.webp"
             alt="MonCity Operations Intelligence dashboard preview"
@@ -152,6 +178,17 @@ export function ProjectCard({
             sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 400px"
             className="project-cover__moncity-image"
           />
+        ) : logo ? (
+          <div className="project-cover__logo-wrap">
+            <Image
+              src={logo.src}
+              alt={logo.alt}
+              width={logo.width}
+              height={logo.height}
+              sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 360px"
+              className="project-cover__logo-image"
+            />
+          </div>
         ) : (
           <>
             <strong>

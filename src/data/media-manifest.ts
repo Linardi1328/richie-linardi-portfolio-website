@@ -102,6 +102,40 @@ export const mediaManifest: readonly MediaItem[] = [
     height: 415,
   },
   {
+    id: "kynexa-product-lockup",
+    filename: "/products/kynexa/website-lockup-v1-960x320.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "KYNEXA — official product brand lockup",
+    altText: "KYNEXA official logo",
+    creditSource: "Approved RE_Product_Brand_Profiles_V1 asset pack",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Owner-approved V1 product brand identity lockup on white plate; conventional WebP derivative without generative modifications.",
+    mobileBehavior:
+      "Responsive image contained within card cover with preserved aspect ratio and object-fit: contain.",
+    width: 960,
+    height: 320,
+  },
+  {
+    id: "rivora-product-lockup",
+    filename: "/products/rivora/website-lockup-v1-960x320.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "RIVORA — official product brand lockup",
+    altText: "RIVORA official logo",
+    creditSource: "Approved RE_Product_Brand_Profiles_V1 asset pack",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Owner-approved V1 product brand identity lockup on white plate; conventional WebP derivative without generative modifications.",
+    mobileBehavior:
+      "Responsive image contained within card cover with preserved aspect ratio and object-fit: contain.",
+    width: 960,
+    height: 320,
+  },
+  {
     id: "spy-market-architecture-diagram",
     filename: "/projects/spy-market/architecture-diagram.svg",
     targetRoute: "/projects/spy-market-agent",
