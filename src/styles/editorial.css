@@ -3220,10 +3220,25 @@ tbody th {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 650px) {
   .athlete-landmark-bar {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+  .cinematic-hero-wrap {
+    padding-top: 1.25rem;
+    padding-bottom: 1.5rem;
+  }
+  .monumental-name {
+    font-size: clamp(2.4rem, 9.2vw, 3.6rem);
+    line-height: 0.95;
+    margin-bottom: 0.85rem;
+  }
+  .hero-status-pill {
+    font-size: 0.65rem;
+    padding: 0.35rem 0.75rem;
+    margin-bottom: 0.75rem;
+    white-space: normal;
   }
 }
 
