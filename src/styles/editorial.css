@@ -167,15 +167,22 @@ ul {
   white-space: nowrap;
 }
 .wordmark__symbol {
-  background: var(--ink);
+  background: #0a0e21;
   color: var(--paper);
   width: 32px;
   height: 32px;
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  font-size: 22px;
-  line-height: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.wordmark__symbol-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 .wordmark__dot {
   color: var(--accent);
@@ -1664,7 +1671,8 @@ tbody th {
     gap: 0.35rem;
   }
   .wordmark__symbol {
-    display: none;
+    width: 24px;
+    height: 24px;
   }
   .world-selector a {
     font-size: 0.58rem;
@@ -2320,6 +2328,42 @@ tbody th {
   right: 1.2rem;
   bottom: 1rem;
   color: var(--ink);
+}
+.project-cover--tourism {
+  background: #f0f7ff;
+  color: #1a365d;
+  padding: 0.8rem;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.project-cover--tourism .project-cover__label {
+  color: #2b6cb0;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.58rem;
+}
+.project-cover__tourism-image {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.project-cover--tourism .project-cover__arrow {
+  right: 0.8rem;
+  bottom: 0.8rem;
+  background: #f0f7ff;
+  color: #1a365d;
+  border-radius: 4px;
+  padding-inline: 0.35rem;
+}
+.project-cover__logo-image--emblem {
+  max-width: 130px;
+  max-height: 105px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(10, 14, 33, 0.12);
 }
 .moncity-visuals .architecture-figure + .architecture-figure {
   margin-top: 1.5rem;
@@ -3262,6 +3306,10 @@ tbody th {
   .project-cover__logo-image {
     max-width: 200px;
     max-height: 64px;
+  }
+  .project-cover__logo-image--emblem {
+    max-width: 110px;
+    max-height: 88px;
   }
   .project-cover--logo .project-cover__arrow {
     right: 0.9rem;

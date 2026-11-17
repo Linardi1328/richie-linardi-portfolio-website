@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type {
@@ -36,7 +37,14 @@ export function EditorialNavigation({
           aria-label="Richie Linardi home"
         >
           <span className="wordmark__symbol" aria-hidden="true">
-            r.
+            <Image
+              src="/branding/rbl-primary-dark.webp"
+              alt=""
+              width={487}
+              height={415}
+              className="wordmark__symbol-image"
+              priority
+            />
           </span>
           Richie Linardi<span className="wordmark__dot">.</span>
         </Link>
