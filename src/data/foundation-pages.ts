@@ -84,7 +84,7 @@ export const foundationPages = {
           "Designed an automated points-tracking system covering more than 350 matches across two competitions. Managed match statistics, scheduling, and scoring flow to keep competition data accurate and current.",
       },
       {
-        eyebrow: "Audit & verification · Dec 2025–Present",
+        eyebrow: "Audit & verification · Dec 2025–Sep 2026",
         title: "Auditor · KHLIM Group of Companies.",
         description:
           "Financial record verification, audit working-paper preparation and review, inventory stock counts, and external audit assignments across three companies.",
@@ -203,7 +203,7 @@ export const foundationPages = {
         eyebrow: "Experience",
         title: "Professional & Technical Roles.",
         description:
-          "Independent Software Developer at R&E Technologies (venture in development, 2026–Present); Stats Team Leader at KHLIM Basketball Club (Jan 2026–Present); Auditor at KHLIM Group of Companies (Dec 2025–Present); Incoming Data Annotation Intern at GTEX Asia Sdn Bhd (Scheduled 23 Nov 2026–19 Feb 2027).",
+          "Independent Software Developer at R&E Technologies (venture in development, 2026–Present); Stats Team Leader at KHLIM Basketball Club (Jan 2026–Present); Auditor at KHLIM Group of Companies (Dec 2025–Sep 2026); Incoming Data Annotation Intern at GTEX Asia Sdn Bhd (Scheduled 23 Nov 2026–19 Feb 2027).",
       },
       {
         eyebrow: "Selected Technical Systems",
