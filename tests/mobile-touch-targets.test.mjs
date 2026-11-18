@@ -1,52 +1,41 @@
 /**
- * RIC-180: Mobile Touch-Target Regression Test Suite
- *
- * Validates touch-target dimensions, WCAG 2.2 SC 2.5.8 Level AA minimum compliance,
- * zero horizontal document overflow, and desktop visual preservation across viewports.
- *
- * Prerequisites:
- *  1. Node.js >= 20.x (with native test runner, global fetch, and global WebSocket).
- *  2. Chromium browser: Google Chrome or Chromium executable found in standard OS paths
- *     (macOS: /Applications/Google Chrome.app, Linux: /usr/bin/google-chrome, /usr/bin/chromium)
- *     or specified via the CHROME_BIN environment variable.
- *  3. Next.js production build in .next/ directory (`npm run build`).
- *
- * Scope:
- *  - 9x .project-card__footer a on /projects (target: >= 44x44 CSS px on mobile)
- *  - 4x .re-card-link on / (target: >= 44x44 CSS px on mobile)
- *  - .text-link standalone action links on mobile (target: >= 44px height)
- *  - .world-selector a compact world switcher (target: >= 24x24 CSS px per WCAG 2.2 AA)
- *  - Document overflow assertion: scrollWidth === clientWidth (320, 375, 390, 412, 1440 px)
- *  - Desktop preservation: 1440px desktop footer link remains compact (< 30px height)
+ * RIC-180: Mobile touch-target regression (standalone; not run by npm validate).
+ * Run with the repository's Node 24, a production build and local Chromium.
+ * Chrome CDP uses private inherited pipes, not a listening debug port.
  */
-
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
-import http from "node:http";
+import { mkdtemp, rm } from "node:fs/promises";
 import net from "node:net";
-import { dirname, resolve } from "node:path";
+import { tmpdir } from "node:os";
+import { dirname, join, resolve } from "node:path";
+import { setTimeout as delay } from "node:timers/promises";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const REPO_ROOT = resolve(__dirname, "..");
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const commandTimeout = 8_000;
+const startupTimeout = 15_000;
 
-function getAvailablePort() {
-  return new Promise((res, rej) => {
-    const srv = net.createServer();
-    srv.unref();
-    srv.on("error", rej);
-    srv.listen(0, "127.0.0.1", () => {
-      const { port } = srv.address();
-      srv.close(() => res(port));
+async function availablePort() {
+  const server = net.createServer();
+  try {
+    await new Promise((resolve, reject) => {
+      server.once("error", reject);
+      server.listen(0, "127.0.0.1", resolve);
     });
-  });
+    return server.address().port;
+  } finally {
+    if (server.listening) {
+      await new Promise((resolve) => server.close(resolve));
+    }
+  }
 }
 
-function getChromeExecutable() {
-  if (process.env.CHROME_BIN && existsSync(process.env.CHROME_BIN)) {
+function chromeExecutable() {
+  if (process.env.CHROME_BIN) {
+    assert.ok(existsSync(process.env.CHROME_BIN), "CHROME_BIN does not exist");
     return process.env.CHROME_BIN;
   }
   const candidates = [
@@ -57,308 +46,433 @@ function getChromeExecutable() {
     "/usr/bin/chromium",
     "/usr/bin/chromium-browser",
   ];
-  for (const c of candidates) {
-    if (existsSync(c)) return c;
-  }
-  return "google-chrome";
+  const executable = candidates.find(existsSync);
+  assert.ok(executable, "Install local Chromium or set CHROME_BIN");
+  return executable;
 }
 
-function delay(ms) {
-  return new Promise((r) => setTimeout(r, ms));
+// A private POSIX process group per task-owned child permits descendant cleanup.
+function startOwned(command, args, stdio) {
+  const child = spawn(command, args, { cwd: root, detached: true, stdio });
+  const state = { child, error: null, ended: false };
+  child.on("error", (error) => {
+    state.error = error;
+    state.ended = true;
+  });
+  child.on("exit", () => {
+    state.ended = true;
+  });
+  return state;
 }
 
-async function waitForServer(port, maxAttempts = 40, intervalMs = 250) {
-  for (let i = 0; i < maxAttempts; i++) {
-    try {
-      const res = await fetch(`http://127.0.0.1:${port}/`);
-      if (res.status === 200) return true;
-    } catch {}
-    await delay(intervalMs);
-  }
-  return false;
+function alive(state) {
+  if (state.error) throw state.error;
+  assert.ok(!state.ended, `Task process exited: ${state.child.spawnfile}`);
 }
 
-async function waitForCdp(debugPort, maxAttempts = 30, intervalMs = 200) {
-  for (let i = 0; i < maxAttempts; i++) {
-    try {
-      const res = await new Promise((resTarget) => {
-        const req = http.get(`http://127.0.0.1:${debugPort}/json`, (r) => {
-          let data = "";
-          r.on("data", (c) => (data += c));
-          r.on("end", () => {
-            try {
-              resTarget(JSON.parse(data));
-            } catch {
-              resTarget(null);
-            }
-          });
-        });
-        req.on("error", () => resTarget(null));
-      });
-      if (res && Array.isArray(res)) {
-        const page = res.find((t) => t.type === "page");
-        if (page?.webSocketDebuggerUrl) return page.webSocketDebuggerUrl;
-      }
-    } catch {}
-    await delay(intervalMs);
-  }
-  return null;
-}
-
-class CDPClient {
-  constructor(ws) {
-    this.ws = ws;
-    this.id = 1;
-    this.pending = new Map();
-    ws.onmessage = (msg) => {
-      const data = JSON.parse(msg.data);
-      if (data.id && this.pending.has(data.id)) {
-        const { resolve, reject } = this.pending.get(data.id);
-        this.pending.delete(data.id);
-        if (data.error) reject(data.error);
-        else resolve(data.result);
-      }
-    };
-  }
-  send(method, params = {}) {
-    return new Promise((resolve, reject) => {
-      const id = this.id++;
-      this.pending.set(id, { resolve, reject });
-      this.ws.send(JSON.stringify({ id, method, params }));
-    });
-  }
-  async eval(expression) {
-    const res = await this.send("Runtime.evaluate", {
-      expression,
-      returnByValue: true,
-      awaitPromise: true,
-    });
-    if (res.exceptionDetails) {
-      throw new Error(JSON.stringify(res.exceptionDetails));
-    }
-    return res.result?.value;
-  }
-}
-
-test("RIC-180: Mobile touch-target regression suite and viewport validation", async () => {
-  const serverPort = await getAvailablePort();
-  const cdpPort = await getAvailablePort();
-
-  console.log(`Starting Next.js production server on port ${serverPort}...`);
-  const serverProcess = spawn(
-    "node",
-    [
-      "node_modules/next/dist/bin/next",
-      "start",
-      "-p",
-      String(serverPort),
-      "-H",
-      "127.0.0.1",
-    ],
-    { cwd: REPO_ROOT, stdio: "ignore" },
-  );
-
-  const serverReady = await waitForServer(serverPort);
-  assert.ok(
-    serverReady,
-    "Production server failed to respond on ephemeral port",
-  );
-
-  const chromePath = getChromeExecutable();
-  console.log(
-    `Launching headless Chrome (${chromePath}) on debug port ${cdpPort}...`,
-  );
-  const chromeProcess = spawn(
-    chromePath,
-    [
-      "--headless=new",
-      `--remote-debugging-port=${cdpPort}`,
-      "--remote-allow-origins=*",
-      "--no-first-run",
-      "--disable-gpu",
-      "about:blank",
-    ],
-    { stdio: "ignore" },
-  );
-
-  const wsUrl = await waitForCdp(cdpPort);
-  assert.ok(wsUrl, "Failed to connect to headless Chrome CDP");
-
-  const ws = new WebSocket(wsUrl);
-  await new Promise((res) => (ws.onopen = res));
-  const client = new CDPClient(ws);
-
-  await client.send("Page.enable");
-  await client.send("DOM.enable");
-
+function signalGroup(state, signal) {
+  if (!state?.child.pid) return false;
   try {
-    const mobileViewports = [320, 375, 390, 412];
-
-    for (const width of mobileViewports) {
-      await client.send("Emulation.setDeviceMetricsOverride", {
-        width,
-        height: 844,
-        deviceScaleFactor: 2,
-        mobile: true,
-      });
-
-      // 1. Validate /projects: exactly 9 project footer links measuring >= 44x44 CSS pixels
-      await client.send("Page.navigate", {
-        url: `http://127.0.0.1:${serverPort}/projects`,
-      });
-      await delay(300);
-
-      const footerLinksData = await client.eval(`
-        (() => {
-          const links = Array.from(document.querySelectorAll(".project-card__footer a"));
-          return links.map(el => {
-            const r = el.getBoundingClientRect();
-            return { width: r.width, height: r.height, text: el.textContent.trim() };
-          });
-        })()
-      `);
-
-      assert.equal(
-        footerLinksData.length,
-        9,
-        `Expected 9 project footer links on /projects at ${width}px`,
-      );
-      for (const link of footerLinksData) {
-        assert.ok(
-          link.height >= 44,
-          `Footer link "${link.text}" height ${link.height}px < 44px at ${width}px`,
-        );
-        assert.ok(
-          link.width >= 44,
-          `Footer link "${link.text}" width ${link.width}px < 44px at ${width}px`,
-        );
-      }
-
-      // 2. Validate /: exactly 4 R&E dossier/collaboration links measuring >= 44px in height
-      await client.send("Page.navigate", {
-        url: `http://127.0.0.1:${serverPort}/`,
-      });
-      await delay(300);
-
-      const reLinksData = await client.eval(`
-        (() => {
-          const links = Array.from(document.querySelectorAll(".re-card-link"));
-          return links.map(el => {
-            const r = el.getBoundingClientRect();
-            return { width: r.width, height: r.height, text: el.textContent.trim() };
-          });
-        })()
-      `);
-
-      assert.equal(
-        reLinksData.length,
-        4,
-        `Expected 4 R&E links on / at ${width}px`,
-      );
-      for (const link of reLinksData) {
-        assert.ok(
-          link.height >= 44,
-          `R&E link "${link.text}" height ${link.height}px < 44px at ${width}px`,
-        );
-        assert.ok(
-          link.width >= 44,
-          `R&E link "${link.text}" width ${link.width}px < 44px at ${width}px`,
-        );
-      }
-
-      // 3. Validate .text-link elements on /: all have height >= 44px
-      const textLinksData = await client.eval(`
-        (() => {
-          const links = Array.from(document.querySelectorAll(".text-link"));
-          return links.map(el => {
-            const r = el.getBoundingClientRect();
-            return { width: r.width, height: r.height, text: el.textContent.trim() };
-          });
-        })()
-      `);
-      assert.ok(
-        textLinksData.length > 0,
-        `Expected .text-link elements on / at ${width}px`,
-      );
-      for (const link of textLinksData) {
-        assert.ok(
-          link.height >= 44,
-          `.text-link "${link.text}" height ${link.height}px < 44px at ${width}px`,
-        );
-      }
-
-      // 4. Validate world switcher accessibility: exceeds WCAG 2.2 AA (>= 24x24px)
-      const worldSwitcherData = await client.eval(`
-        (() => {
-          const links = Array.from(document.querySelectorAll(".world-selector a"));
-          return links.map(el => {
-            const r = el.getBoundingClientRect();
-            return { width: r.width, height: r.height, text: el.textContent.trim() };
-          });
-        })()
-      `);
-      assert.equal(
-        worldSwitcherData.length,
-        2,
-        `Expected 2 world-selector links at ${width}px`,
-      );
-      for (const wsLink of worldSwitcherData) {
-        assert.ok(
-          wsLink.height >= 24 && wsLink.width >= 24,
-          `World switcher link "${wsLink.text}" (${wsLink.width}x${wsLink.height}) does not meet WCAG 2.2 24x24px minimum at ${width}px`,
-        );
-      }
-
-      // 5. Check zero horizontal document overflow on / and /projects
-      const overflow = await client.eval(`
-        (() => {
-          const docEl = document.documentElement;
-          const body = document.body;
-          const scrollWidth = Math.max(docEl.scrollWidth, body ? body.scrollWidth : 0);
-          const clientWidth = docEl.clientWidth;
-          return scrollWidth > clientWidth;
-        })()
-      `);
-      assert.equal(
-        overflow,
-        false,
-        `Horizontal document overflow detected at ${width}px on /`,
-      );
-    }
-
-    // 6. Validate desktop preservation at 1440px
-    await client.send("Emulation.setDeviceMetricsOverride", {
-      width: 1440,
-      height: 900,
-      deviceScaleFactor: 2,
-      mobile: false,
-    });
-    await client.send("Page.navigate", {
-      url: `http://127.0.0.1:${serverPort}/projects`,
-    });
-    await delay(300);
-
-    const desktopFooterLink = await client.eval(`
-      (() => {
-        const el = document.querySelector(".project-card__footer a");
-        if (!el) return null;
-        const r = el.getBoundingClientRect();
-        return { width: Math.round(r.width * 10) / 10, height: Math.round(r.height * 10) / 10 };
-      })()
-    `);
-    assert.ok(desktopFooterLink, "Expected project footer link on desktop");
-    // On desktop, typography is preserved (approx 19px height, not inflated to 44px)
-    assert.ok(
-      desktopFooterLink.height < 30,
-      `Desktop footer link height should preserve compact editorial styling (<30px), got ${desktopFooterLink.height}px`,
-    );
-
-    console.log(
-      "🎉 ALL MOBILE TOUCH-TARGET REGRESSION TESTS PASSED ACCURATELY!",
-    );
-  } finally {
-    ws.close();
-    chromeProcess.kill();
-    serverProcess.kill();
+    process.kill(-state.child.pid, signal);
+    return true;
+  } catch (error) {
+    if (error.code === "ESRCH") return false;
+    throw error;
   }
-});
+}
+
+async function stopOwned(state) {
+  if (!signalGroup(state, "SIGTERM")) return;
+  const deadline = Date.now() + 2_000;
+  while (Date.now() < deadline) {
+    if (!signalGroup(state, 0)) return;
+    await delay(50);
+  }
+  signalGroup(state, "SIGKILL");
+  const killDeadline = Date.now() + 2_000;
+  while (Date.now() < killDeadline) {
+    if (!signalGroup(state, 0)) return;
+    await delay(50);
+  }
+  // An exited leader can leave transient zombie descendants; no live child
+  // should remain after SIGKILL, but a surviving group must be reported.
+  assert.ok(!signalGroup(state, 0), "Task process group did not disappear");
+}
+
+async function poll(label, check, timeout = startupTimeout) {
+  const deadline = Date.now() + timeout;
+  while (Date.now() < deadline) {
+    if (await check()) return;
+    await delay(50);
+  }
+  throw new Error(`Timed out: ${label}`);
+}
+
+async function status(url) {
+  const response = await fetch(url, {
+    redirect: "manual",
+    signal: AbortSignal.timeout(1_500),
+  });
+  const code = response.status;
+  await response.body?.cancel();
+  return code;
+}
+
+// Chromium's --remote-debugging-pipe reads NUL-delimited JSON on fd 3
+// and writes responses on fd 4. No WebSocket or remote-origin flags needed.
+class CDP {
+  constructor(child) {
+    this.input = child.stdio[3];
+    this.output = child.stdio[4];
+    this.pending = new Map();
+    this.nextId = 1;
+    this.buffer = "";
+    this.closed = false;
+    this.output.setEncoding("utf8");
+    this.output.on("data", (chunk) => {
+      this.buffer += chunk;
+      let end;
+      while ((end = this.buffer.indexOf("\0")) !== -1) {
+        const raw = this.buffer.slice(0, end);
+        this.buffer = this.buffer.slice(end + 1);
+        if (!raw) continue;
+        let message;
+        try {
+          message = JSON.parse(raw);
+        } catch (error) {
+          this.fail(error);
+          return;
+        }
+        const entry = this.pending.get(message.id);
+        if (!entry) continue; // events are not command responses
+        this.pending.delete(message.id);
+        clearTimeout(entry.timer);
+        if (message.error)
+          entry.reject(new Error(JSON.stringify(message.error)));
+        else entry.resolve(message.result);
+      }
+    });
+    this.input.on("error", (error) => this.fail(error));
+    this.output.on("error", (error) => this.fail(error));
+    this.output.on("end", () => this.fail(new Error("CDP pipe ended")));
+    child.on("exit", () => this.fail(new Error("Chrome exited")));
+  }
+
+  fail(error) {
+    this.closed = true;
+    for (const entry of this.pending.values()) {
+      clearTimeout(entry.timer);
+      entry.reject(error);
+    }
+    this.pending.clear();
+  }
+
+  send(method, params = {}, sessionId) {
+    assert.ok(!this.closed, "CDP pipe is closed");
+    const id = this.nextId++;
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        this.pending.delete(id);
+        reject(new Error(`CDP timeout: ${method}`));
+      }, commandTimeout);
+      this.pending.set(id, { resolve, reject, timer });
+      const message = { id, method, params };
+      if (sessionId) message.sessionId = sessionId;
+      this.input.write(`${JSON.stringify(message)}\0`, (error) => {
+        if (error) this.fail(error);
+      });
+    });
+  }
+
+  async evaluate(sessionId, expression) {
+    const result = await this.send(
+      "Runtime.evaluate",
+      { expression, returnByValue: true, awaitPromise: true },
+      sessionId,
+    );
+    assert.ok(
+      !result.exceptionDetails,
+      JSON.stringify(result.exceptionDetails),
+    );
+    return result.result?.value;
+  }
+
+  close() {
+    this.fail(new Error("CDP closed by test"));
+    this.input.destroy();
+    this.output.destroy();
+  }
+}
+
+async function navigate(cdp, session, origin, path, width) {
+  const url = `${origin}${path}`;
+  assert.equal(await status(url), 200, `Unexpected HTTP status: ${path}`);
+  const navigation = await cdp.send("Page.navigate", { url }, session);
+  assert.ok(!navigation.errorText, navigation.errorText);
+  await poll(`document ready ${path} at ${width}px`, async () => {
+    try {
+      return await cdp.evaluate(
+        session,
+        `location.href === ${JSON.stringify(url)} &&
+         document.readyState === "complete" && document.fonts.status === "loaded"`,
+      );
+    } catch (error) {
+      if (
+        /execution context was destroyed|cannot find context|inspected target navigated/i.test(
+          error.message,
+        )
+      )
+        return false;
+      throw error;
+    }
+  });
+}
+
+async function assertNoOverflow(cdp, session, path, width) {
+  const geometry = await cdp.evaluate(
+    session,
+    `({ windowWidth: window.innerWidth,
+        viewport: document.documentElement.clientWidth,
+        document: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) })`,
+  );
+  assert.equal(geometry.windowWidth, width, `Wrong viewport: ${path}`);
+  assert.ok(
+    geometry.document <= geometry.viewport,
+    `Overflow: ${path} at ${width}px: ${JSON.stringify(geometry)}`,
+  );
+}
+
+// Scroll each anchor into view, then sample its interior with elementFromPoint.
+// No clicks, external navigation, or account data are needed.
+async function assertTargets(
+  cdp,
+  session,
+  selector,
+  count,
+  minWidth,
+  minHeight,
+  label,
+) {
+  const length = await cdp.evaluate(
+    session,
+    `document.querySelectorAll(${JSON.stringify(selector)}).length`,
+  );
+  if (count === null) assert.ok(length > 0, `${label}: no targets`);
+  else assert.equal(length, count, `${label}: unexpected target count`);
+  for (let index = 0; index < length; index++) {
+    const data = await cdp.evaluate(
+      session,
+      `(async () => {
+      const el = document.querySelectorAll(${JSON.stringify(selector)})[${index}];
+      if (!el) return null;
+      el.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      const r = el.getBoundingClientRect();
+      const style = getComputedStyle(el);
+      const hit = [0.25, 0.5, 0.75].every(fraction => {
+        const x = r.left + r.width / 2;
+        const y = r.top + r.height * fraction;
+        const top = document.elementFromPoint(x, y);
+        return top === el || (top !== null && el.contains(top));
+      });
+      return { width: r.width, height: r.height, text: el.textContent.trim(),
+        visible: el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true }),
+        actionable: el.tagName === "A" && el.hasAttribute("href") &&
+          style.pointerEvents !== "none" && !el.closest("[inert]"), hit };
+    })()`,
+    );
+    assert.ok(data, `${label}: missing target ${index}`);
+    const context = `${label}: ${data.text} ${JSON.stringify(data)}`;
+    assert.ok(data.visible && data.actionable && data.hit, context);
+    assert.ok(data.width >= minWidth && data.height >= minHeight, context);
+  }
+}
+
+test(
+  "RIC-180 mobile touch targets and viewport regression",
+  { timeout: 180_000 },
+  async () => {
+    assert.ok(
+      ["darwin", "linux"].includes(process.platform),
+      "Requires macOS or Linux",
+    );
+    assert.ok(
+      existsSync(join(root, ".next", "BUILD_ID")),
+      "Run npm run build first",
+    );
+    const executable = chromeExecutable();
+    const profile = await mkdtemp(join(tmpdir(), "ric180-chrome-"));
+    let server, chrome, cdp;
+    const cleanupErrors = [];
+    let failure;
+    try {
+      const port = await availablePort();
+      const origin = `http://127.0.0.1:${port}`;
+      server = startOwned(
+        process.execPath,
+        [
+          "node_modules/next/dist/bin/next",
+          "start",
+          "-p",
+          String(port),
+          "-H",
+          "127.0.0.1",
+        ],
+        ["ignore", "ignore", "ignore"],
+      );
+      await poll("Next production server", async () => {
+        alive(server);
+        try {
+          return (await status(`${origin}/`)) === 200;
+        } catch {
+          return false;
+        }
+      });
+      alive(server);
+      chrome = startOwned(
+        executable,
+        [
+          "--headless=new",
+          "--remote-debugging-pipe",
+          `--user-data-dir=${profile}`,
+          "--no-first-run",
+          "--no-default-browser-check",
+          "--disable-gpu",
+          "about:blank",
+        ],
+        ["ignore", "ignore", "ignore", "pipe", "pipe"],
+      );
+      cdp = new CDP(chrome.child);
+      const { targetId } = await cdp.send("Target.createTarget", {
+        url: "about:blank",
+      });
+      const { sessionId: session } = await cdp.send("Target.attachToTarget", {
+        targetId,
+        flatten: true,
+      });
+      await cdp.send("Page.enable", {}, session);
+      await cdp.send("Runtime.enable", {}, session);
+      for (const width of [320, 375, 390, 412]) {
+        await cdp.send(
+          "Emulation.setDeviceMetricsOverride",
+          { width, height: 844, deviceScaleFactor: 2, mobile: true },
+          session,
+        );
+        await cdp.send(
+          "Emulation.setTouchEmulationEnabled",
+          { enabled: true },
+          session,
+        );
+        await navigate(cdp, session, origin, "/projects", width);
+        await assertNoOverflow(cdp, session, "/projects", width);
+        await assertTargets(
+          cdp,
+          session,
+          ".project-card__footer a",
+          9,
+          44,
+          44,
+          `/projects ${width}px`,
+        );
+        await assertTargets(
+          cdp,
+          session,
+          ".footer-bottom nav a",
+          null,
+          44,
+          44,
+          `/projects footer ${width}px`,
+        );
+        await navigate(cdp, session, origin, "/", width);
+        await assertNoOverflow(cdp, session, "/", width);
+        await assertTargets(
+          cdp,
+          session,
+          ".re-card-link",
+          4,
+          44,
+          44,
+          `home dossier ${width}px`,
+        );
+        await assertTargets(
+          cdp,
+          session,
+          ".text-link",
+          null,
+          1,
+          44,
+          `home action ${width}px`,
+        );
+        await assertTargets(
+          cdp,
+          session,
+          ".world-selector a",
+          2,
+          24,
+          24,
+          `world selector ${width}px`,
+        );
+        await assertTargets(
+          cdp,
+          session,
+          ".footer-bottom nav a",
+          null,
+          44,
+          44,
+          `home footer ${width}px`,
+        );
+        console.log(`PASS / and /projects at ${width}px`);
+      }
+      await cdp.send(
+        "Emulation.setDeviceMetricsOverride",
+        { width: 1440, height: 900, deviceScaleFactor: 2, mobile: false },
+        session,
+      );
+      await cdp.send(
+        "Emulation.setTouchEmulationEnabled",
+        { enabled: false },
+        session,
+      );
+      await navigate(cdp, session, origin, "/projects", 1440);
+      await assertNoOverflow(cdp, session, "/projects", 1440);
+      const desktop = await cdp.evaluate(
+        session,
+        `Array.from(document.querySelectorAll(".project-card__footer a"), el => el.getBoundingClientRect().height)`,
+      );
+      assert.equal(desktop.length, 9);
+      assert.ok(
+        desktop.every((height) => height > 0 && height < 30),
+        `Desktop targets changed: ${desktop}`,
+      );
+      console.log("PASS desktop compact project links");
+    } catch (error) {
+      failure = error;
+    } finally {
+      if (cdp && !cdp.closed) {
+        // Prefer graceful browser shutdown; group cleanup is the fallback.
+        try {
+          await cdp.send("Browser.close");
+        } catch {
+          // Browser.close may close the pipe before its acknowledgement.
+        }
+      }
+      cdp?.close();
+      for (const process of [chrome, server]) {
+        try {
+          await stopOwned(process);
+        } catch (error) {
+          cleanupErrors.push(error);
+        }
+      }
+      // Do not delete a profile if Chrome cleanup could not be established.
+      if (cleanupErrors.length === 0)
+        await rm(profile, { recursive: true, force: true });
+      else
+        throw new AggregateError(
+          failure ? [failure, ...cleanupErrors] : cleanupErrors,
+          "Task cleanup failed; profile preserved",
+        );
+    }
+    if (failure) throw failure;
+  },
+);
