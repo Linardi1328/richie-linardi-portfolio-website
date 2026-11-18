@@ -155,7 +155,7 @@ export default function ResumePage() {
                       KHLIM Group of Companies
                     </p>
                   </div>
-                  <span className="resume-entry__period">Dec 2025–Present</span>
+                  <span className="resume-entry__period">Dec 2025–Sep 2026</span>
                 </div>
                 <ul className="resume-entry__bullets">
                   <li>
