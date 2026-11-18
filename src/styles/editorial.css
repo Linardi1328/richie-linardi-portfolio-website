@@ -1424,14 +1424,29 @@ tbody th {
   .footer-bottom nav a {
     display: inline-flex;
     align-items: center;
-    min-height: 40px;
-    padding: 0.4rem 0.25rem;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.4rem 0.5rem;
   }
   .text-link {
     display: inline-flex;
     align-items: center;
-    min-height: 38px;
+    min-height: 44px;
     padding-block: 0.25rem;
+  }
+  .project-card__footer a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 44px;
+    min-width: 44px;
+    padding-block: 0.25rem;
+  }
+  .re-card-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
   .architecture-figure {
     padding: 0.85rem;
@@ -1483,7 +1498,9 @@ tbody th {
     font-size: 0.67rem;
   }
   .hero-photo-note a {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 0.6rem;
   }
   .focus-strip p {
