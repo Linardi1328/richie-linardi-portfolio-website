@@ -123,6 +123,88 @@ const projectThemes: Record<
   },
 };
 
+const projectLogos: Record<
+  string,
+  {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  }
+> = {
+  kynexa: {
+    src: "/products/kynexa/website-lockup-v1-960x320.webp",
+    alt: "KYNEXA official logo",
+    width: 960,
+    height: 320,
+  },
+  rivora: {
+    src: "/products/rivora/website-lockup-v1-960x320.webp",
+    alt: "RIVORA official logo",
+    width: 960,
+    height: 320,
+  },
+  "spy-market-agent": {
+    src: "/products/axiom-quantum/website-lockup-v1-960x320.webp",
+    alt: "AXIOM QUANTUM official logo",
+    width: 960,
+    height: 320,
+  },
+  "axiom-quantum": {
+    src: "/products/axiom-quantum/website-lockup-v1-960x320.webp",
+    alt: "AXIOM QUANTUM official logo",
+    width: 960,
+    height: 320,
+  },
+  "rbl-content-engine": {
+    src: "/products/rbl-content-engine/website-lockup-v1-960x320.webp",
+    alt: "RBL Content Engine official logo",
+    width: 960,
+    height: 320,
+  },
+  "khlim-digital-ecosystem": {
+    src: "/projects/khlim-digital-ecosystem/website-lockup-v1-960x320.webp",
+    alt: "KHLIM Digital Ecosystem official logo lockup",
+    width: 960,
+    height: 320,
+  },
+  "personal-portfolio": {
+    src: "/branding/rbl-primary-dark.webp",
+    alt: "Richie Linardi official personal emblem",
+    width: 487,
+    height: 415,
+  },
+};
+
+const projectDashboards: Record<
+  string,
+  {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    className: string;
+    coverModifier: string;
+  }
+> = {
+  "moncity-data-warehouse": {
+    src: "/projects/moncity/moncity-power-bi-dashboard.webp",
+    alt: "MonCity Operations Intelligence dashboard preview",
+    width: 2000,
+    height: 1296,
+    className: "project-cover__moncity-image",
+    coverModifier: "project-cover--moncity",
+  },
+  "tourism-dashboard": {
+    src: "/projects/tourism-dashboard/dashboard-preview.webp",
+    alt: "Tourism in Malaysia interactive dashboard preview",
+    width: 1440,
+    height: 932,
+    className: "project-cover__tourism-image",
+    coverModifier: "project-cover--tourism",
+  },
+};
+
 export function ProjectCard({
   project,
   index = 0,
@@ -135,23 +217,44 @@ export function ProjectCard({
     label: "Applied systems",
     motif: "nodes",
   };
+  const logo = projectLogos[project.slug];
+  const dashboard = projectDashboards[project.slug];
+  const isEmblem = project.slug === "personal-portfolio";
+
+  const coverModifier = dashboard
+    ? ` ${dashboard.coverModifier}`
+    : logo
+      ? ` project-cover--logo${isEmblem ? " project-cover--emblem" : ""}`
+      : "";
+
   return (
     <article className="project-card">
       <Link
-        className={`project-cover project-cover--${index % 3}${project.slug === "moncity-data-warehouse" ? " project-cover--moncity" : ""}`}
+        className={`project-cover project-cover--${index % 3}${coverModifier}`}
         href={`/projects/${project.slug}`}
         aria-label={`Explore ${project.title}`}
       >
         <span className="project-cover__label">{theme.label}</span>
-        {project.slug === "moncity-data-warehouse" ? (
+        {dashboard ? (
           <Image
-            src="/projects/moncity/moncity-power-bi-dashboard.webp"
-            alt="MonCity Operations Intelligence dashboard preview"
-            width={2000}
-            height={1296}
+            src={dashboard.src}
+            alt={dashboard.alt}
+            width={dashboard.width}
+            height={dashboard.height}
             sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 400px"
-            className="project-cover__moncity-image"
+            className={dashboard.className}
           />
+        ) : logo ? (
+          <div className="project-cover__logo-wrap">
+            <Image
+              src={logo.src}
+              alt={logo.alt}
+              width={logo.width}
+              height={logo.height}
+              sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 360px"
+              className={`project-cover__logo-image${isEmblem ? " project-cover__logo-image--emblem" : ""}`}
+            />
+          </div>
         ) : (
           <>
             <strong>

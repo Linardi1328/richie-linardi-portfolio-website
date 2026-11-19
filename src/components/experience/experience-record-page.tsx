@@ -326,12 +326,12 @@ export function ExperienceRecordPage() {
                   >
                     /
                   </span>
-                  <span>Dec 2025 – Present</span>
+                  <span>Dec 2025 – Sep 2026</span>
                 </div>
                 <div className="experience-dossier-card__title-row">
                   <h3>Auditor</h3>
                   <p className="experience-dossier-card__org">
-                    KHLIM Group of Companies · Dec 2025 – Present
+                    KHLIM Group of Companies · Dec 2025 – Sep 2026
                   </p>
                 </div>
                 <p className="experience-dossier-card__summary">

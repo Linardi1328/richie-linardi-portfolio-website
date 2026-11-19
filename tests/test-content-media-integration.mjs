@@ -473,6 +473,348 @@ async function main() {
     console.log(`  Filter clicked: All photos rendered = ${allCardsCount}`);
 
     console.log(
+      "\n📐 Running Mobile Responsive Computed Properties & Cascade Assertions (RIC-180)...",
+    );
+
+    // 1. Header wrapping and hamburger accessibility at 320px
+    await setViewport(client, 320, 600, true);
+    await client.send("Page.navigate", { url: `http://127.0.0.1:${PORT}/` });
+    await delay(500);
+
+    const headerCheck = await client.eval(`(() => {
+      const headerInner = document.querySelector(".site-header__inner");
+      const summary = document.querySelector(".mobile-navigation summary");
+      const s = getComputedStyle(headerInner);
+      const rect = summary ? summary.getBoundingClientRect() : null;
+      return {
+        flexWrap: s.flexWrap,
+        hamRight: rect ? rect.right : 0,
+        hamVisible: Boolean(
+          rect &&
+            getComputedStyle(summary).visibility !== "hidden" &&
+            rect.width > 0 &&
+            rect.height > 0 &&
+            rect.left >= 0 &&
+            rect.right <= 320,
+        ),
+        docWidth: document.documentElement.scrollWidth,
+      };
+    })()`);
+    assert.equal(
+      headerCheck.flexWrap,
+      "wrap",
+      "Mobile header inner must have flex-wrap: wrap",
+    );
+    assert.equal(
+      headerCheck.hamVisible,
+      true,
+      "Hamburger summary must be visible and within viewport bounds at 320px",
+    );
+    assert.equal(
+      headerCheck.docWidth <= 320,
+      true,
+      `Document scroll width must not overflow at 320px (was ${headerCheck.docWidth})`,
+    );
+
+    // Test header with 150% enlarged text at 320px
+    const headerEnlargedCheck = await client.eval(`(() => {
+      document.documentElement.style.fontSize = "24px";
+      const summary = document.querySelector(".mobile-navigation summary");
+      const rect = summary ? summary.getBoundingClientRect() : null;
+      const res = {
+        hamRight: rect ? rect.right : 0,
+        hamVisible: Boolean(
+          rect &&
+            getComputedStyle(summary).visibility !== "hidden" &&
+            rect.width > 0 &&
+            rect.height > 0 &&
+            rect.left >= 0 &&
+            rect.right <= 320,
+        ),
+        docWidth: document.documentElement.scrollWidth,
+      };
+      document.documentElement.style.fontSize = "";
+      return res;
+    })()`);
+    assert.equal(
+      headerEnlargedCheck.hamVisible,
+      true,
+      "Hamburger summary must remain reachable within 320px viewport when text is enlarged",
+    );
+    console.log("  ✅ Header wrapping & enlarged text verified at 320px");
+
+    // 2. Closed navigation focusability and visibility
+    const navStateCheck = await client.eval(`(() => {
+      const details = document.querySelector(".mobile-navigation");
+      const nav = details ? details.querySelector("nav") : null;
+      const links = nav ? Array.from(nav.querySelectorAll("a")) : [];
+      if (!details || !nav || links.length === 0) return { error: "elements not found" };
+
+      details.open = false;
+      const closedDisplay = getComputedStyle(nav).display;
+      links[0].focus();
+      const closedFocusable = document.activeElement === links[0];
+
+      details.open = true;
+      const openDisplay = getComputedStyle(nav).display;
+      links[0].focus();
+      const openFocusable = document.activeElement === links[0];
+
+      details.open = false;
+      return {
+        closedDisplay,
+        closedFocusable,
+        openDisplay,
+        openFocusable,
+      };
+    })()`);
+    assert.equal(
+      navStateCheck.closedDisplay,
+      "none",
+      "Closed navigation nav must be display: none",
+    );
+    assert.equal(
+      navStateCheck.closedFocusable,
+      false,
+      "Links inside closed navigation must not be focusable",
+    );
+    assert.equal(
+      navStateCheck.openDisplay,
+      "grid",
+      "Open navigation nav must be display: grid",
+    );
+    assert.equal(
+      navStateCheck.openFocusable,
+      true,
+      "Links inside open navigation must be focusable",
+    );
+    console.log("  ✅ Navigation opening, closing & keyboard focus verified");
+
+    // 3. Academic spotlight card padding & border-radius at 320px, 375px, 390px vs desktop
+    for (const w of [320, 375, 390]) {
+      await setViewport(client, w, 700, true);
+      await client.send("Page.navigate", { url: `http://127.0.0.1:${PORT}/` });
+      await delay(400);
+
+      const acadMobile = await client.eval(`(() => {
+        const card = document.querySelector(".academic-spotlight-card");
+        if (!card) return null;
+        const s = getComputedStyle(card);
+        return {
+          paddingTop: s.paddingTop,
+          paddingRight: s.paddingRight,
+          borderRadius: s.borderRadius,
+        };
+      })()`);
+      assert.ok(acadMobile, `Academic spotlight card must exist at ${w}px`);
+      assert.equal(
+        acadMobile.paddingTop,
+        "21.6px",
+        `Academic spotlight card mobile paddingTop must be 21.6px (1.35rem) at ${w}px`,
+      );
+      assert.equal(
+        acadMobile.paddingRight,
+        "17.6px",
+        `Academic spotlight card mobile paddingRight must be 17.6px (1.1rem) at ${w}px`,
+      );
+      assert.equal(
+        acadMobile.borderRadius,
+        "10px",
+        `Academic spotlight card mobile borderRadius must be 10px at ${w}px`,
+      );
+    }
+
+    // Academic card on desktop (1280px)
+    await setViewport(client, 1280, 800, false);
+    await client.send("Page.navigate", { url: `http://127.0.0.1:${PORT}/` });
+    await delay(400);
+
+    const acadDesktop = await client.eval(`(() => {
+      const card = document.querySelector(".academic-spotlight-card");
+      if (!card) return null;
+      const s = getComputedStyle(card);
+      return {
+        paddingTop: s.paddingTop,
+        borderRadius: s.borderRadius,
+      };
+    })()`);
+    assert.equal(
+      acadDesktop.paddingTop,
+      "36px",
+      "Academic spotlight card desktop paddingTop must be 36px (2.25rem)",
+    );
+    assert.equal(
+      acadDesktop.borderRadius,
+      "14px",
+      "Academic spotlight card desktop borderRadius must be 14px",
+    );
+    console.log(
+      "  ✅ Academic card spacing verified on mobile (21.6px/17.6px) and desktop (36px)",
+    );
+
+    // 4. Achievement hero card spacing on mobile vs desktop
+    for (const w of [320, 375, 390]) {
+      await setViewport(client, w, 700, true);
+      await client.send("Page.navigate", {
+        url: `http://127.0.0.1:${PORT}/basketball/achievements`,
+      });
+      await delay(400);
+
+      const achMobile = await client.eval(`(() => {
+        const card = document.querySelector(".achievement-hero-card");
+        if (!card) return null;
+        const s = getComputedStyle(card);
+        return {
+          paddingTop: s.paddingTop,
+          paddingRight: s.paddingRight,
+          gap: s.gap,
+          borderRadius: s.borderRadius,
+        };
+      })()`);
+      assert.ok(achMobile, `Achievement card must exist at ${w}px`);
+      assert.equal(
+        achMobile.paddingTop,
+        "21.6px",
+        `Achievement card mobile paddingTop must be 21.6px (1.35rem) at ${w}px`,
+      );
+      assert.equal(
+        achMobile.gap,
+        "20px",
+        `Achievement card mobile gap must be 20px (1.25rem) at ${w}px`,
+      );
+      assert.equal(
+        achMobile.borderRadius,
+        "10px",
+        `Achievement card mobile borderRadius must be 10px at ${w}px`,
+      );
+    }
+
+    await setViewport(client, 1280, 800, false);
+    await client.send("Page.navigate", {
+      url: `http://127.0.0.1:${PORT}/basketball/achievements`,
+    });
+    await delay(400);
+
+    const achDesktop = await client.eval(`(() => {
+      const card = document.querySelector(".achievement-hero-card");
+      if (!card) return null;
+      const s = getComputedStyle(card);
+      return {
+        paddingTop: s.paddingTop,
+        gap: s.gap,
+        borderRadius: s.borderRadius,
+      };
+    })()`);
+    assert.equal(
+      achDesktop.paddingTop,
+      "36px",
+      "Achievement card desktop paddingTop must be 36px (2.25rem)",
+    );
+    assert.equal(
+      achDesktop.gap,
+      "40px",
+      "Achievement card desktop gap must be 40px (2.5rem)",
+    );
+    assert.equal(
+      achDesktop.borderRadius,
+      "12px",
+      "Achievement card desktop borderRadius must be 12px",
+    );
+    console.log(
+      "  ✅ Achievement card spacing verified on mobile (21.6px/20px) and desktop (36px/40px)",
+    );
+
+    // 5. Gallery filter alignment & touch target height
+    await setViewport(client, 375, 700, true);
+    await client.send("Page.navigate", {
+      url: `http://127.0.0.1:${PORT}/basketball/gallery`,
+    });
+    await delay(400);
+
+    const filterMetrics = await client.eval(`(() => {
+      const span = document.querySelector(".filter-label > span");
+      if (!span) return null;
+      const s = getComputedStyle(span);
+      const rect = span.getBoundingClientRect();
+      return {
+        display: s.display,
+        alignItems: s.alignItems,
+        justifyContent: s.justifyContent,
+        paddingTop: s.paddingTop,
+        minHeight: s.minHeight,
+        renderedHeight: rect.height,
+      };
+    })()`);
+    assert.equal(
+      filterMetrics.display,
+      "inline-flex",
+      "Filter label span must be display: inline-flex on mobile",
+    );
+    assert.equal(
+      filterMetrics.alignItems,
+      "center",
+      "Filter label span must be items-center",
+    );
+    assert.equal(
+      filterMetrics.justifyContent,
+      "center",
+      "Filter label span must be justify-center",
+    );
+    assert.equal(
+      filterMetrics.minHeight,
+      "44px",
+      "Filter label span must have min-height: 44px",
+    );
+    assert.ok(
+      filterMetrics.renderedHeight >= 44,
+      `Filter label span rendered height must be >= 44px (was ${filterMetrics.renderedHeight}px)`,
+    );
+    console.log("  ✅ Gallery filter alignment & >=44px min-height verified");
+
+    // 6. Status dot pulse geometry & flex-shrink
+    await setViewport(client, 320, 700, true);
+    await client.send("Page.navigate", { url: `http://127.0.0.1:${PORT}/` });
+    await delay(400);
+
+    const dotMetrics = await client.eval(`(() => {
+      const dot = document.querySelector(".status-dot-pulse");
+      if (!dot) return null;
+      const s = getComputedStyle(dot);
+      const rect = dot.getBoundingClientRect();
+      return {
+        flexShrink: s.flexShrink,
+        width: s.width,
+        height: s.height,
+        renderedWidth: rect.width,
+        renderedHeight: rect.height,
+      };
+    })()`);
+    assert.equal(
+      dotMetrics.flexShrink,
+      "0",
+      "Status dot pulse must have flex-shrink: 0",
+    );
+    assert.equal(dotMetrics.width, "8px", "Status dot pulse width must be 8px");
+    assert.equal(
+      dotMetrics.height,
+      "8px",
+      "Status dot pulse height must be 8px",
+    );
+    assert.equal(
+      dotMetrics.renderedWidth,
+      8,
+      "Status dot pulse rendered width must be 8px",
+    );
+    assert.equal(
+      dotMetrics.renderedHeight,
+      8,
+      "Status dot pulse rendered height must be 8px",
+    );
+    console.log(
+      "  ✅ Status dot pulse geometry (8px × 8px, flex-shrink: 0) verified",
+    );
+
+    console.log(
       "\n================================================================================",
     );
     console.log("🎉 ALL CONTENT & MEDIA INTEGRATION TESTS PASSED 100%!");

@@ -87,7 +87,8 @@ export const mediaManifest: readonly MediaItem[] = [
   {
     id: "rbl-brand-primary-dark",
     filename: "/branding/rbl-primary-dark.webp",
-    targetRoute: "/",
+    targetRoute:
+      "All routes (header navigation emblem), /projects (Personal Portfolio Website card cover), / (official RBL brand card)",
     mediaType: "image/webp",
     provenance: "2. Approved derivative/crop",
     caption: "RBL — owner-supplied brand identity",
@@ -95,11 +96,119 @@ export const mediaManifest: readonly MediaItem[] = [
     creditSource: "Owner-supplied RBL brand identity board",
     usageStatus: "VERIFIED",
     verificationBasis:
-      "Portfolio owner supplied the brand reference and requested section-specific website use; extracted without redrawing.",
+      "Owner explicitly authorized expanded usage on 17 November 2026 for site-wide navigation emblem and Personal Portfolio Website card cover; owner-supplied personal brand identity; conventional WebP without generative modifications.",
     mobileBehavior:
       "Responsive, intrinsic dimensions and contained aspect ratio; no cropping.",
     width: 487,
     height: 415,
+  },
+  {
+    id: "kynexa-product-lockup",
+    filename: "/products/kynexa/website-lockup-v1-960x320.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "KYNEXA — official product brand lockup",
+    altText: "KYNEXA official logo",
+    creditSource: "Approved RE_Product_Brand_Profiles_V1 asset pack",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Owner-approved V1 product brand identity lockup on white plate; conventional WebP derivative without generative modifications.",
+    mobileBehavior:
+      "Responsive image contained within card cover with preserved aspect ratio and object-fit: contain.",
+    width: 960,
+    height: 320,
+  },
+  {
+    id: "rivora-product-lockup",
+    filename: "/products/rivora/website-lockup-v1-960x320.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "RIVORA — official product brand lockup",
+    altText: "RIVORA official logo",
+    creditSource: "Approved RE_Product_Brand_Profiles_V1 asset pack",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Owner-approved V1 product brand identity lockup on white plate; conventional WebP derivative without generative modifications.",
+    mobileBehavior:
+      "Responsive image contained within card cover with preserved aspect ratio and object-fit: contain.",
+    width: 960,
+    height: 320,
+  },
+  {
+    id: "axiom-quantum-product-lockup",
+    filename: "/products/axiom-quantum/website-lockup-v1-960x320.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "AXIOM QUANTUM — official product brand lockup",
+    altText: "AXIOM QUANTUM official logo",
+    creditSource: "Approved RE_Product_Brand_Profiles_V1 asset pack",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Owner explicitly authorized public display on 17 November 2026; approved V1 product brand identity lockup on white plate; conventional WebP derivative without generative modifications.",
+    mobileBehavior:
+      "Responsive image contained within card cover with preserved aspect ratio and object-fit: contain.",
+    width: 960,
+    height: 320,
+  },
+  {
+    id: "rbl-content-engine-product-lockup",
+    filename: "/products/rbl-content-engine/website-lockup-v1-960x320.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "RBL Content Engine — official product brand lockup",
+    altText: "RBL Content Engine official logo",
+    creditSource: "Approved RE_Product_Brand_Profiles_V1 asset pack",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Owner explicitly authorized public display on 17 November 2026; approved V1 product brand identity lockup on white plate; conventional WebP derivative without generative modifications.",
+    mobileBehavior:
+      "Responsive image contained within card cover with preserved aspect ratio and object-fit: contain.",
+    width: 960,
+    height: 320,
+  },
+  {
+    id: "khlim-digital-ecosystem-product-lockup",
+    filename:
+      "/projects/khlim-digital-ecosystem/website-lockup-v1-960x320.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption: "KHLIM Digital Ecosystem — official product brand lockup",
+    altText: "KHLIM Digital Ecosystem official logo lockup",
+    creditSource:
+      "Approved Portfolio_Final_Implementation_Assets pack (owner authorization dated 17 November 2026)",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Owner explicitly authorized public display on 17 November 2026; approved V1 product brand identity composite lockup (KH laurel and KHS Academy) on white plate; conventional WebP derivative without generative modifications.",
+    mobileBehavior:
+      "Responsive image contained within card cover with preserved aspect ratio and object-fit: contain.",
+    width: 960,
+    height: 320,
+  },
+  {
+    id: "tourism-dashboard-preview",
+    filename: "/projects/tourism-dashboard/dashboard-preview.webp",
+    targetRoute: "/projects",
+    mediaType: "image/webp",
+    provenance: "2. Approved derivative/crop",
+    caption:
+      "Tourism in Malaysia — live interactive data visualization dashboard from FIT2179, Monash University Malaysia, Semester 2, 2024. Deployed at linardi1328.github.io/FIT2179_DV2. Academic coursework, not a commercial deployment.",
+    altText:
+      "Tourism in Malaysia interactive dashboard preview showing tourism trends and destinations.",
+    creditSource:
+      "Richie Linardi · owner-authorized live deployment capture from linardi1328.github.io/FIT2179_DV2",
+    usageStatus: "VERIFIED",
+    verificationBasis:
+      "Captured directly from owner's verified public deployment at https://linardi1328.github.io/FIT2179_DV2/ with owner authorization on 17 November 2026; converted to WebP without generative modifications.",
+    mobileBehavior:
+      "Responsive image contained within card cover with preserved aspect ratio and object-fit: contain.",
+    width: 1440,
+    height: 932,
+    tags: ["academic", "vega", "data-visualization"],
   },
   {
     id: "spy-market-architecture-diagram",
