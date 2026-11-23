@@ -9,7 +9,7 @@ const channels = [
     handle: "in/richie-linardi",
     href: "https://www.linkedin.com/in/richie-linardi-595370314/",
     description:
-      "Connect for software engineering opportunities, internships, data science collaborations, or technical inquiries.",
+      "Connect for data science and AI internships, software engineering projects, technical collaborations, or inquiries.",
   },
   {
     title: "Open Source & Code Repositories",

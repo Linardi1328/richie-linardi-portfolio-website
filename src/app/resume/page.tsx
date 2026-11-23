@@ -167,26 +167,6 @@ export default function ResumePage() {
                   </li>
                 </ul>
               </article>
-
-              <article className="resume-entry">
-                <div className="resume-entry__header">
-                  <div>
-                    <h3 className="resume-entry__role">
-                      Incoming Data Annotation Intern
-                    </h3>
-                    <p className="resume-entry__org">GTEX Asia Sdn Bhd</p>
-                  </div>
-                  <span className="resume-entry__period">
-                    23 Nov 2026–19 Feb 2027 (scheduled)
-                  </span>
-                </div>
-                <ul className="resume-entry__bullets">
-                  <li>
-                    Scheduled professional industry placement focused on data
-                    annotation and machine learning dataset preparation.
-                  </li>
-                </ul>
-              </article>
             </div>
           </section>
 

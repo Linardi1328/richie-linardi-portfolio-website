@@ -22,8 +22,8 @@ export function ProfessionalHome() {
           <div className="home-hero__copy">
             <span className="hero-status-pill">
               <span className="status-dot-pulse" aria-hidden="true" />
-              Monash CS (Data Science) · CGPA 3.50 · Incoming Intern @ GTEX Asia
-              (Scheduled Nov 2026)
+              Monash CS (Data Science) · CGPA 3.50 · Open to data science, AI
+              and analytics internships
             </span>
             <h2
               style={{
@@ -864,9 +864,8 @@ export function ProfessionalHome() {
             label="07 / The next conversation"
             title="Let’s build something real together."
           >
-            Open for software engineering opportunities, technical
-            collaborations, and data science projects. Incoming Data Annotation
-            Intern at GTEX Asia Sdn Bhd scheduled 23 Nov 2026–19 Feb 2027.
+            Open to data science, AI and analytics internships, technical
+            collaborations, and data-driven systems development.
           </SectionHeading>
 
           <div
