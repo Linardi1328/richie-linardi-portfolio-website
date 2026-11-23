@@ -47,6 +47,25 @@ for (const file of srcFiles) {
   }
 }
 
+// 1b. Audit for cancelled GTEX placement terms across src/
+const cancelledPlacementTerms = [
+  "GTEX",
+  "Data Annotation Intern",
+  "Incoming Intern",
+  "23 Nov 2026",
+  "19 Feb 2027",
+];
+
+for (const file of srcFiles) {
+  const content = readFileSync(file, "utf8");
+  for (const term of cancelledPlacementTerms) {
+    if (content.toLowerCase().includes(term.toLowerCase())) {
+      console.error(`❌ Cancelled placement term "${term}" found in ${file}`);
+      hasError = true;
+    }
+  }
+}
+
 // 2. Target files for route-specific identity content checks
 const supportingFiles = [
   join(projectRoot, "src/components/about/about-identity-page.tsx"),

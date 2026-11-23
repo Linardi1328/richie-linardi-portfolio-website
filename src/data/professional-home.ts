@@ -49,9 +49,9 @@ export const professionalHomeData = {
         "Monash University Malaysia · CGPA 3.50 · Expected graduation November 2027.",
     },
     {
-      label: "Upcoming Role",
-      title: "Incoming Data Annotation Intern",
-      description: "GTEX Asia Sdn Bhd · Scheduled 23 Nov 2026 – 19 Feb 2027.",
+      label: "Availability",
+      title: "Internship Availability",
+      description: "Open to data science, AI and analytics internships.",
     },
   ] satisfies ProfessionalMilestone[],
   technicalFocus: [

@@ -90,12 +90,6 @@ export const foundationPages = {
           "Financial record verification, audit working-paper preparation and review, inventory stock counts, and external audit assignments across three companies.",
       },
       {
-        eyebrow: "Incoming Internship · Scheduled 23 Nov 2026 – 19 Feb 2027",
-        title: "Incoming Data Annotation Intern · GTEX Asia Sdn Bhd.",
-        description:
-          "Scheduled to begin on 23 November 2026, focusing on data annotation, dataset verification, and quality workflows supporting applied AI systems.",
-      },
-      {
         eyebrow: "Collaborative Sprint · Sep 2026",
         title: "AI Video Hackathon KL 2026 · Midnight Owls.",
         description:
@@ -157,7 +151,7 @@ export const foundationPages = {
         eyebrow: "Professional & technical",
         title: "Start with the work itself.",
         description:
-          "For internship, software engineering, data science, or AI project conversations, connect via LinkedIn, GitHub, or direct email.",
+          "For data science or AI internships, technical collaborations, or engineering project conversations, connect via LinkedIn, GitHub, or direct email.",
         items: [
           "LinkedIn · linkedin.com/in/richie-linardi-595370314",
           "GitHub · github.com/Linardi1328",
@@ -203,7 +197,7 @@ export const foundationPages = {
         eyebrow: "Experience",
         title: "Professional & Technical Roles.",
         description:
-          "Independent Software Developer at R&E Technologies (venture in development, 2026–Present); Stats Team Leader at KHLIM Basketball Club (Jan 2026–Present); Auditor at KHLIM Group of Companies (Dec 2025–Sep 2026); Incoming Data Annotation Intern at GTEX Asia Sdn Bhd (Scheduled 23 Nov 2026–19 Feb 2027).",
+          "Independent Software Developer at R&E Technologies (venture in development, 2026–Present); Stats Team Leader at KHLIM Basketball Club (Jan 2026–Present); Auditor at KHLIM Group of Companies (Dec 2025–Sep 2026).",
       },
       {
         eyebrow: "Selected Technical Systems",
